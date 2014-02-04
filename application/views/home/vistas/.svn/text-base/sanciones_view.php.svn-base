@@ -1,0 +1,107 @@
+		<div class="header_page">
+            <h1>Sanciones</h1>
+            <h2>&nbsp;</h2>
+        </div>
+        <div class="sanciones_contenedor">
+        	<div class="titular_sanciones">
+            	<h1>Fecha 1</h1>
+            </div>
+            <table class="sanciones">
+                    <thead>
+                        <tr>
+                            <th class="t">Jugador</th>
+                            <th class="t">Equipo</th>
+                            <th class="o">Torneo</th>
+                            <th class="o">Sanción</th>
+                            <th class="t">Observaciones</th>
+                        </tr>
+                     </thead>
+                    <tbody>
+						<!--<?php $i=1; foreach ($goleadores as $goleador): ?>
+                        	<tr class="<?php echo "" . ( ($i & 1) ? 'odd' : 'even' );?>">
+                            <td class="t"><span class="change_may_min"><?php echo $goleador->name_jugador; ?></span> <span class="change_may_min"><?php echo $goleador->last_name; ?></span></td>
+                            <td class="t"><?php echo $goleador->name_equipo; ?></td>
+                            <td class="o"><?php echo $goleador->goal; ?></td>
+                       </tr>
+						<?php $i++; endforeach;?>-->
+                        <tr class="<?php echo "" . ( ($i & 1) ? 'odd' : 'even' );?>">
+                            <td class="t">Jose Forte</td>
+                            <td class="t">Amarula</td>
+                            <td class="o">Copa de Campeones</td>
+                            <td class="o">5</td>
+                            <td class="t">No hay observacionesNo hay observacionesNo hay observacionesNo hay observacionesNo hay observaciones</td>
+                            
+                        </tr>
+                        <tr class="<?php echo "" . ( ($i & 1) ? 'odd' : 'even' );?>">
+                            <td class="t">Jose Forte</td>
+                            <td class="t">Amarula</td>
+                            <td class="o">Fase A</td>
+                            <td class="o">5</td>
+                            <td class="t">No hay observaciones</td>
+                            
+                        </tr>
+                        <tr class="<?php echo "" . ( ($i & 1) ? 'odd' : 'even' );?>">
+                            <td class="t">Jose Forte</td>
+                            <td class="t">Amarula</td>
+                            <td class="o">Fase A</td>
+                            <td class="o">5</td>
+                            <td class="t">No hay observaciones</td>
+                            
+                        </tr>
+                    </tbody>
+			</table>
+            
+            <div class="titular_sanciones">
+            	<h1>Fecha 2</h1>
+            </div>
+           <table class="sanciones">
+                    <thead>
+                        <tr>
+                            <th class="t">Jugador</th>
+                            <th class="t">Equipo</th>
+                            <th class="o">Torneo</th>
+                            <th class="o">Sanción</th>
+                            <th class="t">Observaciones</th>
+                        </tr>
+                     </thead>
+                    <tbody>
+						<!--<?php $i=1; foreach ($goleadores as $goleador): ?>
+                        	<tr class="<?php echo "" . ( ($i & 1) ? 'odd' : 'even' );?>">
+                            <td class="t"><?php echo $goleador->name_jugador; ?> <?php echo $goleador->last_name; ?></td>
+                            <td class="t"><?php echo $goleador->name_equipo; ?></td>
+                            <td class="o"><?php echo $goleador->goal; ?></td>
+                       </tr>
+						<?php $i++; endforeach;?>-->
+                        <tr class="<?php echo "" . ( ($i & 1) ? 'odd' : 'even' );?>">
+                            <td class="t">Jose Forte</td>
+                            <td class="t">Amarula</td>
+                            <td class="o">Copa de Campeones</td>
+                            <td class="o">5</td>
+                            <td class="t">No hay observacionesNo hay observacionesNo hay observacionesNo hay observacionesNo hay observaciones</td>
+                            
+                        </tr>
+                        <tr class="<?php echo "" . ( ($i & 1) ? 'odd' : 'even' );?>">
+                            <td class="t">Jose Forte</td>
+                            <td class="t">Presidiarios de la Malta</td>
+                            <td class="o">Copa de Campeones</td>
+                            <td class="o">5</td>
+                            <td class="t">No hay observaciones</td>
+                            
+                        </tr>
+                        <tr class="<?php echo "" . ( ($i & 1) ? 'odd' : 'even' );?>">
+                            <td class="t">Victor Joaquin Rodriguez Fernandesz</td>
+                            <td class="t">Presidiarios de la Malta</td>
+                            <td class="o">Fase A</td>
+                            <td class="o">5</td>
+                            <td class="t">No hay observaciones</td>
+                            
+                        </tr>
+                    </tbody>
+			</table>
+		
+        </div>	
+
+        </div> <!-- END CONTAINER-->
+	</div> <!-- END WRAPPER -->
+        
+        

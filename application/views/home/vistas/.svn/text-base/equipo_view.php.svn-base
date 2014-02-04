@@ -1,0 +1,108 @@
+        <div class="header_page">
+            <h1>Equipos</h1>
+            <h2>&nbsp;</h2>
+        </div>
+        <div class="preinscripcion_contenedor">
+        	<div id="infoMessage"><?php echo $message;?></div>
+            
+        	<?php if ($equipo_infos){
+			foreach ($equipo_infos as $equipo_info): ?>
+            <div class="team_name">
+            	<p><?php echo $team_name;?></p>
+            </div>
+            <div class="contenedor1">
+            	<div class="titular">
+                <?php 
+					$first = '<div class="';
+					$second = '" style="background-color:';
+					$third = '"></div>';
+					?>
+               		<?php
+							if (!$equipo_info->titular_color1 & !$equipo_info->titular_color2){
+								echo $first . "no-shirt" . $second . "grey" .  $third;
+							}
+							else if ($equipo_info->titular_color1 & $equipo_info->titular_color2){
+								echo $first . "shirt_left" . $second . $equipo_info->titular_color1 . $third;
+								echo $first . "shirt_middle" . $second . $equipo_info->titular_color2 . $third;
+								echo $first . "shirt_right" . $second . $equipo_info->titular_color1 . $third;
+							}							
+							else{
+								if ($equipo_info->titular_color1)
+								{echo $first . "shirt" . $second . $equipo_info->titular_color1 . $third;}
+								else 
+								{echo $first . "shirt" . $second . $equipo_info->titular_color2 . $third;}
+							}
+						?>
+                </div>
+                <div class="link_fixture">
+                	<a href="">Fixture</a>
+                </div>
+                <div class="category_name">
+                	<p>Categoría: <span style="text-transform:uppercase;"><?php echo $team_category;?></span></p>
+                </div>
+                <div class="link_posiciones">
+                	<a href="">Posiciones</a>
+                </div>
+                <div class="suplente">
+                	<?php 
+					$first = '<div class="';
+					$second = '" style="background-color:';
+					$third = '"></div>';
+					?>
+               		<?php
+							if (!$equipo_info->alternativa_color1 & !$equipo_info->alternativa_color2){
+								echo $first . "no_shirt_equipo" . $second . "grey" .  $third;
+							}
+							else if ($equipo_info->alternativa_color2 & $equipo_info->alternativa_color2){
+								echo $first . "shirt_left" . $second . $equipo_info->alternativa_color1 . $third;
+								echo $first . "shirt_middle" . $second . $equipo_info->alternativa_color2 . $third;
+								echo $first . "shirt_right" . $second . $equipo_info->alternativa_color1 . $third;
+							}							
+							else{
+								if ($equipo_info->alternativa_color1)
+								{echo $first . "shirt_equipo" . $second . $equipo_info->alternativa_color1 . $third;}
+								else 
+								{echo $first . "shirt_equipo" . $second . $equipo_info->alternativa_color2 . $third;}
+							}
+						?>
+                </div>
+            </div>
+            <div class="equipo_foto">
+            	<img src="<?php echo base_url();?>uploads/<?php echo $equipo_info->foto; ?>" />
+            </div>
+            <div class="equipo_historia">
+            	<h1>Historia del Equipo</h1>
+            	<?php echo $equipo_info->historia; ?>
+            </div>
+
+            <?php endforeach; } ?>
+            <div class="tabla_jugadores">
+            	<h1>Jugadores</h1>
+            	<table class="equipos">
+                    <thead>
+                        <tr>
+                            <th class="t">Jugador</th>
+                            <th class="o">Goles</th>
+                            <th class="o">Amarillas</th>
+                            <th class="o">Rojas</th>
+                        </tr>
+                     </thead>
+                    <tbody>
+                        <?php $i=1;
+						if ($players_infos){ 
+						foreach ($players_infos as $players_info): ?>
+                        <tr class="<?php echo "" . ( ($i & 1) ? 'odd' : 'even' );?>">
+                            <td class="t"><span class="change_may_min"><?php echo $players_info['name'] . " " .  $players_info['last_name']; ?></span></td>
+                            <td class="o"><?php echo $players_info['goal']; ?></td>
+                            <td class="o" style="background:yellow;color:black"><?php echo $players_info['yellow']; ?></td>
+                            <td class="o" style="background:red;color:white"><?php echo $players_info['red']; ?></td>
+                       </tr>
+                       <?php $i++; endforeach; }?>
+                    </tbody>
+				</table>
+			</div>
+
+        </div>
+
+       </div> <!-- END CONTAINER-->
+	</div> <!-- END WRAPPER -->

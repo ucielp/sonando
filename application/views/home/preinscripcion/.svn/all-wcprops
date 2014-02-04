@@ -1,0 +1,59 @@
+K 25
+svn:wc:ra_dav:version-url
+V 60
+/svn/!svn/ver/65/trunk/application/views/home/preinscripcion
+END
+player_temp_delete_ok.php
+K 25
+svn:wc:ra_dav:version-url
+V 86
+/svn/!svn/ver/65/trunk/application/views/home/preinscripcion/player_temp_delete_ok.php
+END
+create_captain_view.php
+K 25
+svn:wc:ra_dav:version-url
+V 84
+/svn/!svn/ver/65/trunk/application/views/home/preinscripcion/create_captain_view.php
+END
+show_preinscriptos_view.php
+K 25
+svn:wc:ra_dav:version-url
+V 88
+/svn/!svn/ver/65/trunk/application/views/home/preinscripcion/show_preinscriptos_view.php
+END
+carga_foto_equipo_view.php
+K 25
+svn:wc:ra_dav:version-url
+V 87
+/svn/!svn/ver/65/trunk/application/views/home/preinscripcion/carga_foto_equipo_view.php
+END
+carga_jugador_success.php
+K 25
+svn:wc:ra_dav:version-url
+V 86
+/svn/!svn/ver/65/trunk/application/views/home/preinscripcion/carga_jugador_success.php
+END
+carga_foto_equipo_nofoto_view.php
+K 25
+svn:wc:ra_dav:version-url
+V 94
+/svn/!svn/ver/65/trunk/application/views/home/preinscripcion/carga_foto_equipo_nofoto_view.php
+END
+upload_foto_equipo_ok.php
+K 25
+svn:wc:ra_dav:version-url
+V 86
+/svn/!svn/ver/65/trunk/application/views/home/preinscripcion/upload_foto_equipo_ok.php
+END
+preinscripcion.php
+K 25
+svn:wc:ra_dav:version-url
+V 79
+/svn/!svn/ver/65/trunk/application/views/home/preinscripcion/preinscripcion.php
+END
+show_inscriptos_view.php
+K 25
+svn:wc:ra_dav:version-url
+V 85
+/svn/!svn/ver/65/trunk/application/views/home/preinscripcion/show_inscriptos_view.php
+END

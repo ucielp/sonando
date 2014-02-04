@@ -1,0 +1,89 @@
+K 25
+svn:wc:ra_dav:version-url
+V 52
+/svn/!svn/ver/69/trunk/application/views/home/vistas
+END
+contacto.php
+K 25
+svn:wc:ra_dav:version-url
+V 65
+/svn/!svn/ver/43/trunk/application/views/home/vistas/contacto.php
+END
+goleadores_select_category_view.php
+K 25
+svn:wc:ra_dav:version-url
+V 88
+/svn/!svn/ver/69/trunk/application/views/home/vistas/goleadores_select_category_view.php
+END
+inscripcion_view.php
+K 25
+svn:wc:ra_dav:version-url
+V 73
+/svn/!svn/ver/65/trunk/application/views/home/vistas/inscripcion_view.php
+END
+equipos_select_category_view.php
+K 25
+svn:wc:ra_dav:version-url
+V 85
+/svn/!svn/ver/43/trunk/application/views/home/vistas/equipos_select_category_view.php
+END
+equipo_view.php
+K 25
+svn:wc:ra_dav:version-url
+V 68
+/svn/!svn/ver/61/trunk/application/views/home/vistas/equipo_view.php
+END
+sanciones_view.php
+K 25
+svn:wc:ra_dav:version-url
+V 71
+/svn/!svn/ver/61/trunk/application/views/home/vistas/sanciones_view.php
+END
+goleadores_view.php
+K 25
+svn:wc:ra_dav:version-url
+V 72
+/svn/!svn/ver/61/trunk/application/views/home/vistas/goleadores_view.php
+END
+nosotros_view.php
+K 25
+svn:wc:ra_dav:version-url
+V 70
+/svn/!svn/ver/63/trunk/application/views/home/vistas/nosotros_view.php
+END
+home_view.php
+K 25
+svn:wc:ra_dav:version-url
+V 66
+/svn/!svn/ver/65/trunk/application/views/home/vistas/home_view.php
+END
+contacto_envio_ok.php
+K 25
+svn:wc:ra_dav:version-url
+V 74
+/svn/!svn/ver/43/trunk/application/views/home/vistas/contacto_envio_ok.php
+END
+notas.php
+K 25
+svn:wc:ra_dav:version-url
+V 62
+/svn/!svn/ver/61/trunk/application/views/home/vistas/notas.php
+END
+equipos_select_team_view.php
+K 25
+svn:wc:ra_dav:version-url
+V 81
+/svn/!svn/ver/43/trunk/application/views/home/vistas/equipos_select_team_view.php
+END
+ubicacion_view.php
+K 25
+svn:wc:ra_dav:version-url
+V 71
+/svn/!svn/ver/43/trunk/application/views/home/vistas/ubicacion_view.php
+END
+equipos_all_view.php
+K 25
+svn:wc:ra_dav:version-url
+V 73
+/svn/!svn/ver/54/trunk/application/views/home/vistas/equipos_all_view.php
+END

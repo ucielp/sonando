@@ -1,0 +1,125 @@
+#home_wrapper_left_right{
+	position:relative;
+	width:800px;
+	display:inline-block;
+}
+
+.left_links_home{
+	position:relative;
+	width:530px;
+	height:300px;
+	float:left;
+}
+	.left_links_home .accesos_directos{
+		position:relative;
+		background:url('../images/left_bg.png') no-repeat;
+		height:300px;
+	}
+		.left_links_home .accesos_directos .accesos1{
+			position:relative;
+			width:400px;
+			top:50px;
+			left:55px;
+		}
+			.left_links_home .accesos_directos .accesos1 img{
+				margin-left:29px;
+			}
+		.left_links_home .accesos_directos .accesos2{
+			position:relative;
+			width:400px;
+			top:95px;
+			left:55px;			
+		}
+			.left_links_home .accesos_directos .accesos2 img{
+				margin-left:29px;
+			}
+	.left_links_home h1{
+		font-family: 28px/22px Arial,sans-serif;
+		font-size:17px;
+		font-weight:700;
+		color: #5C9731;
+		text-transform:uppercase;
+		padding-left:5px;
+	}
+
+.sidebar{
+	position:relative;
+	width:270px;
+	float:left;
+	}
+	.sidebar h1{
+			font-family: 28px/22px Arial,sans-serif;
+			font-size:17px;
+			font-weight:700;
+			color: #5C9731;
+			text-transform:uppercase;
+			padding-left:5px;
+		}
+	
+#twitter_container{
+	position:relative;
+	width:270px;
+	height:310px;
+	background:url('../images/twitter_bg.png') no-repeat;
+}
+
+#twitter_update_list{
+	display:block;
+	margin: 0 auto;
+	width: 230px;
+	padding:5px;
+	display: block;
+	height: 290px;
+}
+	
+	#twitter_update_list li {
+		list-style-type: none;
+		margin-top:8px;
+	}
+	
+	#twitter_update_list p {
+		list-style-type: none;
+		margin-top:8px;
+		color:#E2E2E2;
+	}
+	#twitter_update_list li a{
+		font-family: 'Open Sans', Times, Times New Roman, sans-serif;
+		font-size:9px !important;
+		font-weight:700;
+		color: #FFF;
+	}
+	
+	#twitter_update_list span{
+		font-family: 'Open Sans', Times, Times New Roman, sans-serif;
+		font-size:11px;
+		font-weight:700;
+		color: #FFF;
+		margin: 0;
+		padding-left: 8px;
+	
+		line-height:20px;
+	}
+		#twitter_update_list span a{
+			display: inline;
+			color: #008080;
+		}
+			#twitter_update_list span a:hover{
+				color: #000000;
+			}
+
+
+.marcas_home{
+	position:relative;
+	width:1700px;
+	height:80px;
+	/*background:#5C9732;*/
+	border: 1px solid #5C9732;
+	margin-top:30px;
+	margin-bottom:30px;
+	opacity:0.8;
+	filter:alpha(opacity=80);
+	display:inline-block;
+	
+}
+
+	

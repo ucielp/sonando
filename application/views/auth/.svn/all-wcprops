@@ -1,0 +1,239 @@
+K 25
+svn:wc:ra_dav:version-url
+V 45
+/svn/!svn/ver/73/trunk/application/views/auth
+END
+edit_player_view.php
+K 25
+svn:wc:ra_dav:version-url
+V 66
+/svn/!svn/ver/31/trunk/application/views/auth/edit_player_view.php
+END
+generar_fases_ok.php
+K 25
+svn:wc:ra_dav:version-url
+V 66
+/svn/!svn/ver/32/trunk/application/views/auth/generar_fases_ok.php
+END
+set_horarios.php
+K 25
+svn:wc:ra_dav:version-url
+V 62
+/svn/!svn/ver/25/trunk/application/views/auth/set_horarios.php
+END
+create_user.php
+K 25
+svn:wc:ra_dav:version-url
+V 60
+/svn/!svn/ver/2/trunk/application/views/auth/create_user.php
+END
+create_team_view.php
+K 25
+svn:wc:ra_dav:version-url
+V 65
+/svn/!svn/ver/2/trunk/application/views/auth/create_team_view.php
+END
+generar_fases.php
+K 25
+svn:wc:ra_dav:version-url
+V 63
+/svn/!svn/ver/32/trunk/application/views/auth/generar_fases.php
+END
+change_password.php
+K 25
+svn:wc:ra_dav:version-url
+V 64
+/svn/!svn/ver/2/trunk/application/views/auth/change_password.php
+END
+carga_nota_error.php
+K 25
+svn:wc:ra_dav:version-url
+V 65
+/svn/!svn/ver/2/trunk/application/views/auth/carga_nota_error.php
+END
+deactivate_user.php
+K 25
+svn:wc:ra_dav:version-url
+V 64
+/svn/!svn/ver/2/trunk/application/views/auth/deactivate_user.php
+END
+login.php
+K 25
+svn:wc:ra_dav:version-url
+V 54
+/svn/!svn/ver/2/trunk/application/views/auth/login.php
+END
+preinscripto_success.php
+K 25
+svn:wc:ra_dav:version-url
+V 69
+/svn/!svn/ver/2/trunk/application/views/auth/preinscripto_success.php
+END
+cargar_nota_view.php
+K 25
+svn:wc:ra_dav:version-url
+V 65
+/svn/!svn/ver/2/trunk/application/views/auth/cargar_nota_view.php
+END
+carga_noticia_success.php
+K 25
+svn:wc:ra_dav:version-url
+V 70
+/svn/!svn/ver/2/trunk/application/views/auth/carga_noticia_success.php
+END
+preinscriptos_view1.php
+K 25
+svn:wc:ra_dav:version-url
+V 68
+/svn/!svn/ver/2/trunk/application/views/auth/preinscriptos_view1.php
+END
+preinscriptos_view2.php
+K 25
+svn:wc:ra_dav:version-url
+V 69
+/svn/!svn/ver/21/trunk/application/views/auth/preinscriptos_view2.php
+END
+set_actual_date.php
+K 25
+svn:wc:ra_dav:version-url
+V 65
+/svn/!svn/ver/64/trunk/application/views/auth/set_actual_date.php
+END
+preinscriptos_view3.php
+K 25
+svn:wc:ra_dav:version-url
+V 69
+/svn/!svn/ver/31/trunk/application/views/auth/preinscriptos_view3.php
+END
+forgot_password.php
+K 25
+svn:wc:ra_dav:version-url
+V 64
+/svn/!svn/ver/2/trunk/application/views/auth/forgot_password.php
+END
+set_horarios_go.php
+K 25
+svn:wc:ra_dav:version-url
+V 65
+/svn/!svn/ver/35/trunk/application/views/auth/set_horarios_go.php
+END
+carga_nota_success.php
+K 25
+svn:wc:ra_dav:version-url
+V 67
+/svn/!svn/ver/2/trunk/application/views/auth/carga_nota_success.php
+END
+header.php
+K 25
+svn:wc:ra_dav:version-url
+V 55
+/svn/!svn/ver/2/trunk/application/views/auth/header.php
+END
+set_horarios_ok.php
+K 25
+svn:wc:ra_dav:version-url
+V 65
+/svn/!svn/ver/35/trunk/application/views/auth/set_horarios_ok.php
+END
+edit_player_ok.php
+K 25
+svn:wc:ra_dav:version-url
+V 64
+/svn/!svn/ver/31/trunk/application/views/auth/edit_player_ok.php
+END
+create_team_view_ok.php
+K 25
+svn:wc:ra_dav:version-url
+V 68
+/svn/!svn/ver/2/trunk/application/views/auth/create_team_view_ok.php
+END
+set_goleadores.php
+K 25
+svn:wc:ra_dav:version-url
+V 64
+/svn/!svn/ver/35/trunk/application/views/auth/set_goleadores.php
+END
+generate_tournament_ok.php
+K 25
+svn:wc:ra_dav:version-url
+V 71
+/svn/!svn/ver/2/trunk/application/views/auth/generate_tournament_ok.php
+END
+create_category.php
+K 25
+svn:wc:ra_dav:version-url
+V 65
+/svn/!svn/ver/11/trunk/application/views/auth/create_category.php
+END
+set_results_go.php
+K 25
+svn:wc:ra_dav:version-url
+V 64
+/svn/!svn/ver/50/trunk/application/views/auth/set_results_go.php
+END
+torneo_ya_generado.php
+K 25
+svn:wc:ra_dav:version-url
+V 68
+/svn/!svn/ver/32/trunk/application/views/auth/torneo_ya_generado.php
+END
+set_actual_date_go.php
+K 25
+svn:wc:ra_dav:version-url
+V 68
+/svn/!svn/ver/57/trunk/application/views/auth/set_actual_date_go.php
+END
+generate_tournament.php
+K 25
+svn:wc:ra_dav:version-url
+V 68
+/svn/!svn/ver/2/trunk/application/views/auth/generate_tournament.php
+END
+index.php
+K 25
+svn:wc:ra_dav:version-url
+V 55
+/svn/!svn/ver/73/trunk/application/views/auth/index.php
+END
+delete_player_ok.php
+K 25
+svn:wc:ra_dav:version-url
+V 66
+/svn/!svn/ver/31/trunk/application/views/auth/delete_player_ok.php
+END
+set_results.php
+K 25
+svn:wc:ra_dav:version-url
+V 61
+/svn/!svn/ver/23/trunk/application/views/auth/set_results.php
+END
+enviar_mail_view.php
+K 25
+svn:wc:ra_dav:version-url
+V 66
+/svn/!svn/ver/21/trunk/application/views/auth/enviar_mail_view.php
+END
+generar_torneos_mensajes.php
+K 25
+svn:wc:ra_dav:version-url
+V 74
+/svn/!svn/ver/64/trunk/application/views/auth/generar_torneos_mensajes.php
+END
+carga_noticia.php
+K 25
+svn:wc:ra_dav:version-url
+V 62
+/svn/!svn/ver/2/trunk/application/views/auth/carga_noticia.php
+END
+edit_user.php
+K 25
+svn:wc:ra_dav:version-url
+V 58
+/svn/!svn/ver/2/trunk/application/views/auth/edit_user.php
+END
+set_goleadores_ok.php
+K 25
+svn:wc:ra_dav:version-url
+V 67
+/svn/!svn/ver/19/trunk/application/views/auth/set_goleadores_ok.php
+END

@@ -1,0 +1,19 @@
+.team-members { 
+	width: 100%;
+	height: 160px; 
+	overflow: hidden; 
+	padding: 60px 0 0; 
+	/*margin: -95px 0 20px; */
+	float:left; 
+}
+.team-members .bx-wrapper { margin: 0 auto;  }
+.team-members .bx-window { overflow: visible !important; }
+.team-members h4 { width: 1024px; margin: -4px auto 0; font: normal normal normal 30px/25px 'GothamMedium', Arial, sans-serif; color: #242424; text-transform: uppercase; letter-spacing: -2px; }
+.team-members .slider-wrapper { position: relative; width: 100%; height: 80px; }
+.team-members ul { text-align:center; height: 80px; position: absolute; left: 0; list-style:none;}
+.team-members li { width: 160px; height: 80px; float:left; padding: 0 3px; position:relative; }
+.team-members li a.ttip { float:left; width: 160px; height: 80px; position:relative; text-decoration:none; }
+.team-members li a.ttip:hover { text-decoration:none; }
+.team-members li img { -moz-border-radius: 3px; -webkit-border-radius: 3px; border-radius: 3px; display:block; }
+.team-members li span { position:absolute; z-index: 20; top: 0px; left: -30px; width: 223px; height: 77px; padding: 40px 0 0; background: url(/resources/1/kw/images/tooltip.png); text-align:center; font: normal normal normal 20px/20px 'GothamMedium', Arial, sans-serif; color: #1d1d1d; opacity: 0; display:none; }
+.team-members li span strong { display:block; color: #1b5eaa; font-weight: normal; }

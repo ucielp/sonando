@@ -1,0 +1,219 @@
+table.posiciones {
+		border: medium none !important;
+		border-collapse: collapse;
+		color: #333333;
+		font-family: 'Open Sans', Times, Times New Roman, sans-serif;
+		width: 800px;
+}
+		table.posiciones thead th{
+			font-family: 'Open Sans', Times, Times New Roman, sans-serif;
+			color: #000000 !important;
+			font-weight: 600;
+			height: 20px !important;
+			line-height: 25px !important;
+			padding: 0 5px !important;
+			text-align: left !important;
+			font-size: 14px;
+			border-bottom:1px solid #D3D3D3;
+		}
+		table.posiciones tbody tr.even {
+			background-color: #DBDBDB !important;
+			border-bottom: 1px solid #DFDFDF;
+			border-left: medium none;
+		}
+		table.posiciones tbody tr.odd, table.posiciones tbody tr.odd td {
+			border-bottom: 1px solid #DFDFDF;
+		}
+		table.posiciones tbody td {
+			padding: 2px 0 !important;
+			font-family: 'Open Sans', Times, Times New Roman, sans-serif;
+			font-size:13px;
+			font-weight:600;
+		}
+		table.posiciones tbody th {
+			padding: 5px !important;
+			font-family: 'Open Sans', Times, Times New Roman, sans-serif;
+			font-size:13px;
+			font-weight:600;
+		}
+		table.posiciones tbody td a, table.posiciones tbody th a {
+			color: #333333;
+			font-weight: 600;
+			text-decoration: none;
+		}
+		table.posiciones .o {
+			padding: 0 5px !important;
+			text-align: center !important;
+			width: 60px;
+		}
+		table.posiciones .t {
+			width: 260px;
+			text-align: left !important;
+		}
+
+#white_space{
+	position:relative;
+	width:800px;
+	height:20px;
+}
+
+#campeones_elim_chart{
+	position:relative;
+	width:800px;
+	height:504px;
+	background: url(../images/campeones/campeones_eliminatoria.png) no-repeat;
+	font-family: 'Open Sans', Times, Times New Roman, sans-serif;
+	font-size:13px;
+	font-weight:600;
+}
+	#chart{
+		position:relative;
+		top:60px;
+	}	
+	.row1, .row2, .row3, .row4, .row5, .row6, .row7, .row8, .row9, .row10{
+		position:relative;
+		width:755px;
+		height:30px;
+		display:inline-block;
+		left:30px;
+	}
+	.row1{height:25px;}
+	.row3{height:40px;}
+	.row5{height:44px;}
+	.row7{height:25px;}
+	.row8{height:75px;}
+	.row9{height:55px;}
+	.cuartos{
+		position:relative;
+		float:left;
+		width:148px;
+	}
+	.semi{
+		position:relative;
+		float:left;
+		width:148px;
+	}
+	.final{
+		position:relative;
+		float:left;
+		width:168px;
+		text-align:center;
+	}
+	.blank1{
+		position:relative;
+		float:left;
+		width:446px;
+	}
+	.blank2{
+		position:relative;
+		float:left;
+		width:205px;
+	}
+	.blank3{
+		position:relative;
+		float:left;
+		width:40px;
+	}
+	.blank4{
+		position:relative;
+		float:left;
+		width:214px;
+	}
+	.blank5{
+		position:relative;
+		float:left;
+		width:288px;
+	}
+	.blank6{
+		position:relative;
+		float:left;
+		width:299px;
+	}
+	
+	
+#campeonato_elim_chart{
+	position:relative;
+	width:800px;
+	height:504px;
+	background: url(../images/campeonato/campeonato_eliminatoria.png) no-repeat;
+	font-family: 'Open Sans', Times, Times New Roman, sans-serif;
+	font-size:13px;
+	font-weight:600;
+}
+	.row1_c, .row2_c, .row3_c, .row4_c, .row5_c, .row6_c{
+		position:relative;
+		width:755px;
+		height:30px;
+		display:inline-block;
+		left:30px;
+	}
+	.row1_c{height:55px;}
+	.row2_c{height:42px;}
+	.row4_c{height:95px;}
+	.row5_c{height:53px;}
+	/*.row1_c{height:25px;}
+	.row3_c{height:40px;}
+	.row5_c{height:44px;}
+	.row7_c{height:25px;}
+	.row8_c{height:75px;}
+	.row9_c{height:55px;}*/
+	
+/*****VISTA POSICIONES ELECCION********/
+
+.bubbles_pos { width: 960px; margin-left:-80px;height: 360px; position:relative; margin-top:100px;}
+.bubbles_pos li{list-style:none;}
+.bubbles_pos .bubble { position:absolute; width: 135px; height: 135px; }
+.bubbles_pos .bubble .front-side { position:absolute; width: 135px; height: 135px; top:0; left:0; }
+.bubbles_pos .bubble .front-side a,
+.bubbles_pos .bubble .front-side span { display:block; text-align:center; padding: 213px 65px 0; font: normal normal normal 22px/22px 'GothamMedium', Arial, sans-serif; color: #252525; text-transform: uppercase; letter-spacing: -2px; text-decoration:none; }
+.bubbles_pos .bubble .front-side a.single,
+.bubbles_pos .bubble .front-side span.single { padding-top: 225px; }
+.bubbles_pos .bubble .back-side { position:absolute; width: 135px; height: 135px; top:0; left:0; background: url(../images/fixture/bubble-back.png); display:none; }
+.bubbles_pos .bubble .back-side a{position:absolute;/*top:60px;left:60px;*/font-family: 'Open Sans', Times, Times New Roman, sans-serif;color: #000000;font-weight: 600;font-size:14px;text-decoration:none;width: 80px; height: 80px;text-align:center;background:url(../images/fixture/ver.png);top:30px;left:30px}
+
+/*
+Esto si quiero solo 4 elementos
+.bubbles_pos .bubble-1 { top: 0px; left:162px;  }
+.bubbles_pos .bubble-1 .front-side { background: url(../images/fixture/bubble1.png); }
+
+.bubbles_pos .bubble-2 { top: 0px; left: 327px; }
+.bubbles_pos .bubble-2 .front-side { background: url(../images/fixture/bubble2.png); }
+
+.bubbles_pos .bubble-3 { top: 0px; left: 492px; }
+.bubbles_pos .bubble-3 .front-side { background: url(../images/fixture/bubble3.png); }
+
+.bubbles_pos .bubble-4 { top: 0px; left: 657px; }
+.bubbles_pos .bubble-4 .front-side { background: url(../images/fixture/bubble4.png); }
+*/
+
+.bubble-1 { top: 0px; left:80px;  }
+.bubble-1 .front-side { background: url(../images/fixture/bubble1.png); }
+
+.bubble-2 { top: 0px; left: 245px; }
+.bubble-2 .front-side { background: url(../images/fixture/bubble2.png); }
+
+.bubble-3 { top: 0px; left: 410px; }
+.bubble-3 .front-side { background: url(../images/fixture/bubble3.png); }
+
+.bubble-4 { top: 0px; left: 575px; }
+.bubble-4 .front-side { background: url(../images/fixture/bubble4.png); }
+
+.bubble-7 { top: 0px; left:745px;}
+.bubble-7 .front-side { background: url(../images/fixture/bubble7.png); }
+
+.submit_posiciones {
+	background : url('../images/ver_posiciones.png') no-repeat center center;
+	width : 90px;
+	height :25px;
+	border: 0px solid red;
+	color : transparent;
+	font-size : 0;
+	cursor:pointer;
+	text-indent:9999px;
+}
+
+select{
+	background:#DBDBDB;
+	float:left;
+	}
+option[selected] { background: gray; }

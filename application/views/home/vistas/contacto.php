@@ -1,0 +1,43 @@
+		<div class="header_page">
+            <h1>Contacto</h1>
+            <h2>&nbsp;</h2>
+        </div>
+        <div class="contacto_contenedor">
+        <div id="validacion_error"><?php echo $message;?></div>
+			<div id="contacto">
+                <div id="contacto-labels">
+                    <p>Nombre:<br /><br /></p>
+                    <p>e-mail:<br /><br /></p>
+                    <p>Teléfono:<br /><br /></p>
+                    <p>Asunto:<br /><br /></p>
+                    <p>Mensaje:</p>
+                </div>
+                    <form id="formID" class="formular" method="post" action="<?php echo site_url('contacto');?>">
+                        <fieldset>
+                            <label>
+                                <input value=""  class="validate[required,custom[onlyLetter],length[0,100]] text-input" type="text" id="lastname" name="lastname"  />
+                            </label>
+                            <label>
+                                <input value=""  class="validate[required,custom[email]] text-input" type="text" name="email" id="email"  />
+                            </label>
+                            <label>
+                                <input value=""  class="validate[required,custom[onlyLetter],length[0,100]] text-input" type="text" id="tel" name="tel"  />
+                            </label>
+                            <label>
+                                <?php 
+								echo form_dropdown('asunto', $asuntos, 'nulo');?><br /><br />
+                            </label>
+                            <label>
+                                <textarea value="Ingresa tu comentario..." class="validate[required,length[6,300]] text-input" name="comments" id="comments" /> </textarea>
+                            </label>
+                            
+                            <input class="submit" type="submit" value="Enviar!"/>
+                        </fieldset>
+                    </form>
+			</div><!-- END contacto-->
+        </div>
+        
+        </div> <!-- END CONTAINER-->
+	</div> <!-- END WRAPPER -->
+        
+        
