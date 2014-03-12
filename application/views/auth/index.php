@@ -11,6 +11,7 @@
 		<p><a href="<?php echo site_url('auth/asignar_categorias_new'); ?>">Asignar evento a cada equipo</a></p>	
         <p><a href="<?php echo site_url('auth/generar_torneos'); ?>">Generar Torneo (todos contra todos)</a></p>
         <p><a href="<?php echo site_url('auth/create_team_new'); ?>">Crear equipos</a></p>
+		<p><a href="<?php echo site_url('auth/set_horario_new'); ?>">Definir horario de evento</a></p>
 
 
         <h1>Comienzo del torneo</h1>

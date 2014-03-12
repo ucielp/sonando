@@ -356,6 +356,58 @@ class Auth extends Controller {
 			}		
 	   }      
 	   
+	   
+	function set_horario_new()
+	{
+		if (!$this->ion_auth->logged_in() || !$this->ion_auth->is_admin())
+		{
+			redirect('auth/login', 'refresh');
+		}
+		$this->data['message'] = (validation_errors()) ? validation_errors() : $this->session->flashdata('message');
+		$this->data['events'] = $this->admin_model_new->get_events_combo_box(); //para el combo box
+		$this->data['fechas'] = $this->admin_model_new->get_fechas(); //para el combo box
+
+		$this->load->view('auth/set_horarios_new_view', $this->data);
+		
+	}
+	
+	
+	
+	
+	function set_horarios_go_new()
+	{
+		if (!$this->ion_auth->logged_in() || !$this->ion_auth->is_admin())
+		{
+			redirect('auth/login', 'refresh');
+		}
+		$this->data['message'] = (validation_errors()) ? validation_errors() : $this->session->flashdata('message');
+		
+		$this->data['actual_tournament_id'] = $this->input->post('dropdown_category');
+		$this->data['actual_fecha_id'] = $this->input->post('dropdown_fechas');
+		$this->data['category_name'] = strtoupper($this->admin_model->get_category_by_id($this->data['actual_tournament_id']));
+		if ($this->admin_model->get_type_category_by_id($this->data['actual_tournament_id']) == 'fase' ){
+			$fase = 1;
+			} 
+		else{
+			$fase = 2;
+			}
+		$this->data['partidos'] = $this->admin_model->get_partidos($this->data['actual_tournament_id'],$this->data['actual_fecha_id'],$fase);
+		$this->load->view('auth/set_horarios_go', $this->data);
+		
+	}
+	   
+	   
+	   
+	   
+	   
+	   
+	   
+	   
+	   
+	   
+	   
+	   
+	   
 	#######################################################################
 	#######################################################################
 	#######################################################################

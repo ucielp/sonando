@@ -405,5 +405,48 @@ class Admin_model_new extends CI_Model{
 			}
 			return $teams;
 	}
+	function get_fechas(){
+		
+		$this->db->select('id');
+		$this->db->from('fechas');
+		$this->db->where("actual", "1");
+		$this->db->where("fase", "2");
+
+		$query = $this->db->get();
+		
+		#segunda consulta
+		$this->db->select('id,nro_fecha,fase');
+		$this->db->from('fechas');
+		
+		#si pasa esto es porq ya arranco la 2da parte del torneo
+		if ($query->num_rows() > 0)
+		{
+			$this->db->order_by("fase", "desc"); 
+			$this->db->order_by("actual", "desc");
+			$this->db->order_by("nro_fecha", "asc"); 
+		}
+		else{
+			$this->db->order_by("actual", "desc");
+			$this->db->order_by("fase", "asc"); 
+			$this->db->order_by("nro_fecha", "asc"); 
+		}	
+		
+	
+		$query = $this->db->get();
+		#echo $this->db->last_query() . "<br>";
+		if ($query->num_rows() > 0){
+			foreach($query->result_array() as $row){
+				if($row['fase'] == 1){
+					$fase = 'fases';
+				}
+				else{
+					$fase = 'campeonatos';
+				}
+				$show = $row['nro_fecha'] . " (" . $fase . ")" ;	
+				$combo[$row['id']]= $show;	
+				}
+			return $combo;
+			}	
+	}	
 }
 		
