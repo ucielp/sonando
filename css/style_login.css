@@ -3,7 +3,7 @@
 
 body{
 	background:#efefef url(../images/footer_tile.png);
-	color:#9B331B;
+	color:#909090;
 	font-family:'Open Sans', arial, serif;
 	font-size:12px;
 }
@@ -354,5 +354,14 @@ table.goleadores_admin {
 		}
 		.sanciones_motivo input{
 	    width: 500px;
+		}
 		
+		#infoWarning{
+	width:960px;
+	margin:0 auto;
+	padding:0 10px;
+	position:relative;
+	color:red;
+	}
+}
 

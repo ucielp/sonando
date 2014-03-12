@@ -5,29 +5,37 @@
 	<div id="menues">
 <h1>Panel</h1>
 		<div id="infoMessage"><?php echo $message;?></div>
+		<h1>Nuevos items</h1>
+		<p><a href="<?php echo site_url('auth/create_modify_category_new'); ?>">Crear, modificar y eliminar <b>categorías</b></a></p>
+		<p><a href="<?php echo site_url('auth/create_modify_events'); ?>">Crear, modificar y eliminar <b>eventos</b></a></p>
+		<p><a href="<?php echo site_url('auth/asignar_categorias_new'); ?>">Asignar evento a cada equipo</a></p>	
+        <p><a href="<?php echo site_url('auth/generar_torneos'); ?>">Generar Torneo (todos contra todos)</a></p>
+        <p><a href="<?php echo site_url('auth/create_team_new'); ?>">Crear equipos</a></p>
+
+
         <h1>Comienzo del torneo</h1>
-		<p><a href="<?php echo site_url('auth/create_category'); ?>">Crear categoría</a></p>
+		<p><a href="<?php echo site_url('auth/create_category'); ?>">Crear categoría <b>OBSOLETO</b></a></p>
 		<p><a href="<?php echo site_url('auth/mostrar_categorias'); ?>">Inscribir jugadores</a></p>
         <p><a href="<?php echo site_url('auth/create_team'); ?>">Crear equipos</a></p>
-		<p><a href="<?php echo site_url('auth/asignar_categorias'); ?>">Asignar Categoría</a></p>	
-        <p><a href="<?php echo site_url('auth/generar_fases'); ?>">Generar Torneo de Fases</a></p>
-		<p><a href="<?php echo site_url('auth/swap_teams'); ?>">Intercambiar equipos</a></p>
+		<p><a href="<?php echo site_url('auth/asignar_categorias'); ?>">Asignar Categoría <b>OBSOLETO</b></a></p>	
+        <p><a href="<?php echo site_url('auth/generar_fases'); ?>">Generar Torneo de Fases <b>OBSOLETO</b></a></p>
+		<p><a href="<?php echo site_url('auth/swap_teams'); ?>">Intercambiar equipos <b>OBSOLETO</b></a></p>
         <p><a href="<?php echo site_url('auth/change_name_teams'); ?>">Cambiar nombre equipo</a></p>
-		<p><a href="<?php echo site_url('auth/create_match'); ?>">Generar partido manualmente (T verano)</a></p>
+		<p><a href="<?php echo site_url('auth/create_match'); ?>">Generar partido manualmente (T verano) <b>OBSOLETO</b></a></p>
 
 
         
         <h1>Segunda parte del torneo</h1>
-         <p><a href="<?php echo site_url('auth/set_tournament'); ?>">Modificar que mostrar en Fixture y Posiciones para las distintas partes del torneo</a></p>
-        <p><a href="<?php echo site_url('auth/generar_campeones_grupos'); ?>">Generar Copa de Campeones temporal</a></p>
-		<p><a href="<?php echo site_url('auth/generar_campeonato_grupos'); ?>">Generar Zona Campeonato temporal</a></p>
-		<p><a href="<?php echo site_url('auth/generar_descenso'); ?>">Generar Zona Descenso temporal</a></p>
-        <p><a href="<?php echo site_url('auth/generar_repechaje_grupos'); ?>">Generar Repechaje temporal</a></p>
-        <p><a href="<?php echo site_url('auth/generar_postfase'); ?>">Generar Torneos de Grupo para CC Camp Rpechaje y Desc</a></p>
+         <p><a href="<?php echo site_url('auth/set_tournament'); ?>">Modificar que mostrar en Fixture y Posiciones para las distintas partes del torneo <b>OBSOLETO</b></a></p>
+        <p><a href="<?php echo site_url('auth/generar_campeones_grupos'); ?>">Generar Copa de Campeones temporal <b>OBSOLETO</b></a></p>
+		<p><a href="<?php echo site_url('auth/generar_campeonato_grupos'); ?>">Generar Zona Campeonato temporal <b>OBSOLETO</b></a></p>
+		<p><a href="<?php echo site_url('auth/generar_descenso'); ?>">Generar Zona Descenso temporal <b>OBSOLETO</b></a></p>
+        <p><a href="<?php echo site_url('auth/generar_repechaje_grupos'); ?>">Generar Repechaje temporal <b>OBSOLETO</b></a></p>
+        <p><a href="<?php echo site_url('auth/generar_postfase'); ?>">Generar Torneos de Grupo para CC Camp Rpechaje y Desc <b>OBSOLETO</b></a></p>
         
         <h1>Tercera parte del torneo (eliminatoria)</h1>
-		<p><a href="<?php echo site_url('auth/generar_campeones_cuartos'); ?>">Generar cuartos de final de Copa de Campeones</a></p>
-		<p><a href="<?php echo site_url('auth/generar_campeonato_semis'); ?>">Generar semifinales Campeonatos</a></p>
+		<p><a href="<?php echo site_url('auth/generar_campeones_cuartos'); ?>">Generar cuartos de final de Copa de Campeones <b>OBSOLETO</b></a></p>
+		<p><a href="<?php echo site_url('auth/generar_campeonato_semis'); ?>">Generar semifinales Campeonatos <b>OBSOLETO</b></a></p>
 
         <h1>Para todas las fechas (horarios, resultados y goles)</h1>
 		<p><a href="<?php echo site_url('auth/fecha_actual'); ?>">Definir Fecha actual</a></p>
@@ -36,7 +44,7 @@
 
 		<p><a href="<?php echo site_url('auth/set_results'); ?>">Cargar Resultados de liga </a></p>
         <p><a href="<?php echo site_url('auth/set_results_elim'); ?>">Cargar Resultados de eliminatoria</a></p>
-		<p><a href="<?php echo site_url('auth/modificar_tabla'); ?>">Modificar tabla posiciones(caso excepcional)</a></p>
+		<p><a href="<?php echo site_url('auth/modificar_tabla'); ?>">Modificar tabla posiciones  <b>(caso excepcional)</b></a></p>
 	   	<p><a href="<?php echo site_url('auth/partidos_por_horario'); ?>">Ver cantidad de partidos por horario</a></p>
 
         

@@ -128,7 +128,8 @@
                <?php } ?>
             </table>
 		</div>
-	  <p><?php echo form_submit('submit', 'Inscribir');?>
+	  <p><?php echo form_submit('submit', 'Actualizar jugadores');?>
+	  <p><?php echo (anchor("auth/inscribir_jugador/" . $team_id, 'Inscribir un nuevo jugador'));?></td>
 
      
     <?php echo form_close();?>

@@ -1746,7 +1746,7 @@ el permiso especial de los organizadores del torneo. Hay tiempo hasta el Sábado
         JOIN equipos_users eqp ON eqp.team_id = eq.id
         WHERE eq.category_id = 0 
 		ORDER BY t_id ASC, e_name ASC');	
-		#echo $this->db->last_query() . "<br>";
+		//~ echo $this->db->last_query() . "<br>";
 
 		return $query->result();
     }
@@ -1810,7 +1810,7 @@ el permiso especial de los organizadores del torneo. Hay tiempo hasta el Sábado
 	#Genera el fixture a una vuelta si $ida_vuelta = 0
 	#Genera el fixture a dos vueltas si $ida_vuelta = 1
 	 
-	 function show_fixtures($team_ids,$tournament_id,$ida_vuelta)
+	function show_fixtures($team_ids,$tournament_id,$ida_vuelta)
     {
 	   $teams = sizeof($team_ids);
 	      

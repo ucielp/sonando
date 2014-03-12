@@ -6,7 +6,7 @@
 	   
 	<div id="infoMessage"><?php echo $message;?></div>
     
-	<?php echo form_open("auth/create_team");?>
+	<?php echo form_open("auth/create_team_new");?>
     
      <p>Nuevo Equipo<br />
      <?php echo form_input('team');?>

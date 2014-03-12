@@ -24,7 +24,7 @@
     </table>
     
      
-	 <p><a href="<?php echo site_url('auth/generar_fases');?>"><u>Go Back</u></a></p>
+	 <p><a href="<?php echo site_url('auth/generar_torneos');?>"><u>Go Back</u></a></p>
 
       
 

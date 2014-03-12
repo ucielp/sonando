@@ -25,4 +25,4 @@
 </head>
 
 <body>
-<div id="logo_container"><a id="logo-login" href="<?php echo base_url();?>home">Soñando con el Gol</a></div>
+<div id="logo_container"><a id="logo-login" href="<?php echo base_url();?>auth">Soñando con el Gol</a></div>
