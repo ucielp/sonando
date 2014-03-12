@@ -46,6 +46,7 @@
 				   ?>
 				</tbody>
 			</table>     
+			
                    
             <div class="controls">
                    <?php echo $this->pagination_torneo->create_links();
