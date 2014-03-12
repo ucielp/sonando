@@ -16,8 +16,7 @@ class Equipos extends CI_Controller {
 	{
 		$this->data['title'] = "So&ntilde;ando con el gol - Equipos";
 		$this->data['message'] = (validation_errors()) ? validation_errors() : $this->session->flashdata('message');
-		//$this->data['categories'] = $this->admin_model->get_categories(); //para el combo box
-		$this->data['categories'] = $this->equipos_model->get_all_categories();
+		$this->data['categories'] = $this->fixture_model_new->get_all_events();
 		$categories = $this->data['categories']; 
 		foreach ($categories as $category):
 			$this->data['equipos'][$category->id] = $this->equipos_model->get_all_teams($category->id);

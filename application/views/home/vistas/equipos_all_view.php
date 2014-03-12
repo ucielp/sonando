@@ -8,7 +8,7 @@
             <table class="equipos_all">
                 <thead>
                     <tr>
-                        <th class="t">Categoría <span style="text-transform:uppercase;"><?php echo $category->category; ?></span></th>
+                        <th class="t"> <span style="text-transform:uppercase;"><?php echo $category->name; ?></span></th>
                     </tr>
                  </thead>
              	<tbody>

@@ -151,6 +151,18 @@ class Fixture_model_new extends CI_Model{
 			return $nro_grupo;
 		}
 		
+		//~ TODO Esto es para equipos pero lo tengo que arreglar
+		function get_all_events(){
+			$this->db->select('id,name_event as name');
+			$this->db->from('events');
+			//~ $this->db->where('generado', '1');
+			$query = $this->db->get();	
+			if ($query->num_rows() > 0 ) {
+				return $query->result();		
+			}
+		}
+		
+		
 		
 }
 		
