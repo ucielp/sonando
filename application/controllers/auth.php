@@ -1442,7 +1442,7 @@ class Auth extends Controller {
 		$this->load->view('auth/set_horarios_elim_ok', $this->data);
 		
 	}
-	######################## IMPRIMIR FORMULARIOS
+	######################## IMPRIMIR PLANILLAS
 	function print_form($id_partido){
 	
 		if (!$this->ion_auth->logged_in() || !$this->ion_auth->is_admin())
@@ -1463,12 +1463,12 @@ class Auth extends Controller {
             $tournament_id = $equipo->tournament_id;
 		}
 		
-  		$torneos = $this->admin_model->get_tipo_torneo($tournament_id);
+  		$torneos = $this->admin_model_new->get_event_by_id($tournament_id);
     
         foreach ($torneos as $torneo){
-			$this->data['type'] = $torneo->type;
-            $this->data['category'] = $torneo->category;
-            $this->data['name'] = "";
+			$this->data['name_event'] = $torneo->name_event;
+            //~ $this->data['category'] = $torneo->category;
+            //~ $this->data['name'] = "";
 		}
         
 		$this->data['players_team1'] = $this->admin_model->show_players_ficha($team1_id);

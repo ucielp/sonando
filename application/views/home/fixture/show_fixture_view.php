@@ -27,7 +27,6 @@
                         <th class="t"></th>
                         <th class="o">Fecha</th>
                         <th class="o">Horario</th>
-                        <th class="o">Cancha</th>
                     </tr>
                  </thead>
              	<tbody>
@@ -40,7 +39,6 @@
                         <td class="t"><a href="<?php echo base_url(); ?>equipos/equipo/<?php echo $partido->id_equipo2;?>"><?php echo $partido->name_equipo2;?></a></td>
                         <td class="o"><?php echo $partido->date;?></td>
                         <td class="o"><?php echo $partido->time;?></td>
-                        <td class="o">Cancha <?php echo $partido->court;?></td>
 	               </tr>
                    <?php $i++; endforeach;
 				   ?>

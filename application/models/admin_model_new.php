@@ -38,7 +38,7 @@ class Admin_model_new extends CI_Model{
 	function get_events_combo_box(){
 		$this->db->select('id, name_event,category_id');	
 		$this->db->from('events');
-		$this->db->order_by('category_id asc');
+		$this->db->order_by('category_id asc, name_event');
 		$query = $this->db->get();
 		if ($query->num_rows() > 0)
 		{			
@@ -447,6 +447,16 @@ class Admin_model_new extends CI_Model{
 				}
 			return $combo;
 			}	
-	}	
+	}
+    
+    function get_event_by_id($event_id){
+        	
+        $this->db->select('name_event, category_id');
+		$this->db->from('events');
+		$this->db->where('id',$event_id);
+		$query = $this->db->get();
+		$torneo = $query->result();
+		return $torneo;
+    }
 }
 		
