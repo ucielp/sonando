@@ -11,8 +11,9 @@
 		<p><a href="<?php echo site_url('auth/asignar_categorias_new'); ?>">Asignar evento a cada equipo</a></p>	
         <p><a href="<?php echo site_url('auth/generar_torneos'); ?>">Generar Torneo (todos contra todos)</a></p>
         <p><a href="<?php echo site_url('auth/create_team_new'); ?>">Crear equipos</a></p>
-		<p><a href="<?php echo site_url('auth/set_horario_new'); ?>">Definir horario de evento</a></p>
-
+		<p><a href="<?php echo site_url('auth/set_horario_new'); ?>">Definir horario de eventos</a></p>
+		<p><a href="<?php echo site_url('auth/set_results_new'); ?>">Cargar Resultados de eventos</a></p>
+		<p><a href="<?php echo site_url('auth/swap_teams'); ?>">Intercambiar equipos </a></p>
 
         <h1>Comienzo del torneo</h1>
 		<p><a href="<?php echo site_url('auth/create_category'); ?>">Crear categoría <b>OBSOLETO</b></a></p>
@@ -20,7 +21,6 @@
         <p><a href="<?php echo site_url('auth/create_team'); ?>">Crear equipos</a></p>
 		<p><a href="<?php echo site_url('auth/asignar_categorias'); ?>">Asignar Categoría <b>OBSOLETO</b></a></p>	
         <p><a href="<?php echo site_url('auth/generar_fases'); ?>">Generar Torneo de Fases <b>OBSOLETO</b></a></p>
-		<p><a href="<?php echo site_url('auth/swap_teams'); ?>">Intercambiar equipos <b>OBSOLETO</b></a></p>
         <p><a href="<?php echo site_url('auth/change_name_teams'); ?>">Cambiar nombre equipo</a></p>
 		<p><a href="<?php echo site_url('auth/create_match'); ?>">Generar partido manualmente (T verano) <b>OBSOLETO</b></a></p>
 
@@ -43,7 +43,6 @@
 		<p><a href="<?php echo site_url('auth/set_horario'); ?>">Definir horario de liga</a></p>
 		<p><a href="<?php echo site_url('auth/set_horario_elim'); ?>">Definir horario de eliminatoria</a></p>
 
-		<p><a href="<?php echo site_url('auth/set_results'); ?>">Cargar Resultados de liga </a></p>
         <p><a href="<?php echo site_url('auth/set_results_elim'); ?>">Cargar Resultados de eliminatoria</a></p>
 		<p><a href="<?php echo site_url('auth/modificar_tabla'); ?>">Modificar tabla posiciones  <b>(caso excepcional)</b></a></p>
 	   	<p><a href="<?php echo site_url('auth/partidos_por_horario'); ?>">Ver cantidad de partidos por horario</a></p>

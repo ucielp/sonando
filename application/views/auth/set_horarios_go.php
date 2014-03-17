@@ -53,7 +53,7 @@
 				</tbody>
 			</table>    <br>
 		<?php echo form_submit('submit', 'Cargar horarios');?><br><br>
-		<a href="<?php echo site_url('auth/set_horario');?>"><u>Go Back</u></a>
+		<a href="<?php echo site_url('auth/set_horario_new');?>"><u>Go Back</u></a>
 
       			</center>
 

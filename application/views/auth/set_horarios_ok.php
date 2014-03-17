@@ -7,7 +7,7 @@
 	<div id="infoMessage"><?php echo $message;?></div>   
 	
    
-		<a href="<?php echo site_url('auth/set_horario');?>"><u>Go Back</u></a>
+		<a href="<?php echo site_url('auth/set_horario_new');?>"><u>Go Back</u></a>
 
       			</center>
 

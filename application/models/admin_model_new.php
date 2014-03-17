@@ -50,6 +50,21 @@ class Admin_model_new extends CI_Model{
 			return 0;
 	}
 
+	function get_events_combo_box_2(){
+		$this->db->select('id, name_event,category_id');	
+		$this->db->from('events');
+		$this->db->order_by('category_id asc, name_event');
+		$query = $this->db->get();
+		if ($query->num_rows() > 0)
+		{			
+			foreach($query->result_array() as $row){
+				$combo[$row['id']]=$row['name_event'] ;	
+			}
+			return $combo;
+		}
+			return 0;
+	}
+	
 	
 	#me devuelve las categorias para poner en un comboBox donde tambien muestra el id
 	function get_categories_combo_box_to_events(){

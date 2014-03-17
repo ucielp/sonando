@@ -16,7 +16,7 @@
                    
 
 			<div class="header_page">
-				<h1>Fase <span style="text-transform:uppercase;"><?php echo $category_name;?></span></h1>
+				<h1><?php echo $event_name;?></span></h1>
 				<h2>Fecha <?php echo $fecha_nro;?></h2>
 			</div>
 			<table class="fixture">

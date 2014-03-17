@@ -6,10 +6,9 @@
         	<div id="infoMessage"><?php echo $message;?></div>
         	<?php echo form_open("goleadores/ver_goleadores");?>
     
-             <p>Elija una categoría<br/>
              
-             <?php if ( $categories){
-                 echo form_dropdown('dropdown_category', $categories);
+             <?php if ( $events){
+                 echo form_dropdown('dropdown_category', $events);
                  } 
              ?>
 

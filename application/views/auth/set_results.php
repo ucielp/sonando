@@ -6,10 +6,10 @@
 	
 	<div id="infoMessage"><?php echo $message;?></div>   
 	
-    <?php echo form_open("auth/set_results_go");?>
+    <?php echo form_open("auth/set_results_new_go");?>
     
      <p>Eligir torneo para cargar los resultados<br/>
-     <?php echo form_dropdown('dropdown_category', $tournament);?>
+     <?php echo form_dropdown('dropdown_category', $events);?>
      </p>
      
       <p>Eligir la fecha para cargar los resultados<br/>

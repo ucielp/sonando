@@ -80,9 +80,9 @@ class Fixture extends CI_Controller {
 		
 		$fecha = $current_fecha;
 		$data['fixture'] = $this->fixture_model_new->get_partidos($event_id,$fecha);
-		$data['category_name'] = $event_id; //para imprimir el nombre por pantalla
+		$data['event_name'] = $this->fixture_model_new->get_event_name_by_id($event_id); //para imprimir el nombre por pantalla
 		
-		$data['title'] = "So&ntilde;ando con el Gol - Posiciones Fase " . $data['category_name'];
+		$data['title'] = "So&ntilde;ando con el Gol";
 		$data['main_content'] = 'home/fixture/show_fixture_view';
 		$this->load->view('home/temp/template', $data);
 	}	
@@ -138,7 +138,7 @@ class Fixture extends CI_Controller {
 		
 		$fecha = $current_fecha;
 		$data['fixture'] = $this->fixture_model_new->get_partidos($event_id,$fecha);
-		$data['category_name'] = $event_id; //para imprimir el nombre por pantalla
+		$data['event_name'] = $this->fixture_model_new->get_event_name_by_id($event_id); //para imprimir el nombre por pantalla
 		
 		$data['title'] = "So&ntilde;ando con el Gol - Posiciones Fase " . $data['category_name'];
 		$data['main_content'] = 'home/fixture/show_fixture_view';

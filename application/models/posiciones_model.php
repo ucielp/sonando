@@ -71,9 +71,7 @@ class Posiciones_model extends CI_Model{
 		$this->db->select('e.name as name_equipo,e.id as id_equipo,pj,pg,pe,pp,gf,gc,dg,ptos');
 		$this->db->from('posiciones p');
 		$this->db->join('equipos e','e.id = p.team_id');
-		#$this->db->join('tipo_torneo t','t.id = e.category_id');
-		#$this->db->where('e.category_id', $actual_fase1_id);
-		$this->db->join('tipo_torneo t','t.id = e.actual_fase1_id');
+		$this->db->join('events t','t.id = e.actual_fase1_id');
 		$this->db->where('e.actual_fase1_id', $actual_fase1_id);
 		
 		$this->db->where('p.fase', '1');

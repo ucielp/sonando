@@ -13,27 +13,41 @@ class Posiciones extends CI_Controller {
 
 	}
 	
-	public function index() //ver que hacer aca, si disparar alguna otra cosa al llamar al index, alguna predeterminada puede ser
-	{
-		$data['title'] = "So&ntilde;ando con el Gol - Posiciones";
+	
+	function index(){
 		
-		$mostrar_torneo = $this->data['categories'] = $this->admin_model->get_show_tournament();
-		if ($mostrar_torneo == 0){
-			$data['categories'] = $this->equipos_model->get_all_categories();
-			#Esta es la nueva para el Apertura y para la copa de verano???
-			$data['main_content'] = 'home/posiciones/posiciones_apertura_view';
-		}
-		elseif ($mostrar_torneo == 1)  {
-			#Esta es la de antes cuando habia varios torneos
-			$data['main_content'] = 'home/posiciones/posiciones_view';
-		}	
-		else{
-		}
-		
-		$data['message'] = (validation_errors()) ? validation_errors() : $this->session->flashdata('message');
-		$this->load->view('home/temp/template', $data);
-		
+		$this->data['title'] = "Posiciones";
+		$this->data['message'] = (validation_errors()) ? validation_errors() : $this->session->flashdata('message');
+		$this->data['events'] = $this->fixture_model_new->get_events_combo_box(); # combobox
+			
+		$this->data['main_content'] = 'home/posiciones/new_posiciones_view';
+		$this->load->view('home/temp/template', $this->data);
+
 	}
+	
+	public function show_positions(){
+		
+		$data['events'] = $this->fixture_model_new->get_events_combo_box(); # combobox
+		
+		$event_id = $this->input->post('dropdown_events'); //cual tengo que mostrar
+
+
+		$data['event_name'] = $this->fixture_model_new->get_event_name_by_id($event_id); //para imprimir el nombre por pantalla
+		$data['posiciones'] = $this->posiciones_model->get_positions_fase1($event_id); //genero la tabla de posiciones
+
+		$data['title'] = "Posiciones";
+		$data['main_content'] = 'home/posiciones/ver_events_view_new.php';
+		$this->load->view('home/temp/template', $data);
+	}
+	
+	
+	
+	
+	
+	############################################################################
+	############################################################################
+	
+	
 	/*****************FASE************************/
 	public function fase(){
 		$data['title'] = "So&ntilde;ando con el Gol - Posiciones Fase";
