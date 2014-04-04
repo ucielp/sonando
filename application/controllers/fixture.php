@@ -49,9 +49,6 @@ class Fixture extends CI_Controller {
 		}
 		
 		
-		//~ var_dump($_POST);
-		//~ $current_fecha = $this->fixture_model->get_actual($fase);
-
 		$data['events'] = $this->fixture_model_new->get_events_combo_box(); # combobox
 		
 		//~ Aca me podria fijar dependiendo del torneo que se juega la cantidad de fechas
@@ -65,7 +62,7 @@ class Fixture extends CI_Controller {
 				'total_rows'	=> $total_rows,
 				'per_page'		=> $limit,
 				'cur_page'		=> $current_fecha,
-				#'uri_segment'  => '2',
+				'uri_segment'  => '2',
 				'full_tag_open'	=> '<div id="paginacion">',
 				'full_tag_close' => '</div><div class="clear"></div>',
 				'first_link'	=>	FALSE,
@@ -87,63 +84,64 @@ class Fixture extends CI_Controller {
 		$this->load->view('home/temp/template', $data);
 	}	
 	
-	public function show_fixture_byd($fecha=NULL)
-	{
-		$this->data['title'] = "Fixture";
-		$this->data['message'] = (validation_errors()) ? validation_errors() : $this->session->flashdata('message');
-		
-		//Declaramos offset y limit para la paginación
-		$limit = 1;
-		#$offset = 1;
-		
-		//~ ESTO TENGO QUE VER BIEN COMO LO HAGO,QUIZAS DEBERIA SACARLO
-		$fase = 1;
-		
-		if ($fecha){
-			$current_fecha = $fecha;
-		}	
-		else{
-			$current_fecha = $this->fixture_model->get_actual($fase);
-		}
-		
-		$event_id = 4;
-		
-		var_dump($_POST);
-
-		$data['events'] = $this->fixture_model_new->get_events_combo_box(); # combobox
-		
-		//~ Aca me podria fijar dependiendo del torneo que se juega la cantidad de fechas
-		$total_rows = $this->fixture_model->get_nros_fecha($fase) + 1;
-		
-		$data['fecha_nro'] = $current_fecha;
-		$this->load->library('pagination_torneo');
-		
-		$config = array(
-				'base_url'		=> base_url().'fixture/show_fixture_byd/' ,
-				'total_rows'	=> $total_rows,
-				'per_page'		=> $limit,
-				'cur_page'		=> $current_fecha,
-				#'uri_segment'  => '2',
-				'full_tag_open'	=> '<div id="paginacion">',
-				'full_tag_close' => '</div><div class="clear"></div>',
-				'first_link'	=>	FALSE,
-				'last_link'		=>	FALSE,
-				'use_page_numbers' => FALSE,
-				'cur_tag_open'	=>	'<strong>',
-				'cur_tag_close'	=>	'</strong>'
-			);
-			
-		$this->pagination_torneo->initialize($config);
-			
-		
-		$fecha = $current_fecha;
-		$data['fixture'] = $this->fixture_model_new->get_partidos($event_id,$fecha);
-		$data['event_name'] = $this->fixture_model_new->get_event_name_by_id($event_id); //para imprimir el nombre por pantalla
-		
-		$data['title'] = "So&ntilde;ando con el Gol - Posiciones Fase " . $data['category_name'];
-		$data['main_content'] = 'home/fixture/show_fixture_view';
-		$this->load->view('home/temp/template', $data);
-	}	
+	
+	//~ public function show_fixture_byid($fecha=NULL)
+	//~ {
+		//~ $this->data['title'] = "Fixture";
+		//~ $this->data['message'] = (validation_errors()) ? validation_errors() : $this->session->flashdata('message');
+		//~ 
+		//~ //Declaramos offset y limit para la paginación
+		//~ $limit = 1;
+		//~ #$offset = 1;
+		//~ 
+		######ESTO TENGO QUE VER BIEN COMO LO HAGO,QUIZAS DEBERIA SACARLO
+		//~ $fase = 1;
+		//~ 
+		//~ if ($fecha){
+			//~ $current_fecha = $fecha;
+		//~ }	
+		//~ else{
+			//~ $current_fecha = $this->fixture_model->get_actual($fase);
+		//~ }
+		//~ 
+		//~ $event_id = 4;
+		//~ 
+		//~ var_dump($_POST);
+//~ 
+		//~ $data['events'] = $this->fixture_model_new->get_events_combo_box(); # combobox
+		//~ 
+		####Aca me podria fijar dependiendo del torneo que se juega la cantidad de fechas
+		//~ $total_rows = $this->fixture_model->get_nros_fecha($fase) + 1;
+		//~ 
+		//~ $data['fecha_nro'] = $current_fecha;
+		//~ $this->load->library('pagination_torneo');
+		//~ 
+		//~ $config = array(
+				//~ 'base_url'		=> base_url().'fixture/show_fixture_byid/' ,
+				//~ 'total_rows'	=> $total_rows,
+				//~ 'per_page'		=> $limit,
+				//~ 'cur_page'		=> $current_fecha,
+				//~ #'uri_segment'  => '2',
+				//~ 'full_tag_open'	=> '<div id="paginacion">',
+				//~ 'full_tag_close' => '</div><div class="clear"></div>',
+				//~ 'first_link'	=>	FALSE,
+				//~ 'last_link'		=>	FALSE,
+				//~ 'use_page_numbers' => FALSE,
+				//~ 'cur_tag_open'	=>	'<strong>',
+				//~ 'cur_tag_close'	=>	'</strong>'
+			//~ );
+			//~ 
+		//~ $this->pagination_torneo->initialize($config);
+			//~ 
+		//~ 
+		//~ $fecha = $current_fecha;
+		//~ $data['fixture'] = $this->fixture_model_new->get_partidos($event_id,$fecha);
+		//~ $data['event_name'] = $this->fixture_model_new->get_event_name_by_id($event_id); //para imprimir el nombre por pantalla
+		//~ 
+		//~ $data['title'] = "So&ntilde;ando con el Gol - Posiciones Fase " . $data['category_name'];
+		//~ $data['main_content'] = 'home/fixture/show_fixture_view';
+		//~ $this->load->view('home/temp/template', $data);
+	//~ }	
 	
 	
 	
