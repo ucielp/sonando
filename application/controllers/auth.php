@@ -407,6 +407,29 @@ class Auth extends Controller {
 		
 	}
 	   
+	function mostrar_categorias_new()
+	{
+		if (!$this->ion_auth->logged_in() || !$this->ion_auth->is_admin())
+			{
+				redirect('auth', 'refresh');
+			}
+			
+		$this->data['message'] = (validation_errors()) ? validation_errors() : $this->session->flashdata('message');
+		
+		$this->data['categories'] = $this->admin_model_new->get_events_ninguno(); //para el combo box
+
+		$this->load->view('auth/preinscriptos_view1', $this->data);
+
+	}
+	  
+	   
+	   
+	   
+	   
+	   
+	   
+	   
+	   
 	   
 	   
 	   

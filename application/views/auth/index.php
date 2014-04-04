@@ -14,6 +14,8 @@
 		<p><a href="<?php echo site_url('auth/set_horario_new'); ?>">Definir horario de eventos</a></p>
 		<p><a href="<?php echo site_url('auth/set_results_new'); ?>">Cargar Resultados de eventos</a></p>
 		<p><a href="<?php echo site_url('auth/swap_teams'); ?>">Intercambiar equipos </a></p>
+		<p><a href="<?php echo site_url('auth/mostrar_categorias_new'); ?>">Inscribir jugadores</a></p>
+
 
         <h1>Comienzo del torneo</h1>
 		<p><a href="<?php echo site_url('auth/create_category'); ?>">Crear categoría <b>OBSOLETO</b></a></p>
