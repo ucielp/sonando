@@ -14,7 +14,7 @@ table.tableizer-table {border: 1px solid #CCC; font-family: Arial, Helvetica, sa
 <table class="tableizer-table">
 <!-- tr class="tableizer-firstrow"-->
  <tr>
-    <th colspan = 12><?php echo $name_event ;?></th>
+    <th colspan = 12><?php echo $name_event . " (fecha ". $nro_fecha. ") ";?></th>
   </tr>
  <tr>
     <th colspan = 6><?php echo $equipo1_name;?></th>

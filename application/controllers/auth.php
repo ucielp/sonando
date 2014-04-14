@@ -436,10 +436,7 @@ class Auth extends Controller {
 	   
 	   
 	   
-	   
-	   
-	   
-	   
+
 	   
 	   
 	#######################################################################
@@ -452,7 +449,7 @@ class Auth extends Controller {
 			redirect('auth/login', 'refresh');
 		}
 		$this->data['message'] = (validation_errors()) ? validation_errors() : $this->session->flashdata('message');
-		$this->data['tournament'] = $this->admin_model->get_tournaments_liga(); //para el combo box
+		$this->data['tournament'] = $this->admin_model_new->get_events_ninguno(); //para el combo box
 
 		$this->load->view('auth/modificar_tabla',$this->data);
 	}
@@ -1495,6 +1492,7 @@ class Auth extends Controller {
 			$this->data['cancha'] = $equipo->court;
 			$this->data['hora'] = $equipo->time;
             $tournament_id = $equipo->tournament_id;
+            $this->data['nro_fecha'] = $equipo->nro_fecha;
 		}
 		
   		$torneos = $this->admin_model_new->get_event_by_id($tournament_id);
