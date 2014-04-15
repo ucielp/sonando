@@ -15,6 +15,8 @@
 		<p><a href="<?php echo site_url('auth/set_results_new'); ?>">Cargar Resultados de eventos</a></p>
 		<p><a href="<?php echo site_url('auth/swap_teams'); ?>">Intercambiar equipos </a></p>
 		<p><a href="<?php echo site_url('auth/mostrar_categorias_new'); ?>">Inscribir jugadores</a></p>
+		<p><a href="<?php echo site_url('auth/modificar_tabla'); ?>">Modificar tabla posiciones  <b>(caso excepcional)</b></a></p>
+		<p><a href="<?php echo site_url('auth/horario_fecha'); ?>">Ver horarios por fecha</a></p>
 
 
         <h1>Comienzo del torneo</h1>

@@ -497,6 +497,25 @@ class Admin_model_new extends CI_Model{
 		  
 		}
 	}
+	
+	function get_partidos_por_fecha()
+	{
 		
+		$this->db->select('eq1.name equipo1,eq2.name equipo2,e.name_event,p.time as horario,p.court as cancha');	
+		$this->db->from('partidos p');
+		$this->db->join('fechas f','f.id = p.nro_fecha_id');
+		$this->db->join('events e','e.id = p.tournament_id');
+		$this->db->join('equipos eq1','eq1.id = p.team1_id');
+		$this->db->join('equipos eq2','eq2.id = p.team2_id');
+		$this->db->where('f.actual', 1);
+		$query = $this->db->get();
+		//~ echo $this->db->last_query() . "<br>";
+
+        if ($query->num_rows() > 0)
+		{
+			return $query->result();
+		}
+	}
+	
 }
 		
