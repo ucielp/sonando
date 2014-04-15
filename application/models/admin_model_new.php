@@ -473,5 +473,30 @@ class Admin_model_new extends CI_Model{
 		$torneo = $query->result();
 		return $torneo;
     }
+    
+    function get_reglamento(){
+		$this->db->from('reglamento');
+		$this->db->order_by('titulo');
+		$query = $this->db->get();
+		return $query->result();
+	}
+	
+	function get_team_category($team_id)
+	{
+		$this->db->select('name_event');	
+		$this->db->from('events t');
+		$this->db->join('equipos e','e.category_id=t.id');
+		$this->db->where('e.id', $team_id);
+		$query = $this->db->get();
+		//~ echo $this->db->last_query() . "<br>";
+
+        if ($query->num_rows() > 0)
+		{
+		   $row = $query->row(); 
+		   return $row->name_event;
+		  
+		}
+	}
+		
 }
 		

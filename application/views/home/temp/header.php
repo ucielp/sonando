@@ -126,10 +126,10 @@
                     <li><a href="<?php echo base_url(); ?>fixture"><span>Fixture</span></a></li>
                     <li><a href="<?php echo base_url(); ?>equipos"><span>Equipos</span></a></li>
                     <li><a href="<?php echo base_url(); ?>goleadores"><span>Goleadores</span></a></li>
-                    <li class="right"><a href="<?php echo base_url(); ?>nosotros"><span>Nosotros</span></a></li>
+                    <li class="right"><a href="<?php echo base_url(); ?>reglamento"><span>Reglamento</span></a></li>
                     <li><a href="<?php echo base_url(); ?>notas"><span>Notas</span></a></li>
                     <li><a href="<?php echo base_url(); ?>sanciones"><span>Sanciones</span></a></li>
-                    <li><a href="<?php echo base_url(); ?>contacto"><span>Contacto</span></a></li>
+                    <li><a href="<?php echo base_url(); ?>nosotros"><span>Nosotros</span></a></li>
                 </ul>
             </div>
 		</div> <!-- END logo_nav_container -->

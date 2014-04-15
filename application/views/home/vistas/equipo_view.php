@@ -1,5 +1,5 @@
         <div class="header_page">
-            <h1>Equipos</h1>
+            <h1>Equipo</h1>
             <h2>&nbsp;</h2>
         </div>
         <div class="preinscripcion_contenedor">
@@ -38,7 +38,7 @@
                 	<a href="">Fixture</a>
                 </div>
                 <div class="category_name">
-                	<p>Categoría: <span style="text-transform:uppercase;"><?php echo $team_category;?></span></p>
+                	<p> <span style="text-transform:uppercase;"><?php echo $team_category;?></span></p>
                 </div>
                 <div class="link_posiciones">
                 	<a href="">Posiciones</a>

@@ -41,7 +41,7 @@ class Equipos extends CI_Controller {
 		$this->data['equipo_infos'] = $this->admin_model->get_equipo_info($team_id);
 		$this->data['players_infos'] = $this->admin_model->get_all_players($team_id);
 		$this->data['team_name'] = $this->admin_model->get_team_name($team_id);
-		$this->data['team_category'] = $this->admin_model->get_team_category($team_id);
+		$this->data['team_category'] = $this->admin_model_new->get_team_category($team_id);
 		$this->data['main_content'] = 'home/vistas/equipo_view';
 		$this->load->view('home/temp/template', $this->data);
 	}
@@ -53,7 +53,7 @@ class Equipos extends CI_Controller {
 		$this->data['equipo_infos'] = $this->admin_model->get_equipo_info($team_id);
 		$this->data['players_infos'] = $this->admin_model->get_all_players($team_id);
 		$this->data['team_name'] = $this->admin_model->get_team_name($team_id);
-		$this->data['team_category'] = $this->admin_model->get_team_category($team_id);
+		$this->data['team_category'] = $this->admin_model_new->get_team_category($team_id);
 		$this->data['main_content'] = 'home/vistas/equipo_view';
 		$this->load->view('home/temp/template', $this->data);
 	}

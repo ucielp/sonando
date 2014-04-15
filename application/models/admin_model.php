@@ -1681,6 +1681,7 @@ el permiso especial de los organizadores del torneo. Hay tiempo hasta el Sábado
 		  
 		}
 	}
+	
 	function get_category_fases($fase){
 		$this->db->select('id');	
 		$this->db->from('tipo_torneo');

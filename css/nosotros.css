@@ -26,6 +26,23 @@
 	line-height:18px;
 }
 
+
+
+.nosotros_contenedor a{
+	text-decoration:none;
+	outline:none;
+	color:#5C9731;
+	font-family:'YanoneBold', sans-serif;
+	font-size:12px;
+}
+.nosotros_contenedor a:hover{
+	text-decoration:none;
+	outline:none;
+	color:#909090;
+	font-family:'YanoneBold', sans-serif;
+	font-size:12px;
+}
+
 #ubicacion{
 	position:relative;
 	display:inline-block;

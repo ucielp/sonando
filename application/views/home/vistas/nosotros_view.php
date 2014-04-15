@@ -2,7 +2,16 @@
             <h1>Nosotros</h1>
             <h2>&nbsp;</h2>
         </div>
+		
+	
+
         <div class="nosotros_contenedor">
+			<div class="titular_nosotros">
+            	<h1>Contacto</h1>
+            </div>
+			<p>
+			<a href="<?php echo base_url(); ?>contacto" target="_blank">Contactarse</a>
+			</p>
         	<div class="titular_nosotros">
             	<h1>Historia del Torneo</h1>
             </div>
@@ -80,40 +89,7 @@
                 </div>
             	<div id="map"></div>
             </div>
-			<div class="titular_nosotros">
-            	<h1>Desarrollo del Torneo</h1>
-            </div>
-            <div id="desarrollo_torneo">
-                <div class="link_pdf">
-                    <h2>Desarrollo Apertura 2013</h2>
-                    <a href="<?php echo base_url(); ?>images/nosotros/desarrollo_torneo_2013.doc" target="_blank"><img src="<?php echo base_url(); ?>images/nosotros/pdf_icon.png" width="52" height="52" /></a>
-                </div>
-                 <div class="link_pdf">
-                    <h2>Desarrollo Clausura 2013</h2>
-                    <a href="<?php echo base_url(); ?>images/nosotros/desarrollo_clausura_2013.doc" target="_blank"><img src="<?php echo base_url(); ?>images/nosotros/pdf_icon.png" width="52" height="52" /></a>
-                </div>
-                <!--
-                <div class="link_pdf">
-                    <h2>Desarrollo Clausura 2012</h2>
-                    <a href="<?php echo base_url(); ?>images/nosotros/DesarrolloClausura.doc" target="_blank"><img src="<?php echo base_url(); ?>images/nosotros/pdf_icon.png" width="52" height="52" /></a>
-                </div>
-                -->
-                <div class="link_pdf">
-                    <h2>Tribunal de Disciplina</h2>
-                    <a href="<?php echo base_url(); ?>images/nosotros/reglamento_2013.doc" target="_blank"><img src="<?php echo base_url(); ?>images/nosotros/pdf_icon.png" width="52" height="52" /></a>
-               </div>
-               
-                 <div class="link_pdf">
-                    <h2>Autorización (menores de 18 años)</h2>
-                    <a href="<?php echo base_url(); ?>images/nosotros/autorizacion.doc" target="_blank"><img src="<?php echo base_url(); ?>images/nosotros/pdf_icon.png" width="52" height="52" /></a>
-               </div>
-                <div class="link_pdf">
-                    <h2>Acta de deslinde de responsabilidad civil</h2>
-                    <a href="<?php echo base_url(); ?>images/nosotros/deslinde_responsabilidad_civil.doc" target="_blank"><img src="<?php echo base_url(); ?>images/nosotros/pdf_icon.png" width="52" height="52" /></a>
-               </div>
-               
-           </div>
-            
+			
             <script type="text/javascript">
             var map = new GMap2(document.getElementById("map"));
             var mapTypeControl = new GMapTypeControl();

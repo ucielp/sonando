@@ -1,6 +1,6 @@
 <?php if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 
-class Nosotros extends CI_Controller {
+class Reglamento extends CI_Controller {
 
 	function __construct(){
 		parent::__construct();
@@ -14,9 +14,13 @@ class Nosotros extends CI_Controller {
 	public function index()
 	{
 		$this->data['title'] = "Soñando con el Gol - Nosotros";
+		
+		$this->data['items_reglamento'] = $this->admin_model_new->get_reglamento();
 				
-		$this->data['main_content'] = 'home/vistas/nosotros_view';
+		$this->data['main_content'] = 'home/vistas/reglamento_view';
 		$this->load->view('home/temp/template', $this->data);
+		
+		
 		
 	}
 	
