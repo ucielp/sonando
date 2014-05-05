@@ -11,7 +11,7 @@
 .team-members h4 { width: 1024px; margin: -4px auto 0; font: normal normal normal 30px/25px 'GothamMedium', Arial, sans-serif; color: #242424; text-transform: uppercase; letter-spacing: -2px; }
 .team-members .slider-wrapper { position: relative; width: 100%; height: 80px; }
 .team-members ul { text-align:center; height: 80px; position: absolute; left: 0; list-style:none;}
-.team-members li { width: 160px; height: 80px; float:left; padding: 0 3px; position:relative; }
+.team-members li { width: 160px; height: 80px; float:left; padding: 0 25px; position:relative; }
 .team-members li a.ttip { float:left; width: 160px; height: 80px; position:relative; text-decoration:none; }
 .team-members li a.ttip:hover { text-decoration:none; }
 .team-members li img { -moz-border-radius: 3px; -webkit-border-radius: 3px; border-radius: 3px; display:block; }
