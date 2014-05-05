@@ -79,12 +79,10 @@
             <div id="ubicacion">
             	<div id="datos_contacto_mapa">
                     <p>Podés contactarte con nosotros</p>
-                    <p>Francisco Pochetino: 0341-155876106</p>
-                    <p>Pablo Benetti: 0341-155876088</p>
-                    <p>Tambien con los coordinadores</p>
-                    <p>Pablo: 0341-155007422</p>
-                    <p>Cristian Lucero: 0341-155876092</p>
-
+                    <p>Francisco Pochetino: 0341-153882888</p>
+                    <p>Pablo Benetti: 0341-153882887</p>
+                    <p>Santiago Biazzi 0341-155032605</p>
+                    <p>Atencion al ciente: 0341-3882874</p>
                     <p>info@sonandoconelgol.com.ar</p>
                 </div>
             	<div id="map"></div>
