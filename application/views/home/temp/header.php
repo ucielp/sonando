@@ -34,6 +34,7 @@
 <script src="<?php echo base_url();?>js/bubbles/jquery-css-transform.js" type="text/javascript"></script>
 <script src="<?php echo base_url();?>js/bubbles/rotate3Di.js" type="text/javascript"></script>
 <script src="<?php echo base_url();?>js/bubbles/functions.js" type="text/javascript"></script>
+<script src="<?php echo base_url();?>js/catMenu.js" type="text/javascript"></script>
 
 <script src="http://maps.google.com/maps?file=api&v=2&key=ABQIAAAAbOd_d_a4SYm-T6fDAmk6zBQ65V4I35QkyvHAPBchMUfZFypIUBRQ_6o0f2QKuzVoJDqhnXtMdpMVEQ" type="text/javascript"></script>
 

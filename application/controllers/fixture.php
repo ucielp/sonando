@@ -17,7 +17,10 @@ class Fixture extends CI_Controller {
 		$this->data['title'] = "Fixture";
 		$this->data['message'] = (validation_errors()) ? validation_errors() : $this->session->flashdata('message');
 		$this->data['events'] = $this->fixture_model_new->get_events_combo_box(); # combobox
-			
+		
+		$this->data['categoryTree'] = $this->fixture_model_new->parse_tree(); # Category Tree
+
+		
 		$this->data['main_content'] = 'home/fixture/new_fixture_view';
 		$this->load->view('home/temp/template', $this->data);
 

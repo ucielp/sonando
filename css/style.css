@@ -230,6 +230,58 @@ ul li,ol li{margin-left:25px}
 					text-decoration:none;
 					text-align:right;
 				}
+				
+				.catmenu ul {
+	width: 300px;
+    padding: 0px 0px;
+    margin:0px;
+    font-family:Arial, Helvetica, sans-serif;
+    font-size:15px;
+    color:#FFF;
+    list-style:none;
+}
+.catmenu ul li {
+    background:#DBDBDB;
+    line-height:28px;
+    border-bottom:1px solid #333;
+	list-style: none;
+	padding: 3px 0px;
+}
+.catmenu ul li:last-child {
+	border: none;
+}
+.catmenu ul li a {
+	margin: 0;
+	padding: 1px 12px;
+	color: #333333;
+    font-weight: 600;
+    text-decoration: none;
+}
+.catmenu ul li a:hover {
+    color: #5E9527;
+}
+.catmenu ul li > ul {
+	width: 100%;
+}
+.catmenu ul li > ul  li{
+	margin-left: 10px;
+}
+.catmenu .nav-click {
+	border: 0 none;
+    cursor: pointer;
+    display: inline-block;
+    float: left;
+    height: 14px;
+    width: 10px;
+	margin: 8px 0 0 16px;
+}
+.catmenu ul li.has-sub.collapsed>:first-child {
+	background: url(../images/navigation_left_arrow.png) no-repeat;
+}
+.catmenu ul li.has-sub.expanded>:first-child {
+	background: url(../images/navigation_down_arrow.png) no-repeat;
+}
+
 		/*#footer #right_footer .footer_quick{
 			position:relative;
 			width:320px;

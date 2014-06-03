@@ -176,5 +176,71 @@ class Fixture_model_new extends CI_Model{
 			}
 		}
 		
+		function get_category_tree() {
+	
+		$this->db->select('id, parent_id,name_category');	
+		$this->db->from('category');
+		$query = $this->db->get();
+		//~ echo $this->db->last_query() . "<br>";
+		  
+
+		foreach ($query->result() as $row)
+		{
+			$pid  = $row->parent_id;
+			$id   = $row->id;
+			$name = $row->name_category;
+
+			// Create or add child information to the parent node
+			if (isset($tree[$pid]))
+				// a node for the parent exists
+				// add another child id to this parent
+				$tree[$pid]["children"][] = $id;
+			else
+				// create the first child to this parent
+				$tree[$pid] = array("children"=>array($id));
+
+			// Create or add name information for current node
+			if (isset($tree[$id]))
+				// a node for the id exists:
+				// set the name of current node
+				$tree[$id]["name"] = $name;
+			else
+				// create the current node and give it a name
+				$tree[$id] = array( "name"=>$name );
+		}
+		return $tree;
+	}
+	
+	function convert_to_ul($tree, $id, $html){
+
+	  if (isset($tree[$id]['name']))
+		$html .= 
+			'<li>' .
+				'<span class="nav-click"></span>' .
+				'<a href="' . base_url() . 'fixture/show_fixture/' . $id . '">' . $tree[$id]['name'] . '</a>';
+
+	  if (isset($tree[$id]['children']))
+	  {
+		$arChildren = &$tree[$id]['children'];
+		$len = count($arChildren);
+		$html .= '<ul>';
+		for ($i=0; $i<$len; $i++) {
+			$html .= $this->fixture_model_new->convert_to_ul($tree, $arChildren[$i], "");
+		}
+		$html .= '</ul>'.PHP_EOL;
+	  }
+
+	  $html .= '</li>'.PHP_EOL;
+	  return $html;
+	}
+	
+	function parse_tree () {
+	
+	    $tree = $this->fixture_model_new->get_category_tree();
+		$too = $this->fixture_model_new->convert_to_ul($tree, 0, "");
+		
+		return $too;
+	}
+		
 }
 		

@@ -1,6 +1,11 @@
             <div class="combo_box_wrapper">
+            
+<div class="combo_box_wrapper">
+	<div class="catmenu"><?php echo $categoryTree ?></div>
+</div>
             <?php $data = array('class' => 'fixture_form');
 			echo form_open('fixture/show_fixture', $data);
+			
                   echo form_dropdown('dropdown_events', $events);
             
                   $data_submit = array(
