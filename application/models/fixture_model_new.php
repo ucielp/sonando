@@ -180,6 +180,7 @@ class Fixture_model_new extends CI_Model{
 	
 		$this->db->select('id, parent_id,name_category');	
 		$this->db->from('category');
+		$this->db->where('show','1');
 		$query = $this->db->get();
 		//~ echo $this->db->last_query() . "<br>";
 		  
