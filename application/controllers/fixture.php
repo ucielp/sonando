@@ -158,37 +158,7 @@ class Fixture extends CI_Controller {
 	
 	
 	# Estos son los metodos viejos #
-	public function index_old()
-	{
-		$this->data['title'] = "So&ntilde;ando con el Gol - Fixture";
-		$this->data['message'] = (validation_errors()) ? validation_errors() : $this->session->flashdata('message');
-		$this->data['categories'] = $this->equipos_model->get_all_categories();
 		
-		$mostrar_torneo = $this->data['categories'] = $this->admin_model->get_show_tournament();
-		if ($mostrar_torneo == 0){
-			$type = 'fase';
-			$this->data['categories'] = $this->posiciones_model->get_categories($type); //para el combo box
-			$this->data['main_content'] = 'home/fixture/fase';
-		}
-		elseif ($mostrar_torneo == 1)  {
-			#Esto lo cambie para cuando hay varias copas 
-        	$this->data['main_content'] = 'home/fixture/fixture_view';
-		}	
-		else{
-			#Esto es para el torneo apertura 2012 
-			# PERO NO FUNCIONA OJO!
-			$type = 'fase';
-			$this->data['categories'] = $this->posiciones_model->get_categories($type); //para el combo box
-			echo $this->data['categories'];
-			$this->data['main_content'] = 'home/fixture/fixture_apertura_view';
-		}	
-			
-		
-		
-		$this->load->view('home/temp/template', $this->data);
-	
-	}
-	
 	/*****************FASE************************/
 	public function fase(){
 		$data['title'] = "So&ntilde;ando con el Gol - Fixture Fase";
