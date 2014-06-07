@@ -49,10 +49,10 @@ p{
 }
 	#header #logo_nav_container{
 		position:relative;
-		width:960px;
+		width:1080px;
 		height:195px;
 		left:50%;
-		margin-left:-480px;
+		margin-left:-541px;
 	}
 	#header #logo{
 		position:absolute;
@@ -99,7 +99,7 @@ p{
 		}
 		#header #nav ul{
 			position:relative;
-			width:960px;
+			width:1080px;
 			left:50%;
 			margin-left:-480px;
 		}
@@ -125,8 +125,9 @@ ul li,ol li{margin-left:25px}
 	width:1080px;
 	margin:0 auto;
 }
-#container{
-	display:inline-block;
+.container{
+	margin: 0 auto;
+    width: 800px;
 }
 	.header_page{
 		padding-top:20px;
@@ -167,16 +168,17 @@ ul li,ol li{margin-left:25px}
 	opacity:0.8;
 	filter:alpha(opacity=80);
 	border-top:4px solid #5C9732;
+	text-align:center;
 }
 	#footer #footer_wrapper{
 		position:relative;
-		width:960px;
+		width:1080px;
 		display:inline-block;
 		height:100px;
 	}
 		#footer #left_footer{
 			position:relative;
-			width:320px;
+			width:360px;
 			float:left;
 			height:100px;
 			text-align:center;
@@ -191,7 +193,7 @@ ul li,ol li{margin-left:25px}
 			
 		#footer #middle_footer{
 			position:relative;
-			width:320px;
+			width:360px;
 			float:left;
 			height:100px;
 			text-align:center;
@@ -200,14 +202,14 @@ ul li,ol li{margin-left:25px}
 
 		#footer #right_footer{
 			position:relative;
-			width:320px;
+			width:360px;
 			float:left;
 			height:136px;
 		}
 			#footer #right_footer img{
 				position:relative;
 				top: 20px;
-				left:75px;
+				left:63px;
 			}
 			#footer #right_footer p{
 				position:absolute;

@@ -2,7 +2,7 @@
 				<h1><?php echo $event_name;?></span></h1>
 				<h2>Fecha <?php echo $fecha_nro;?></h2>
 			</div>
-			<div id="container">
+			<div class="container-fixture">
 				<div class="catmenu"><?php echo $categoryTree ?></div>
 				<div class="table-wrapper">
 					<table class="fixture">

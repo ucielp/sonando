@@ -1,6 +1,7 @@
 .nosotros_contenedor{
 	position:relative;
 	width:800px;
+	margin:0 auto;
 }
 .nosotros_contenedor .titular_nosotros{
 	position:relative;

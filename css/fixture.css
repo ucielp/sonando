@@ -1,4 +1,6 @@
-
+.container-fixture{
+	display:inline-block;
+}
 table.fixture {
 		border: medium none !important;
 		border-collapse: collapse;
