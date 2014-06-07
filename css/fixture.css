@@ -1,9 +1,10 @@
+
 table.fixture {
 		border: medium none !important;
 		border-collapse: collapse;
 		color: #333333;
 		font-family: 'Open Sans', Times, Times New Roman, sans-serif;
-		width: 800px;
+		width: 700px;
 }
 		table.fixture thead th{
 			font-family: 'Open Sans', Times, Times New Roman, sans-serif;
@@ -60,7 +61,6 @@ table.fixture {
 
 .controls{
 	position:relative;
-	width:800px;
 	display:inline-block;
 	margin-top:30px;
 	font-family: 'Open Sans', Times, Times New Roman, sans-serif;
@@ -68,20 +68,18 @@ table.fixture {
 	font-weight: 600;
 	font-size:10px;
 }
-
-.fecha_anterior{
-	position:relative;
-	float:left;
-	width:400px;
-	text-align:left;
+.table-wrapper .controls #paginacion {
+	width: 700px;
 }
-.fecha_posterior{
-	position:relative;
-	float:left;
-	width:400px;
-	text-align:right;
+.table-wrapper .controls #paginacion .fecha_anterior{
+	float: left;
 }
-
+.table-wrapper #paginacion .fecha_posterior{
+	float: right;
+}
+.table-wrapper #paginacion .fecha_posterior a img{
+	float: right;
+}
 /*****VISTA FIXTURE ELECCION********/
 
 .bubbles { width: 960px; margin-left:-80px;height: 360px; position:relative; margin-top:100px;}

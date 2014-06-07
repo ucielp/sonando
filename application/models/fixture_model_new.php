@@ -218,7 +218,7 @@ class Fixture_model_new extends CI_Model{
 		$html .= 
 			'<li>' .
 				'<span class="nav-click"></span>' .
-				'<a href="' . base_url() . 'fixture/show_fixture/' . $id . '">' . $tree[$id]['name'] . '</a>';
+				'<a href="' . base_url() . 'fixture/index/' . $id . '">' . $tree[$id]['name'] . '</a>';
 
 	  if (isset($tree[$id]['children']))
 	  {

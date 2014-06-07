@@ -136,4 +136,3 @@
 		</div> <!-- END logo_nav_container -->
 	</div>
     <div id="wrapper">
-      <div id="container">

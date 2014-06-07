@@ -12,26 +12,9 @@ class Fixture extends CI_Controller {
 
 	}
 	
-	function index(){
-		
-		$this->data['title'] = "Fixture";
-		$this->data['message'] = (validation_errors()) ? validation_errors() : $this->session->flashdata('message');
-		$this->data['events'] = $this->fixture_model_new->get_events_combo_box(); # combobox
-		
-		$this->data['categoryTree'] = $this->fixture_model_new->parse_tree(); # Category Tree
-
-		
-		$this->data['main_content'] = 'home/fixture/new_fixture_view';
-		$this->load->view('home/temp/template', $this->data);
-
-	}
-	
-	public function show_fixture($event_id=NULL,$fecha=NULL)
+	function index($event_id=NULL,$fecha=NULL)
 	{
-		
-		$this->data['title'] = "Fixture";
-		$this->data['message'] = (validation_errors()) ? validation_errors() : $this->session->flashdata('message');
-		
+			
 		//Declaramos offset y limit para la paginación
 		$limit = 1;
 		#$offset = 1;
@@ -44,13 +27,10 @@ class Fixture extends CI_Controller {
 		else{
 			$current_fecha = $this->fixture_model->get_actual($fase);
 		}
-
-		if ($event_id){
-		}	
-		else{
-			$event_id = $this->input->post('dropdown_events'); 
+		//By default show a main category in order to fill the table content
+		if (!$event_id){
+			$event_id = 1;
 		}
-		
 		
 		$data['events'] = $this->fixture_model_new->get_events_combo_box(); # combobox
 		
@@ -61,7 +41,7 @@ class Fixture extends CI_Controller {
 		$this->load->library('pagination_torneo');
 		
 		$config = array(
-				'base_url'		=> base_url().'fixture/show_fixture/' . $event_id ,
+				'base_url'		=> base_url().'fixture/index/' . $event_id ,
 				'total_rows'	=> $total_rows,
 				'per_page'		=> $limit,
 				'cur_page'		=> $current_fecha,
@@ -81,13 +61,15 @@ class Fixture extends CI_Controller {
 		$fecha = $current_fecha;
 		$data['fixture'] = $this->fixture_model_new->get_partidos($event_id,$fecha);
 		$data['event_name'] = $this->fixture_model_new->get_event_name_by_id($event_id); //para imprimir el nombre por pantalla
+		$data['categoryTree'] = $this->fixture_model_new->parse_tree(); # Category Tree
 		
 		$data['title'] = "So&ntilde;ando con el Gol";
+		$data['message'] = (validation_errors()) ? validation_errors() : $this->session->flashdata('message');
+		
 		$data['main_content'] = 'home/fixture/show_fixture_view';
 		$this->load->view('home/temp/template', $data);
-	}	
-	
-	
+	}
+
 	//~ public function show_fixture_byid($fecha=NULL)
 	//~ {
 		//~ $this->data['title'] = "Fixture";
