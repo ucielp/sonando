@@ -17,7 +17,12 @@
      <?php $categories[0] = 'Es una categoría padre'; 
 	 echo form_dropdown('dropdown_parent_category', $categories, '0');?>
      </p>
-      
+     
+       <p> Elija el tipo de torneo<br />
+     
+     <?php
+	 echo form_dropdown('dropdown_parent_category', $tipo_torneo, '0');?>
+     </p>
       <p>Mostrar la categoría?<br />
      <?php
 		$show = array(

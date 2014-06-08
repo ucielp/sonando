@@ -57,7 +57,8 @@ class Fixture extends CI_Controller {
 			
 		$this->pagination_torneo->initialize($config);
 			
-		
+		$data['categoryTree'] = $this->fixture_model_new->parse_tree(); # Category Tree
+
 		$fecha = $current_fecha;
 		$data['fixture'] = $this->fixture_model_new->get_partidos($event_id,$fecha);
 		$data['event_name'] = $this->fixture_model_new->get_event_name_by_id($event_id); //para imprimir el nombre por pantalla

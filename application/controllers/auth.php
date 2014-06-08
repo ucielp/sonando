@@ -32,6 +32,12 @@ class Auth extends Controller {
 		$this->data['message'] = (validation_errors()) ? validation_errors() : $this->session->flashdata('message');
 		$this->data['categories'] = $this->admin_model_new->get_categories(); 
 		
+		//~ $tipo_torneo['nodo'] = 'nodo';
+		//~ $tipo_torneo['ida'] = 'ida';
+		//~ $tipo_torneo['idayvuelta'] = 'idayvuelta';
+		//~ $tipo_torneo['eliminatoria'] = 'eliminatoria';
+		//~ $this->data['tipo_torneo'] = $tipo_torneo;
+		
 		$this->load->view('auth/modify_category_new', $this->data);
 	
 	}
@@ -48,11 +54,17 @@ class Auth extends Controller {
 	
 		if ($cats) {
 			$this->data['categories'] = $cats;
-		
 		}
 		else{
 			$this->data['categories'] = '';
 		}
+		
+		$tipo_torneo[0] = 'nodo';
+		$tipo_torneo[1] = 'ida';
+		$tipo_torneo[2] = 'idayvuelta';
+		$tipo_torneo[3] = 'eliminatoria';
+		
+		$this->data['tipo_torneo'] = $tipo_torneo;
 		$this->load->view('auth/create_new_category_view', $this->data);
 	
 	}
@@ -92,9 +104,9 @@ class Auth extends Controller {
 		$id_parente_category = $this->input->post('res2');	
 		$show = $this->input->post('show');
 		$category_id = $this->input->post('category');
+		$tipo_torneo = $this->input->post('res3');
 
-		
-		$this->admin_model_new->set_category($category_id,$name_category,$id_parente_category,$show);
+		$this->admin_model_new->set_category($category_id,$name_category,$id_parente_category,$show,$tipo_torneo);
 		$this->data['warning'] = "";
 		$this->data['message'] = "Se han modificado las categorías.";
 		

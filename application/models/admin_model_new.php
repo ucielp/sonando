@@ -35,6 +35,8 @@ class Admin_model_new extends CI_Model{
 			return 0;
 	}
 	
+
+	
 	function get_events_combo_box(){
 		$this->db->select('id, name_event,category_id');	
 		$this->db->from('events');
@@ -91,13 +93,14 @@ class Admin_model_new extends CI_Model{
 		return $this->db->insert_id();
 	}
 		
-	function set_category($category_id,$name_category,$id_parente_category,$show){
+	function set_category($category_id,$name_category,$id_parente_category,$show,$tipo_torneo){
 		$i = 1;
 		foreach ($category_id as $cat_id){
 			$data = array(
 				'name_category' => $name_category[$i],
 				'parent_id' => $id_parente_category[$i],
 				'show' => $show[$i],
+				'tipo' => $tipo_torneo[$i],
 			);
 			$this->db->where('id', $cat_id);
 			$this->db->update('category', $data);
