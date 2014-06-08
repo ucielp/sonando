@@ -1,4 +1,5 @@
-        <div class="header_page">
+        <div class="container">
+		<div class="header_page">
             <h1>Equipo</h1>
             <h2>&nbsp;</h2>
         </div>

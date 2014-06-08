@@ -12,8 +12,8 @@
             <h1 style="color:#FFF;padding-top:15px;">Torneo de Futbol Stella Maris</h1>
         </div>
         <div id="right_footer">
-            <a href="http://www.joseforte.com.ar" target="_blank"><img src="<?php echo base_url(); ?>images/logo-jose-forte-com-ar.png" /></a>
-            <p>developed by <a href="http://www.joseforte.com.ar" target="_blank">José Forte</a></p>
+            <a href="http://www.joseforte.com" target="_blank"><img src="<?php echo base_url(); ?>images/logo-jose-forte-com-ar.png" /></a>
+            <p>developed by <a href="http://www.joseforte.com" target="_blank">José Forte</a></p>
         </div>
 	</div>
 </div>

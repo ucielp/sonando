@@ -1,3 +1,4 @@
+		<div class="container">
 		<div class="header_page">
             <h1>Sanciones</h1>
             <h2>&nbsp;</h2>

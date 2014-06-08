@@ -233,6 +233,7 @@
 	width:800px;
 	font-size: 10pt;
 	display:inline-block;
+	margin:0 auto;
 }
 	table.equipos_all {
 		border: medium none !important;
