@@ -41,6 +41,14 @@
 						?>
 						</td>
 						
+						<td>
+						<?php $name0  = 'type_id[' . $i. ']';?>
+						<?php 
+							$name1  = 'res3[' . $i . ']';
+							echo form_input($name1,$category['tipo']);
+						?>
+						</td>
+						
 						<!-- Esto es para show -->						
 						<?php 
 						$show_name = 'show[' . $i . ']';

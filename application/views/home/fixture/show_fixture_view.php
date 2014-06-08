@@ -1,20 +1,8 @@
    <div class="combo_box_wrapper">
 	  
-            <?php $data = array('class' => 'fixture_form');
-			echo form_open('fixture/show_fixture', $data);
-                  echo form_dropdown('dropdown_events', $events);
-            
-                  $data_submit = array(
-								  'name'        => 'mysubmit',
-								  'class'          => 'submit_fixture',
-								  'value'       => 'Fixture',
-								);
-                      echo form_submit($data_submit);
-                
-                    echo form_close();
-                   ?>
-                   
-
+         	<div class="catmenu">
+					<?php echo $categoryTree ?></div>
+			<div id="container">		
 			<div class="header_page">
 				<h1><?php echo $event_name;?></span></h1>
 				<h2>Fecha <?php echo $fecha_nro;?></h2>
