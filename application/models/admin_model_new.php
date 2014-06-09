@@ -84,10 +84,11 @@ class Admin_model_new extends CI_Model{
 			return 0;
 	}
 	
-	function create_category($name_category,$parent_id,$show){
+	function create_category($name_category,$parent_id,$show,$tipo){
 		$this->db->set('name_category', $name_category);
 		$this->db->set('parent_id', $parent_id);
 		$this->db->set('show', $show);
+		$this->db->set('tipo', $tipo);
 
 		$this->db->insert('category');
 		return $this->db->insert_id();
@@ -518,6 +519,24 @@ class Admin_model_new extends CI_Model{
 		{
 			return $query->result();
 		}
+	}
+	
+	function get_tipo_torneos()
+	{
+
+		$query = $this->db->query("SHOW COLUMNS FROM category LIKE 'tipo'");	
+
+		foreach ($query->result() as $row){
+			$enums = $row->Type;
+			$regex = "/'(.*?)'/";
+			preg_match_all( $regex , $enums, $enum_array );
+			$enum_fields = $enum_array[1];
+		}
+		
+		foreach($enum_fields as $enum_data){
+			$combo[$enum_data]=$enum_data;	
+		}
+		return $combo;
 	}
 	
 }

@@ -31,12 +31,11 @@ class Auth extends Controller {
 	
 		$this->data['message'] = (validation_errors()) ? validation_errors() : $this->session->flashdata('message');
 		$this->data['categories'] = $this->admin_model_new->get_categories(); 
-		
-		//~ $tipo_torneo['nodo'] = 'nodo';
-		//~ $tipo_torneo['ida'] = 'ida';
-		//~ $tipo_torneo['idayvuelta'] = 'idayvuelta';
-		//~ $tipo_torneo['eliminatoria'] = 'eliminatoria';
-		//~ $this->data['tipo_torneo'] = $tipo_torneo;
+
+
+		$tipo_torneo = $this->admin_model_new->get_tipo_torneos();
+
+		$this->data['tipo_torneo'] = $tipo_torneo;
 		
 		$this->load->view('auth/modify_category_new', $this->data);
 	
@@ -59,12 +58,9 @@ class Auth extends Controller {
 			$this->data['categories'] = '';
 		}
 		
-		$tipo_torneo[0] = 'nodo';
-		$tipo_torneo[1] = 'ida';
-		$tipo_torneo[2] = 'idayvuelta';
-		$tipo_torneo[3] = 'eliminatoria';
-		
+		$tipo_torneo = $this->admin_model_new->get_tipo_torneos();
 		$this->data['tipo_torneo'] = $tipo_torneo;
+		
 		$this->load->view('auth/create_new_category_view', $this->data);
 	
 	}
@@ -78,13 +74,14 @@ class Auth extends Controller {
 		$name_category = $this->input->post('name_category');	
 		$parent_id = $this->input->post('dropdown_parent_category');
 		$mostrar = $this->input->post('mostrar');
+		$tipo = $this->input->post('dropdown_tipo_torneo');
 		if($mostrar){
 			$show = 1;
 		}
 		else{	
 			$show = 0;
 		}
-		$this->admin_model_new->create_category($name_category,$parent_id,$show);
+		$this->admin_model_new->create_category($name_category,$parent_id,$show,$tipo);
 
 		$this->data['message'] = "Se ha creado la categoría.";
 
@@ -104,9 +101,9 @@ class Auth extends Controller {
 		$id_parente_category = $this->input->post('res2');	
 		$show = $this->input->post('show');
 		$category_id = $this->input->post('category');
-		$tipo_torneo = $this->input->post('res3');
+		$dropdown_t_id = $this->input->post('dropdown_t_id');	
 
-		$this->admin_model_new->set_category($category_id,$name_category,$id_parente_category,$show,$tipo_torneo);
+		$this->admin_model_new->set_category($category_id,$name_category,$id_parente_category,$show,$dropdown_t_id);
 		$this->data['warning'] = "";
 		$this->data['message'] = "Se han modificado las categorías.";
 		
@@ -2097,6 +2094,8 @@ class Auth extends Controller {
 
 			//list the users
 			$this->data['users'] = $this->ion_auth->get_users_array();
+			
+
 
 			$this->load->view('auth/index', $this->data);
 		}

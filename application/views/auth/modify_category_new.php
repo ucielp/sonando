@@ -12,6 +12,7 @@
                     <th>ID</th>
                     <th>Nombre</th>
                     <th>ID de la categoría padre</th>
+                    <th>TipoTorneo<br> (Nodo es que no se juega)</th>
                     <th>Mostrar</th>
                     <th>Eliminar categoría</th>
 
@@ -41,13 +42,18 @@
 						?>
 						</td>
 						
-						<td>
-						<?php $name0  = 'type_id[' . $i. ']';?>
-						<?php 
-							$name1  = 'res3[' . $i . ']';
-							echo form_input($name1,$category['tipo']);
-						?>
-						</td>
+						  <td><?php $name  = 'dropdown_t_id[' . $i . ']';
+							echo form_dropdown($name,$tipo_torneo,$category['tipo']);
+                           
+							$t_id = 'hid_i_id[' . $i .  ']';
+							$e_id = array(
+							'name'  => $t_id,
+							'value' => $category['tipo'],
+							'checked'     =>  'true',
+							'type'     =>  'hidden',
+						);
+						?>  </td>
+						
 						
 						<!-- Esto es para show -->						
 						<?php 

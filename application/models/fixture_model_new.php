@@ -178,11 +178,10 @@ class Fixture_model_new extends CI_Model{
 		
 		function get_category_tree() {
 	
-		$this->db->select('id, parent_id,name_category');	
+		$this->db->select('id, parent_id,name_category,tipo');	
 		$this->db->from('category');
 		$this->db->where('show','1');
 		$query = $this->db->get();
-		//~ echo $this->db->last_query() . "<br>";
 		  
 
 		foreach ($query->result() as $row)
@@ -190,7 +189,11 @@ class Fixture_model_new extends CI_Model{
 			$pid  = $row->parent_id;
 			$id   = $row->id;
 			$name = $row->name_category;
+			$tipo = $row->tipo;
 
+			$tree[$id]["tipo"] = $tipo;
+
+			
 			// Create or add child information to the parent node
 			if (isset($tree[$pid]))
 				// a node for the parent exists
@@ -208,17 +211,28 @@ class Fixture_model_new extends CI_Model{
 			else
 				// create the current node and give it a name
 				$tree[$id] = array( "name"=>$name );
+				
 		}
 		return $tree;
 	}
 	
 	function convert_to_ul($tree, $id, $html){
-
-	  if (isset($tree[$id]['name']))
-		$html .= 
-			'<li>' .
-				'<span class="nav-click"></span>' .
-				'<a href="' . base_url() . 'fixture/index/' . $id . '">' . $tree[$id]['name'] . '</a>';
+			
+	  if (isset($tree[$id]['name'])){
+	  //~ if (isset($tree[$id]['name']) & ($tree[$id]['tipo'] == 'ida' )){
+			if($tree[$id]['tipo'] == "nodo"){
+				$html .= 
+					'<li>' .
+						'<span class="nav-click"></span>' .
+						'<a href="#">' . $tree[$id]['name'] . '</a>';
+			}
+			else{
+				$html .= 
+					'<li>' .
+						'<span class="nav-click"></span>' .
+						'<a href="' . base_url() . 'fixture/index/' . $id . '">' . $tree[$id]['name'] . '</a>';
+			}
+	   }			
 
 	  if (isset($tree[$id]['children']))
 	  {
@@ -238,7 +252,7 @@ class Fixture_model_new extends CI_Model{
 	function parse_tree () {
 	
 	    $tree = $this->fixture_model_new->get_category_tree();
-		$too = $this->fixture_model_new->convert_to_ul($tree, 0, "");
+		$too  = $this->fixture_model_new->convert_to_ul($tree, 0, "");
 		
 		return $too;
 	}

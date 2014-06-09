@@ -34,7 +34,7 @@ class Fixture extends CI_Controller {
 			$event_id = $default_category;
 		}
 		
-		$data['events'] = $this->fixture_model_new->get_events_combo_box(); # combobox
+		//~ $data['events'] = $this->fixture_model_new->get_events_combo_box(); # combobox
 		
 		//~ Aca me podria fijar dependiendo del torneo que se juega la cantidad de fechas
 		$total_rows = $this->fixture_model->get_nros_fecha($fase) + 1;
@@ -59,9 +59,9 @@ class Fixture extends CI_Controller {
 			
 		$this->pagination_torneo->initialize($config);
 			
-		$data['categoryTree'] = $this->fixture_model_new->parse_tree(); # Category Tree
 
 		$fecha = $current_fecha;
+		
 		$data['fixture'] = $this->fixture_model_new->get_partidos($event_id,$fecha);
 		$data['event_name'] = $this->fixture_model_new->get_event_name_by_id($event_id); //para imprimir el nombre por pantalla
 		$data['categoryTree'] = $this->fixture_model_new->parse_tree(); # Category Tree

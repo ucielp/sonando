@@ -21,7 +21,7 @@
        <p> Elija el tipo de torneo<br />
      
      <?php
-	 echo form_dropdown('dropdown_parent_category', $tipo_torneo, '0');?>
+	 echo form_dropdown('dropdown_tipo_torneo', $tipo_torneo, '0');?>
      </p>
       <p>Mostrar la categoría?<br />
      <?php
