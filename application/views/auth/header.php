@@ -12,6 +12,7 @@
 <script src="<?php echo base_url();?>assets/bin/jquery.form.min.js"></script>
 <script src="<?php echo base_url();?>assets/bin/swfupload.js"></script>
 <script type="text/javascript" src="<?php echo base_url();?>js/jscripts/tiny_mce/tiny_mce.js"></script>
+<script src="<?php echo base_url();?>js/catMenu.js" type="text/javascript"></script>
 
 <script type="text/javascript">
 	tinyMCE.init({

@@ -28,13 +28,13 @@ class Fixture extends CI_Controller {
 			$current_fecha = $this->fixture_model->get_actual($fase);
 		}
 		
-		$default_category = 1;
+		$default_category = 72;
 		//By default show a main category in order to fill the table content
+	
 		if (!$event_id){
 			$event_id = $default_category;
 		}
 		
-		//~ $data['events'] = $this->fixture_model_new->get_events_combo_box(); # combobox
 		
 		//~ Aca me podria fijar dependiendo del torneo que se juega la cantidad de fechas
 		$total_rows = $this->fixture_model->get_nros_fecha($fase) + 1;

@@ -53,7 +53,11 @@ h1, h3{
 	}
 
 .mainInfo{
+	position:absolute;
+
+/*
 	position:relative;
+*/
 	left:50%;
 	margin-left:-480px;
 	width:1000px;
@@ -363,5 +367,72 @@ table.goleadores_admin {
 	position:relative;
 	color:red;
 	}
-}
 
+
+.catmenu {
+	margin-left: 20px;
+	width: 200px;
+	float: left;
+}
+.catmenu ul {
+    font-family:Arial, Helvetica, sans-serif;
+    font-size:13px;
+    color:#FFF;
+    list-style:none;
+}
+.catmenu>:first-child {
+ 	-moz-border-radius:15px; 
+	-ms-border-radius:15px; 
+	-o-border-radius:15px; 
+	-webkit-border-radius:15px; 
+	border-radius:15px;
+}	
+.catmenu ul li {
+    line-height:28px;
+	list-style: none;
+	padding: 3px 0px;
+	margin: 0 0 0 5px;
+}
+.catmenu ul li:last-child {
+	border: none;
+}
+.catmenu ul li a {
+	margin: 0;
+	padding: 1px 1px;
+	color: #333333;
+    font-weight: bold;
+    text-decoration: none;
+	text-shadow: 1px 1px #BDBDBD;
+}
+.catmenu ul li a:hover {
+    color: #5E9527;
+}
+.catmenu ul li > ul {
+	width: 100%;
+}
+.catmenu ul li > ul  li{
+	margin-left: 10px;
+}
+.catmenu .nav-click {
+	border: 0 none;
+    cursor: pointer;
+    display: inline-block;
+    float: left;
+    height: 14px;
+    width: 10px;
+	padding: 4px;
+	margin-top: 8px;
+}
+.catmenu ul li.has-sub.collapsed>:first-child {
+	background: url(../images/navigation_left_arrow.png) -3px -2px no-repeat;
+}
+.catmenu ul li.has-sub.expanded>:first-child {
+	background: url(../images/navigation_down_arrow.png) -1px 0px no-repeat;
+}
+/* Menu Categoria */
+
+.table-wrapper {
+	float: right;
+    margin-left: 70px;
+    width: 700px;
+}

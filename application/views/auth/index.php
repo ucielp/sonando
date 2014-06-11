@@ -7,9 +7,8 @@
 		<div id="infoMessage"><?php echo $message;?></div>
 		<h1>Nuevos items</h1>
 		<p><a href="<?php echo site_url('auth/create_modify_category_new'); ?>">Crear, modificar y eliminar <b>categorías</b></a></p>
-		<p><a href="<?php echo site_url('auth/create_modify_events'); ?>">Crear, modificar y eliminar <b>eventos</b></a></p>
-		<p><a href="<?php echo site_url('auth/asignar_categorias_new'); ?>">Asignar evento a cada equipo</a></p>	
-        <p><a href="<?php echo site_url('auth/generar_torneos'); ?>">Generar Torneo (todos contra todos)</a></p>
+		<p><a href="<?php echo site_url('auth/asignar_categorias_new'); ?>">Asignar evento a cada equipo</a></p>
+		<p><a href="<?php echo site_url('auth/generar_torneos'); ?>">Generar Torneo</a></p>
         <p><a href="<?php echo site_url('auth/create_team_new'); ?>">Crear equipos</a></p>
 		<p><a href="<?php echo site_url('auth/set_horario_new'); ?>">Definir horario de eventos</a></p>
 		<p><a href="<?php echo site_url('auth/set_results_new'); ?>">Cargar Resultados de eventos</a></p>
