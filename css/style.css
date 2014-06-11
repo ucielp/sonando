@@ -275,7 +275,9 @@ background:#CCC;
 .catmenu ul {
     font-family:Arial, Helvetica, sans-serif;
     font-size:13px;
-    color:#FFF;
+    color:#A0A0A0;
+	font-weight: bold;
+
     list-style:none;
 }
 .catmenu>:first-child {
@@ -312,6 +314,7 @@ background:#CCC;
 .catmenu ul li > ul  li{
 	margin-left: 10px;
 }
+
 .catmenu .nav-click {
 	border: 0 none;
     cursor: pointer;

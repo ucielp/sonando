@@ -594,7 +594,7 @@ class Admin_model_new extends CI_Model{
 				$html .= 
 					'<li>' .
 						'<span class="nav-click"></span>' .
-						'<a href="' . base_url() . 'auth/generar_torneo_id/' . $id . '">' . $tree[$id]['name'] . '</a>';
+						'<a href="' . base_url() . 'auth/generar_torneo_byid/' . $id . '">' . $tree[$id]['name'] . '</a>';
 			}
 	   }			
 

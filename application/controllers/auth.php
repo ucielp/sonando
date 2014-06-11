@@ -275,6 +275,16 @@ class Auth extends Controller {
 		$this->load->view('auth/generar_torneos', $this->data);
 	}
 	
+	function generar_torneo_byid()
+	{
+	
+		if (!$this->ion_auth->logged_in() || !$this->ion_auth->is_admin())
+		{
+			redirect('auth/login', 'refresh');
+		}
+	
+	}
+		
 	//~ function generar_torneos_ok ()
 	//~ {
 		//~ if (!$this->ion_auth->logged_in() || !$this->ion_auth->is_admin())

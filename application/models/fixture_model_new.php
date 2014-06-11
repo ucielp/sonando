@@ -224,7 +224,7 @@ class Fixture_model_new extends CI_Model{
 				$html .= 
 					'<li>' .
 						'<span class="nav-click"></span>' .
-						'<a href="#">' . $tree[$id]['name'] . '</a>';
+						 $tree[$id]['name'] ;
 			}
 			else{
 				$html .= 
