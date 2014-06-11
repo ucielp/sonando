@@ -28,7 +28,8 @@ class Admin_model_new extends CI_Model{
 		if ($query->num_rows() > 0)
 		{			
 			foreach($query->result_array() as $row){
-				$combo[$row['id']]=$row['name_category'];	
+				$name_category_completo = $this->fixture_model_new->get_category_and_subcategory($row['id']);
+				$combo[$row['id']]=$name_category_completo;	
 			}
 			return $combo;
 		}

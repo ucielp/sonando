@@ -256,6 +256,22 @@ class Fixture_model_new extends CI_Model{
 		
 		return $too;
 	}
-		
+	
+	function get_category_and_subcategory($id_category){
+		$string = '';
+		while($id_category != 0){
+			$this->db->select('name_category,parent_id');	
+			$this->db->from('category');
+			$this->db->where('id', $id_category);
+			$query = $this->db->get();
+			//~ $string = '';
+			foreach ($query->result() as $row){	
+				$parent_id = $row->parent_id;
+				$string = $row->name_category . " / " . $string;
+			}
+			$id_category = $parent_id;
+		}
+		return $string;
+	}
 }
 		
