@@ -223,6 +223,25 @@ class Admin_model_new extends CI_Model{
 		return $query->result();
     }
     
+    function get_all_teams_activos(){
+		
+		$this->db->select('name as e_name, id as e_id');	
+		$this->db->from('equipos');
+		$this->db->where('activo', '1');
+		$query = $this->db->get();
+		
+		return $query->result();
+    }
+        
+    function get_all_teams_not_this_category($category_id){
+
+		$query = $this->db->query('SELECT name as e_name, id as e_id FROM equipos 
+		WHERE activo = 1
+		AND ID NOT IN (SELECT team_id FROM category_display WHERE category_id = '. $category_id . ')');	
+
+		return $query->result();
+    }
+    
 	function torneo_generado($event_id)
 	{
 		$this->db->select('generado');	
@@ -231,6 +250,47 @@ class Admin_model_new extends CI_Model{
 		$query = $this->db->get();
 		foreach ($query->result() as $row){
 			return $row->generado;
+		}
+	}
+	
+	function insert_equipo_torneo($ids_en_array, $show, $category_id){
+		$i = 1;
+		foreach ($ids_en_array as $id){
+			if ($show[$i]){
+				$this->db->set('team_id', $ids_en_array[$i]);
+				$this->db->set('category_id', $category_id);
+				$this->db->insert('category_display');
+				$this->db->insert_id();
+			}
+			$i++;
+		}
+		
+	}
+	
+	function delete_equipo_from_category_display($category_id,$team_id)
+	{
+		$this->db->where('category_id', $category_id);
+		$this->db->where('team_id', $team_id);
+		$this->db->delete('category_display'); 
+	}
+	
+	function update_equipos_from_category_display($category_id, $new_post, $new_post_id){
+		$i = 0;
+		foreach ($new_post_id as $a){
+			$ids[$i] = $a;
+			$i++;
+		}
+		
+		$i = 0;
+		foreach ($new_post as $post){
+			$data = array(
+				'orden' => $post,
+           	);
+			$this->db->where('category_id', $category_id);
+			$this->db->where('team_id', 	$ids[$i]);
+			$this->db->update('category_display', $data);
+			$this->db->insert_id();
+			$i++;
 		}
 	}
 	
@@ -580,21 +640,20 @@ class Admin_model_new extends CI_Model{
 		return $tree;
 	}
 	
-	function convert_to_ul($tree, $id, $html){
+	function convert_to_ul($tree, $id, $html,$url_link){
 			
 	  if (isset($tree[$id]['name'])){
 	  //~ if (isset($tree[$id]['name']) & ($tree[$id]['tipo'] == 'ida' )){
 			if($tree[$id]['tipo'] == "nodo"){
 				$html .= 
 					'<li>' .
-						'<span class="nav-click"></span>' .
-						'<a href="#">' . $tree[$id]['name'] . '</a>';
+						'<span class="nav-click"></span>' . $tree[$id]['name'] ;
 			}
 			else{
 				$html .= 
 					'<li>' .
 						'<span class="nav-click"></span>' .
-						'<a href="' . base_url() . 'auth/generar_torneo_byid/' . $id . '">' . $tree[$id]['name'] . '</a>';
+						'<a href="' . base_url() . $url_link . $id . '">' . $tree[$id]['name'] . '</a>';
 			}
 	   }			
 
@@ -604,7 +663,7 @@ class Admin_model_new extends CI_Model{
 		$len = count($arChildren);
 		$html .= '<ul>';
 		for ($i=0; $i<$len; $i++) {
-			$html .= $this->admin_model_new->convert_to_ul($tree, $arChildren[$i], "");
+			$html .= $this->admin_model_new->convert_to_ul($tree, $arChildren[$i], "",$url_link);
 		}
 		$html .= '</ul>'.PHP_EOL;
 	  }
@@ -613,13 +672,44 @@ class Admin_model_new extends CI_Model{
 	  return $html;
 	}
 	
-	function parse_tree () {
+	function parse_tree ($url_link) {
 	
 	    $tree = $this->admin_model_new->get_category_tree();
-		$too  = $this->admin_model_new->convert_to_ul($tree, 0, "");
+		$too  = $this->admin_model_new->convert_to_ul($tree, 0, "",$url_link);
 		
 		return $too;
 	}
 	
+	
+	function get_data_category_by_id($id){
+		$this->db->select('name_category,show,tipo,generado');	
+		$this->db->from('category');
+		$this->db->where('id', $id);
+		$query = $this->db->get();
+
+		foreach ($query->result() as $row){
+			return $row;
+		}
+	}
+	
+	function get_all_teams_from_category_display_by_categoryid($category_id){
+        $this->db->select('team_id,e.name as nombre_equipo,cd.orden as el_orden');
+        $this->db->from('category_display cd');
+		$this->db->join('equipos e','e.id=cd.team_id');
+        $this->db->where('cd.category_id',$category_id);
+		$this->db->order_by('cd.orden','ASC');
+		$this->db->order_by('name','ASC');
+
+        $query = $this->db->get();
+        $res = $query->result();
+        
+        if ($query->num_rows() > 0)
+		{
+		  return $res;
+		}
+		else{
+			return 0;
+		}
+    }
 }
 		

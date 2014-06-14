@@ -64,7 +64,9 @@ class Fixture extends CI_Controller {
 		
 		$data['fixture'] = $this->fixture_model_new->get_partidos($event_id,$fecha);
 		$data['event_name'] = $this->fixture_model_new->get_category_and_subcategory($event_id); //para imprimir el nombre por pantalla
-		$data['categoryTree'] = $this->fixture_model_new->parse_tree(); # Category Tree
+
+		$url_link = 'fixture/index/';
+		$data['categoryTree'] = $this->fixture_model_new->parse_tree($url_link); # Category Tree
 		
 		$data['title'] = "So&ntilde;ando con el Gol";
 		$data['message'] = (validation_errors()) ? validation_errors() : $this->session->flashdata('message');

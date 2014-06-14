@@ -216,7 +216,7 @@ class Fixture_model_new extends CI_Model{
 		return $tree;
 	}
 	
-	function convert_to_ul($tree, $id, $html){
+	function convert_to_ul($tree, $id, $html,$url_link){
 			
 	  if (isset($tree[$id]['name'])){
 	  //~ if (isset($tree[$id]['name']) & ($tree[$id]['tipo'] == 'ida' )){
@@ -230,7 +230,7 @@ class Fixture_model_new extends CI_Model{
 				$html .= 
 					'<li>' .
 						'<span class="nav-click"></span>' .
-						'<a href="' . base_url() . 'fixture/index/' . $id . '">' . $tree[$id]['name'] . '</a>';
+						'<a href="' . base_url() . $url_link . $id . '">' . $tree[$id]['name'] . '</a>';
 			}
 	   }			
 
@@ -240,7 +240,7 @@ class Fixture_model_new extends CI_Model{
 		$len = count($arChildren);
 		$html .= '<ul>';
 		for ($i=0; $i<$len; $i++) {
-			$html .= $this->fixture_model_new->convert_to_ul($tree, $arChildren[$i], "");
+			$html .= $this->fixture_model_new->convert_to_ul($tree, $arChildren[$i], "",$url_link);
 		}
 		$html .= '</ul>'.PHP_EOL;
 	  }
@@ -249,10 +249,10 @@ class Fixture_model_new extends CI_Model{
 	  return $html;
 	}
 	
-	function parse_tree () {
+	function parse_tree ($url_link) {
 	
 	    $tree = $this->fixture_model_new->get_category_tree();
-		$too  = $this->fixture_model_new->convert_to_ul($tree, 0, "");
+		$too  = $this->fixture_model_new->convert_to_ul($tree, 0, "",$url_link);
 		
 		return $too;
 	}

@@ -9,8 +9,6 @@
     <?php echo form_open("auth/generar_torneos_ok");?>
 	<div class="catmenu"><?php echo $categoryTree ?></div>
 
-     
-
 	 <p><a href="<?php echo site_url('auth');?>"><u>Go Back</u></a></p>
 
       
