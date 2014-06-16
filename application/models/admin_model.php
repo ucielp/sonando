@@ -1065,7 +1065,7 @@ el permiso especial de los organizadores del torneo. Hay tiempo hasta el Sábado
 		$this->db->where('f.id',$actual_fecha_id);
 		$this->db->where('f.fase',$fase);
 		$query = $this->db->get();
-		#echo $this->db->last_query() . "<br>";
+		echo $this->db->last_query() . "<br>";
 		$partidos = $query->result();
 		return $partidos;
 	}

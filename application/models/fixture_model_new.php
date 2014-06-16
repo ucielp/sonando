@@ -49,6 +49,7 @@ class Fixture_model_new extends CI_Model{
 			//~ $this->db->where('fase',$fase);
 			$query = $this->db->get();
 			$partidos = $query->result();
+            #echo $this->db->last_query() . "<br>";
 			return $partidos;
 		}
 		#la anterior

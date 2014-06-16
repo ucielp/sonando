@@ -85,6 +85,22 @@ class Posiciones_model extends CI_Model{
 		return $posiciones;
 	}
 	
+    
+    function get_positions($tournament_id){
+		$this->db->select('e.name as name_equipo,e.id as id_equipo,pj,pg,pe,pp,gf,gc,dg,ptos');
+		$this->db->from('posiciones p');
+		$this->db->join('equipos e','e.id = p.team_id');
+		$this->db->where('p.category_id', $tournament_id);
+		$this->db->order_by('ptos','DESC');
+		$this->db->order_by('dg','DESC');
+		$this->db->order_by('gf','DESC');
+		$this->db->order_by('name_equipo','ASC');
+		$query = $this->db->get();
+		$posiciones = $query->result();
+		# echo $this->db->last_query() . "<br>";
+		return $posiciones;
+	}
+    
 	
 		#retorna las posiciones de la fase2 dandole el id de tipo_torneo
 	function get_positions_fase2($actual_fase2_id){

@@ -12,7 +12,8 @@ class Fixture extends CI_Controller {
 
 	}
 	
-	function index($event_id=NULL,$fecha=NULL)
+    # TODO arreglar este HACK que puse el event_id por defecto
+	function index($event_id=74,$fecha=NULL)
 	{
 			
 		//Declaramos offset y limit para la paginación
@@ -28,7 +29,6 @@ class Fixture extends CI_Controller {
 			$current_fecha = $this->fixture_model->get_actual($fase);
 		}
 		
-		$default_category = 72;
 		//By default show a main category in order to fill the table content
 	
 		if (!$event_id){

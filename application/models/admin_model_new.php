@@ -294,13 +294,21 @@ class Admin_model_new extends CI_Model{
 		}
 	}
 	
-	function generate_fase($event_id,$ida_vuelta){
-		$equipos = $this->admin_model_new->get_teams($event_id);
+	function generate_tournament($tournament_id,$tipo_torneo){
+		
+        if ($tipo_torneo == 'ida'){
+            $ida_vuelta = 0;
+        }
+        else{
+            $ida_vuelta = 1;
+        }
+        
+        $equipos = $this->admin_model_new->get_teams($tournament_id);
 		$i = 0;
 		
 		foreach ($equipos as $row)
 		{
-		   $equipos_id[$i] = $row['id'];	
+		   $equipos_id[$i] = $row['team_id'];	
 		   $i++;
 		}
 		#GENERO EL EQUIPO FANTASMA CON ID = 0
@@ -308,34 +316,37 @@ class Admin_model_new extends CI_Model{
 			$equipos_id[$i] = 0;
 		}
 		
-		$this->admin_model_new->show_fixtures($equipos_id,$event_id,$ida_vuelta);
+		$this->admin_model_new->show_fixtures($equipos_id,$tournament_id,$ida_vuelta);
 		
 		$cant = sizeof($equipos);
-		#esto es para fases
+		#de ahora en mas siempre dejo fase 1 y veo si lo puedo eliminar
 		$fase = 1;
 		
 		$this->admin_model_new->generate_fechas($cant,$fase,$ida_vuelta);
 		
 		#seteo en 1 el campo generado de tipo_torneo
-		$this->admin_model_new->se_genero_eltorneo($event_id);
+		$this->admin_model_new->se_genero_eltorneo($tournament_id);
 	}
 	
 	
-	#la uso en generate_fase
-	function get_teams($event_id){
-        $this->db->select('id,name');
-        $this->db->from('equipos');
-        $this->db->where('category_id',$event_id);
+	#la uso en generate_tournament
+	function get_teams($tournament_id){
+        $this->db->select('team_id');
+        $this->db->from('category_display');
+        $this->db->where('category_id',$tournament_id);
 		$this->db->order_by('orden','ASC');
-		$this->db->order_by('name','ASC');
+		$this->db->order_by('id','ASC');
 
         $query = $this->db->get();
+        
+        # echo $this->db->last_query() . "<br>";
+
         $res = $query->result_array();
         return $res;
     }
 	
-	#la uso en generate_fase
-    function show_fixtures($team_ids,$event_id,$ida_vuelta)
+	#la uso en generate_tournament
+    function show_fixtures($team_ids,$tournament_id,$ida_vuelta)
     {
 	   $teams = sizeof($team_ids);
 	      
@@ -362,8 +373,8 @@ class Admin_model_new extends CI_Model{
 				if ($match == 0) {
 					$away = $teams - 1;
 				}
-				$rounds[$round][$match] = $this->admin_model->team_name($home + 1, $team_ids) 
-					. " vs " .  $this->admin_model->team_name($away + 1, $team_ids);
+				$rounds[$round][$match] = $this->admin_model_new->team_name($home + 1, $team_ids) 
+					. " vs " .  $this->admin_model_new->team_name($away + 1, $team_ids);
 			}
    		}
 	   
@@ -388,7 +399,7 @@ class Admin_model_new extends CI_Model{
 		// to home on odd rounds.
 		for ($round = 0; $round < sizeof($rounds); $round++) {
 			if ($round % 2 == 1) {
-				$rounds[$round][0] = $this->admin_model->flip($rounds[$round][0]);
+				$rounds[$round][0] = $this->admin_model_new->flip($rounds[$round][0]);
 			}
 		}
 		for ($i = 0; $i < sizeof($rounds); $i++) {
@@ -396,12 +407,12 @@ class Admin_model_new extends CI_Model{
 			foreach ($rounds[$i] as $r){
 				list($team1_id, $team2_id) = explode('vs', $r);
 				
-				$this->db->set('tournament_id', $event_id);
+				$this->db->set('tournament_id', $tournament_id);
 				$this->db->set('team1_id', $team1_id);
 				$this->db->set('team2_id', $team2_id);
 				$this->db->set('nro_fecha_id', $i+1);
 				$this->db->insert('partidos');
-				
+				# echo $this->db->last_query() . "<br>";
 	 			$res = $this->db->insert_id();
 			}
     	}
@@ -413,9 +424,9 @@ class Admin_model_new extends CI_Model{
 			for ($i = sizeof($rounds) - 1; $i >= 0; $i--) {
 				$round_counter += 1;
 				foreach ($rounds[$i] as $r) {
-					$r_flip = $this->admin_model->flip($r);
+					$r_flip = $this->admin_model_new->flip($r);
 					list($team1_id, $team2_id) = explode('vs', $r_flip);
-					$this->db->set('tournament_id', $event_id);
+					$this->db->set('tournament_id', $tournament_id);
 					$this->db->set('team1_id', $team1_id);
 					$this->db->set('team2_id', $team2_id);
 					$this->db->set('nro_fecha_id', $i+1+$k);
@@ -430,7 +441,7 @@ class Admin_model_new extends CI_Model{
 			}
   	  }
 	
-	#la uso en generate_fase
+	#la uso en generate_tournament
 	function generate_fechas($cant,$fase,$ida_vuelta){
 		$cant = $cant - 1;
 		if ($ida_vuelta){
@@ -454,13 +465,30 @@ class Admin_model_new extends CI_Model{
 			}
 		}
 	}
+    
+    #la uso en show_fixtures
+	function flip($match) {
+   	 	$components = explode(' vs ', $match);
+   	 	return $components[1] . " vs " . $components[0];
+	}
 	
-	function se_genero_eltorneo($event_id){
+	#la uso en show_fixtures
+	function team_name($num, $names) {
+			$i = $num - 1;
+		if (sizeof($names) > $i && strlen(trim($names[$i])) > 0) {
+			return trim($names[$i]);
+		} else {
+			return $num;
+		}
+	}
+	
+	function se_genero_eltorneo($tournament_id){
 			$data = array(
+            # TODO esto tiene que estar en 1
 				'generado' => '1',
            	);
-			$this->db->where('id', $event_id);
-			$this->db->update('events', $data);
+			$this->db->where('id', $tournament_id);
+			$this->db->update('category', $data);
 			$id_test = $this->db->insert_id();
 	} 
 	
@@ -476,11 +504,12 @@ class Admin_model_new extends CI_Model{
 		}
 	}
 	
-	function generate_table_positions($event_id,$fase){
-		$teams = $this->admin_model_new->get_teams($event_id);
+	function generate_table_positions($tournament_id){
+        
+		$teams = $this->admin_model_new->get_teams($tournament_id);
 		foreach ($teams as $team){
-			$this->db->set('team_id', $team['id']);
-			$this->db->set('fase', $fase);
+			$this->db->set('team_id', $team['team_id']);
+            $this->db->set('category_id', $tournament_id);
 			$this->db->insert('posiciones');
 			}
 			return $teams;
@@ -711,5 +740,8 @@ class Admin_model_new extends CI_Model{
 			return 0;
 		}
     }
+    
+    
+    ### Todas las funciones para gener el fixture y la tabla de posiciones nueva
 }
 		

@@ -100,10 +100,10 @@ class Auth extends Controller {
 		$name_category = $this->input->post('res1');	
 		$id_parente_category = $this->input->post('res2');	
 		$show = $this->input->post('show');
-		$category_id = $this->input->post('category');
+		$tournament_id = $this->input->post('category');
 		$dropdown_t_id = $this->input->post('dropdown_t_id');	
 
-		$this->admin_model_new->set_category($category_id,$name_category,$id_parente_category,$show,$dropdown_t_id);
+		$this->admin_model_new->set_category($tournament_id,$name_category,$id_parente_category,$show,$dropdown_t_id);
 		$this->data['warning'] = "";
 		$this->data['message'] = "Se han modificado las categorías.";
 		
@@ -112,7 +112,7 @@ class Auth extends Controller {
 	
 	}
 	
-	function delete_category($category_id)
+	function delete_category($tournament_id)
 	{ 
 		if (!$this->ion_auth->logged_in() || !$this->ion_auth->is_admin())
 		{
@@ -120,7 +120,7 @@ class Auth extends Controller {
 		}
 		
 		# Tengo que eliminar todas las categorías de abajo tambien.
-		$this->data['warning'] = $this->admin_model_new->delete_category($category_id);
+		$this->data['warning'] = $this->admin_model_new->delete_category($tournament_id);
 		$this->data['message'] = "La categoría ha sido eliminado";
 		$this->load->view('auth/delete_category_ok', $this->data);
 	}
@@ -271,27 +271,34 @@ class Auth extends Controller {
 		$this->data['categoryTree'] = $this->admin_model_new->parse_tree($url_link); # Category Tree
 		 
 		$this->data['message'] = (validation_errors()) ? validation_errors() : $this->session->flashdata('message');
-		# Uso la misma vista que en generar_torneos
+		# Uso la misma vista que en generar_torneos pero le paso otro link
 		$this->load->view('auth/generar_torneos', $this->data);
 	}
 	
-	function mostrar_equipos_de_torneo($category_id){
+	function mostrar_equipos_de_torneo($tournament_id){
 		if (!$this->ion_auth->logged_in() || !$this->ion_auth->is_admin())
 		{
 			redirect('auth/login', 'refresh');
 		}
 		
-		$data_category = $this->admin_model_new->get_data_category_by_id($category_id);
-		$teams = $this->admin_model_new->get_all_teams_from_category_display_by_categoryid($category_id);
-		$this->data['orden'] = $this->admin_model_new->get_orden_ninguno(); //para el combo box
-		$this->data['teams'] = $teams;
-		$this->data['category_id'] = $category_id;
-		$this->data['message'] = (validation_errors()) ? validation_errors() : $this->session->flashdata('message');
-		$this->load->view('auth/mostrar_equipos_de_torneo_view', $this->data);
+		$data_category = $this->admin_model_new->get_data_category_by_id($tournament_id);
+        if ($data_category->generado){
+            echo "Este torneo no se puede modificar porque ya fue generado";
+        }
+        else{
+            $teams = $this->admin_model_new->get_all_teams_from_category_display_by_categoryid($tournament_id);
+            $this->data['orden'] = $this->admin_model_new->get_orden_ninguno(); //para el combo box
+            $this->data['teams'] = $teams;
+            $this->data['category_id'] = $tournament_id;
+            $this->data['message'] = (validation_errors()) ? validation_errors() : $this->session->flashdata('message');
+            $this->load->view('auth/mostrar_equipos_de_torneo_view', $this->data);
+        }
+        
+		
 	
 	}
 	
-	function update_equipo_torneo_go($category_id){
+	function update_equipo_torneo_go($tournament_id){
 		if (!$this->ion_auth->logged_in() || !$this->ion_auth->is_admin())
 		{
 			redirect('auth/login', 'refresh');
@@ -299,29 +306,29 @@ class Auth extends Controller {
 		
 		$new_post2 = $this->input->post('dropdown2');
 		$new_post2_id = $this->input->post('hid2');
-		$this->admin_model_new->update_equipos_from_category_display($category_id, $new_post2,$new_post2_id);
+		$this->admin_model_new->update_equipos_from_category_display($tournament_id, $new_post2,$new_post2_id);
 		
-		$this->data['category_id'] = $category_id;
+		$this->data['category_id'] = $tournament_id;
 		$this->data['titulo_mensage'] = 'Se actualizaron los equipos';
 		$this->data['message'] = (validation_errors()) ? validation_errors() : $this->session->flashdata('message');
 		$this->load->view('auth/asignar_equipo_torneo_view_ok', $this->data);
 	}	
 	
-	function delete_team_from_category_display ($category_id,$team_id){
+	function delete_team_from_category_display ($tournament_id,$team_id){
 		if (!$this->ion_auth->logged_in() || !$this->ion_auth->is_admin())
 		{
 			redirect('auth/login', 'refresh');
 		}
 		
-		$this->admin_model_new->delete_equipo_from_category_display($category_id,$team_id);
-		$this->data['category_id'] = $category_id;
+		$this->admin_model_new->delete_equipo_from_category_display($tournament_id,$team_id);
+		$this->data['category_id'] = $tournament_id;
 		$this->data['titulo_mensage'] = 'Se eliminó el equipo';
 
 		$this->data['message'] = (validation_errors()) ? validation_errors() : $this->session->flashdata('message');
 		$this->load->view('auth/asignar_equipo_torneo_view_ok', $this->data);
 	}
 
-	function asignar_equipo_torneo_elegir($category_id){
+	function asignar_equipo_torneo_elegir($tournament_id){
 		if (!$this->ion_auth->logged_in() || !$this->ion_auth->is_admin())
 		{
 			redirect('auth/login', 'refresh');
@@ -329,14 +336,14 @@ class Auth extends Controller {
 		
 		# chequeo el tipo de torneo aca y voy a distintas vistas
 		$this->data['orden'] = $this->admin_model_new->get_orden_ninguno(); //para el combo box
-		$this->data['teams'] = $this->admin_model_new->get_all_teams_not_this_category($category_id);
-		$this->data['category_id'] = $category_id;
+		$this->data['teams'] = $this->admin_model_new->get_all_teams_not_this_category($tournament_id);
+		$this->data['category_id'] = $tournament_id;
 		$this->data['message'] = (validation_errors()) ? validation_errors() : $this->session->flashdata('message');
 
 		$this->load->view('auth/asignar_equipo_torneo_view', $this->data);
 	}
 	
-	function asignar_equipo_torneo_go($category_id){
+	function asignar_equipo_torneo_go($tournament_id){
 		if (!$this->ion_auth->logged_in() || !$this->ion_auth->is_admin())
 		{
 			redirect('auth/login', 'refresh');
@@ -346,9 +353,9 @@ class Auth extends Controller {
 		$show = $this->input->post('show');
 		$ids_en_array = $this->input->post('ids_en_array');
 			
-		$this->admin_model_new->insert_equipo_torneo($ids_en_array,$show,$category_id);
+		$this->admin_model_new->insert_equipo_torneo($ids_en_array,$show,$tournament_id);
 		$this->data['titulo_mensage'] = 'Se agregaron los equipos';
-		$this->data['category_id'] = $category_id;
+		$this->data['category_id'] = $tournament_id;
 		$this->data['message'] = (validation_errors()) ? validation_errors() : $this->session->flashdata('message');
 		$this->load->view('auth/asignar_equipo_torneo_view_ok', $this->data);
 	}	
@@ -360,21 +367,82 @@ class Auth extends Controller {
 			redirect('auth/login', 'refresh');
 		}
 		
-		$url_link = 'auth/generar_torneo_byid/';
+		$url_link = 'auth/generar_torneo_byid_previsualizar/';
 		$this->data['categoryTree'] = $this->admin_model_new->parse_tree($url_link); # Category Tree
 		 
 		$this->data['message'] = (validation_errors()) ? validation_errors() : $this->session->flashdata('message');
-		# Uso la misma vista que en asignar_equipo_torneo
+		# Uso la misma vista que en asignar_equipo_torneo pero le paso otro link
 		$this->load->view('auth/generar_torneos', $this->data);
 	}
+    
 	
-	function generar_torneo_byid()
+	function generar_torneo_byid_previsualizar($tournament_id)
 	{
 	
 		if (!$this->ion_auth->logged_in() || !$this->ion_auth->is_admin())
 		{
 			redirect('auth/login', 'refresh');
 		}
+        
+        $data_category = $this->admin_model_new->get_data_category_by_id($tournament_id);
+        
+        if ($data_category->tipo == 'eliminatoria'){
+            echo "El torneo es de eliminatoria asi que no se puede generar<br>";
+        }
+        else{
+            $this->data['teams'] = $this->admin_model_new->get_all_teams_from_category_display_by_categoryid($tournament_id);
+            $this->data['data_category'] = $data_category;
+            $this->data['category_id']   = $tournament_id;
+            $this->data['message'] = (validation_errors()) ? validation_errors() : $this->session->flashdata('message');
+            $this->load->view('auth/generar_torneo_byid_previsualizar_view', $this->data);
+
+        }
+        
+	}
+    
+	function generar_torneo_byid_go($tournament_id)
+	{
+	
+		if (!$this->ion_auth->logged_in() || !$this->ion_auth->is_admin())
+		{
+			redirect('auth/login', 'refresh');
+		}
+        
+        $data_category = $this->admin_model_new->get_data_category_by_id($tournament_id);
+        $generado = $data_category->generado;
+        $tipo_torneo = $data_category->tipo;
+        
+        if($generado){
+            echo "Este torneo ya fue generado anteriormente";
+        }
+        else{
+            # Genero el fixture y cargo las fechas y seteo en 1 el generado
+            $this->admin_model_new->generate_tournament($tournament_id,$tipo_torneo);
+            
+            # Genero las tablas de posiciones y ya no me intersa que fase sea, pero si el tournament id
+            $this->data['teams'] = $this->admin_model_new->generate_table_positions($tournament_id);
+
+        }
+	
+		//~ #chequeo si el torneo se creo anteriormente
+		//~ if ($this->admin_model_new->torneo_generado($tournament_id) == 0){
+			//~ #esta linea es la que genera el torneo fase
+			//~ $this->admin_model_new->generate_fase($tournament_id,$ida_vuelta);
+		//~ 
+			//~ $this->data['categories'] = $this->admin_model_new->get_categories(); //para el combo box
+			//~ $this->data['categoria'] = strtoupper($this->admin_model_new->get_category_by_id($tournament_id));
+			//~ 
+			//~ #genero las tablas con esos equipos
+			//~ $fase  = 1;
+			//~ #me devuelve los teams creados
+			//~ $this->data['teams'] = $this->admin_model_new->generate_table_positions($tournament_id, $fase);
+			//~ $this->load->view('auth/generar_fases_ok', $this->data);
+			//~ }
+		//~ else{
+			//~ $this->data['categoria'] = strtoupper($this->admin_model_new->get_category_by_id($tournament_id));
+			//~ $this->data['message'] = (validation_errors()) ? validation_errors() : $this->session->flashdata('message');
+			//~ $this->load->view('auth/torneo_ya_generado', $this->data);
+		//~ }
 	
 	}
 		
@@ -408,7 +476,7 @@ class Auth extends Controller {
 			//~ $this->load->view('auth/torneo_ya_generado', $this->data);
 		//~ }
 	//~ }
-	//~ 
+
 	function create_team_new()	
 	 {
 			
@@ -779,53 +847,53 @@ class Auth extends Controller {
 	
 	
 	
+	 ## Obsoletas
 	
-	
-	function generar_fases()
-	{
-		if (!$this->ion_auth->logged_in() || !$this->ion_auth->is_admin())
-		{
-			redirect('auth/login', 'refresh');
-		}
-		$this->data['categories'] = $this->admin_model->get_categories(); //para el combo box
-		 
-		$this->data['message'] = (validation_errors()) ? validation_errors() : $this->session->flashdata('message');
-		$this->load->view('auth/generar_fases', $this->data);
-	}
-	
-	function generar_fases_ok ()
-	{
-		if (!$this->ion_auth->logged_in() || !$this->ion_auth->is_admin())
-		{
-			redirect('auth/login', 'refresh');
-		}
-		
-		#0 si es ida solo y 1 si es ida y vuelta
-		$ida_vuelta = 0;
-		#tournament_id = category_id
-		$tournament_id = $this->input->post('dropdown_category'); //cual tengo que mostrar
-	
-		#chequeo si el torneo se creo anteriormente
-		if ($this->admin_model->torneo_generado($tournament_id) == 0){
-			#esta linea es la que genera el torneo fase
-			$this->admin_model->generate_fase($tournament_id,$ida_vuelta);
-		
-			$this->data['categories'] = $this->admin_model->get_categories(); //para el combo box
-			$this->data['categoria'] = strtoupper($this->admin_model->get_category_by_id($tournament_id));
-			
-			#genero las tablas con esos equipos
-			$fase  = 1;
-			#me devuelve los teams creados
-			$this->data['teams'] = $this->admin_model->generate_table_positions($tournament_id, $fase);
-			$this->load->view('auth/generar_fases_ok', $this->data);
-			}
-		else{
-			$this->data['categoria'] = strtoupper($this->admin_model->get_category_by_id($tournament_id));
-			$this->data['message'] = (validation_errors()) ? validation_errors() : $this->session->flashdata('message');
-			$this->load->view('auth/torneo_ya_generado', $this->data);
-		}
-		
-	}
+	//~ function generar_fases()
+	//~ {
+		//~ if (!$this->ion_auth->logged_in() || !$this->ion_auth->is_admin())
+		//~ {
+			//~ redirect('auth/login', 'refresh');
+		//~ }
+		//~ $this->data['categories'] = $this->admin_model->get_categories(); //para el combo box
+		 //~ 
+		//~ $this->data['message'] = (validation_errors()) ? validation_errors() : $this->session->flashdata('message');
+		//~ $this->load->view('auth/generar_fases', $this->data);
+	//~ }
+	//~ 
+	//~ function generar_fases_ok ()
+	//~ {
+		//~ if (!$this->ion_auth->logged_in() || !$this->ion_auth->is_admin())
+		//~ {
+			//~ redirect('auth/login', 'refresh');
+		//~ }
+		//~ 
+		//~ #0 si es ida solo y 1 si es ida y vuelta
+		//~ $ida_vuelta = 0;
+		//~ #tournament_id = category_id
+		//~ $tournament_id = $this->input->post('dropdown_category'); //cual tengo que mostrar
+	//~ 
+		//~ #chequeo si el torneo se creo anteriormente
+		//~ if ($this->admin_model->torneo_generado($tournament_id) == 0){
+			//~ #esta linea es la que genera el torneo fase
+			//~ $this->admin_model->generate_fase($tournament_id,$ida_vuelta);
+		//~ 
+			//~ $this->data['categories'] = $this->admin_model->get_categories(); //para el combo box
+			//~ $this->data['categoria'] = strtoupper($this->admin_model->get_category_by_id($tournament_id));
+			//~ 
+			//~ #genero las tablas con esos equipos
+			//~ $fase  = 1;
+			//~ #me devuelve los teams creados
+			//~ $this->data['teams'] = $this->admin_model->generate_table_positions($tournament_id, $fase);
+			//~ $this->load->view('auth/generar_fases_ok', $this->data);
+			//~ }
+		//~ else{
+			//~ $this->data['categoria'] = strtoupper($this->admin_model->get_category_by_id($tournament_id));
+			//~ $this->data['message'] = (validation_errors()) ? validation_errors() : $this->session->flashdata('message');
+			//~ $this->load->view('auth/torneo_ya_generado', $this->data);
+		//~ }
+		//~ 
+	//~ }
 	
 	function swap_teams()
 	{
