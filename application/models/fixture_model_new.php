@@ -272,6 +272,7 @@ class Fixture_model_new extends CI_Model{
 			}
 			$id_category = $parent_id;
 		}
+        #echo $this->db->last_query() . "<br>";
 		return $string;
 	}
 }

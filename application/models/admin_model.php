@@ -229,7 +229,7 @@ class Admin_model extends CI_Model{
 		$query = $this->db->get();
 		$teams = $query->result();
         
-        //~ echo $this->db->last_query() . "<br>";
+        //~ #echo $this->db->last_query() . "<br>";
 
 		return $teams;
 	}	
@@ -1748,7 +1748,7 @@ el permiso especial de los organizadores del torneo. Hay tiempo hasta el Sábado
         JOIN equipos_users eqp ON eqp.team_id = eq.id
         WHERE eq.category_id = 0 
 		ORDER BY t_id ASC, e_name ASC');	
-		//~ echo $this->db->last_query() . "<br>";
+		//~ # echo $this->db->last_query() . "<br>";
 
 		return $query->result();
     }

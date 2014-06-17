@@ -6,9 +6,9 @@
 	
 	<div id="infoMessage"><?php echo $message;?></div>   
 	
-    <?php echo form_open("auth/set_goleadores/$actual_tournament_id");?>     
+    <?php echo form_open("auth/set_goleadores_new/$tournament_id");?>     
      <div class="header_page">
-				<h1>Partidos del torneo <span style="text-transform:uppercase;"><?php echo $category_name;?></span></h1>
+				<h1> <?php echo $category_name;?></h1>
 			</div>
             <center>
 			<table class="resultados_admin">

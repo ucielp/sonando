@@ -10,8 +10,8 @@
 		<p><a href="<?php echo site_url('auth/asignar_equipo_torneo'); ?>">Asignar equipo a cada torneo</a></p>
 		<p><a href="<?php echo site_url('auth/generar_torneos'); ?>">Generar Torneo</a></p>
         <p><a href="<?php echo site_url('auth/create_team_new'); ?>">Crear equipos</a></p>
-		<p><a href="<?php echo site_url('auth/set_horario_new'); ?>">Definir horario de eventos</a></p>
-		<p><a href="<?php echo site_url('auth/set_results_new'); ?>">Cargar Resultados de eventos</a></p>
+		<p><a href="<?php echo site_url('auth/set_horario_new'); ?>">Definir horario de torneo</a></p>
+		<p><a href="<?php echo site_url('auth/set_results_new'); ?>">Cargar Resultados de torneo</a></p>
 		<p><a href="<?php echo site_url('auth/swap_teams'); ?>">Intercambiar equipos </a></p>
 		<p><a href="<?php echo site_url('auth/mostrar_categorias_new'); ?>">Inscribir jugadores</a></p>
 		<p><a href="<?php echo site_url('auth/modificar_tabla'); ?>">Modificar tabla posiciones  <b>(caso excepcional)</b></a></p>

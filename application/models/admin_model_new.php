@@ -519,7 +519,6 @@ class Admin_model_new extends CI_Model{
 		$this->db->select('id');
 		$this->db->from('fechas');
 		$this->db->where("actual", "1");
-		$this->db->where("fase", "2");
 
 		$query = $this->db->get();
 		
@@ -595,10 +594,10 @@ class Admin_model_new extends CI_Model{
 	function get_partidos_por_fecha()
 	{
 		
-		$this->db->select('eq1.name equipo1,eq2.name equipo2,e.name_event,p.time as horario,p.court as cancha');	
+		$this->db->select('eq1.name equipo1,eq2.name equipo2,c.id as id_category,p.time as horario,p.court as cancha');	
 		$this->db->from('partidos p');
 		$this->db->join('fechas f','f.id = p.nro_fecha_id');
-		$this->db->join('events e','e.id = p.tournament_id');
+		$this->db->join('category c','c.id = p.tournament_id');
 		$this->db->join('equipos eq1','eq1.id = p.team1_id');
 		$this->db->join('equipos eq2','eq2.id = p.team2_id');
 		$this->db->where('f.actual', 1);
@@ -741,7 +740,225 @@ class Admin_model_new extends CI_Model{
 		}
     }
     
+    	function get_partidos($tournament_id,$actual_fecha_id){
+		$this->db->select('p.id as p_id,e1.name as name_equipo1,e2.name as name_equipo2,nro_fecha,date,time,court,team1_res,team2_res,cargado');
+		$this->db->from('partidos p');
+		$this->db->join('equipos e1','e1.id = p.team1_id');
+		$this->db->join('equipos e2','e2.id = p.team2_id');
+		$this->db->join('fechas f','f.nro_fecha= p.nro_fecha_id');
+		$this->db->where('tournament_id',$tournament_id);
+		$this->db->where('f.id',$actual_fecha_id);
+		$query = $this->db->get();
+		//~ echo $this->db->last_query() . "<br>";
+		$partidos = $query->result();
+		return $partidos;
+	}
+	
+    function set_horarios($partidos_id,$dias,$horarios,$canchas)
+		{
+	 	$i = 1; 
+		foreach ($partidos_id as $partido)
+		{
+		
+			#esto actualiza los horarios de partidos
+			$data = array(
+				'date' => $dias[$i],
+				'time' => $horarios[$i],
+				'court' => $canchas[$i],
+           	);
+         	$this->db->where('id', $partido);
+			$this->db->update('partidos', $data);
+			$this->db->insert_id();
+			
+			$i++;
+    	}  
+	}
+	
+    function set_results($partidos_id,$result1,$result2,$cargados,$perdidos){
+		$i = 1;
+		foreach ($partidos_id as $partido)
+		{		
+				#esto actualiza los partidos que no fueron seteados
+				if (!$cargados[$i]){
+					if ($perdidos[$i]){
+						#Perdieron los dos equipos se le pone 0 a 0 pero no se suman los puntos
+						$data = array(
+							'team1_res' => '0',
+							'team2_res' => '0',
+							'cargado' => '1',
+						);
+						$this->db->where('id', $partido);
+						$this->db->update('partidos', $data);
+						$this->db->insert_id();
+					}
+				else {
+					$data = array(
+							'team1_res' => $result1[$i],
+							'team2_res' => $result2[$i],
+							'cargado' => '1',
+						);
+						$this->db->where('id', $partido);
+						$this->db->update('partidos', $data);
+						$this->db->insert_id();
+				}
+			}
+			else{
+				#echo "esos partidos fueron seteados anteriormente: " . $partido . "<br>";
+			}	
+			$i++;
+    	}  
+	}
     
-    ### Todas las funciones para gener el fixture y la tabla de posiciones nueva
+    function update_positions($partidos,$cargado,$actual_perdido){
+		if (!$cargado){
+			if  ($actual_perdido){
+				$this->ambos_perdieron($partidos->team1_id,$partidos->team2_id);
+			}
+			else {
+				if ($partidos->team1_res == $partidos->team2_res){
+					$this->empate($partidos->team1_id,$partidos->team2_id,$partidos->team1_res,$partidos->team2_res);
+				}
+				else if ($partidos->team1_res > $partidos->team2_res){
+					$this->ganador($partidos->team1_id,$partidos->team2_id,$partidos->team1_res,$partidos->team2_res);
+				}
+				else {
+					$this->ganador($partidos->team2_id,$partidos->team1_id,$partidos->team2_res,$partidos->team1_res);
+				}
+			}
+		}
+		else{
+				#equipo ya cargado
+			}
+	}
+	
+    
+    	function empate($team1_id,$team2_id, $team1_res, $team2_res){
+			$this->db->set('pj', 'pj + 1', FALSE);
+			$this->db->set('pe', 'pe + 1', FALSE);
+			$gf = 'gf+'. $team1_res;
+			$gc = 'gc-'. $team2_res;
+			$dg = 'dg+' . $team1_res . "-" . $team2_res;
+			$this->db->set('gf', $gf, FALSE);
+			$this->db->set('gc', $gc, FALSE);
+			$this->db->set('dg', $dg, FALSE);
+			$this->db->set('ptos', 'ptos + 1', FALSE);
+			$this->db->where('team_id', $team1_id);
+			$this->db->update('posiciones');
+			$this->db->insert_id();
+	
+			$this->db->set('pj', 'pj + 1', FALSE);
+			$this->db->set('pe', 'pe + 1', FALSE);
+			$gf = 'gf+'. $team2_res;
+			$gc = 'gc-'. $team1_res;
+			$dg = 'dg+' . $team2_res . "-" . $team1_res;
+			$this->db->set('gf', $gf, FALSE);
+			$this->db->set('gc', $gc, FALSE);
+			$this->db->set('dg', $dg, FALSE);
+			$this->db->set('ptos', 'ptos + 1', FALSE);
+			$this->db->where('team_id', $team2_id);
+			$this->db->update('posiciones');
+			$res = $this->db->insert_id();
+
+	}
+
+	function ganador($team1_id,$team2_id, $team1_res, $team2_res){
+			$this->db->set('pj', 'pj + 1', FALSE);
+			$this->db->set('pg', 'pg + 1', FALSE);
+			$gf = 'gf+'. $team1_res;
+			$gc = 'gc-'. $team2_res;
+			$dg = 'dg+' . $team1_res . "-" . $team2_res;
+			$this->db->set('gf', $gf, FALSE);
+			$this->db->set('gc', $gc, FALSE);
+			$this->db->set('dg', $dg, FALSE);
+			$this->db->set('ptos', 'ptos + 3', FALSE);
+			$this->db->where('team_id', $team1_id);
+			$this->db->update('posiciones');
+			$this->db->insert_id();
+	
+			$this->db->set('pj', 'pj + 1', FALSE);
+			$this->db->set('pp', 'pp + 1', FALSE);
+			$gf = 'gf+'. $team2_res;
+			$gc = 'gc-'. $team1_res;
+			$dg = 'dg+' . $team2_res . "-" . $team1_res;
+			$this->db->set('gf', $gf, FALSE);
+			$this->db->set('gc', $gc, FALSE);
+			$this->db->set('dg', $dg, FALSE);
+			$this->db->where('team_id', $team2_id);
+			$this->db->update('posiciones');
+			$res = $this->db->insert_id();
+	}
+	
+	function ambos_perdieron($team1_id,$team2_id){
+			$this->db->set('pj', 'pj + 1', FALSE);
+			$this->db->set('pp', 'pp + 1', FALSE);
+			$this->db->where('team_id', $team1_id);
+			$this->db->update('posiciones');
+			$this->db->insert_id();
+			
+			$this->db->set('pj', 'pj + 1', FALSE);
+			$this->db->set('pp', 'pp + 1', FALSE);
+			$this->db->where('team_id', $team2_id);
+			$this->db->update('posiciones');
+			$this->db->insert_id();
+	}
+    
+    function get_team_by_match($partido_id)
+	{
+		$this->db->select('team1_id, team2_id,team1_res,team2_res, e1.name as equipo1_name, e2.name as equipo2_name');
+		$this->db->from('partidos p');
+		$this->db->join('equipos e1','e1.id = p.team1_id');
+		$this->db->join('equipos e2','e2.id = p.team2_id');
+		$this->db->where('p.id',$partido_id);
+		$query = $this->db->get();
+		foreach ($query->result() as $row){
+			return $row;
+		}
+	}
+    
+    function get_all_players_combo($team_id)
+	{
+		$this->db->from('jugadores');
+		$this->db->where('team_id',$team_id);
+		$this->db->order_by('last_name','asc');		
+		$query = $this->db->get();	
+		if ($query->num_rows() > 0 ) {
+			foreach($query->result_array() as $row){
+				$full_name = $row['name'] . " " . $row['last_name'];
+				$combo[$row['id']] = $full_name;	
+				}
+					
+		}
+		$combo[0] = 'Otro';
+		return $combo;	
+	}
+    
+    function set_goleadores($goleadores_id){
+		foreach ($goleadores_id as $goleador_id){
+			$this->db->set('goal', 'goal + 1', FALSE);
+			$this->db->where('id', $goleador_id);
+			$this->db->update('jugadores');
+			$res = $this->db->insert_id();
+			}
+	}
+	
+    
+    function get_goleadores($category_id){
+	   $this->db->select('j.name as name_jugador, j.last_name, j.goal,e.name as name_equipo');
+	   $this->db->from('jugadores j');
+	   $this->db->join('equipos e','e.id = j.team_id');
+	   $this->db->join('tipo_torneo c','c.id = e.actual_fase1_id');
+	   #$this->db->join('tipo_torneo c','c.id = e.category_id');
+	   
+	   $this->db->where('c.id',$category_id);
+	   $this->db->where('j.goal > ','0');
+
+	   $this->db->limit(20);
+	   $this->db->order_by('j.goal desc, e.name asc'); 
+	   $query = $this->db->get();
+	   $goleadores = $query->result();
+        echo $this->db->last_query() . "<br>";
+
+	   return $goleadores;
+	}
 }
 		

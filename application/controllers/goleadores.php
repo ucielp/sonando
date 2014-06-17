@@ -29,7 +29,7 @@ class Goleadores extends CI_Controller {
 		$this->data['events'] = $this->admin_model_new->get_events_combo_box_2(); //para el combo box
 		
 		$event_id = $this->input->post('dropdown_category');
-		$this->data['goleadores'] = $this->admin_model->get_goleadores($event_id);
+		$this->data['goleadores'] = $this->admin_model_new->get_goleadores($event_id);
 		$this->data['main_content'] = 'home/vistas/goleadores_view';
 		$this->load->view('home/temp/template', $this->data);
 	}

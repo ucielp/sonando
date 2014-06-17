@@ -8,7 +8,7 @@
 	
     <?php echo form_open("auth/set_horarios_last");?>     
      <div class="header_page">
-				<h1>Partidos del torneo <span style="text-transform:uppercase;"><?php echo $category_name;?></span></h1>
+				<h1> <?php echo $category_name;?></h1>
 			</div>
             <center>
 			<table class="horarios_admin">

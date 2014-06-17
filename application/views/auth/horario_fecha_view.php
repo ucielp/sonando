@@ -11,7 +11,7 @@
 			<table class="fixture">
                 <thead>
                     <tr>
-						<th>Evento</th>
+						<th>Torneo</th>
                         <th>Equipo1</th>
                         <th>Equipo2</th>
                         <th>Horario</th>
@@ -22,7 +22,7 @@
              	<tbody>
                 	<?php $i=1; foreach($partidos as $partido):?>
                     <tr class="<?php echo "" . ( ($i & 1) ? 'odd' : 'even' );?>">
-						<td class="t"><?php echo $partido->name_event;?></td>
+                    	<td class="t"><?php echo $cat_and_subcategory[$partido->id_category];?></td>
                         <td class="t"><?php echo $partido->equipo1;?></td>
                         <td class="t"><?php echo $partido->equipo2;?></td>
                         <td class="o"><?php echo $partido->horario;?></td>

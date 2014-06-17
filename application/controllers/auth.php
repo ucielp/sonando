@@ -293,9 +293,6 @@ class Auth extends Controller {
             $this->data['message'] = (validation_errors()) ? validation_errors() : $this->session->flashdata('message');
             $this->load->view('auth/mostrar_equipos_de_torneo_view', $this->data);
         }
-        
-		
-	
 	}
 	
 	function update_equipo_torneo_go($tournament_id){
@@ -423,7 +420,192 @@ class Auth extends Controller {
             $this->data['teams'] = $this->admin_model_new->generate_table_positions($tournament_id);
 
         }
+    }
+        
+    ### Definir horario
+    function set_horario_new()
+	{
+		if (!$this->ion_auth->logged_in() || !$this->ion_auth->is_admin())
+		{
+			redirect('auth/login', 'refresh');
+		}
+		
+		$url_link = 'auth/set_horario_new_elegir_fecha/';
+		$this->data['categoryTree'] = $this->admin_model_new->parse_tree($url_link); # Category Tree
+
+		$this->data['message'] = (validation_errors()) ? validation_errors() : $this->session->flashdata('message');
+		# Uso la misma vista que en generar_torneos pero le paso otro link
+		$this->load->view('auth/generar_torneos', $this->data);
+		
+	}
+    
+    function set_horario_new_elegir_fecha($tournament_id)
+    {
+        if (!$this->ion_auth->logged_in() || !$this->ion_auth->is_admin())
+		{
+			redirect('auth/login', 'refresh');
+		}
+        		
+        $this->data['message'] = (validation_errors()) ? validation_errors() : $this->session->flashdata('message');
+        $this->data['fechas'] = $this->admin_model_new->get_fechas(); //para el combo box
+
+        $this->data['tournament_id'] = $tournament_id;
+        
+        $this->load->view('auth/set_horario_new_elegir_fecha_view', $this->data);
+    }
+        
+    function set_horario_new_go($tournament_id)
+	{
+		if (!$this->ion_auth->logged_in() || !$this->ion_auth->is_admin())
+		{
+			redirect('auth/login', 'refresh');
+		}
+		$this->data['message'] = (validation_errors()) ? validation_errors() : $this->session->flashdata('message');
+		
+		$this->data['actual_fecha_id'] = $this->input->post('dropdown_fechas');;
+		        
+        $this->data['category_name'] = $this->fixture_model_new->get_category_and_subcategory($tournament_id); //para imprimir el nombre por pantalla
+
+		$this->data['partidos'] = $this->admin_model_new->get_partidos($tournament_id,$this->data['actual_fecha_id']);
+		$this->load->view('auth/set_horarios_go', $this->data);
+		
+	}
+    
+    function set_horarios_last()
+	{
+		if (!$this->ion_auth->logged_in() || !$this->ion_auth->is_admin())
+		{
+			redirect('auth/login', 'refresh');
+		}
+		$this->data['message'] = (validation_errors()) ? validation_errors() : $this->session->flashdata('message');
+		
+		$this->data['dias'] = $this->input->post('dias');	
+		$this->data['horarios'] = $this->input->post('horarios');	
+		$this->data['canchas'] = $this->input->post('canchas');	
+		$this->data['partidos_id'] = $this->input->post('part_id');	
+
+		$matchs_id = $this->data['partidos_id'];
+		$dias = $this->data['dias'];
+		$horarios = $this->data['horarios']; 
+		$canchas = $this->data['canchas'];
+		
+		#seteo los horarios
+		$this->admin_model_new->set_horarios($matchs_id,$dias,$horarios,$canchas);
+		
+		$this->load->view('auth/set_horarios_ok', $this->data);
+		
+	}
 	
+    ########## Cargar resultados
+    	function set_results_new()
+	{
+		if (!$this->ion_auth->logged_in() || !$this->ion_auth->is_admin())
+		{
+			redirect('auth/login', 'refresh');
+		}
+		
+		$url_link = 'auth/set_results_new_elegir_fecha/';
+		$this->data['categoryTree'] = $this->admin_model_new->parse_tree($url_link); # Category Tree
+		 
+		$this->data['message'] = (validation_errors()) ? validation_errors() : $this->session->flashdata('message');
+		# Uso la misma vista que en generar_torneos pero le paso otro link
+		$this->load->view('auth/generar_torneos', $this->data);
+		
+	}
+    
+     function set_results_new_elegir_fecha($tournament_id)
+    {
+        if (!$this->ion_auth->logged_in() || !$this->ion_auth->is_admin())
+		{
+			redirect('auth/login', 'refresh');
+		}
+        		
+        $this->data['message'] = (validation_errors()) ? validation_errors() : $this->session->flashdata('message');
+        $this->data['fechas'] = $this->admin_model_new->get_fechas(); //para el combo box
+
+        $this->data['tournament_id'] = $tournament_id;
+        
+        $this->load->view('auth/set_results_new_elegir_fecha_view', $this->data);
+    }
+	
+	function set_results_new_go($tournament_id)
+	{
+		if (!$this->ion_auth->logged_in() || !$this->ion_auth->is_admin())
+		{
+			redirect('auth/login', 'refresh');
+		}
+		$this->data['message'] = (validation_errors()) ? validation_errors() : $this->session->flashdata('message');
+        $this->data['tournament_id'] = $tournament_id;
+
+		$this->data['actual_fecha_id'] = $this->input->post('dropdown_fechas');;
+        $this->data['category_name'] = $this->fixture_model_new->get_category_and_subcategory($tournament_id); //para imprimir el nombre por pantalla
+
+
+		$this->data['partidos'] = $this->admin_model_new->get_partidos($tournament_id,$this->data['actual_fecha_id']);
+		$this->load->view('auth/set_results_go', $this->data);
+		
+	}
+    
+    
+    function set_goleadores_new($actual_tournament_id)
+	{
+		if (!$this->ion_auth->logged_in() || !$this->ion_auth->is_admin())
+		{
+			redirect('auth/login', 'refresh');
+		}
+		$this->data['message'] = (validation_errors()) ? validation_errors() : $this->session->flashdata('message');
+		
+		$this->data['result1'] = $this->input->post('res1');	
+		$this->data['result2'] = $this->input->post('res2');	
+		$this->data['partidos_id'] = $this->input->post('part_id');	
+		$this->data['cargados'] = $this->input->post('cargados');
+		$this->data['perdidos'] = $this->input->post('perdidos');	
+
+
+		$matchs_id = $this->data['partidos_id'];
+		$teams1_res = $this->data['result1']; 
+		$teams2_res = $this->data['result2'];
+		$cargados = $this->data['cargados'];
+		$perdidos = $this->data['perdidos'];
+		#seteo los resultados y perdido es 1 entonces ambos pierden
+		$this->admin_model_new->set_results($matchs_id,$teams1_res,$teams2_res,$cargados,$perdidos);
+		
+		$i = 1;
+		foreach($matchs_id as $partido_id):
+			$partido = $this->admin_model_new->get_team_by_match($partido_id);
+			$this->data['equipo1_name'][$partido_id] = $partido->equipo1_name;
+			$this->data['equipo2_name'][$partido_id] = $partido->equipo2_name;
+			$this->data['players_team1'][$partido_id] = $this->admin_model_new->get_all_players_combo($partido->team1_id);
+			$this->data['players_team2'][$partido_id] = $this->admin_model_new->get_all_players_combo($partido->team2_id); 
+			
+			$acutal_cargado = $this->data['cargados'][$i];
+			$acutal_perdido = $this->data['perdidos'][$i];
+			#actualizo posiciones pero solo de los que no estaban seteados
+			
+			$this->admin_model_new->update_positions($partido,$acutal_cargado,$acutal_perdido);
+			$i++;
+		endforeach;
+		$this->load->view('auth/set_goleadores', $this->data);
+	}
+    
+    
+    function set_goleadores_new_go()
+	{
+		if (!$this->ion_auth->logged_in() || !$this->ion_auth->is_admin())
+		{
+			redirect('auth/login', 'refresh');
+		}
+		
+		$this->data['message'] = (validation_errors()) ? validation_errors() : $this->session->flashdata('message');
+
+		$this->data['goleadores_id'] = $this->input->post('players');
+		
+		$this->admin_model_new->set_goleadores($this->data['goleadores_id']); 
+		$this->load->view('auth/set_goleadores_ok', $this->data);
+	}
+    
+    
+    
 		//~ #chequeo si el torneo se creo anteriormente
 		//~ if ($this->admin_model_new->torneo_generado($tournament_id) == 0){
 			//~ #esta linea es la que genera el torneo fase
@@ -444,8 +626,6 @@ class Auth extends Controller {
 			//~ $this->load->view('auth/torneo_ya_generado', $this->data);
 		//~ }
 	
-	}
-		
 	//~ function generar_torneos_ok ()
 	//~ {
 		//~ if (!$this->ion_auth->logged_in() || !$this->ion_auth->is_admin())
@@ -537,56 +717,9 @@ class Auth extends Controller {
 	   }      
 	   
 	   
-	function set_horario_new()
-	{
-		if (!$this->ion_auth->logged_in() || !$this->ion_auth->is_admin())
-		{
-			redirect('auth/login', 'refresh');
-		}
-		$this->data['message'] = (validation_errors()) ? validation_errors() : $this->session->flashdata('message');
-		$this->data['events'] = $this->admin_model_new->get_events_combo_box(); //para el combo box
-		$this->data['fechas'] = $this->admin_model_new->get_fechas(); //para el combo box
 
-		$this->load->view('auth/set_horarios_new_view', $this->data);
-		
-	}
 
-	function set_results_new()
-	{
-		if (!$this->ion_auth->logged_in() || !$this->ion_auth->is_admin())
-		{
-			redirect('auth/login', 'refresh');
-		}
-		$this->data['message'] = (validation_errors()) ? validation_errors() : $this->session->flashdata('message');
-		$this->data['events'] = $this->admin_model_new->get_events_combo_box(); //para el combo box
-		$this->data['fechas'] = $this->admin_model_new->get_fechas(); //para el combo box
 
-		$this->load->view('auth/set_results', $this->data);
-		
-	}
-	
-	function set_results_new_go()
-	{
-		if (!$this->ion_auth->logged_in() || !$this->ion_auth->is_admin())
-		{
-			redirect('auth/login', 'refresh');
-		}
-		$this->data['message'] = (validation_errors()) ? validation_errors() : $this->session->flashdata('message');
-		
-		$this->data['actual_tournament_id'] = $this->input->post('dropdown_category');
-		$this->data['actual_fecha_id'] = $this->input->post('dropdown_fechas');
-		$this->data['category_name'] = strtoupper($this->admin_model->get_category_by_id($this->data['actual_tournament_id']));
-		if ($this->admin_model->get_type_category_by_id($this->data['actual_tournament_id']) == 'fase' ){
-			$fase = 1;
-			} 
-		else{
-			$fase = 2;
-			}
-		$this->data['partidos'] = $this->admin_model->get_partidos($this->data['actual_tournament_id'],$this->data['actual_fecha_id'],$fase);
-		$this->load->view('auth/set_results_go', $this->data);
-		
-	}
-	   
 	function mostrar_categorias_new()
 	{
 		if (!$this->ion_auth->logged_in() || !$this->ion_auth->is_admin())
@@ -611,16 +744,19 @@ class Auth extends Controller {
 			
 		$this->data['message'] = (validation_errors()) ? validation_errors() : $this->session->flashdata('message');
 
-		$this->data['partidos'] = $this->admin_model_new->get_partidos_por_fecha(); 
-
+        $partidos = $this->admin_model_new->get_partidos_por_fecha(); 
+		$this->data['partidos'] = $partidos;
+        
+        #get_category_and_subcategory
+        
+        foreach($partidos as $partido){
+            $cat_and_subcategory[$partido->id_category] = $this->fixture_model_new->get_category_and_subcategory($partido->id_category);
+        }
+        $this->data['cat_and_subcategory'] = $cat_and_subcategory;
+    
 		$this->load->view('auth/horario_fecha_view', $this->data);
 
-	   	}
-	   
-	   
-	   
-	   
-	   
+    }
 	   
 	   
 	   
@@ -1409,53 +1545,53 @@ class Auth extends Controller {
 		
 	}
 	
-	function set_goleadores($actual_tournament_id)
-	{
-		if (!$this->ion_auth->logged_in() || !$this->ion_auth->is_admin())
-		{
-			redirect('auth/login', 'refresh');
-		}
-		$this->data['message'] = (validation_errors()) ? validation_errors() : $this->session->flashdata('message');
-		
-		$this->data['result1'] = $this->input->post('res1');	
-		$this->data['result2'] = $this->input->post('res2');	
-		$this->data['partidos_id'] = $this->input->post('part_id');	
-		$this->data['cargados'] = $this->input->post('cargados');
-		$this->data['perdidos'] = $this->input->post('perdidos');	
-
-
-		$matchs_id = $this->data['partidos_id'];
-		$teams1_res = $this->data['result1']; 
-		$teams2_res = $this->data['result2'];
-		$cargados = $this->data['cargados'];
-		$perdidos = $this->data['perdidos'];
-		#seteo los resultados y perdido es 1 entonces ambos pierden
-		$this->admin_model->set_results($matchs_id,$teams1_res,$teams2_res,$cargados,$perdidos);
-		#1 si es fase 2 si es campeones/campeonato/descenso
-		if ($this->admin_model->get_type_category_by_id($actual_tournament_id) == 'fase' ){
-			$fase = 1;
-			} 
-		else{
-			$fase = 2;
-			}
-		$i = 1;
-		foreach($matchs_id as $partido_id):
-			$partido = $this->admin_model->get_team_by_match($partido_id);
-			$this->data['equipo1_name'][$partido_id] = $partido->equipo1_name;
-			$this->data['equipo2_name'][$partido_id] = $partido->equipo2_name;
-			$this->data['players_team1'][$partido_id] = $this->admin_model->get_all_players_combo($partido->team1_id);
-			$this->data['players_team2'][$partido_id] = $this->admin_model->get_all_players_combo($partido->team2_id); 
-			
-			$acutal_cargado = $this->data['cargados'][$i];
-			$acutal_perdido = $this->data['perdidos'][$i];
-			#actualizo posiciones pero solo de los que no estaban seteados
-			
-			$this->admin_model->update_positions($partido,$fase,$acutal_cargado,$acutal_perdido);
-			$i++;
-		endforeach;
-		$this->load->view('auth/set_goleadores', $this->data);
-	}
-	
+	//~ function set_goleadores($actual_tournament_id)
+	//~ {
+		//~ if (!$this->ion_auth->logged_in() || !$this->ion_auth->is_admin())
+		//~ {
+			//~ redirect('auth/login', 'refresh');
+		//~ }
+		//~ $this->data['message'] = (validation_errors()) ? validation_errors() : $this->session->flashdata('message');
+		//~ 
+		//~ $this->data['result1'] = $this->input->post('res1');	
+		//~ $this->data['result2'] = $this->input->post('res2');	
+		//~ $this->data['partidos_id'] = $this->input->post('part_id');	
+		//~ $this->data['cargados'] = $this->input->post('cargados');
+		//~ $this->data['perdidos'] = $this->input->post('perdidos');	
+//~ 
+//~ 
+		//~ $matchs_id = $this->data['partidos_id'];
+		//~ $teams1_res = $this->data['result1']; 
+		//~ $teams2_res = $this->data['result2'];
+		//~ $cargados = $this->data['cargados'];
+		//~ $perdidos = $this->data['perdidos'];
+		//~ #seteo los resultados y perdido es 1 entonces ambos pierden
+		//~ $this->admin_model->set_results($matchs_id,$teams1_res,$teams2_res,$cargados,$perdidos);
+		//~ #1 si es fase 2 si es campeones/campeonato/descenso
+		//~ if ($this->admin_model->get_type_category_by_id($actual_tournament_id) == 'fase' ){
+			//~ $fase = 1;
+			//~ } 
+		//~ else{
+			//~ $fase = 2;
+			//~ }
+		//~ $i = 1;
+		//~ foreach($matchs_id as $partido_id):
+			//~ $partido = $this->admin_model->get_team_by_match($partido_id);
+			//~ $this->data['equipo1_name'][$partido_id] = $partido->equipo1_name;
+			//~ $this->data['equipo2_name'][$partido_id] = $partido->equipo2_name;
+			//~ $this->data['players_team1'][$partido_id] = $this->admin_model->get_all_players_combo($partido->team1_id);
+			//~ $this->data['players_team2'][$partido_id] = $this->admin_model->get_all_players_combo($partido->team2_id); 
+			//~ 
+			//~ $acutal_cargado = $this->data['cargados'][$i];
+			//~ $acutal_perdido = $this->data['perdidos'][$i];
+			//~ #actualizo posiciones pero solo de los que no estaban seteados
+			//~ 
+			//~ $this->admin_model->update_positions($partido,$fase,$acutal_cargado,$acutal_perdido);
+			//~ $i++;
+		//~ endforeach;
+		//~ $this->load->view('auth/set_goleadores', $this->data);
+	//~ }
+	//~ 
 	function set_results_elim()
 	{
 		if (!$this->ion_auth->logged_in() || !$this->ion_auth->is_admin())
@@ -1530,27 +1666,27 @@ class Auth extends Controller {
 	
 	
 	
-	function set_horarios_go()
-	{
-		if (!$this->ion_auth->logged_in() || !$this->ion_auth->is_admin())
-		{
-			redirect('auth/login', 'refresh');
-		}
-		$this->data['message'] = (validation_errors()) ? validation_errors() : $this->session->flashdata('message');
-		
-		$this->data['actual_tournament_id'] = $this->input->post('dropdown_category');
-		$this->data['actual_fecha_id'] = $this->input->post('dropdown_fechas');
-		$this->data['category_name'] = strtoupper($this->admin_model->get_category_by_id($this->data['actual_tournament_id']));
-		if ($this->admin_model->get_type_category_by_id($this->data['actual_tournament_id']) == 'fase' ){
-			$fase = 1;
-			} 
-		else{
-			$fase = 2;
-			}
-		$this->data['partidos'] = $this->admin_model->get_partidos($this->data['actual_tournament_id'],$this->data['actual_fecha_id'],$fase);
-		$this->load->view('auth/set_horarios_go', $this->data);
-		
-	}
+	//~ function set_horarios_go()
+	//~ {
+		//~ if (!$this->ion_auth->logged_in() || !$this->ion_auth->is_admin())
+		//~ {
+			//~ redirect('auth/login', 'refresh');
+		//~ }
+		//~ $this->data['message'] = (validation_errors()) ? validation_errors() : $this->session->flashdata('message');
+		//~ 
+		//~ $this->data['actual_tournament_id'] = $this->input->post('dropdown_category');
+		//~ $this->data['actual_fecha_id'] = $this->input->post('dropdown_fechas');
+		//~ $this->data['category_name'] = strtoupper($this->admin_model->get_category_by_id($this->data['actual_tournament_id']));
+		//~ if ($this->admin_model->get_type_category_by_id($this->data['actual_tournament_id']) == 'fase' ){
+			//~ $fase = 1;
+			//~ } 
+		//~ else{
+			//~ $fase = 2;
+			//~ }
+		//~ $this->data['partidos'] = $this->admin_model->get_partidos($this->data['actual_tournament_id'],$this->data['actual_fecha_id'],$fase);
+		//~ $this->load->view('auth/set_horarios_go', $this->data);
+		//~ 
+	//~ }
 	
 	function partidos_por_horario(){
 		if (!$this->ion_auth->logged_in() || !$this->ion_auth->is_admin())
@@ -1576,30 +1712,7 @@ class Auth extends Controller {
 
 	}
 	
-	function set_horarios_last()
-	{
-		if (!$this->ion_auth->logged_in() || !$this->ion_auth->is_admin())
-		{
-			redirect('auth/login', 'refresh');
-		}
-		$this->data['message'] = (validation_errors()) ? validation_errors() : $this->session->flashdata('message');
-		
-		$this->data['dias'] = $this->input->post('dias');	
-		$this->data['horarios'] = $this->input->post('horarios');	
-		$this->data['canchas'] = $this->input->post('canchas');	
-		$this->data['partidos_id'] = $this->input->post('part_id');	
 
-		$matchs_id = $this->data['partidos_id'];
-		$dias = $this->data['dias'];
-		$horarios = $this->data['horarios']; 
-		$canchas = $this->data['canchas'];
-		
-		#seteo los resultados
-		$this->admin_model->set_horarios($matchs_id,$dias,$horarios,$canchas);
-		
-		$this->load->view('auth/set_horarios_ok', $this->data);
-		
-	}
 	
 	function set_horario_elim()
 	{
@@ -1748,20 +1861,20 @@ class Auth extends Controller {
 	
 	
 	#######################################################################
-	function set_goleadores_go()
-	{
-		if (!$this->ion_auth->logged_in() || !$this->ion_auth->is_admin())
-		{
-			redirect('auth/login', 'refresh');
-		}
-		
-		$this->data['message'] = (validation_errors()) ? validation_errors() : $this->session->flashdata('message');
-
-		$this->data['goleadores_id'] = $this->input->post('players');
-		
-		$this->admin_model->set_goleadores($this->data['goleadores_id']); 
-		$this->load->view('auth/set_goleadores_ok', $this->data);
-	}
+	//~ function set_goleadores_go()
+	//~ {
+		//~ if (!$this->ion_auth->logged_in() || !$this->ion_auth->is_admin())
+		//~ {
+			//~ redirect('auth/login', 'refresh');
+		//~ }
+		//~ 
+		//~ $this->data['message'] = (validation_errors()) ? validation_errors() : $this->session->flashdata('message');
+//~ 
+		//~ $this->data['goleadores_id'] = $this->input->post('players');
+		//~ 
+		//~ $this->admin_model->set_goleadores($this->data['goleadores_id']); 
+		//~ $this->load->view('auth/set_goleadores_ok', $this->data);
+	//~ }
 		
 	function cargar_responsable()
 	{	
