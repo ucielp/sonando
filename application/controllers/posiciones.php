@@ -21,7 +21,7 @@ class Posiciones extends CI_Controller {
 		$this->data['events'] = $this->fixture_model_new->get_events_combo_box(); # combobox
 
 		$this->data['event_name'] = $this->fixture_model_new->get_category_and_subcategory($event_id); //para imprimir el nombre por pantalla
-        $this->data['posiciones'] = $this->posiciones_model->get_positions($event_id); //genero la tabla de posiciones
+        $this->data['posiciones'] = $this->admin_model_new->get_positions($event_id); //genero la tabla de posiciones
 
 
    		$url_link = 'posiciones/index/';

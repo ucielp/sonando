@@ -2,11 +2,11 @@
 
 <div class='mainInfo'>
 
-	<h1>Crear partido</h1>
+	<h1>Crear partido para el torneo:      <?php echo $tournament;?></h1>
 	   
 	<div id="infoMessage"><?php echo $message;?></div>
     
-	<?php echo form_open("auth/create_match_go");?>
+	<?php echo form_open("auth/create_match_new_go/$tournament_id");?>
     
      <p>Equipo1<br />     
      <?php $categories[0] = 'Ninguno'; 
@@ -16,10 +16,6 @@
        <p>Equipo2<br />     
      <?php $categories[0] = 'Ninguno'; 
 	 echo form_dropdown('dropdown_team2', $equipos, '0');?>
-     </p>
-     
-      <p>Eligir torneo para cargar los resultados<br/>
-     <?php echo form_dropdown('dropdown_category', $tournament);?>
      </p>
      
       <p>Eligir la fecha para cargar los resultados<br/>

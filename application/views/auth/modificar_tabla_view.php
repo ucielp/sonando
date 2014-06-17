@@ -71,8 +71,12 @@
                    <?php $j++; endforeach;?>
 				</tbody>
 			</table>   <br><br>
+            		<p><a href="<?php echo site_url('auth/modificar_tabla_agregar_equipo/') . '/' . $tournament_id;?>"><u>Agregar a un equipo (para tablas de eliminatoria)</u></a></p>
+
 <?php echo form_submit('submit', 'Modificar tabla');?><br><br>
-		<a href="<?php echo site_url('auth/set_results');?>"><u>Go Back</u></a>			
+
+		<a href="<?php echo site_url('auth/set_results');?>"><u>Go Back</u></a>
+        
             
         </div> <!-- END CONTAINER-->
 	</div> <!-- END WRAPPER -->

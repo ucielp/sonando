@@ -956,9 +956,47 @@ class Admin_model_new extends CI_Model{
 	   $this->db->order_by('j.goal desc, e.name asc'); 
 	   $query = $this->db->get();
 	   $goleadores = $query->result();
-        echo $this->db->last_query() . "<br>";
-
+       
 	   return $goleadores;
+	}
+    
+    function get_equipos_from_category_display($tournament_id){
+        
+        $query = $this->db->query('SELECT name, id FROM equipos 
+		WHERE activo = 1
+		AND ID IN (SELECT team_id FROM category_display WHERE category_id = '. $tournament_id . ')');	
+        
+		foreach($query->result_array() as $row){
+			$combo[$row['id']]=$row['name'];	
+			}
+		$combo[0] = 'Elegir equipo';
+
+		return $combo;
+	}
+    
+     function generate_match($team1_id,$team2_id,$tournament_id,$fecha_id){
+		  
+		 		$this->db->set('tournament_id', $tournament_id);
+				$this->db->set('team1_id', $team1_id);
+				$this->db->set('team2_id', $team2_id);
+				$this->db->set('nro_fecha_id', $fecha_id);
+				$this->db->insert('partidos');
+	 			$res = $this->db->insert_id();
+		}  
+    
+    function get_positions($tournament_id){
+		$this->db->select('p.id as position_id,e.name as name_equipo,e.id as id_equipo,pj,pg,pe,pp,gf,gc,dg,ptos');
+		$this->db->from('posiciones p');
+		$this->db->join('equipos e','e.id = p.team_id');
+		$this->db->where('p.category_id', $tournament_id);
+		$this->db->order_by('ptos','DESC');
+		$this->db->order_by('dg','DESC');
+		$this->db->order_by('gf','DESC');
+		$this->db->order_by('name_equipo','ASC');
+		$query = $this->db->get();
+		$posiciones = $query->result();
+		# echo $this->db->last_query() . "<br>";
+		return $posiciones;
 	}
 }
 		

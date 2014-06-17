@@ -651,11 +651,10 @@ el permiso especial de los organizadores del torneo. Hay tiempo hasta el Sábado
 		foreach($query->result_array() as $row){
 			$combo[$row['id']]=$row['name'];	
 			}
-		
 		$combo[0] = 'Elegir equipo';
-
 		return $combo;
-	}	
+	}
+    
 	function change_team_name($team_id,$new_name) {
 		$datos1 = array(
 				'name' => $new_name,
