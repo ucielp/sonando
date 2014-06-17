@@ -13,7 +13,7 @@ class Fixture extends CI_Controller {
 	}
 	
     # TODO arreglar este HACK que puse el event_id por defecto
-	function index($event_id=74,$fecha=NULL)
+	function index($event_id=26,$fecha=NULL)
 	{
 			
 		//Declaramos offset y limit para la paginación

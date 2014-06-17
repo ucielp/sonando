@@ -14,7 +14,7 @@ class Posiciones extends CI_Controller {
 	}
 	
     # TODO arreglar este HACK que puse el event_id por defecto
-	function index($event_id=74) {
+	function index($event_id=26) {
 		
 		$this->data['title'] = "Posiciones";
 		$this->data['message'] = (validation_errors()) ? validation_errors() : $this->session->flashdata('message');
