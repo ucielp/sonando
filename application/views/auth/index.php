@@ -17,19 +17,24 @@
 		<p><a href="<?php echo site_url('auth/modificar_tabla_new'); ?>">Modificar tabla posiciones  <b>(caso excepcional)</b></a></p>
 		<p><a href="<?php echo site_url('auth/horario_fecha'); ?>">Ver horarios por fecha</a></p>
 		<p><a href="<?php echo site_url('auth/create_match_new'); ?>">Generar partido manualmente</a></p>
+		<p><a href="<?php echo site_url('auth/activar_equipos'); ?>">Activar equipos, ver usuarios, contraseñas e inscribir jugadores</a></p>	
+        <p><a href="<?php echo site_url('auth/change_name_teams'); ?>">Cambiar nombre equipo</a></p>
+	   	<p><a href="<?php echo site_url('auth/partidos_por_horario'); ?>">Ver cantidad de partidos por horario</a></p>
+		<p><a href="<?php echo site_url('auth/fecha_actual'); ?>">Definir Fecha actual</a></p>
 
 
+<!--
         <h1>Comienzo del torneo</h1>
 		<p><a href="<?php echo site_url('auth/create_category'); ?>">Crear categoría <b>OBSOLETO</b></a></p>
 		<p><a href="<?php echo site_url('auth/mostrar_categorias'); ?>">Inscribir jugadores</a></p>
         <p><a href="<?php echo site_url('auth/create_team'); ?>">Crear equipos</a></p>
-		<p><a href="<?php echo site_url('auth/asignar_categorias'); ?>">Asignar Categoría <b>OBSOLETO</b></a></p>	
         <p><a href="<?php echo site_url('auth/generar_fases'); ?>">Generar Torneo de Fases <b>OBSOLETO</b></a></p>
-        <p><a href="<?php echo site_url('auth/change_name_teams'); ?>">Cambiar nombre equipo</a></p>
 		<p><a href="<?php echo site_url('auth/create_match'); ?>">Generar partido manualmente (T verano) <b>OBSOLETO</b></a></p>
+-->
 
 
         
+<!--
         <h1>Segunda parte del torneo</h1>
          <p><a href="<?php echo site_url('auth/set_tournament'); ?>">Modificar que mostrar en Fixture y Posiciones para las distintas partes del torneo <b>OBSOLETO</b></a></p>
         <p><a href="<?php echo site_url('auth/generar_campeones_grupos'); ?>">Generar Copa de Campeones temporal <b>OBSOLETO</b></a></p>
@@ -41,15 +46,15 @@
         <h1>Tercera parte del torneo (eliminatoria)</h1>
 		<p><a href="<?php echo site_url('auth/generar_campeones_cuartos'); ?>">Generar cuartos de final de Copa de Campeones <b>OBSOLETO</b></a></p>
 		<p><a href="<?php echo site_url('auth/generar_campeonato_semis'); ?>">Generar semifinales Campeonatos <b>OBSOLETO</b></a></p>
+-->
 
+<!--
         <h1>Para todas las fechas (horarios, resultados y goles)</h1>
-		<p><a href="<?php echo site_url('auth/fecha_actual'); ?>">Definir Fecha actual</a></p>
 		<p><a href="<?php echo site_url('auth/set_horario'); ?>">Definir horario de liga</a></p>
 		<p><a href="<?php echo site_url('auth/set_horario_elim'); ?>">Definir horario de eliminatoria</a></p>
-
         <p><a href="<?php echo site_url('auth/set_results_elim'); ?>">Cargar Resultados de eliminatoria</a></p>
 		<p><a href="<?php echo site_url('auth/modificar_tabla'); ?>">Modificar tabla posiciones  <b>(caso excepcional)</b></a></p>
-	   	<p><a href="<?php echo site_url('auth/partidos_por_horario'); ?>">Ver cantidad de partidos por horario</a></p>
+-->
 
         
 		<h2>Fin del torneo (CUIDADO, se van a borrar todos los datos del torneo)</h2>

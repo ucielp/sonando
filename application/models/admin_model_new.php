@@ -208,16 +208,13 @@ class Admin_model_new extends CI_Model{
 		return $combo;
 	}
 	
-	function get_all_teams_nocategory(){
+	function get_all_teams(){
 		
-		$query = $this->db->query('SELECT e.id as e_id,e.name as e_name, t.id as t_id,eq.password as psswd, e.orden as orden FROM equipos e 
-		JOIN events t ON t.id = e.category_id
+		$query = $this->db->query('
+		SELECT e.id as e_id,e.name as e_name, eq.password as psswd, eq.user as user, e.activo
+		FROM equipos e 
 		JOIN equipos_users eq ON eq.team_id = e.id
-		UNION 
-		SELECT eq.id as e_id,eq.name as e_name, 0,eqp.password as psswd,0 as t_id FROM equipos eq 
-        JOIN equipos_users eqp ON eqp.team_id = eq.id
-        WHERE eq.category_id = 0 
-		ORDER BY t_id ASC, e_name ASC');	
+		ORDER BY e_name ASC');	
 		//~ echo $this->db->last_query() . "<br>";
 
 		return $query->result();
@@ -998,5 +995,37 @@ class Admin_model_new extends CI_Model{
 		# echo $this->db->last_query() . "<br>";
 		return $posiciones;
 	}
+	
+	function delete_team_totalmente($team_id){
+		$this->db->delete('equipos', array('id' => $team_id));
+		$this->db->delete('equipos_info', array('team_id' => $team_id));
+		$this->db->delete('equipos_users', array('team_id' => $team_id));
+		$this->db->delete('jugadores', array('team_id' => $team_id));
+		$this->db->delete('partidos', array('team1_id' => $team_id));
+		$this->db->delete('partidos', array('team2_id' => $team_id));
+		$this->db->delete('posiciones', array('team_id' => $team_id));
+	}
+	
+	function update_equipos_activado($activates, $equipos_ids){
+		$i = 0;
+		foreach ($equipos_ids as $a){
+			$ids[$i] = $a;
+			$i++;
+		}
+		
+		$i = 0;
+		foreach ($activates as $post){
+			$data = array(
+				'activo' => $post,
+           	);
+			$this->db->where('id', 	$ids[$i]);
+			$this->db->update('equipos', $data);
+			$id_test = $this->db->insert_id();
+			#echo $this->db->last_query() . "<br>";
+			$i++;
+		}
+	}
+	
+	
 }
 		

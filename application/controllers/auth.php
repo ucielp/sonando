@@ -530,7 +530,7 @@ class Auth extends Controller {
 		}
 	}
     
-    
+    ### Modificar tablas de posiciones
     function modificar_tabla_new()
 	{
 		if (!$this->ion_auth->logged_in() || !$this->ion_auth->is_admin())
@@ -588,6 +588,76 @@ class Auth extends Controller {
         echo "agregar un equipo con este tournament id (chequear q sea eliminatoria) " . $tournament_id;
         
    }
+   
+   ###  Activar equipos
+   	function activar_equipos()
+	{
+		if (!$this->ion_auth->logged_in() || !$this->ion_auth->is_admin())
+			{
+				redirect('auth', 'refresh');
+			}
+			
+		$this->data['message'] = (validation_errors()) ? validation_errors() : $this->session->flashdata('message');
+		
+		$this->data['categories'] = $this->admin_model->get_categories_ninguno(); //para el combo box
+		$this->data['orden'] = $this->admin_model->get_orden_ninguno(); //para el combo box
+
+		
+ 		$this->data['teams'] = $this->admin_model_new->get_all_teams();
+
+		$this->load->view('auth/activar_equipo_view', $this->data);
+
+	}
+	
+	### VER
+	function activar_equipos_go()
+	{
+		if (!$this->ion_auth->logged_in() || !$this->ion_auth->is_admin())
+		{
+			redirect('auth/login', 'refresh');
+		}
+		$this->data['message'] = (validation_errors()) ? validation_errors() : $this->session->flashdata('message');
+		
+		$activates = $this->input->post('activate');
+		$equipos_ids = $this->input->post('equipo');
+		
+		$this->admin_model_new->update_equipos_activado($activates,$equipos_ids);
+
+
+		$this->load->view('auth/activar_equipo_view_ok', $this->data);
+	}
+	
+	function delete_team_preguntar($team_id)
+	{
+		if (!$this->ion_auth->logged_in() || !$this->ion_auth->is_admin())
+		{
+			redirect('auth/login', 'refresh');
+		}
+		$this->data['message'] = (validation_errors()) ? validation_errors() : $this->session->flashdata('message');
+
+		$this->data['team_id'] = $team_id;
+		$this->data['team_name'] = $this->admin_model->get_team_name($team_id);
+
+		$this->load->view('auth/delete_team_preguntar_view', $this->data);
+
+	}
+	
+	function delete_team_go($team_id)
+	{
+		if (!$this->ion_auth->logged_in() || !$this->ion_auth->is_admin())
+		{
+			redirect('auth/login', 'refresh');
+		}
+		
+		$this->data['message'] = (validation_errors()) ? validation_errors() : $this->session->flashdata('message');
+		$this->data['team_id'] = $team_id;
+		$this->data['team_name'] = $this->admin_model->get_team_name($team_id);
+		
+		$this->admin_model_new->delete_team_totalmente($team_id);
+		
+		$this->load->view('auth/delete_team_ok', $this->data);
+
+	}
     
 		//~ #chequeo si el torneo se creo anteriormente
 		//~ if ($this->admin_model_new->torneo_generado($tournament_id) == 0){
@@ -1899,74 +1969,74 @@ class Auth extends Controller {
 
 	}
 	
-	function asignar_categorias()
-	{
-		if (!$this->ion_auth->logged_in() || !$this->ion_auth->is_admin())
-			{
-				redirect('auth', 'refresh');
-			}
-			
-		$this->data['message'] = (validation_errors()) ? validation_errors() : $this->session->flashdata('message');
-		
-		$this->data['categories'] = $this->admin_model->get_categories_ninguno(); //para el combo box
-		$this->data['orden'] = $this->admin_model->get_orden_ninguno(); //para el combo box
-
-		
- 		$this->data['teams'] = $this->admin_model->get_all_teams_nocategory();
-
-		$this->load->view('auth/asignar_categorias_view1', $this->data);
-
-	}
-	
-	function asignar_categorias_go()
-	{
-		if (!$this->ion_auth->logged_in() || !$this->ion_auth->is_admin())
-		{
-			redirect('auth/login', 'refresh');
-		}
-		$this->data['message'] = (validation_errors()) ? validation_errors() : $this->session->flashdata('message');
-		
-		$this->data['new_post'] = $this->input->post('dropdown');
-		$this->data['new_post_id'] = $this->input->post('hid');
-		
-		$this->data['new_post2'] = $this->input->post('dropdown2');
-		$this->data['new_post_id2'] = $this->input->post('hid2');
-		
-		$this->admin_model->update_categorias($this->data['new_post'],$this->data['new_post_id']);
-		$this->admin_model->update_equipos($this->data['new_post2'],$this->data['new_post_id2']);
-
-
-		$this->load->view('auth/asignar_categorias_view2', $this->data);
-	}
-	
-	function mostrar_equipos()
-	{
-		if (!$this->ion_auth->logged_in() || !$this->ion_auth->is_admin())
-			{
-				redirect('auth', 'refresh');
-			}
-			
-		$this->data['message'] = (validation_errors()) ? validation_errors() : $this->session->flashdata('message');
-		
-		$this->data['team'] = $this->admin_model->get_teams_combo($this->input->post('categories')); //para el combo box
-
-		$this->load->view('auth/preinscriptos_view2', $this->data);
-
-	}
-	
-	function pre_inscriptos()
-	{
-		if (!$this->ion_auth->logged_in() || !$this->ion_auth->is_admin())
-			{
-				redirect('auth', 'refresh');
-			}
-		$opcion = $this->input->post('submit');
-		$this->data['team_id'] = $this->input->post('team');
-		$this->data['message'] = (validation_errors()) ? validation_errors() : $this->session->flashdata('message');
-		$this->data['players'] = $this->admin_model->get_all_players($this->input->post('team')); 
-		
-		$this->load->view('auth/preinscriptos_view3', $this->data);
-	}
+	//~ function asignar_categorias()
+	//~ {
+		//~ if (!$this->ion_auth->logged_in() || !$this->ion_auth->is_admin())
+			//~ {
+				//~ redirect('auth', 'refresh');
+			//~ }
+			//~ 
+		//~ $this->data['message'] = (validation_errors()) ? validation_errors() : $this->session->flashdata('message');
+		//~ 
+		//~ $this->data['categories'] = $this->admin_model->get_categories_ninguno(); //para el combo box
+		//~ $this->data['orden'] = $this->admin_model->get_orden_ninguno(); //para el combo box
+//~ 
+		//~ 
+ 		//~ $this->data['teams'] = $this->admin_model->get_all_teams_nocategory();
+//~ 
+		//~ $this->load->view('auth/asignar_categorias_view1', $this->data);
+//~ 
+	//~ }
+	//~ 
+	//~ function asignar_categorias_go()
+	//~ {
+		//~ if (!$this->ion_auth->logged_in() || !$this->ion_auth->is_admin())
+		//~ {
+			//~ redirect('auth/login', 'refresh');
+		//~ }
+		//~ $this->data['message'] = (validation_errors()) ? validation_errors() : $this->session->flashdata('message');
+		//~ 
+		//~ $this->data['new_post'] = $this->input->post('dropdown');
+		//~ $this->data['new_post_id'] = $this->input->post('hid');
+		//~ 
+		//~ $this->data['new_post2'] = $this->input->post('dropdown2');
+		//~ $this->data['new_post_id2'] = $this->input->post('hid2');
+		//~ 
+		//~ $this->admin_model->update_categorias($this->data['new_post'],$this->data['new_post_id']);
+		//~ $this->admin_model->update_equipos($this->data['new_post2'],$this->data['new_post_id2']);
+//~ 
+//~ 
+		//~ $this->load->view('auth/asignar_categorias_view2', $this->data);
+	//~ }
+	//~ 
+	//~ function mostrar_equipos()
+	//~ {
+		//~ if (!$this->ion_auth->logged_in() || !$this->ion_auth->is_admin())
+			//~ {
+				//~ redirect('auth', 'refresh');
+			//~ }
+			//~ 
+		//~ $this->data['message'] = (validation_errors()) ? validation_errors() : $this->session->flashdata('message');
+		//~ 
+		//~ $this->data['team'] = $this->admin_model->get_teams_combo($this->input->post('categories')); //para el combo box
+//~ 
+		//~ $this->load->view('auth/preinscriptos_view2', $this->data);
+//~ 
+	//~ }
+	//~ 
+	//~ function pre_inscriptos()
+	//~ {
+		//~ if (!$this->ion_auth->logged_in() || !$this->ion_auth->is_admin())
+			//~ {
+				//~ redirect('auth', 'refresh');
+			//~ }
+		//~ $opcion = $this->input->post('submit');
+		//~ $this->data['team_id'] = $this->input->post('team');
+		//~ $this->data['message'] = (validation_errors()) ? validation_errors() : $this->session->flashdata('message');
+		//~ $this->data['players'] = $this->admin_model->get_all_players($this->input->post('team')); 
+		//~ 
+		//~ $this->load->view('auth/preinscriptos_view3', $this->data);
+	//~ }
 	
 	# Esta es nueva para que desde el admin se pueda inscribir un jugador
 	function inscribir_jugador($team_id){

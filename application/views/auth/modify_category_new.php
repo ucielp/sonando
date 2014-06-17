@@ -19,7 +19,8 @@
                 </tr>
                 <?php $i = 0; 
 				if ($categories){
-					$i=1; foreach ($categories as $category):?>
+					$i=1;
+					 foreach ($categories as $category):?>
 						<tr>
 							<td><?php echo $category['id']?></td>
 							<?php $name0  = 'category[' . $i. ']';?>
