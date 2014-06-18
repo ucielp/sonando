@@ -812,9 +812,37 @@ class Auth extends Controller {
     }
 	   
 	   
-	   
-	   
+	## Imprimir planillas
+	
+	function print_form($id_partido){
+	
+		if (!$this->ion_auth->logged_in() || !$this->ion_auth->is_admin())
+			{
+				redirect('auth/login', 'refresh');
+			}
+		$this->data['message'] = (validation_errors()) ? validation_errors() : $this->session->flashdata('message');
+		
+		$equipos = $this->admin_model->get_equipos_partidos($id_partido);
+		
+		foreach ($equipos as $equipo){
+			$team1_id = $equipo->team1_id;
+			$team2_id = $equipo->team2_id;
+			$this->data['equipo1_name'] = $equipo->equipo1_name;
+			$this->data['equipo2_name'] = $equipo->equipo2_name;
+			$this->data['cancha'] = $equipo->court;
+			$this->data['hora'] = $equipo->time;
+            $tournament_id = $equipo->tournament_id;
+            $this->data['nro_fecha'] = $equipo->nro_fecha;
+		}
+		
+		$this->data['name_event'] = $this->fixture_model_new->get_category_and_subcategory($tournament_id); //para imprimir el nombre por pantalla
 
+		$this->data['players_team1'] = $this->admin_model->show_players_ficha($team1_id);
+		$this->data['players_team2'] = $this->admin_model->show_players_ficha($team2_id);
+		
+	
+		$this->load->view('auth/mostrar_planilla', $this->data);
+	} 
 	   
 	   
 	#######################################################################
@@ -1829,41 +1857,7 @@ class Auth extends Controller {
 		
 	}
 	######################## IMPRIMIR PLANILLAS
-	function print_form($id_partido){
 	
-		if (!$this->ion_auth->logged_in() || !$this->ion_auth->is_admin())
-			{
-				redirect('auth/login', 'refresh');
-			}
-		$this->data['message'] = (validation_errors()) ? validation_errors() : $this->session->flashdata('message');
-		
-		$equipos = $this->admin_model->get_equipos_partidos($id_partido);
-		
-		foreach ($equipos as $equipo){
-			$team1_id = $equipo->team1_id;
-			$team2_id = $equipo->team2_id;
-			$this->data['equipo1_name'] = $equipo->equipo1_name;
-			$this->data['equipo2_name'] = $equipo->equipo2_name;
-			$this->data['cancha'] = $equipo->court;
-			$this->data['hora'] = $equipo->time;
-            $tournament_id = $equipo->tournament_id;
-            $this->data['nro_fecha'] = $equipo->nro_fecha;
-		}
-		
-  		$torneos = $this->admin_model_new->get_event_by_id($tournament_id);
-    
-        foreach ($torneos as $torneo){
-			$this->data['name_event'] = $torneo->name_event;
-            //~ $this->data['category'] = $torneo->category;
-            //~ $this->data['name'] = "";
-		}
-        
-		$this->data['players_team1'] = $this->admin_model->show_players_ficha($team1_id);
-		$this->data['players_team2'] = $this->admin_model->show_players_ficha($team2_id);
-		
-	
-		$this->load->view('auth/mostrar_planilla', $this->data);
-	}
 	
 	function print_form_elim($id_partido){
 
