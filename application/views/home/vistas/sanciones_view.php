@@ -5,35 +5,10 @@
         </div>
        <div class="sanciones_contenedor">
         	
-            <table class="sanciones">
-                    <thead>
-                        <tr>
-                            <th class="t">Jugador</th>
-                            <th class="t">Equipo</th>
-                            <th class="t">Torneo (nro fecha)</th>
-                            <th class="t">Sanción</th>
-                            <th class="t">Observaciones</th>
-                        </tr>
-                     </thead>
-                    <tbody>
-						<?php $i=1; foreach ($sanciones as $jugador): ?>
-                        	<tr class="<?php echo "" . ( ($i & 1) ? 'odd' : 'even' );?>">
-							<td class="t"><span class="change_may_min"><?php echo $jugador->nombre_jugador ; ?></span> <span class="change_may_min"><?php echo $jugador->apellido; ?></span></td>
-                            <td class="t"><?php echo $jugador->nombre_equipo; ?></td>
-                            <td class="t"><?php echo $jugador->type . " ".  $jugador->category  . " (" .$jugador->fecha  . ")" ;  ?></td>
-                            <td class="t"><?php 
-							$label = " fecha";
-							if ($jugador->sancion > 1){
-								$label = " fechas";
-								}
-							echo $jugador->sancion . $label ;
-							?></td>
-  							 <td class="t"><?php echo $jugador->observacion; ?></td>
-
-                       </tr>
-						<?php $i++; endforeach;?>
-                    </tbody>
-			</table>
+           <h3><?php echo $titulo ?></h3>
+			<a href="<?php echo $link . '"';?> target="_blank">
+                <img src="<?php echo base_url(); ?>images/nosotros/pdf_icon.png" width="52" height="52" /></a>
+		</div>	
             </div>
         </div> <!-- END CONTAINER-->
 	</div> <!-- END WRAPPER -->
