@@ -1,8 +1,6 @@
 			<div class="container-fixture">
 				<div class="catmenu"><?php echo $categoryTree ?></div>
 				<div class="table-wrapper">
-					<div class="loading">
-					</div>
 					<div class="table-header">
 						<h1><?php echo $event_name;?></span></h1>
 						<h2>Fecha <?php echo $fecha_nro;?></h2>
