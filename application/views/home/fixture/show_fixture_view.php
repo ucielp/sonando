@@ -1,10 +1,10 @@
-			<div class="header_page">
-				<h1><?php echo $event_name;?></span></h1>
-				<h2>Fecha <?php echo $fecha_nro;?></h2>
-			</div>
 			<div class="container-fixture">
 				<div class="catmenu"><?php echo $categoryTree ?></div>
 				<div class="table-wrapper">
+					<div class="table-header">
+						<h1><?php echo $event_name;?></span></h1>
+						<h2>Fecha <?php echo $fecha_nro;?></h2>
+					</div>
 					<table class="fixture">
 						<thead>
 							<tr>
@@ -39,4 +39,21 @@
 				</div> <!-- END table-wrapper -->
 			</div> <!-- END CONTAINER-->
    	</div> <!-- END WRAPPER-->
-        
+	
+<script type="text/javascript">
+$('.fecha_posterior a').bind( "click", function(e) {
+	e.preventDefault();
+	var href = $(this).attr("href");
+	$(".table-wrapper").load(href);
+});
+$('.fecha_anterior a').bind( "click", function(e) {
+	e.preventDefault();
+	var href = $(this).attr("href");
+	$(".table-wrapper").load(href);
+});
+$('.catmenu li a').bind( "click", function(e) {
+	e.preventDefault();
+	var href = $(this).attr("href");
+	$(".table-wrapper").load(href);
+});
+</script>      
