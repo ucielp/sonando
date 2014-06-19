@@ -360,3 +360,7 @@ background:#CCC;
 	margin:0 0 2em;
 	padding:0 2em 1em;
 }
+.ajax-loader{
+	height: 120px;
+	text-align: center;
+}

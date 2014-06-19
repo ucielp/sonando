@@ -39,20 +39,23 @@
 				</div> <!-- END table-wrapper -->
 			</div> <!-- END CONTAINER-->
    	</div> <!-- END WRAPPER-->
-	
+
 <script type="text/javascript">
 $('.fecha_posterior a').bind( "click", function(e) {
 	e.preventDefault();
+	$(".table-wrapper .fixture").html('<h1 class="ajax-loader"><img src="<?php echo base_url(); ?>images/ajax-loader.gif" /></h1>');
 	var href = $(this).attr("href");
 	$(".table-wrapper").load(href);
 });
 $('.fecha_anterior a').bind( "click", function(e) {
 	e.preventDefault();
+	$(".table-wrapper .fixture").html('<h1 class="ajax-loader"><img src="<?php echo base_url(); ?>images/ajax-loader.gif" /></h1>');
 	var href = $(this).attr("href");
 	$(".table-wrapper").load(href);
 });
 $('.catmenu li a').bind( "click", function(e) {
 	e.preventDefault();
+	$(".table-wrapper .fixture").html('<h1 class="ajax-loader"><img src="<?php echo base_url(); ?>images/ajax-loader.gif" /></h1>');
 	var href = $(this).attr("href");
 	$(".table-wrapper").load(href);
 });
