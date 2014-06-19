@@ -269,6 +269,7 @@ background:#CCC;
 
 .catmenu {
 	margin-left: 20px;
+	margin-top: 80px;
 	width: 200px;
 	float: left;
 }
@@ -337,4 +338,25 @@ background:#CCC;
 	float: right;
     margin-left: 70px;
     width: 700px;
+}
+.table-header{
+	padding-top:20px;
+	z-index:2;
+}
+.table-header h1{
+	font-family: 'Open Sans', Times, Times New Roman, sans-serif;
+	font-size:18px;
+	font-weight:600;
+	text-align:center;
+}
+.table-header h2{
+	text-align:center;
+	color:#999;
+	font-family: 'Open Sans', Times, Times New Roman, sans-serif;
+	font-size:16px;
+	font-weight:600;
+	text-align:center;
+	border-bottom:1px solid #D3D3D3;
+	margin:0 0 2em;
+	padding:0 2em 1em;
 }
