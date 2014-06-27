@@ -24,12 +24,29 @@ class Posiciones extends CI_Controller {
         $this->data['posiciones'] = $this->admin_model_new->get_positions($event_id); //genero la tabla de posiciones
 
 
-   		$url_link = 'posiciones/index/';
+   		$url_link = 'posiciones/show/';
         $this->data['categoryTree'] = $this->fixture_model_new->parse_tree($url_link); # Category Tree
 			
 		$this->data['main_content'] = 'home/posiciones/new_posiciones_view';
 		$this->load->view('home/temp/template', $this->data);
 
+	}
+	
+	function show($event_id=26) {
+		
+		$this->data['title'] = "Posiciones";
+		$this->data['message'] = (validation_errors()) ? validation_errors() : $this->session->flashdata('message');
+		$this->data['events'] = $this->fixture_model_new->get_events_combo_box(); # combobox
+
+		$this->data['event_name'] = $this->fixture_model_new->get_category_and_subcategory($event_id); //para imprimir el nombre por pantalla
+        $this->data['posiciones'] = $this->admin_model_new->get_positions($event_id); //genero la tabla de posiciones
+
+
+   		$url_link = 'posiciones/show/';
+        $this->data['categoryTree'] = $this->fixture_model_new->parse_tree($url_link); # Category Tree
+
+		$this->load->view('home/posiciones/table_wrapper_view', $this->data);
+		
 	}
 	
 	//~ public function show_positions(){

@@ -2,7 +2,7 @@
 				<div class="catmenu"><?php echo $categoryTree ?></div>
 				<div class="table-wrapper">
 					<div class="table-header">
-						<h1><?php echo $event_name;?></span></h1>
+						<h1><?php echo $event_name;?></h1>
 						<h2>Fecha <?php echo $fecha_nro;?></h2>
 					</div>
 					<table class="fixture">
@@ -46,17 +46,26 @@ $('.fecha_posterior a').bind( "click", function(e) {
 	$(".table-wrapper .fixture").html('<h1 class="ajax-loader"><img src="<?php echo base_url(); ?>images/ajax-loader.gif" /></h1>');
 	var href = $(this).attr("href");
 	$(".table-wrapper").load(href);
+	$("body, html").animate({ 
+            scrollTop: $( ".table-wrapper" ).offset().top 
+    }, 600);
 });
 $('.fecha_anterior a').bind( "click", function(e) {
 	e.preventDefault();
 	$(".table-wrapper .fixture").html('<h1 class="ajax-loader"><img src="<?php echo base_url(); ?>images/ajax-loader.gif" /></h1>');
 	var href = $(this).attr("href");
 	$(".table-wrapper").load(href);
+	$("body, html").animate({ 
+            scrollTop: $( ".table-wrapper" ).offset().top 
+    }, 600);
 });
 $('.catmenu li a').bind( "click", function(e) {
 	e.preventDefault();
 	$(".table-wrapper .fixture").html('<h1 class="ajax-loader"><img src="<?php echo base_url(); ?>images/ajax-loader.gif" /></h1>');
 	var href = $(this).attr("href");
 	$(".table-wrapper").load(href);
+	$("body, html").animate({ 
+            scrollTop: $( ".table-wrapper" ).offset().top 
+    }, 600);
 });
 </script>      
