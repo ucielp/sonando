@@ -4,6 +4,7 @@ table.posiciones {
 		color: #333333;
 		font-family: 'Open Sans', Times, Times New Roman, sans-serif;
 		width: 650px;
+		margin-top: 40px;
 }
 		table.posiciones thead th{
 			font-family: 'Open Sans', Times, Times New Roman, sans-serif;
