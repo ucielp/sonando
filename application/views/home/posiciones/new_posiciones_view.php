@@ -3,6 +3,7 @@
 			<div class="table-wrapper">
 				<div class="table-header">
 					<h1><?php echo $event_name;?></h1>
+						<h2></h2>
 				</div>
 			<table class="posiciones">
                 <thead>
