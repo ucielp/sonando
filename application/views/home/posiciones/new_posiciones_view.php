@@ -1,15 +1,9 @@
-		<div class="header_page">
-                <h1><?php echo $event_name;?></span></h1>
-                <h2></h2>
-
-        </div>
-        
         <div class="container-fixture">
-				<div class="catmenu"><?php echo $categoryTree ?></div>
-				<div class="table-wrapper">
-
-                        
-                        
+			<div class="catmenu"><?php echo $categoryTree ?></div>
+			<div class="table-wrapper">
+				<div class="table-header">
+					<h1><?php echo $event_name;?></h1>
+				</div>
 			<table class="posiciones">
                 <thead>
                     <tr>
@@ -51,6 +45,16 @@
             </div> 
             </div> 
 
-
+<script type="text/javascript">
+$('.catmenu li a').bind( "click", function(e) {
+	e.preventDefault();
+	$(".table-wrapper .posiciones").html('<h1 class="ajax-loader"><img src="<?php echo base_url(); ?>images/ajax-loader.gif" /></h1>');
+	var href = $(this).attr("href");
+	$(".table-wrapper").load(href);
+	$("body, html").animate({ 
+            scrollTop: $( ".table-wrapper" ).offset().top 
+    }, 600);
+});
+</script>
        
 
