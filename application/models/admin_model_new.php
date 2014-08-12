@@ -938,25 +938,25 @@ class Admin_model_new extends CI_Model{
 			}
 	}
 	
-    
-    function get_goleadores($category_id){
-	   $this->db->select('j.name as name_jugador, j.last_name, j.goal,e.name as name_equipo');
-	   $this->db->from('jugadores j');
-	   $this->db->join('equipos e','e.id = j.team_id');
-	   $this->db->join('tipo_torneo c','c.id = e.actual_fase1_id');
-	   #$this->db->join('tipo_torneo c','c.id = e.category_id');
-	   
-	   $this->db->where('c.id',$category_id);
-	   $this->db->where('j.goal > ','0');
 
-	   $this->db->limit(20);
-	   $this->db->order_by('j.goal desc, e.name asc'); 
-	   $query = $this->db->get();
-	   $goleadores = $query->result();
-       
-	   return $goleadores;
-	}
-    
+    function get_goleadores_new($category_id){
+        $query = $this->db->query('SELECT j.name as name_jugador, j.last_name, j.goal,e.name as name_equipo
+        
+                FROM  jugadores j
+                JOIN equipos e ON e.id  = j.team_id
+                WHERE team_id IN (SELECT team_id FROM category_display WHERE category_id = '. $category_id . 
+                        ' AND goal != 0 )
+               
+                ORDER by goal desc,e.name asc
+                LIMIT 20
+                '
+        );	
+		return $query->result();
+
+    }
+
+
+
     function get_equipos_from_category_display($tournament_id){
         
         $query = $this->db->query('SELECT name, id FROM equipos 
