@@ -4,11 +4,11 @@ class Fixture extends CI_Controller {
 
 		function __construct(){
 		parent::__construct();
-		$this>load>library('form_validation');
-		$this>load>database();
-		$this>load>helper('url');
-		$this>load>helper('form');
-		$this>load>library('ion_auth');
+		$this->load->library('form_validation');
+		$this->load->database();
+		$this->load->helper('url');
+		$this->load->helper('form');
+		$this->load->library('ion_auth');
 
 	}
 	
@@ -26,7 +26,7 @@ class Fixture extends CI_Controller {
 			$current_fecha = $fecha;
 		}	
 		else{
-			$current_fecha = $this>fixture_model>get_actual($fase);
+			$current_fecha = $this->fixture_model->get_actual($fase);
 		}
 		
 		//By default show a main category in order to fill the table content
@@ -37,10 +37,10 @@ class Fixture extends CI_Controller {
 		
 		
 		//~ Aca me podria fijar dependiendo del torneo que se juega la cantidad de fechas
-		$total_rows = $this>fixture_model>get_nros_fecha($fase) + 1;
+		$total_rows = $this->fixture_model->get_nros_fecha($fase) + 1;
 		
 		$data['fecha_nro'] = $current_fecha;
-		$this>load>library('pagination_torneo');
+		$this->load->library('pagination_torneo');
 		
 		$config = array(
 				'base_url'		=> base_url().'fixture/show/' . $event_id ,
@@ -57,22 +57,22 @@ class Fixture extends CI_Controller {
 				'cur_tag_close'	=>	'</strong>'
 			);
 			
-		$this>pagination_torneo>initialize($config);
+		$this->pagination_torneo->initialize($config);
 			
 
 		$fecha = $current_fecha;
 		
-		$data['fixture'] = $this>fixture_model_new>get_partidos($event_id,$fecha);
-		$data['event_name'] = $this>fixture_model_new>get_category_and_subcategory($event_id); //para imprimir el nombre por pantalla
+		$data['fixture'] = $this->fixture_model_new->get_partidos($event_id,$fecha);
+		$data['event_name'] = $this->fixture_model_new->get_category_and_subcategory($event_id); //para imprimir el nombre por pantalla
 
 		$url_link = 'fixture/show/';
-		$data['categoryTree'] = $this>fixture_model_new>parse_tree($url_link); # Category Tree
+		$data['categoryTree'] = $this->fixture_model_new->parse_tree($url_link); # Category Tree
 		
 		$data['title'] = "So&ntilde;ando con el Gol";
-		$data['message'] = (validation_errors()) ? validation_errors() : $this>session>flashdata('message');
+		$data['message'] = (validation_errors()) ? validation_errors() : $this->session->flashdata('message');
 		
 		$data['main_content'] = 'home/fixture/show_fixture_view';
-		$this>load>view('home/temp/template', $data);
+		$this->load->view('home/temp/template', $data);
 	}
 
 	function show ($event_id=26,$fecha=NULL)
@@ -88,7 +88,7 @@ class Fixture extends CI_Controller {
 		$current_fecha = $fecha;
 	}	
 	else{
-		$current_fecha = $this>fixture_model>get_actual($fase);
+		$current_fecha = $this->fixture_model->get_actual($fase);
 	}
 	
 	//By default show a main category in order to fill the table content
@@ -99,10 +99,10 @@ class Fixture extends CI_Controller {
 	
 	
 	//~ Aca me podria fijar dependiendo del torneo que se juega la cantidad de fechas
-	$total_rows = $this>fixture_model>get_nros_fecha($fase) + 1;
+	$total_rows = $this->fixture_model->get_nros_fecha($fase) + 1;
 	
 	$data['fecha_nro'] = $current_fecha;
-	$this>load>library('pagination_torneo');
+	$this->load->library('pagination_torneo');
 	
 	$config = array(
 			'base_url'		=> base_url().'fixture/show/' . $event_id ,
@@ -119,20 +119,19 @@ class Fixture extends CI_Controller {
 			'cur_tag_close'	=>	'</strong>'
 		);
 		
-	$this>pagination_torneo>initialize($config);
+	$this->pagination_torneo->initialize($config);
 		
-
 	$fecha = $current_fecha;
 	
-	$data['fixture'] = $this>fixture_model_new>get_partidos($event_id,$fecha);
-	$data['event_name'] = $this>fixture_model_new>get_category_and_subcategory($event_id); //para imprimir el nombre por pantalla
+	$data['fixture'] = $this->fixture_model_new->get_partidos($event_id,$fecha);
+	$data['event_name'] = $this->fixture_model_new->get_category_and_subcategory($event_id); //para imprimir el nombre por pantalla
 
 	$url_link = 'fixture/show/';
 	
 	$data['title'] = "So&ntilde;ando con el Gol";
-	$data['message'] = (validation_errors()) ? validation_errors() : $this>session>flashdata('message');
+	$data['message'] = (validation_errors()) ? validation_errors() : $this->session->flashdata('message');
 	
-	$this>load>view('home/fixture/table_wrapper_view', $data);
+	$this->load->view('home/fixture/table_wrapper_view', $data);
 }
  	
 	
