@@ -1,4 +1,4 @@
-<?php  if ( ! defined('BASEPATH')) exit('No direct script access allowed');
+<?php if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 /**
  * CodeIgniter
  *
@@ -667,8 +667,7 @@ class CI_Session {
 					$expire,
 					$this->cookie_path,
 					$this->cookie_domain,
-					$this->cookie_secure
-				);
+					$this->cookie_secure );
 	}
 
 	// --------------------------------------------------------------------

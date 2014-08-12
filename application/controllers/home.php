@@ -1,4 +1,4 @@
-﻿<?php defined('BASEPATH') OR exit('No direct script access allowed');
+<?php defined('BASEPATH') OR exit('No direct script access allowed');
 
 class Home extends CI_Controller {
 
@@ -22,7 +22,5 @@ class Home extends CI_Controller {
 		$this->load->view('home/temp/template', $this->data);
 	}
 }
-
-
 /* End of file welcome.php */
 /* Location: ./application/controllers/welcome.php */
