@@ -12,7 +12,7 @@
         <p><a href="<?php echo site_url('auth/create_team_new'); ?>">Crear equipos</a></p>
 		<p><a href="<?php echo site_url('auth/set_horario_new'); ?>">Definir horario de torneo</a></p>
 		<p><a href="<?php echo site_url('auth/set_results_new'); ?>">Cargar Resultados de torneo</a></p>
-		<p><a href="<?php echo site_url('auth/swap_teams'); ?>">Intercambiar equipos </a></p>
+		<p><a href="<?php echo site_url('auth/swap_teams_new'); ?>">Reemplazar un equipo dentro de un torneo</a></p>
 		<p><a href="<?php echo site_url('auth/mostrar_categorias_new'); ?>">Inscribir jugadores</a></p>
 		<p><a href="<?php echo site_url('auth/modificar_tabla_new'); ?>">Modificar tabla posiciones  <b>(caso excepcional)</b></a></p>
 		<p><a href="<?php echo site_url('auth/horario_fecha'); ?>">Ver horarios por fecha</a></p>
@@ -64,7 +64,10 @@
 
         <h1>Notas</h1>
         <p><a href="<?php echo site_url('auth/cargar_nota'); ?>">Cargar una nota</a></p>
-		<p><a href="<?php echo site_url('auth/cargar_sanciones_equipo'); ?>">Cargar sanciones</a></p>
+		
+        <!--
+        <p><a href="<?php echo site_url('auth/cargar_sanciones_equipo'); ?>">Cargar sanciones</a></p>
+        -->
         
         <h1>Otros</h1>
         <p><a href="<?php echo site_url('auth/preview_mail'); ?>">Enviar Mail de PreInscripcion</a></p>

@@ -230,14 +230,10 @@ class Admin_model_new extends CI_Model{
 		return $query->result();
     }
         
-    function get_all_teams_not_this_category($category_id){
-
-		$query = $this->db->query('SELECT name as e_name, id as e_id FROM equipos 
-		WHERE activo = 1
-		AND ID NOT IN (SELECT team_id FROM category_display WHERE category_id = '. $category_id . ')');	
-
-		return $query->result();
-    }
+   
+    
+       
+        
     
 	function torneo_generado($event_id)
 	{
@@ -737,7 +733,97 @@ class Admin_model_new extends CI_Model{
 		}
     }
     
-    	function get_partidos($tournament_id,$actual_fecha_id){
+    ### Funciones para swap
+    
+    function get_all_teams_from_category_display_by_categoryid_combobox($category_id){
+        $this->db->select('team_id,e.name as nombre_equipo');
+        $this->db->from('category_display cd');
+		$this->db->join('equipos e','e.id=cd.team_id');
+        $this->db->where('cd.category_id',$category_id);
+		$this->db->order_by('cd.orden','ASC');
+		$this->db->order_by('name','ASC');
+
+        $query = $this->db->get();
+        if ($query->num_rows() > 0)
+		{
+            foreach($query->result_array() as $row){
+				$combo[$row['team_id']]=$row['nombre_equipo'];	
+			}
+            $combo[0] = 'Elegir equipo para que salga';
+			return $combo;		
+        }
+		else{
+			return 0;
+        }
+    }
+    
+    
+     function get_all_teams_not_this_category($category_id){
+
+		$query = $this->db->query('SELECT name as nombre_equipo, id as team_id FROM equipos 
+		WHERE activo = 1
+		AND ID NOT IN (SELECT team_id FROM category_display WHERE category_id = '. $category_id . ')');	
+
+        
+        if ($query->num_rows() > 0)
+		{
+            foreach($query->result_array() as $row){
+				$combo[$row['team_id']]=$row['nombre_equipo'];	
+			}
+            $combo[0] = 'Elegir equipo para que entre';
+			return $combo;		
+        }
+		else{
+			return 0;
+        }
+    }
+    
+    function swap_teams($tournament_id,$team_in,$team_out){
+        
+        echo "$tournament_id,$team_in,$team_out";
+		
+		
+		###partidos 
+		$data = array(
+				'team1_id' =>  $team_in,
+           	);
+		$this->db->where('team1_id', $team_out);
+        $this->db->where('tournament_id', $tournament_id);
+		$this->db->update('partidos', $data);
+		$this->db->insert_id();	
+				
+		$data = array(
+				'team2_id' =>  $team_in,
+           	);
+		$this->db->where('team2_id', $team_out);
+        $this->db->where('tournament_id', $tournament_id);
+		$this->db->update('partidos', $data);
+		$this->db->insert_id();			
+
+
+		# category_display
+		$data = array(
+				'team_id' =>  $team_in,
+           	);
+		$this->db->where('team_id', $team_out);
+        $this->db->where('category_id', $tournament_id);
+		$this->db->update('category_display', $data);
+		$this->db->insert_id();
+		
+		# posiciones 
+		$data = array(
+				'team_id' =>  $team_in,
+           	);
+		$this->db->where('team_id', $team_out);
+        $this->db->where('category_id', $tournament_id);
+		$this->db->update('posiciones', $data);
+		$this->db->insert_id();	
+		
+	}
+    
+    ################# end of swap
+    
+    function get_partidos($tournament_id,$actual_fecha_id){
 		$this->db->select('p.id as p_id,e1.name as name_equipo1,e2.name as name_equipo2,nro_fecha,date,time,court,team1_res,team2_res,cargado');
 		$this->db->from('partidos p');
 		$this->db->join('equipos e1','e1.id = p.team1_id');
@@ -1026,6 +1112,38 @@ class Admin_model_new extends CI_Model{
 		}
 	}
 	
-	
+	### Crear equipos nuevos
+    function create_team($team_name,$category_id){
+        
+        $this->db->select('id');	
+		$this->db->from('equipos');
+		$this->db->where('name', $team_name);
+		        
+        $query = $this->db->get();
+		if($query->num_rows() > 0)
+		{
+            return 0;
+        }
+        else{
+            $this->db->set('name', $team_name);
+            $this->db->set('category_id', $category_id);
+            //~ $this->db->set('actual_fase1_id', $category_id);
+            $this->db->insert('equipos');
+            return $this->db->insert_id();
+        }
+	}
+	function create_team_info($team_id){
+		$this->db->set('team_id', $team_id);
+		$this->db->insert('equipos_info');
+		return $this->db->insert_id();
+	}
+    
+    function create_equipos_users($team_id,$username, $password){
+		$this->db->set('team_id', $team_id);
+		$this->db->set('user', $username);
+		$this->db->set('password', $password);
+		$this->db->insert('equipos_users');
+		return $this->db->insert_id();
+	}
+    ### Fin de crear equipos
 }
-		

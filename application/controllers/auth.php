@@ -736,30 +736,34 @@ class Auth extends Controller {
 						$this->data['category_by_id'] =  $this->admin_model_new->get_category_by_id($this->data['category_id']);
 						$this->data['team_name'] = $this->input->post('team');
 						
-						$this->data['team_id'] = $this->admin_model->create_team($this->data['team_name'],$this->data['category_id']);
-						
+                        $new_team_id = $this->admin_model_new->create_team($this->data['team_name'],$this->data['category_id']);
+                        if (!$new_team_id){
+                            echo "No se puede crear un equipo con un nombre ya existente";
+                            return;
+                        }
+                        $this->data['team_id'] = $new_team_id;
+                        
+                        $username = $this->data['team_name'];
+                        $email = $this->data['team_name'] ;#. "@user.com";
+                        $password =  md5($this->data['team_name']);
+                        $password = substr ($password,0,7);
+                        $team_id = $this->data['team_id'];
+                        #agrego info a los equipos
+                        $this->admin_model_new->create_team_info($team_id);
+                        #guardo el usuario y constraseña para mandarlo por mail
+                        $this->admin_model_new->create_equipos_users($team_id,$username, $password);
 
-						$username = $this->data['team_name'];
-						$email = $this->data['team_name'] ;#. "@user.com";
-						$password =  md5($this->data['team_name']);
-						$password = substr ($password,0,7);
-						$team_id = $this->data['team_id'];
-						#agrego info a los equipos
-						$this->admin_model->create_team_info($team_id);
-						#guardo el usuario y constraseña para mandarlo por mail
-						$this->admin_model->create_equipos_users($team_id,$username, $password);
-
-						$additional_data = array(
-						    'first_name' =>  $this->data['team_name'],
-							'last_name' =>  $this->data['team_name'],
-						);
-						$grupo_name = 'inscriptions';
-						
-						if ($this->form_validation->run() == true && $this->ion_auth->register($username, $password, $email, $additional_data, $team_id, $grupo_name)){
-							$this->session->set_flashdata('message', "User Created");
-							$this->load->view('auth/create_team_view_ok',$this->data);
-							}
-					}
+                        $additional_data = array(
+                            'first_name' =>  $this->data['team_name'],
+                            'last_name' =>  $this->data['team_name'],
+                        );
+                        $grupo_name = 'inscriptions';
+                        
+                        if ($this->form_validation->run() == true && $this->ion_auth->register($username, $password, $email, $additional_data, $team_id, $grupo_name)){
+                            $this->session->set_flashdata('message', "User Created");
+                            $this->load->view('auth/create_team_view_ok',$this->data);
+                            }
+                    }
 			}
 			else
 			{
@@ -931,64 +935,6 @@ class Auth extends Controller {
 		$this->load->view('auth/create_category', $this->data);	
 	}
 	
-	function create_team()	
-	 {
-			
-		 if (!$this->ion_auth->logged_in() || !$this->ion_auth->is_admin())
-			{
-				redirect('auth/login', 'refresh');
-			}
-		
-			$this->data['categories'] = $this->admin_model->get_categories(); //para el combo box
-			$this->form_validation->set_rules('team', 'Equipo', 'required');
-			$this->data['message'] = (validation_errors()) ? validation_errors() : $this->session->flashdata('message');
-				
-			if ($this->form_validation->run() == true)
-			{
-					if ( $this->input->post('dropdown_category') == 0)
-					{
-						$this->data['message'] = 'Debe elegir una categoría';
-						$this->load->view('auth/create_team_view',$this->data);
-					}
-					else{
-					
-					
-						$this->data['category_id'] = $this->input->post('dropdown_category');
-						$this->data['category_by_id'] =  $this->admin_model->get_category_by_id($this->data['category_id']);
-						$this->data['team_name'] = $this->input->post('team');
-						
-						$this->data['team_id'] = $this->admin_model->create_team($this->data['team_name'],$this->data['category_id']);
-						
-
-						$username = $this->data['team_name'];
-						$email = $this->data['team_name'] ;#. "@user.com";
-						$password =  md5($this->data['team_name']);
-						$password = substr ($password,0,7);
-						$team_id = $this->data['team_id'];
-						#agrego info a los equipos
-						$this->admin_model->create_team_info($team_id);
-						#guardo el usuario y constraseña para mandarlo por mail
-						$this->admin_model->create_equipos_users($team_id,$username, $password);
-
-						$additional_data = array(
-						    'first_name' =>  $this->data['team_name'],
-							'last_name' =>  $this->data['team_name'],
-						);
-						$grupo_name = 'inscriptions';
-						
-						if ($this->form_validation->run() == true && $this->ion_auth->register($username, $password, $email, $additional_data, $team_id, $grupo_name)){
-							$this->session->set_flashdata('message', "User Created");
-							$this->load->view('auth/create_team_view_ok',$this->data);
-							}
-					}
-			}
-			else
-			{
-				$this->data['message'] = validation_errors();
-				$this->load->view('auth/create_team_view',$this->data);
-				#no hago nada	
-			}		
-	   }      
 
 	function fecha_actual(){
 		if (!$this->ion_auth->logged_in() || !$this->ion_auth->is_admin())
@@ -1018,51 +964,101 @@ class Auth extends Controller {
 		
 	}
 	
-	function cargar_sanciones_equipo(){
+	//~ function cargar_sanciones_equipo(){
+		//~ if (!$this->ion_auth->logged_in() || !$this->ion_auth->is_admin())
+		//~ {
+			//~ redirect('auth/login', 'refresh');
+		//~ }
+		//~ 
+		//~ $this->data['equipos'] = $this->admin_model->get_equipos(); //para el combo box
+//~ 
+		//~ $this->data['message'] = (validation_errors()) ? validation_errors() : $this->session->flashdata('message');
+		//~ $this->load->view('auth/cargar_sanciones_view1', $this->data);
+		//~ 
+	//~ }
+	//~ function cargar_sanciones_detalles(){
+		//~ if (!$this->ion_auth->logged_in() || !$this->ion_auth->is_admin())
+		//~ {
+			//~ redirect('auth/login', 'refresh');
+		//~ }
+		//~ 
+		//~ $id_equipo = $this->input->post('dropdown_equipos');
+		//~ $this->data['jugadores']= $this->admin_model->get_all_players_combo($id_equipo);
+//~ 
+		//~ $this->data['message'] = (validation_errors()) ? validation_errors() : $this->session->flashdata('message');
+		//~ $this->load->view('auth/cargar_sanciones_view2', $this->data);
+		//~ 
+	//~ }
+	//~ function cargar_sanciones_go(){
+		//~ if (!$this->ion_auth->logged_in() || !$this->ion_auth->is_admin())
+		//~ {
+			//~ redirect('auth/login', 'refresh');
+		//~ }
+		//~ 
+		//~ $id_jugador = $this->input->post('dropdown_jugadores');
+		//~ $sancion = $this->input->post('sancion');
+		//~ $observacion = $this->input->post('observacion');
+		//~ $nro_fecha = $this->input->post('fecha');
+		//~ $tournament_id = $this->admin_model->get_tournament_by_player_id($id_jugador);
+		//~ 
+		//~ $this->admin_model->set_sancion($id_jugador,$sancion,$observacion,$tournament_id,$nro_fecha);
+//~ 
+		//~ 
+		//~ $this->data['message'] = (validation_errors()) ? validation_errors() : $this->session->flashdata('message');
+		//~ $this->load->view('auth/cargar_sanciones_ok', $this->data);
+	//~ }
+	
+	function swap_teams_new()
+	{
 		if (!$this->ion_auth->logged_in() || !$this->ion_auth->is_admin())
 		{
 			redirect('auth/login', 'refresh');
 		}
-		
-		$this->data['equipos'] = $this->admin_model->get_equipos(); //para el combo box
-
+        
+        
+        $url_link = 'auth/swap_teams_new_temp/';
+		$this->data['categoryTree'] = $this->admin_model_new->parse_tree($url_link); # Category Tree
+		 
 		$this->data['message'] = (validation_errors()) ? validation_errors() : $this->session->flashdata('message');
-		$this->load->view('auth/cargar_sanciones_view1', $this->data);
-		
-	}
-	function cargar_sanciones_detalles(){
-		if (!$this->ion_auth->logged_in() || !$this->ion_auth->is_admin())
-		{
-			redirect('auth/login', 'refresh');
-		}
-		
-		$id_equipo = $this->input->post('dropdown_equipos');
-		$this->data['jugadores']= $this->admin_model->get_all_players_combo($id_equipo);
-
-		$this->data['message'] = (validation_errors()) ? validation_errors() : $this->session->flashdata('message');
-		$this->load->view('auth/cargar_sanciones_view2', $this->data);
-		
-	}
-	function cargar_sanciones_go(){
-		if (!$this->ion_auth->logged_in() || !$this->ion_auth->is_admin())
-		{
-			redirect('auth/login', 'refresh');
-		}
-		
-		$id_jugador = $this->input->post('dropdown_jugadores');
-		$sancion = $this->input->post('sancion');
-		$observacion = $this->input->post('observacion');
-		$nro_fecha = $this->input->post('fecha');
-		$tournament_id = $this->admin_model->get_tournament_by_player_id($id_jugador);
-		
-		$this->admin_model->set_sancion($id_jugador,$sancion,$observacion,$tournament_id,$nro_fecha);
-
-		
-		$this->data['message'] = (validation_errors()) ? validation_errors() : $this->session->flashdata('message');
-		$this->load->view('auth/cargar_sanciones_ok', $this->data);
+		# Uso la misma vista que en generar_torneos pero le paso otro link
+		$this->load->view('auth/generar_torneos', $this->data);
 	}
 	
-	
+    function swap_teams_new_temp($tournament_id){
+        
+        $this->data['teams_from_tournament'] = $this->admin_model_new->get_all_teams_from_category_display_by_categoryid_combobox($tournament_id);
+        $this->data['teams_actives'] = $this->admin_model_new->get_all_teams_not_this_category($tournament_id);
+        
+        $this->data['category_name'] =$this->fixture_model_new->get_category_and_subcategory($tournament_id);
+        $this->data['tournament_id'] = $tournament_id;
+        $this->load->view('auth/swap_teams_view', $this->data);
+
+        
+    }
+    
+    
+	function swap_teams_new_go($tournament_id)
+
+	{
+		if (!$this->ion_auth->logged_in() || !$this->ion_auth->is_admin())
+		{
+			redirect('auth/login', 'refresh');
+		}
+		
+		$team_in = $this->input->post('team_in');
+		$team_out = $this->input->post('team_out'); 
+		
+		if (!$team_in or !$team_out or ($team_in == $team_out)){
+			echo "Debe elegir 2 equipos distintos para intercambiar";
+		}
+		else{
+			
+			$this->admin_model_new->swap_teams($tournament_id,$team_in,$team_out);
+		
+			$this->data['message'] = (validation_errors()) ? validation_errors() : $this->session->flashdata('message');
+			$this->load->view('auth/swap_teams_ok_view', $this->data);
+		}
+	}
 	
 	 ## Obsoletas
 	
@@ -1112,41 +1108,41 @@ class Auth extends Controller {
 		//~ 
 	//~ }
 	
-	function swap_teams()
-	{
-		if (!$this->ion_auth->logged_in() || !$this->ion_auth->is_admin())
-		{
-			redirect('auth/login', 'refresh');
-		}
-		
-		$this->data['equipos'] = $this->admin_model->get_equipos_swap(); //para el combo box
-
-		$this->data['message'] = (validation_errors()) ? validation_errors() : $this->session->flashdata('message');
-		$this->load->view('auth/swap_teams_view', $this->data);
-	}
-	
-
-	function swap_teams_go()
-	{
-		if (!$this->ion_auth->logged_in() || !$this->ion_auth->is_admin())
-		{
-			redirect('auth/login', 'refresh');
-		}
-		
-		$team1_id = $this->input->post('dropdown_team1'); //cual tengo que mostrar
-		$team2_id = $this->input->post('dropdown_team2'); //cual tengo que mostrar
-		
-		if (!$team1_id or !$team2_id or ($team1_id == $team2_id)){
-			echo "Debe elegir 2 equipos distintos para intercambiar";
-		}
-		else{
-			
-			$this->admin_model->swap_teams($team1_id,$team2_id);
-		
-			$this->data['message'] = (validation_errors()) ? validation_errors() : $this->session->flashdata('message');
-			$this->load->view('auth/swap_teams_ok_view', $this->data);
-		}
-	}
+	//~ function swap_teams()
+	//~ {
+		//~ if (!$this->ion_auth->logged_in() || !$this->ion_auth->is_admin())
+		//~ {
+			//~ redirect('auth/login', 'refresh');
+		//~ }
+		//~ 
+		//~ $this->data['equipos'] = $this->admin_model->get_equipos_swap(); //para el combo box
+//~ 
+		//~ $this->data['message'] = (validation_errors()) ? validation_errors() : $this->session->flashdata('message');
+		//~ $this->load->view('auth/swap_teams_view', $this->data);
+	//~ }
+	//~ 
+//~ 
+	//~ function swap_teams_go()
+	//~ {
+		//~ if (!$this->ion_auth->logged_in() || !$this->ion_auth->is_admin())
+		//~ {
+			//~ redirect('auth/login', 'refresh');
+		//~ }
+		//~ 
+		//~ $team1_id = $this->input->post('dropdown_team1'); //cual tengo que mostrar
+		//~ $team2_id = $this->input->post('dropdown_team2'); //cual tengo que mostrar
+		//~ 
+		//~ if (!$team1_id or !$team2_id or ($team1_id == $team2_id)){
+			//~ echo "Debe elegir 2 equipos distintos para intercambiar";
+		//~ }
+		//~ else{
+			//~ 
+			//~ $this->admin_model->swap_teams($team1_id,$team2_id);
+		//~ 
+			//~ $this->data['message'] = (validation_errors()) ? validation_errors() : $this->session->flashdata('message');
+			//~ $this->load->view('auth/swap_teams_ok_view', $this->data);
+		//~ }
+	//~ }
 	
 		function change_name_teams()
 	{
