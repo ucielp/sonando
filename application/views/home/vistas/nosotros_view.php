@@ -79,7 +79,7 @@
             <div id="ubicacion">
             	<div id="datos_contacto_mapa">
                     <p>Podés contactarte con nosotros</p>
-                    <p>Francisco Pochetino: 0341-153882888</p>
+                    <p>Francisco Pochettino: 0341-153882888</p>
                     <p>Pablo Benetti: 0341-153882887</p>
                     <p>Santiago Biazzi 0341-155032605</p>
                     <p>Atencion al ciente: 0341-3882874</p>
