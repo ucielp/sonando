@@ -1027,7 +1027,7 @@ class Auth extends Controller {
     function swap_teams_new_temp($tournament_id){
         
         $this->data['teams_from_tournament'] = $this->admin_model_new->get_all_teams_from_category_display_by_categoryid_combobox($tournament_id);
-        $this->data['teams_actives'] = $this->admin_model_new->get_all_teams_not_this_category($tournament_id);
+        $this->data['teams_actives'] = $this->admin_model_new->get_all_teams_not_this_category_combo($tournament_id);
         
         $this->data['category_name'] =$this->fixture_model_new->get_category_and_subcategory($tournament_id);
         $this->data['tournament_id'] = $tournament_id;

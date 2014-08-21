@@ -758,7 +758,16 @@ class Admin_model_new extends CI_Model{
     }
     
     
-     function get_all_teams_not_this_category($category_id){
+    function get_all_teams_not_this_category($category_id){
+
+        $query = $this->db->query('SELECT name as e_name, id as e_id FROM equipos 
+        WHERE activo = 1
+        AND ID NOT IN (SELECT team_id FROM category_display WHERE category_id = '. $category_id . ')');	
+
+        return $query->result();
+    }
+
+     function get_all_teams_not_this_category_combo($category_id){
 
 		$query = $this->db->query('SELECT name as nombre_equipo, id as team_id FROM equipos 
 		WHERE activo = 1
@@ -780,7 +789,7 @@ class Admin_model_new extends CI_Model{
     
     function swap_teams($tournament_id,$team_in,$team_out){
         
-        echo "$tournament_id,$team_in,$team_out";
+        //~ echo "$tournament_id,$team_in,$team_out";
 		
 		
 		###partidos 
