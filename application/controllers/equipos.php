@@ -18,9 +18,12 @@ class Equipos extends CI_Controller {
 		$this->data['message'] = (validation_errors()) ? validation_errors() : $this->session->flashdata('message');
 		$this->data['categories'] = $this->fixture_model_new->get_all_events();
 		$categories = $this->data['categories']; 
-		foreach ($categories as $category):
-			$this->data['equipos'][$category->id] = $this->equipos_model->get_all_teams($category->id);
-		endforeach;
+		
+		$this->data['equipos_activos'] = $this->admin_model_new->get_all_teams_activos();
+		
+		//~ foreach ($categories as $category):
+			//~ $this->data['equipos'][$category->id] = $this->equipos_model->get_all_teams($category->id);
+		//~ endforeach;
 		$this->data['main_content'] = 'home/vistas/equipos_all_view';
 		$this->load->view('home/temp/template', $this->data);
 	}

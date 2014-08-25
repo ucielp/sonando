@@ -5,27 +5,22 @@
         </div>
         <div class="equipos_all_contenedor">
         	<div id="infoMessage"><?php echo $message;?></div>
-        	<?php foreach ($categories as $category): ?>
-            <table class="equipos_all">
-                <thead>
-                    <tr>
-                        <th class="t"> <span style="text-transform:uppercase;"><?php echo $category->name; ?></span></th>
-                    </tr>
-                 </thead>
-             	<tbody>
-                	<?php $i = 0; ?>
-                   
-                    <?php for ($j = 0; $j < sizeof($equipos[$category->id]); $j++) {?>
-                   <tr class="<?php echo "" . ( ($i & 1) ? 'odd' : 'even' );?>">
-                        <td class="t"><a href="<?php echo base_url();?>equipos/equipo/<?php echo  $equipos[$category->id][$j]->id;?>"><?php echo $equipos[$category->id][$j]->name; ?></a></td>
+				<?php $j = 0; ?>
+        		<?php $i = 0; ?>
+			<table class="equipos_all">
+
+        	<?php foreach ($equipos_activos as $equipo): ?>
+				<tr class="<?php echo "" . ( ($i & 1) ? 'odd' : 'even' );?>">
+                        <td class="t"><a href="<?php echo base_url();?>equipos/equipo/<?php echo  $equipo->e_id;?>"><?php echo $equipo->e_name; ?></a></td>
 	               </tr>
-                   <?php $i++; } ?>
-                   
-				</tbody>
-			</table>
-            
-            <?php endforeach; ?>
-            
+	               
+        	<?php  $i++; endforeach; ?>
+			
+
+        	<table class="equipos_all">
+				
+	           			</table>    
+
         </div>
 
        </div> <!-- END CONTAINER-->

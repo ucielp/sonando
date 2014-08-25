@@ -225,6 +225,8 @@ class Admin_model_new extends CI_Model{
 		$this->db->select('name as e_name, id as e_id');	
 		$this->db->from('equipos');
 		$this->db->where('activo', '1');
+		$this->db->order_by('e_name','ASC');
+		
 		$query = $this->db->get();
 		
 		return $query->result();
