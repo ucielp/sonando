@@ -11,7 +11,7 @@
 
         	<?php foreach ($equipos_activos as $equipo): ?>
 				<tr class="<?php echo "" . ( ($i & 1) ? 'odd' : 'even' );?>">
-                        <td class="t"><a href="<?php echo base_url();?>equipos/equipo/<?php echo  $equipo->e_id;?>"><?php echo $equipo->e_name; ?></a></td>
+                        <td class="t"><a href="<?php echo base_url();?>equipos/equipo/<?php echo  $equipo->id;?>"><?php echo $equipo->e_name; ?></a></td>
 	               </tr>
 	               
         	<?php  $i++; endforeach; ?>

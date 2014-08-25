@@ -19,7 +19,7 @@ class Equipos extends CI_Controller {
 		$this->data['categories'] = $this->fixture_model_new->get_all_events();
 		$categories = $this->data['categories']; 
 		
-		$this->data['equipos_activos'] = $this->admin_model_new->get_all_teams_activos();
+		$this->data['equipos_activos'] = $this->admin_model_new->get_all_teams_jugando_algo();
 		
 		//~ foreach ($categories as $category):
 			//~ $this->data['equipos'][$category->id] = $this->equipos_model->get_all_teams($category->id);
