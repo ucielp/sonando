@@ -1,0 +1,30 @@
+.header-landing{
+	height: 300px;
+	/*background:#56771f url(../images/image_4.jpg) repeat-x left bottom;*/
+	background:#56771f;
+	padding: 25px 0 0;
+	text-align: left;
+}
+.logos-container{
+	height: 195px;
+	left: 50%;
+	margin-left: -541px;
+	position: relative;
+	width: 1080px;
+	top: 60px;
+}
+.nav-landing{
+	background: url("../images/menu_bg.png") repeat scroll left bottom rgba(0, 0, 0, 0);
+    height: 90px;
+    position: relative;
+}
+.nav-landing ul{
+	position: absolute;
+	right: 65px;
+}
+.nav-landing ul li{
+	list-style-type: none;
+	float: left;
+	margin-top: -40px;
+	padding: 0;
+}
