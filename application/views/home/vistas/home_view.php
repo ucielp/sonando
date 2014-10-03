@@ -1,7 +1,6 @@
         <div class="container">
 		<div class="header_page">
             <h1>Home</h1>
-            <!-- <h2><a href="<?php echo base_url(); ?>uploads/jueves_viernes_sabado.xls">Horarios Jueves 08 Viernes 09 y Sábado 10</a></h2> -->
         </div>
         	<div class="team-members">
             <ul>

@@ -55,7 +55,7 @@
 				<a class="logos logo-inferiores" target="_blank" href="https://www.facebook.com/sonandoinferiores"></a>
 				<a class="logos logo-libres" href="<?php echo base_url(); ?>home"></a>
 				<a class="logos logo-empresas" target="_blank" href="https://www.facebook.com/torneoempresas"></a>
-				<a class="logos logo-mas-30" target="_blank" href="<?php echo base_url(); ?>home"></a>
+				<a class="logos logo-mas-30" target="_blank" href="<?php echo base_url(); ?>mayores"></a>
 				<!--<a class="logos logo-extra2" target="_blank" href="<?php echo base_url(); ?>home"></a>-->
             </div>
 		</div> <!-- END logos-container -->
