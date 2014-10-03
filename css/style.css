@@ -57,12 +57,12 @@ p{
 	#header #logo{
 		position:absolute;
 		display:inline-block;
-		width:137px;
-		height:137px;
+		width:150px;
+		height:150px;
 		background:url(../images/logo.png) no-repeat left top;
 		top:-20px;
 		left:50%;
-		margin-left:-68.5px;
+		margin-left:-78.5px;
 		z-index:1
 	}
 	#header #logo span{
