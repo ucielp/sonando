@@ -1,9 +1,9 @@
 .header-landing{
 	height: 300px;
-	/*background:#56771f url(../images/image_4.jpg) repeat-x left bottom;*/
-	background:#56771f;
+	background:#5E9527;
 	padding: 25px 0 0;
 	text-align: left;
+	border-bottom: 4px solid #2c2c2c;
 }
 .logos-container{
 	height: 195px;
@@ -11,20 +11,117 @@
 	margin-left: -541px;
 	position: relative;
 	width: 1080px;
-	top: 60px;
 }
-.nav-landing{
-	background: url("../images/menu_bg.png") repeat scroll left bottom rgba(0, 0, 0, 0);
-    height: 90px;
-    position: relative;
-}
-.nav-landing ul{
-	position: absolute;
-	right: 65px;
-}
-.nav-landing ul li{
-	list-style-type: none;
+/*Logos image properties */
+.logos{
+    display: inline-block;
 	float: left;
-	margin-top: -40px;
-	padding: 0;
+	background-size: 100% auto;
+	background-repeat: no-repeat;
 }
+
+/*5 logos template*/
+.logos{
+   margin-left: 16px;
+}
+.logo-libres{
+	width: 250px;
+	height: 250px;
+	background-image: url("../images/landing/logo_libres_b_w.png");
+	background-position: center;
+}
+.logo-libres:hover{
+	background-image: url("../images/landing/logo_libres.png");
+	background-position: center;
+}
+.logo-mujeres{
+	width: 160px;
+	height: 160px;
+	background-image: url("../images/landing/logo_mujeres_b_w.png");
+}
+.logo-mujeres:hover{
+	background-image: url("../images/landing/logo_mujeres.png");
+}
+.logo-inferiores{
+	width: 200px;
+	height: 200px;
+	background-image: url("../images/landing/logo_inferiores_b_w.png");
+}
+.logo-inferiores:hover{
+	background-image: url("../images/landing/logo_inferiores.png");
+}
+.logo-empresas{
+	width: 200px;
+	height: 200px;
+	background-image: url("../images/landing/logo_empresas_b_w.png");
+}
+.logo-empresas:hover{
+	background-image: url("../images/landing/logo_empresas.png");
+}
+.logo-mas-30{
+	width: 160px;
+	height: 160px;
+	background-image: url("../images/landing/logo_mas_30_b_w.png");
+}
+.logo-mas-30:hover{
+	background-image: url("../images/landing/logo_mas_30.png");
+}
+/*7 logos template*/
+/* .logo-libres{
+	width: 200px;
+	height: 200px;
+	background-image: url("../images/landing/logo_libres_b_w.png");
+	background-position: center;
+}
+.logo-libres:hover{
+	background-image: url("../images/landing/logo_libres.png");
+	background-position: center;
+}
+.logo-extra1{
+	width: 125px;
+	height: 125px;
+	background-image: url("../images/landing/logo_extra1_b_w.png");
+}
+.logo-extra1:hover{
+	background-image: url("../images/landing/logo_extra1.png");
+}
+.logo-mujeres{
+	width: 140px;
+	height: 140px;
+	background-image: url("../images/landing/logo_mujeres_b_w.png");
+}
+.logo-mujeres:hover{
+	background-image: url("../images/landing/logo_mujeres.png");
+}
+.logo-inferiores{
+	width: 160px;
+	height: 160px;
+	background-image: url("../images/landing/logo_inferiores_b_w.png");
+}
+.logo-inferiores:hover{
+	background-image: url("../images/landing/logo_inferiores.png");
+}
+.logo-empresas{
+	width: 160px;
+	height: 160px;
+	background-image: url("../images/landing/logo_empresas_b_w.png");
+}
+.logo-empresas:hover{
+	background-image: url("../images/landing/logo_empresas.png");
+}
+.logo-mas-30{
+	width: 140px;
+	height: 140px;
+	background-image: url("../images/landing/logo_mas_30_b_w.png");
+}
+.logo-mas-30:hover{
+	background-image: url("../images/landing/logo_mas_30.png");
+}
+.logo-extra2{
+	width: 125px;
+	height: 125px;
+	background-image: url("../images/landing/logo_extra2_b_w.png");
+}
+.logo-extra2:hover{
+	background-image: url("../images/landing/logo_extra2.png");
+} */

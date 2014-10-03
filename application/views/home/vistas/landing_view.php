@@ -50,34 +50,13 @@
 		<div id="top"></div>
 		<div class="logos-container">
             <div class="nav-landing">
-                <ul>
-					<li>
-						<a class="logo-mujeres" href="<?php echo base_url(); ?>home">
-							<img src="<?php echo base_url(); ?>images/landing/logo_mujeres.png" width="150" alt="Libres">
-						</a>
-					</li>
-                    <li>
-						<a class="logo-inferiores" href="<?php echo base_url(); ?>home">
-							<img src="<?php echo base_url(); ?>images/landing/logo_inferiores.png" width="200" alt="Libres">
-						</a>
-					</li>
-					<li>
-						<a class="logo-libres" href="<?php echo base_url(); ?>home">
-							<img src="<?php echo base_url(); ?>images/landing/logo_libres.png" width="250" alt="Libres">
-						</a>
-					</li>
-					<li>
-						<a class="logo-empresas" href="<?php echo base_url(); ?>home">
-							<img src="<?php echo base_url(); ?>images/landing/logo_empresas.png" width="200" alt="Libres">
-						</a>
-					</li>
-					<li>
-						<a class="logo-mas-30" href="<?php echo base_url(); ?>home">
-							<img src="<?php echo base_url(); ?>images/landing/logo_mas_30.png" width="150" alt="Libres">
-						</a>
-					</li>
-					
-                </ul>
+				<!--<a class="logos logo-extra1" target="_blank" href="<?php echo base_url(); ?>home"></a>-->
+				<a class="logos logo-mujeres" target="_blank" href="https://www.facebook.com/sonandoconelgolfemenino"></a>
+				<a class="logos logo-inferiores" target="_blank" href="https://www.facebook.com/sonandoinferiores"></a>
+				<a class="logos logo-libres" href="<?php echo base_url(); ?>home"></a>
+				<a class="logos logo-empresas" target="_blank" href="https://www.facebook.com/torneoempresas"></a>
+				<a class="logos logo-mas-30" target="_blank" href="<?php echo base_url(); ?>home"></a>
+				<!--<a class="logos logo-extra2" target="_blank" href="<?php echo base_url(); ?>home"></a>-->
             </div>
 		</div> <!-- END logos-container -->
 	</div>
