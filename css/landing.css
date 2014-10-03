@@ -23,6 +23,7 @@
 /*5 logos template*/
 .logos{
    margin-left: 16px;
+   outline: none;
 }
 .logo-libres{
 	width: 250px;
