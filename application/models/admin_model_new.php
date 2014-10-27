@@ -638,7 +638,6 @@ class Admin_model_new extends CI_Model{
 	
 		$this->db->select('id, parent_id,name_category,tipo');	
 		$this->db->from('category');
-		$this->db->where('show','1');
 		$query = $this->db->get();
 		  
 
@@ -707,7 +706,6 @@ class Admin_model_new extends CI_Model{
 	}
 	
 	function parse_tree ($url_link) {
-	
 	    $tree = $this->admin_model_new->get_category_tree();
 		$too  = $this->admin_model_new->convert_to_ul($tree, 0, "",$url_link);
 		
