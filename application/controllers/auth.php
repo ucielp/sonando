@@ -75,7 +75,7 @@ class Auth extends Controller {
 				redirect('auth', 'refresh');
 			}
 		$name_category = $this->input->post('name_category');	
-		$parent_id = $this->input->post('dropdown_parent_category');
+		$parent_id = $this->input->post('parent_id');
 		$mostrar = $this->input->post('mostrar');
 		$tipo = $this->input->post('dropdown_tipo_torneo');
 		if($mostrar){

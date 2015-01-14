@@ -12,7 +12,7 @@
      <?php echo form_input('name_category');?>
      </p>
      
-     <p> ID Padre (en caso de ser una subcategoría) - Ver tabla abajo<br />
+     <p> ID Padre (en caso de ser una subcategoría) - Poner el ID que corresponde en la tabla abajo<br />
      
      <?php 
 		echo form_input('parent_id',0);
