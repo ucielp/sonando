@@ -20,22 +20,41 @@ class Admin_model_new extends CI_Model{
 	}
 		
 	#me devuelve las categorias para poner en un comboBox
-	function get_categories_combo_box(){
-		$this->db->select('id, name_category');	
+	# Este metodo arriba se colgaba porque hace muchas consultas
+	//~ function get_categories_combo_box(){
+		//~ $this->db->select('id, name_category');	
+		//~ $this->db->from('category');
+		//~ $this->db->order_by('parent_id asc');
+		//~ $query = $this->db->get();
+		//~ if ($query->num_rows() > 0)
+		//~ {			
+			//~ foreach($query->result_array() as $row){
+				//~ $name_category_completo = $this->fixture_model_new->get_category_and_subcategory($row['id']);
+				//~ $combo[$row['id']]=$name_category_completo;	
+			//~ }
+			//~ return $combo;
+		//~ }
+			//~ return 0;
+	//~ }
+	
+	function get_table_categories(){
+		$this->db->select('id, name_category,parent_id');	
 		$this->db->from('category');
 		$this->db->order_by('parent_id asc');
 		$query = $this->db->get();
 		if ($query->num_rows() > 0)
-		{			
+		{	
+			$this->load->library('table');
+			$this->table->set_heading('ID', 'Category', 'ID Padre');
 			foreach($query->result_array() as $row){
-				$name_category_completo = $this->fixture_model_new->get_category_and_subcategory($row['id']);
-				$combo[$row['id']]=$name_category_completo;	
+				
+			$this->table->add_row($row['id'], $row['name_category'] , $row['parent_id']);
+
 			}
-			return $combo;
+			return $this->table->generate();
 		}
 			return 0;
 	}
-	
 
 	
 	function get_events_combo_box(){

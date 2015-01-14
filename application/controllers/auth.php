@@ -43,20 +43,23 @@ class Auth extends Controller {
 	
 	function create_new_category()
 	{
+		//~ $this->output->enable_profiler(TRUE);
+
 		if (!$this->ion_auth->logged_in() || !$this->ion_auth->is_admin())
 			{
 				redirect('auth', 'refresh');
 			}
 	
 		$this->data['message'] = (validation_errors()) ? validation_errors() : $this->session->flashdata('message');
-		$cats = $this->admin_model_new->get_categories_combo_box(); //para el combo box
-	
-		if ($cats) {
-			$this->data['categories'] = $cats;
+		$table_cats = $this->admin_model_new->get_table_categories(); 
+		
+		if ($table_cats) {
+			$this->data['categories'] = $table_cats;
 		}
 		else{
 			$this->data['categories'] = '';
 		}
+		
 		
 		$tipo_torneo = $this->admin_model_new->get_tipo_torneos();
 		$this->data['tipo_torneo'] = $tipo_torneo;

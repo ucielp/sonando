@@ -12,10 +12,12 @@
      <?php echo form_input('name_category');?>
      </p>
      
-     <p> Padre de la categoría (en caso de ser una subcategoría)<br />
+     <p> ID Padre (en caso de ser una subcategoría) - Ver tabla abajo<br />
      
-     <?php $categories[0] = 'Es una categoría padre'; 
-	 echo form_dropdown('dropdown_parent_category', $categories, '0');?>
+     <?php 
+		echo form_input('parent_id',0);
+		?>
+
      </p>
      
        <p> Elija el tipo de torneo<br />
@@ -37,7 +39,8 @@
 
 	 <p><a href="<?php echo site_url('auth');?>"><u>Go Back</u></a></p>
 
-      
+	 <?php echo $categories?>
+
     <?php echo form_close();?>
 
 </div>
