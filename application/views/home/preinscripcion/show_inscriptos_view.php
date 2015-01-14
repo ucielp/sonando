@@ -18,6 +18,8 @@
                 <th>Email</th>
                 <th>Obra Social</th>
                 <th>Certificado</th>
+				<th>Deslinde</th>
+
                 <th>Electro</th>
             </tr>
         <?php 
@@ -31,13 +33,23 @@
                 <td><?php echo $user['phone'];?></td>
                 <td><?php echo $user['email'];?></td>
                 <td><?php echo $user['obra_social'];?></td>
+               
                 <td><?php if ($user['certificado'] == 1){
                      echo "Si";
-                    }
-                    else{
+				}
+				else{
                      echo "No";
-                    }?>
+				}?>
                 </td>
+                
+				<td><?php if ($user['deslinde'] == 1){
+                     echo "Si";
+				}
+				else{
+                     echo "No";
+				}?>
+                </td>
+                
                 <td><?php if ($user['electro'] == 1){
                          echo "Si";
                         }

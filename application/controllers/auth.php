@@ -775,27 +775,7 @@ class Auth extends Controller {
 				#no hago nada	
 			}		
 	   }      
-	   
-	   
 
-
-
-	function mostrar_categorias_new()
-	{
-		if (!$this->ion_auth->logged_in() || !$this->ion_auth->is_admin())
-			{
-				redirect('auth', 'refresh');
-			}
-			
-		$this->data['message'] = (validation_errors()) ? validation_errors() : $this->session->flashdata('message');
-		
-		$this->data['categories'] = $this->admin_model_new->get_events_ninguno(); //para el combo box
-
-		$this->load->view('auth/preinscriptos_view1', $this->data);
-
-	}
-	  
-	   
 	function horario_fecha(){ 
 		if (!$this->ion_auth->logged_in() || !$this->ion_auth->is_admin())
 			{
@@ -844,70 +824,14 @@ class Auth extends Controller {
 		
 		$this->data['name_event'] = $this->fixture_model_new->get_category_and_subcategory($tournament_id); //para imprimir el nombre por pantalla
 
-		$this->data['players_team1'] = $this->admin_model->show_players_ficha($team1_id);
-		$this->data['players_team2'] = $this->admin_model->show_players_ficha($team2_id);
+		$this->data['players_team1'] = $this->admin_model_new->show_players_ficha($team1_id);
+		$this->data['players_team2'] = $this->admin_model_new->show_players_ficha($team2_id);
 		
 	
 		$this->load->view('auth/mostrar_planilla', $this->data);
 	} 
 	   
 	   
-	#######################################################################
-	#######################################################################
-	#######################################################################
-	
-	//~ function modificar_tabla(){
-		//~ if (!$this->ion_auth->logged_in() || !$this->ion_auth->is_admin())
-		//~ {
-			//~ redirect('auth/login', 'refresh');
-		//~ }
-		//~ $this->data['message'] = (validation_errors()) ? validation_errors() : $this->session->flashdata('message');
-		//~ $this->data['tournament'] = $this->admin_model_new->get_events_ninguno(); //para el combo box
-//~ 
-		//~ $this->load->view('auth/modificar_tabla',$this->data);
-	//~ }
-	//~ 
-	//~ function modificar_tabla_go(){
-		//~ if (!$this->ion_auth->logged_in() || !$this->ion_auth->is_admin())
-		//~ {
-			//~ redirect('auth/login', 'refresh');
-		//~ }
-		//~ $this->data['actual_tournament_id'] = $this->input->post('dropdown_category');
-		//~ $actual_tournament_id = $this->data['actual_tournament_id'];
-		//~ 
-		//~ if ($this->admin_model->get_type_category_by_id($actual_tournament_id) == 'fase' ){
-			//~ $this->data['posiciones'] = $this->admin_model->get_positions_modify_fase1($actual_tournament_id);
-			//~ } 
-		//~ else{
-			//~ $this->data['posiciones'] = $this->admin_model->get_positions_modify_fase2($actual_tournament_id);
-			//~ }
-//~ 
-		//~ 
-		//~ #echo $this->$data['posiciones'];
-		//~ 
-		//~ 
-		//~ $this->data['message'] = (validation_errors()) ? validation_errors() : $this->session->flashdata('message');
-		//~ $this->load->view('auth/modificar_tabla_view', $this->data);	
-	//~ }
-	//~ 
-	//~ function modificar_tabla_ok(){
-		//~ if (!$this->ion_auth->logged_in() || !$this->ion_auth->is_admin())
-		//~ {
-			//~ redirect('auth/login', 'refresh');
-		//~ }
-		//~ $this->data['message'] = (validation_errors()) ? validation_errors() : $this->session->flashdata('message');
-		//~ 
-		//~ $posiciones_id = $this->input->post('pos_id');
-		//~ $pg = $this->input->post('pg');
-		//~ $pe = $this->input->post('pe');
-		//~ $pp = $this->input->post('pp');
-		//~ $gf = $this->input->post('gf');
-		//~ $gc = $this->input->post('gc');
-		//~ 
-		//~ $this->admin_model->update_results($posiciones_id,$pg,$pe,$pp,$gf,$gc);
-		//~ $this->load->view('auth/modificar_tabla_ok', $this->data);
-	//~ }
-	
 	function create_category()
 	{		
 		if (!$this->ion_auth->logged_in() || !$this->ion_auth->is_admin())
@@ -1887,8 +1811,8 @@ class Auth extends Controller {
             $this->data['name'] = " (" . $torneo->name . ")";
 		}
         
-		$this->data['players_team1'] = $this->admin_model->show_players_ficha($team1_id);
-		$this->data['players_team2'] = $this->admin_model->show_players_ficha($team2_id);
+		$this->data['players_team1'] = $this->admin_model_new->show_players_ficha($team1_id);
+		$this->data['players_team2'] = $this->admin_model_new->show_players_ficha($team2_id);
 		
 	
 		$this->load->view('auth/mostrar_planilla', $this->data);
@@ -2258,14 +2182,13 @@ class Auth extends Controller {
 			
 		$ids_elec = $this->input->post('electro');	
 		$ids_cert = $this->input->post('certificado');
+		$ids_deslinde = $this->input->post('deslinde');
 		$ids_inscriptos = $this->input->post('inscripto');
 
 		
 		$this->data['message'] = (validation_errors()) ? validation_errors() : $this->session->flashdata('message');
 		
-		$this->admin_model->update_jugadores($ids_elec,$ids_cert,$ids_inscriptos);
-		
-		#$this->admin_model->inscribir($this->data['players']);
+		$this->admin_model_new->update_jugadores($ids_elec,$ids_cert,$ids_deslinde,$ids_inscriptos);
 		
 		$this->load->view('auth/preinscripto_success', $this->data);
 	}
@@ -2929,7 +2852,7 @@ class Auth extends Controller {
 		
 		$clausura = 0;
 		
-		$this->admin_model->clean_db($clausura);
+		$this->admin_model_new->clean_db($clausura);
 
 		$this->load->view('auth/clean_db',$this->data);
 	}
@@ -2944,7 +2867,7 @@ class Auth extends Controller {
 		
 		$clausura = 1;
 		
-		$this->admin_model->clean_db($clausura);
+		$this->admin_model_new->clean_db($clausura);
 
 		$this->load->view('auth/clean_db',$this->data);
 	}

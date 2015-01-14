@@ -20,7 +20,8 @@ table.tableizer-table {border: 1px solid #CCC; font-family: Arial, Helvetica, sa
     <th colspan = 6><?php echo $equipo1_name;?></th>
     <th colspan = 6><?php echo $equipo2_name;?></th>
   </tr>
-<tr class="name"><td>N°</td><td>Nombre</td><td>DNI</td><td>Fecha Nac</td><td>Elec/Cert</td><td>Firma</td><td>N°</td><td>Nombre</td><td>DNI</td><td>Fecha Nac</td><td>Elec/Cert</td><td>Firma</td></tr> 
+<tr class="name"><td>N°</td><td>Nombre</td><td>DNI</td><td>Fecha Nac</td><td>Elec/Cert/Desl</td><td>Firma</td>
+				 <td>N°</td><td>Nombre</td><td>DNI</td><td>Fecha Nac</td><td>Elec/Cert/Desl</td><td>Firma</td></tr> 
 <?php 
 
 	$max_cant = max(count($players_team1),count($players_team2));
@@ -41,6 +42,8 @@ table.tableizer-table {border: 1px solid #CCC; font-family: Arial, Helvetica, sa
 			if($player1->electro) { echo "Si";} else {echo "No";} 
 			echo  "/";
 			if($player1->certificado) { echo "Si";} else {echo "No";}
+			echo  "/";
+			if($player1->deslinde) { echo "Si";} else {echo "No";}
 			echo "</td><td width = 100px>.</td><td>.</td>";
 			if($k < count($players_team2)){
 				if ($players_team2[$k]->inscripto){
@@ -57,6 +60,8 @@ table.tableizer-table {border: 1px solid #CCC; font-family: Arial, Helvetica, sa
 				if($players_team2[$k]->electro) { echo "Si";} else {echo "No";} 
 				echo  "/";
 				if($players_team2[$k]->certificado) { echo "Si";} else {echo "No";}
+				echo  "/";
+				if($player1->deslinde) { echo "Si";} else {echo "No";}
 				echo "</td><td width = 100px>.</td>";
 			
 				$k++;

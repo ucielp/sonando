@@ -188,19 +188,6 @@ class Admin_model_new extends CI_Model{
 		return $warning;
 	}
 	
-	###ESTO LO USO PARA CAMBIAR LAS CATEGORIAS DE LOS EQUIPOS
-	#me devuelve las categorias para poner en un comboBox
-	function get_events_ninguno(){
-		$this->db->select('id, name_event as name, category_id');	
-		$this->db->from('events');
-		$query = $this->db->get();
-		foreach($query->result_array() as $row){
-			$combo[$row['id']]=$row['name'];	
-			}
-		$combo[0] = 'Ninguna';
-		return $combo;
-	}
-	
 	function get_orden_ninguno(){
 		$combo[0] = '1';
 		$combo[1] = '2';
@@ -1185,4 +1172,126 @@ class Admin_model_new extends CI_Model{
 		return $this->db->insert_id();
 	}
     ### Fin de crear equipos
+    
+	function update_jugadores($ids_elec,$ids_cert,$ids_deslinde,$ids_inscriptos){
+		if ($ids_elec){
+			foreach( $ids_elec as $id => $val)
+			{
+			$data = array(
+				'electro' => $val,
+           	);
+			
+			$this->db->where('id', $id);
+			$this->db->update('jugadores', $data);
+			$id_test = $this->db->insert_id();
+			} 	
+		}
+		if ($ids_cert){
+			foreach( $ids_cert as $id => $val)
+			{
+			$data = array(
+				'certificado' => $val,
+           	);
+			
+			$this->db->where('id', $id);
+			$this->db->update('jugadores', $data);
+			$id_test = $this->db->insert_id();
+			} 	
+		}
+		
+		if ($ids_deslinde){
+			foreach( $ids_deslinde as $id => $val)
+			{
+			$data = array(
+				'deslinde' => $val,
+           	);
+			
+			$this->db->where('id', $id);
+			$this->db->update('jugadores', $data);
+			$id_test = $this->db->insert_id();
+			} 	
+		}
+		if ($ids_inscriptos){
+			foreach( $ids_inscriptos as $id => $val)
+			{
+			$data = array(
+				'inscripto' => $val,
+           	);
+			
+			$this->db->where('id', $id);
+			$this->db->update('jugadores', $data);
+			$id_test = $this->db->insert_id();
+			} 	
+		}
+	}
+	
+	function show_players_ficha($equipo_id){
+
+		$this->db->select('name as nombre,last_name as apellido, dni, birth,certificado,electro,inscripto,deslinde');
+		$this->db->from('jugadores');
+		$this->db->where('team_id',$equipo_id);
+
+		#$this->db->where('inscripto','1');
+
+		$certificado = 'No';
+		$electro = 'No';
+		$inscripto = 'No';
+		$query = $this->db->get();
+		#echo $this->db->last_query() . "<br>";
+
+		return $query->result();
+	}
+	
+	function clean_db($clausura){
+			
+			$this->db->truncate('partidos_elimin');
+			$this->db->truncate('partidos'); 
+ 			$this->db->truncate('posiciones'); 
+			$this->db->truncate('postfase_temp'); 
+			$this->db->truncate('fechas'); 
+			$this->db->truncate('notas'); 
+			$this->db->truncate('sanciones');
+			$this->db->truncate('category_display');
+			
+			
+			$data = array(
+				'generado' => '0',
+           	);
+           	
+			$this->db->update('category', $data);
+			
+			$data = array(
+				'actual_fase2_id' => '0',
+				'orden' => '0',
+				
+           	);
+			$this->db->update('equipos', $data);
+			
+			$data = array(
+				'goal' => '0',
+				'red' => '0',
+				'yellow' => '0',
+				'goal' => '0',
+				
+           	);
+			$this->db->update('jugadores', $data);
+			
+			$data = array(
+				'generado' => '0',
+				
+           	);
+			$this->db->update('tipo_torneo', $data);
+			
+			#si ademas es clausura hay que borrar los certificados, electros y deslinde
+			if ($clausura){
+				$data = array(
+					'certificado' => '0',
+					'electro' => '0',
+					'deslinde' => '0',
+					'inscripto' => '0',
+           		);
+				$this->db->update('jugadores', $data);
+			}
+		}	
+		
 }
