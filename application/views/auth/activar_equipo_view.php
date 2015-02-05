@@ -21,7 +21,6 @@
 				if ($teams){
 					$i = 0;
 					foreach ($teams as $team):
-						print $i
 						?>
 						<tr> 
 						
@@ -32,7 +31,9 @@
 							<td><?php echo $team->user;?></td>
 							<td><?php echo  $team->psswd;?></td>
 							
-							<?php $name0  = 'equipo[' . $i. ']';?>
+							<?php $name0  = 'equipo[' . $i. ']'; 						print $i
+?>
+							
                         	<input type="hidden" name="<?php echo $name0;?>" value="<?php echo $team->e_id?>">
                         	
 							<?php 
