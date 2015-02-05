@@ -650,9 +650,6 @@ class Auth extends Controller {
 		
 		$this->admin_model_new->update_equipos_activado($activates,$equipos_ids);
 
-		$this->output->enable_profiler(TRUE);
-
-
 		$this->load->view('auth/activar_equipo_view_ok', $this->data);
 	}
 	

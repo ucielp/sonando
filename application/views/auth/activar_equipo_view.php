@@ -35,7 +35,6 @@
                         	
 							<?php 
 								$show_name = 'activate[' . $i . ']';
-						 						print $i;
 
 								if ($team->activo == 1){
 									$checked = TRUE;
