@@ -20,7 +20,9 @@
                 <?php
 				if ($teams){
 					$i = 0;
-					foreach ($teams as $team):?>
+					foreach ($teams as $team):
+						print $i
+						?>
 						<tr> 
 						
 							<td><a href="<?php echo base_url(); ?>equipos/equipo/
