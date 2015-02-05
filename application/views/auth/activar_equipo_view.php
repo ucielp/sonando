@@ -29,33 +29,20 @@
 
 							<td><?php echo $team->user;?></td>
 							<td><?php echo  $team->psswd;?></td>
-							
-							<?php $name0  = 'equipo[' . $i. ']';?>
-                        	<input type="hidden" name="<?php echo $name0;?>" value="<?php echo $team->e_id?>">
-                        	
-							<?php 
-								$show_name = 'activate[' . $i . ']';
 
+							<?php 
 								if ($team->activo == 1){
-									$checked = TRUE;
+									$checked = 'checked';
 								} else
 								{
-									$checked = FALSE;
+									$checked = '';
 								}
-								$show = array(
-									'name'    => $show_name,
-									'value'   => '1',
-									'checked' =>  $checked,
-								); 	
-								$show2 = array(
-									'name'     => $show_name,
-									'value'    => '0',
-									'checked'  =>  $checked,
-									'type'     =>  'hidden',
-								);
+								
 							?> 
-							<td><?php echo form_input($show2);?><?php echo form_checkbox($show);?>  </td>
-													
+							<td>
+								<?php echo '<input type="checkbox" '.$checked.' name="activados['.$team->e_id.'][]" value="'.$team->e_id.'" />';?>
+							</td>
+							
 							<td><?php echo (anchor("auth/pre_inscriptos_by_team_id/".$team->e_id, 'Inscribir jugador'));?></td>
 							<td><?php echo (anchor("auth/delete_team_preguntar/".$team->e_id, 'Eliminar'));?></td>
 

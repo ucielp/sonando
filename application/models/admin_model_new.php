@@ -1118,51 +1118,36 @@ class Admin_model_new extends CI_Model{
 		$this->db->delete('posiciones', array('team_id' => $team_id));
 	}
 	
-	function update_equipos_activado($activates, $equipos_ids){
-		$i = 0;
-		foreach ($equipos_ids as $a){
-			$ids[$i] = $a;
-			$i++;
-		}
-		
-		
-		$i = 0;
+	function update_equipos_activado($activados){
 
 		$in = array();
-		$out = array();
 
-		foreach ($activates as $post){
-			//~ print "$post $ids[$i]<br>";
-			if ($post){
-				array_push($in,$ids[$i] );
+		foreach( $activados as $s => $opts )
+			{
+				foreach( $opts as $id )
+				{
+					array_push($in,$id);
+
+				}
 			}
-			else{
-				array_push($out,$ids[$i] );
-			}	
 		
-			$data = array(
-				'activo' => $post,
-           	);
-			//~ $this->db->where('id', 	$ids[$i]);
-			//~ $this->db->update('equipos', $data);
-			//~ $id_test = $this->db->insert_id();
-			$i++;
-		}
-		
-		# Seteo los activos
-		$data = array(
-			'activo' => 1,
-		);
-		$this->db->where_in('id', $in);
-		$this->db->update('equipos', $data);
-		$id_test = $this->db->insert_id();
-		# Seteo los que no están activos
+		//~ # Seteo todos como no activos 
 		$data = array(
 			'activo' => 0,
 		);
-		$this->db->where_in('id', $out);
 		$this->db->update('equipos', $data);
 		$id_test = $this->db->insert_id();
+		
+		# Seteo ahora solo los activos
+		$data = array(
+			'activo' => 1,
+		);
+		
+		$this->db->where_in('id', $in);
+		$this->db->update('equipos', $data);
+		$id_test = $this->db->insert_id();
+		
+
 
 	}
 	

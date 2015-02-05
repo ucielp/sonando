@@ -632,11 +632,12 @@ class Auth extends Controller {
 		
  		$this->data['teams'] = $this->admin_model_new->get_all_teams();
 
+		//~ $this->output->enable_profiler(TRUE);
+
 		$this->load->view('auth/activar_equipo_view', $this->data);
 
 	}
 	
-	### VER
 	function activar_equipos_go()
 	{
 		if (!$this->ion_auth->logged_in() || !$this->ion_auth->is_admin())
@@ -645,10 +646,11 @@ class Auth extends Controller {
 		}
 		$this->data['message'] = (validation_errors()) ? validation_errors() : $this->session->flashdata('message');
 		
-		$activates = $this->input->post('activate');
-		$equipos_ids = $this->input->post('equipo');
+		$activados = $this->input->post('activados');
 		
-		$this->admin_model_new->update_equipos_activado($activates,$equipos_ids);
+		
+		$this->admin_model_new->update_equipos_activado($activados);
+
 
 		$this->load->view('auth/activar_equipo_view_ok', $this->data);
 	}
