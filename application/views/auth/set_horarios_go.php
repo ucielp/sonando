@@ -22,6 +22,8 @@
                         <th class="t">Equipo2</th>
 						
 						<th class="t">Planilla</th>
+						<th align="right" width = "200">Eliminar partido</th>
+
                     </tr>
                  </thead>
              	<tbody>
@@ -48,6 +50,8 @@
 
                         <td class="t"><a href=""><?php echo $partido->name_equipo2;?></a></td>
 						<td class="t"><a href="<?php echo site_url('auth/print_form/' . $partido->p_id )?>"<u>Imprimir planilla</u></a></td>
+						<td class="t" align="right"><a href="<?php echo site_url('auth/delete_match_pre/' . $partido->p_id )?>"<u>Eliminar</u></a></td>
+
 	               </tr>
                    <?php $i++; endforeach;?>
 				</tbody>

@@ -1125,17 +1125,45 @@ class Admin_model_new extends CI_Model{
 			$i++;
 		}
 		
+		
 		$i = 0;
+
+		$in = array();
+		$out = array();
+
 		foreach ($activates as $post){
+			//~ print "$post $ids[$i]<br>";
+			if ($post){
+				array_push($in,$ids[$i] );
+			}
+			else{
+				array_push($out,$ids[$i] );
+			}	
+		
 			$data = array(
 				'activo' => $post,
            	);
-			$this->db->where('id', 	$ids[$i]);
-			$this->db->update('equipos', $data);
-			$id_test = $this->db->insert_id();
-			#echo $this->db->last_query() . "<br>";
+			//~ $this->db->where('id', 	$ids[$i]);
+			//~ $this->db->update('equipos', $data);
+			//~ $id_test = $this->db->insert_id();
 			$i++;
 		}
+		
+		# Seteo los activos
+		$data = array(
+			'activo' => 1,
+		);
+		$this->db->where_in('id', $in);
+		$this->db->update('equipos', $data);
+		$id_test = $this->db->insert_id();
+		# Seteo los que no están activos
+		$data = array(
+			'activo' => 0,
+		);
+		$this->db->where_in('id', $out);
+		$this->db->update('equipos', $data);
+		$id_test = $this->db->insert_id();
+
 	}
 	
 	### Crear equipos nuevos
@@ -1292,6 +1320,11 @@ class Admin_model_new extends CI_Model{
            		);
 				$this->db->update('jugadores', $data);
 			}
-		}	
+		}
+		
+	function delete_match($match_id)
+	{
+		$this->db->delete('partidos', array('id' => $match_id));
+	}
 		
 }

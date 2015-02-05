@@ -368,6 +368,30 @@ class Auth extends Controller {
 		
 	}
 	
+	function delete_match_pre($match_id)
+	{ 
+		if (!$this->ion_auth->logged_in() || !$this->ion_auth->is_admin())
+		{
+			redirect('auth/login', 'refresh');
+		}
+		
+		$this->data['message'] = "Está seguro que quiere eliminar este partido?";
+		$this->data['match_id'] = $match_id;
+		$this->load->view('auth/delete_match_pre', $this->data);
+	}
+	
+	function delete_match($match_id)
+	{ 
+		if (!$this->ion_auth->logged_in() || !$this->ion_auth->is_admin())
+		{
+			redirect('auth/login', 'refresh');
+		}
+		
+		$this->admin_model_new->delete_match($match_id);
+		$this->data['message'] = "El partido ha sido borrado";
+		$this->load->view('auth/delete_match_ok', $this->data);
+	}
+	
     ########## Cargar resultados
     	function set_results_new()
 	{
@@ -625,7 +649,7 @@ class Auth extends Controller {
 		$equipos_ids = $this->input->post('equipo');
 		
 		$this->admin_model_new->update_equipos_activado($activates,$equipos_ids);
-
+		
 
 		$this->load->view('auth/activar_equipo_view_ok', $this->data);
 	}
