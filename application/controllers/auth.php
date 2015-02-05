@@ -628,12 +628,11 @@ class Auth extends Controller {
 		
 		$this->data['categories'] = $this->admin_model->get_categories_ninguno(); //para el combo box
 		$this->data['orden'] = $this->admin_model->get_orden_ninguno(); //para el combo box
+
 		
  		$this->data['teams'] = $this->admin_model_new->get_all_teams();
 
-		$this->output->enable_profiler(TRUE);
-
-		//~ $this->load->view('auth/activar_equipo_view', $this->data);
+		$this->load->view('auth/activar_equipo_view', $this->data);
 
 	}
 	
@@ -650,6 +649,8 @@ class Auth extends Controller {
 		$equipos_ids = $this->input->post('equipo');
 		
 		$this->admin_model_new->update_equipos_activado($activates,$equipos_ids);
+
+		$this->output->enable_profiler(TRUE);
 
 
 		$this->load->view('auth/activar_equipo_view_ok', $this->data);
