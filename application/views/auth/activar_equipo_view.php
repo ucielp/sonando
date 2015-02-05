@@ -20,8 +20,7 @@
                 <?php
 				if ($teams){
 					$i = 0;
-					foreach ($teams as $team):
-						?>
+					foreach ($teams as $team):?>
 						<tr> 
 						
 							<td><a href="<?php echo base_url(); ?>equipos/equipo/
@@ -31,14 +30,13 @@
 							<td><?php echo $team->user;?></td>
 							<td><?php echo  $team->psswd;?></td>
 							
-							<?php $name0  = 'equipo[' . $i. ']'; 						print $i
-?>
-							
+							<?php $name0  = 'equipo[' . $i. ']';?>
                         	<input type="hidden" name="<?php echo $name0;?>" value="<?php echo $team->e_id?>">
                         	
 							<?php 
 								$show_name = 'activate[' . $i . ']';
-						 
+						 						print $i;
+
 								if ($team->activo == 1){
 									$checked = TRUE;
 								} else
