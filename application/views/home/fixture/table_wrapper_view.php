@@ -17,7 +17,14 @@
 			<tr class="<?php echo "" . ( ($i & 1) ? 'odd' : 'even' );?>">
 				<td class="t"><a href="<?php echo base_url(); ?>equipos/equipo/<?php echo $partido->id_equipo1;?>"><?php echo $partido->name_equipo1;?></a></td>
 				<td class="o stg">
-				<?php if ($partido->cargado){echo $partido->team1_res;?>:<?php echo $partido->team2_res;?></td>
+				<?php if ($partido->cargado){ 
+					if ($partido->team1_pen){ echo "(" . $partido->team1_pen . ") ";}
+					echo $partido->team1_res;
+						?>:<?php 
+					echo $partido->team2_res;
+					if ($partido->team2_pen){ echo " (" . $partido->team2_pen . ")";}
+				?>
+				</td>
 				<?php }else{ ?>- : -</td> <?php }?>
 				<td class="t"><a href="<?php echo base_url(); ?>equipos/equipo/<?php echo $partido->id_equipo2;?>"><?php echo $partido->name_equipo2;?></a></td>
 				<td class="o"><?php echo $partido->date;?></td>

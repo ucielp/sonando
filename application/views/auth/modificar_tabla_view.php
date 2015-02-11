@@ -75,7 +75,7 @@
 
 <?php echo form_submit('submit', 'Modificar tabla');?><br><br>
 
-		<a href="<?php echo site_url('auth/set_results');?>"><u>Go Back</u></a>
+		<a href="<?php echo site_url('auth/');?>"><u>Go Back</u></a>
         
             
         </div> <!-- END CONTAINER-->

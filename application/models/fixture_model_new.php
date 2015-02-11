@@ -37,7 +37,7 @@ class Fixture_model_new extends CI_Model{
 	}
 	function get_partidos($event_id,$fecha){
 		if ($fecha == 0){		
-			$this->db->select('p.id as p_id,e1.name as name_equipo1,e1.id as id_equipo1,e2.name as name_equipo2,e2.id as id_equipo2,nro_fecha,date,time,court,team1_res,team2_res, cargado');
+			$this->db->select('p.id as p_id,e1.name as name_equipo1,e1.id as id_equipo1,e2.name as name_equipo2,e2.id as id_equipo2,nro_fecha,date,time,court,team1_res,team2_res,team1_pen,team2_pen,cargado');
 			$this->db->from('partidos p');
 			$this->db->join('equipos e1','e1.id = p.team1_id');
 			$this->db->join('equipos e2','e2.id = p.team2_id');
@@ -54,7 +54,7 @@ class Fixture_model_new extends CI_Model{
 		}
 		#la anterior
 		else {
-			$this->db->select('p.id as p_id,e1.name as name_equipo1,e1.id as id_equipo1,e2.name as name_equipo2,e2.id as id_equipo2,nro_fecha,date,time,court,team1_res,team2_res, cargado');
+			$this->db->select('p.id as p_id,e1.name as name_equipo1,e1.id as id_equipo1,e2.name as name_equipo2,e2.id as id_equipo2,nro_fecha,date,time,court,team1_res,team2_res,team1_pen,team2_pen,cargado');
 			$this->db->from('partidos p');
 			$this->db->join('equipos e1','e1.id = p.team1_id');
 			$this->db->join('equipos e2','e2.id = p.team2_id');

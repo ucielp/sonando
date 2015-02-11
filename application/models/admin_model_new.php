@@ -850,7 +850,7 @@ class Admin_model_new extends CI_Model{
     ################# end of swap
     
     function get_partidos($tournament_id,$actual_fecha_id){
-		$this->db->select('p.id as p_id,e1.name as name_equipo1,e2.name as name_equipo2,nro_fecha,date,time,court,team1_res,team2_res,cargado');
+		$this->db->select('p.id as p_id,e1.name as name_equipo1,e2.name as name_equipo2,nro_fecha,date,time,court,team1_res,team2_res,team1_pen,team2_pen,cargado');
 		$this->db->from('partidos p');
 		$this->db->join('equipos e1','e1.id = p.team1_id');
 		$this->db->join('equipos e2','e2.id = p.team2_id');
@@ -883,7 +883,8 @@ class Admin_model_new extends CI_Model{
     	}  
 	}
 	
-    function set_results($partidos_id,$result1,$result2,$cargados,$perdidos){
+    function set_results($partidos_id,$result1,$result2,$penal1,$penal2,$cargados,$perdidos){
+
 		$i = 1;
 		foreach ($partidos_id as $partido)
 		{		
@@ -901,14 +902,32 @@ class Admin_model_new extends CI_Model{
 						$this->db->insert_id();
 					}
 				else {
+					if ($penal1[$i]){
+						$p1 = $penal1[$i];
+					}
+					else{
+						$p1 = 'NULL';
+					}
+					
+					if ($penal2[$i]){
+						$p2 = $penal2[$i];
+					}
+					else{
+						$p2 = 'NULL';
+					}		
+							
 					$data = array(
 							'team1_res' => $result1[$i],
 							'team2_res' => $result2[$i],
+							'team1_pen' => $p1,
+							'team2_pen' => $p2,
 							'cargado' => '1',
 						);
 						$this->db->where('id', $partido);
 						$this->db->update('partidos', $data);
 						$this->db->insert_id();
+						# echo $this->db->last_query() . "<br>";
+
 				}
 			}
 			else{

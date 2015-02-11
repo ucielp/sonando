@@ -453,7 +453,10 @@ class Auth extends Controller {
 		$this->data['message'] = (validation_errors()) ? validation_errors() : $this->session->flashdata('message');
 		
 		$this->data['result1'] = $this->input->post('res1');	
-		$this->data['result2'] = $this->input->post('res2');	
+		$this->data['result2'] = $this->input->post('res2');
+		$this->data['penal1'] = $this->input->post('pen1');	
+		$this->data['penal2'] = $this->input->post('pen2');	
+		
 		$this->data['partidos_id'] = $this->input->post('part_id');	
 		$this->data['cargados'] = $this->input->post('cargados');
 		$this->data['perdidos'] = $this->input->post('perdidos');	
@@ -462,10 +465,13 @@ class Auth extends Controller {
 		$matchs_id = $this->data['partidos_id'];
 		$teams1_res = $this->data['result1']; 
 		$teams2_res = $this->data['result2'];
+		$teams1_pen = $this->data['penal1']; 
+		$teams2_pen = $this->data['penal2'];
+		
 		$cargados = $this->data['cargados'];
 		$perdidos = $this->data['perdidos'];
 		#seteo los resultados y perdido es 1 entonces ambos pierden
-		$this->admin_model_new->set_results($matchs_id,$teams1_res,$teams2_res,$cargados,$perdidos);
+		$this->admin_model_new->set_results($matchs_id,$teams1_res,$teams2_res,$teams1_pen,$teams2_pen,$cargados,$perdidos);
 		
 		$i = 1;
 		foreach($matchs_id as $partido_id):
