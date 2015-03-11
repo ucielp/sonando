@@ -526,6 +526,7 @@ class Admin_model_new extends CI_Model{
 			}
 			return $teams;
 	}
+    
 	function get_fechas(){
 		
 		$this->db->select('id');
@@ -937,20 +938,20 @@ class Admin_model_new extends CI_Model{
     	}  
 	}
     
-    function update_positions($partidos,$cargado,$actual_perdido){
+    function update_positions($partidos,$cargado,$actual_perdido,$actual_tournament_id){
 		if (!$cargado){
 			if  ($actual_perdido){
-				$this->ambos_perdieron($partidos->team1_id,$partidos->team2_id);
+				$this->ambos_perdieron($partidos->team1_id,$partidos->team2_id,$actual_tournament_id);
 			}
 			else {
 				if ($partidos->team1_res == $partidos->team2_res){
-					$this->empate($partidos->team1_id,$partidos->team2_id,$partidos->team1_res,$partidos->team2_res);
+					$this->empate($partidos->team1_id,$partidos->team2_id,$partidos->team1_res,$partidos->team2_res,$actual_tournament_id);
 				}
 				else if ($partidos->team1_res > $partidos->team2_res){
-					$this->ganador($partidos->team1_id,$partidos->team2_id,$partidos->team1_res,$partidos->team2_res);
+					$this->ganador($partidos->team1_id,$partidos->team2_id,$partidos->team1_res,$partidos->team2_res,$actual_tournament_id);
 				}
 				else {
-					$this->ganador($partidos->team2_id,$partidos->team1_id,$partidos->team2_res,$partidos->team1_res);
+					$this->ganador($partidos->team2_id,$partidos->team1_id,$partidos->team2_res,$partidos->team1_res,$actual_tournament_id);
 				}
 			}
 		}
@@ -960,7 +961,7 @@ class Admin_model_new extends CI_Model{
 	}
 	
     
-    	function empate($team1_id,$team2_id, $team1_res, $team2_res){
+    	function empate($team1_id,$team2_id, $team1_res, $team2_res,$actual_tournament_id){
 			$this->db->set('pj', 'pj + 1', FALSE);
 			$this->db->set('pe', 'pe + 1', FALSE);
 			$gf = 'gf+'. $team1_res;
@@ -971,6 +972,7 @@ class Admin_model_new extends CI_Model{
 			$this->db->set('dg', $dg, FALSE);
 			$this->db->set('ptos', 'ptos + 1', FALSE);
 			$this->db->where('team_id', $team1_id);
+            $this->db->where('category_id', $actual_tournament_id);            
 			$this->db->update('posiciones');
 			$this->db->insert_id();
 	
@@ -984,12 +986,13 @@ class Admin_model_new extends CI_Model{
 			$this->db->set('dg', $dg, FALSE);
 			$this->db->set('ptos', 'ptos + 1', FALSE);
 			$this->db->where('team_id', $team2_id);
+            $this->db->where('category_id', $actual_tournament_id);            
 			$this->db->update('posiciones');
 			$res = $this->db->insert_id();
 
 	}
 
-	function ganador($team1_id,$team2_id, $team1_res, $team2_res){
+	function ganador($team1_id,$team2_id, $team1_res, $team2_res,$actual_tournament_id){
 			$this->db->set('pj', 'pj + 1', FALSE);
 			$this->db->set('pg', 'pg + 1', FALSE);
 			$gf = 'gf+'. $team1_res;
@@ -1000,6 +1003,7 @@ class Admin_model_new extends CI_Model{
 			$this->db->set('dg', $dg, FALSE);
 			$this->db->set('ptos', 'ptos + 3', FALSE);
 			$this->db->where('team_id', $team1_id);
+            $this->db->where('category_id', $actual_tournament_id);            
 			$this->db->update('posiciones');
 			$this->db->insert_id();
 	
@@ -1012,20 +1016,23 @@ class Admin_model_new extends CI_Model{
 			$this->db->set('gc', $gc, FALSE);
 			$this->db->set('dg', $dg, FALSE);
 			$this->db->where('team_id', $team2_id);
+            $this->db->where('category_id', $actual_tournament_id);            
 			$this->db->update('posiciones');
 			$res = $this->db->insert_id();
 	}
 	
-	function ambos_perdieron($team1_id,$team2_id){
+	function ambos_perdieron($team1_id,$team2_id,$actual_tournament_id){
 			$this->db->set('pj', 'pj + 1', FALSE);
 			$this->db->set('pp', 'pp + 1', FALSE);
 			$this->db->where('team_id', $team1_id);
+            $this->db->where('category_id', $actual_tournament_id);
 			$this->db->update('posiciones');
 			$this->db->insert_id();
 			
 			$this->db->set('pj', 'pj + 1', FALSE);
 			$this->db->set('pp', 'pp + 1', FALSE);
 			$this->db->where('team_id', $team2_id);
+            $this->db->where('category_id', $actual_tournament_id);            
 			$this->db->update('posiciones');
 			$this->db->insert_id();
 	}

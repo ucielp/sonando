@@ -485,7 +485,7 @@ class Auth extends Controller {
 			$acutal_perdido = $this->data['perdidos'][$i];
 			#actualizo posiciones pero solo de los que no estaban seteados
 			
-			$this->admin_model_new->update_positions($partido,$acutal_cargado,$acutal_perdido);
+			$this->admin_model_new->update_positions($partido,$acutal_cargado,$acutal_perdido,$actual_tournament_id);
 			$i++;
 		endforeach;
 		$this->load->view('auth/set_goleadores', $this->data);
