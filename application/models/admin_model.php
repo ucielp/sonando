@@ -172,7 +172,7 @@ class Admin_model extends CI_Model{
 		$query = $this->db->get();
 		$teams = $query->result();
         
-        echo $this->db->last_query() . "<br>";
+        //~ echo $this->db->last_query() . "<br>";
 
 		return $teams;
 	}	
