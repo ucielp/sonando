@@ -163,7 +163,7 @@ class Admin_model extends CI_Model{
     
 	### Estas dos son las nuevas funciones para sacar los datos para armar la planilla
     function get_equipos_partidos($id_partido){
-		$this->db->select('tournament_id,team1_id,team2_id,e1.name as equipo1_name, e2.name as equipo2_name,court,time,nro_fecha');
+		$this->db->select('tournament_id,team1_id,team2_id,e1.name as equipo1_name, e2.name as equipo2_name,court,time,nro_fecha,date');
 		$this->db->from('partidos p');
 		$this->db->join('equipos e1','e1.id = p.team1_id');
 		$this->db->join('equipos e2','e2.id = p.team2_id');
@@ -172,7 +172,7 @@ class Admin_model extends CI_Model{
 		$query = $this->db->get();
 		$teams = $query->result();
         
-        //~ #echo $this->db->last_query() . "<br>";
+        echo $this->db->last_query() . "<br>";
 
 		return $teams;
 	}	

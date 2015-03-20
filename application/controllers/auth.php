@@ -849,6 +849,7 @@ class Auth extends Controller {
 			$this->data['equipo2_name'] = $equipo->equipo2_name;
 			$this->data['cancha'] = $equipo->court;
 			$this->data['hora'] = $equipo->time;
+            $this->data['date'] = $equipo->date;
             $tournament_id = $equipo->tournament_id;
             $this->data['nro_fecha'] = $equipo->nro_fecha;
 		}
