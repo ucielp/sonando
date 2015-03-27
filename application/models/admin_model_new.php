@@ -117,7 +117,7 @@ class Admin_model_new extends CI_Model{
 	function set_category($category_id,$name_category,$id_parente_category,$show,$tipo_torneo){
 		$i = 1;
 		foreach ($category_id as $cat_id){
-            if($name_category[$i] != null){
+            if(!isset($name_category[$i])){
                 $data = array(
                     'name_category' => $name_category[$i],
                     'parent_id' => $id_parente_category[$i],
