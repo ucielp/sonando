@@ -116,6 +116,8 @@ class Admin_model_new extends CI_Model{
 		
 	function set_category($category_id,$name_category,$id_parente_category,$show,$tipo_torneo){
 		$i = 1;
+        echo $i  . "???<br>";
+
 		foreach ($category_id as $cat_id){
 			$data = array(
 				'name_category' => $name_category[$i],
@@ -123,10 +125,11 @@ class Admin_model_new extends CI_Model{
 				'show' => $show[$i],
 				'tipo' => $tipo_torneo[$i],
 			);
+            echo $this->db->last_query() . $i  . "<br>";
+
 			$this->db->where('id', $cat_id);
 			$this->db->update('category', $data);
 			$this->db->insert_id();
-            echo $this->db->last_query() . $i  . "<br>";
 
 			$i++;
 		}	
