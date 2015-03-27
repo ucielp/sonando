@@ -126,6 +126,8 @@ class Admin_model_new extends CI_Model{
 			$this->db->where('id', $cat_id);
 			$this->db->update('category', $data);
 			$this->db->insert_id();
+            echo $this->db->last_query() . $i  . "<br>";
+
 			$i++;
 		}	
 	}
