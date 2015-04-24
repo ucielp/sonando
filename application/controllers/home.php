@@ -16,7 +16,7 @@ class Home extends CI_Controller {
 	{
 		$this->data['title'] = "So&ntilde;ando con el gol - Home";
 		$this->data['message'] = (validation_errors()) ? validation_errors() : $this->session->flashdata('message');
-		$this->output->enable_profiler(TRUE);
+		
 		$this->data['marcas'] = $this->home_model->get_marcas();
 		$this->data['main_content'] = 'home/vistas/home_view';
 		$this->load->view('home/temp/template', $this->data);
