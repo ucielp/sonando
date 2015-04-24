@@ -15,7 +15,7 @@ class Fixture extends CI_Controller {
     # TODO arreglar este HACK que puse el event_id por defecto
 	function index($event_id=26,$fecha=NULL)
 	{
-			
+        $this->output->enable_profiler(TRUE);
 		//Declaramos offset y limit para la paginación
 		$limit = 1;
 		#$offset = 1;
@@ -77,7 +77,8 @@ class Fixture extends CI_Controller {
 
 	function show ($event_id=26,$fecha=NULL)
 {
-		
+    
+    $this->output->enable_profiler(TRUE);
 	//Declaramos offset y limit para la paginación
 	$limit = 1;
 	#$offset = 1;
