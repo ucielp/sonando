@@ -1,10 +1,14 @@
 ﻿<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-
 <html xmlns="http://www.w3.org/1999/xhtml">
 
 <head>
-<meta http-equiv="X-UA-Compatible" content="ie=8" /> 
+<meta http-equiv="X-UA-Compatible" content="ie=8" />
+
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta content="text/html;charset=utf-8" http-equiv="Content-Type">
+<meta content="utf-8" http-equiv="encoding">
+
+
 <link rel="shortcut icon" href="<?php echo base_url(); ?>images/favicon.gif" type="image/gif">
 
 <title><?php echo $title; ?></title>
@@ -26,8 +30,12 @@
 <link rel="stylesheet" href="<?php echo base_url(); ?>css/ie_style.css" type="text/css" >
 <![endif]-->	
 <link href='http://fonts.googleapis.com/css?family=Open+Sans:400,60	0,700,800' rel='stylesheet' type='text/css'>
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.6.4/jquery.min.js"></script>
-<script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.8.16/jquery-ui.min.js"></script>
+
+<!-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.6.4/jquery.min.js"></script> -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
+<!-- <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.8.16/jquery-ui.min.js"></script> -->
+<script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.4/jquery-ui.min.js"></script>
+
 <script type="text/javascript" src="<?php echo base_url(); ?>js/jquery.miniColors.js"></script>
 <script type="text/javascript" src="<?php echo base_url();?>js/jscripts/tiny_mce/tiny_mce.js"></script>
 <script type="text/javascript" src="<?php echo base_url();?>js/jquery.placehold.min.js"></script>

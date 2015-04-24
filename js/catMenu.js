@@ -1,5 +1,5 @@
 $(function() {
-	// Only for views with catMenu
+	// Only for views with catMenu	
 	$('.catmenu').parent().css('marginBottom','80px');	
 	// Let's find all categories with subcategories
 	$('.catmenu ul').find('li:has(ul)')
