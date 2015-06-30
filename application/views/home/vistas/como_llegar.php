@@ -52,7 +52,7 @@
 								<li><a href="predio.html">El Predio</a><img src="img/activemenu.png" class="activearrow"/></li>
 								<li><a href="https://www.facebook.com/sonando.conelgol/photos_stream" target="_blank">Fotos</a><img src="img/activemenu.png" class="activearrow"/></li>
 								<li><a href="notas.html">Notas</a><img src="img/activemenu.png" class="activearrow"/></li>
-								<li class="active"><a href="contacto.html">Contacto</a><img src="img/activemenu.png" class="activearrow"/></li>
+								<li class="active"><a href="<?php echo base_url(); ?>contacto">Contacto</a><img src="img/activemenu.png" class="activearrow"/></li>
 								<li class="dropdown">
 									<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Torneos</a>
 									<ul class="dropdown-menu">
@@ -66,7 +66,7 @@
 						</div>
 					</div>
 					<div class="col-xs-12 col-sm-12 col-md-2 col-lg-2 hidden-xs">
-						<div class="pull-right consonline"><a href="contacto.html"><img src="img/arrow_right.png"/> Consultas Online</a></div>
+						<div class="pull-right consonline"><a href="<?php echo base_url(); ?>contacto"><img src="img/arrow_right.png"/> Consultas Online</a></div>
 					</div>
 				</div>
 			</div>
@@ -83,7 +83,7 @@
 					<div class="comollegarinfo">
 						<img src="img/llegar1.png" class="img-responsive"/>
 						<a href="http://www.rosario.gov.ar/infomapa" target="_blank"><img src="img/llegar2.png" class="img-responsive"/></a>
-						<a href="contacto.html"><img src="img/llegar3.png" class="img-responsive"/></a>
+						<a href="<?php echo base_url(); ?>contacto"><img src="img/llegar3.png" class="img-responsive"/></a>
 					</div>
 				</div>
 			</div>
