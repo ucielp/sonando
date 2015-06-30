@@ -1,3 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+    <title>Soñando con el gol</title>
+
+    <!-- Bootstrap -->
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+		<link href='http://fonts.googleapis.com/css?family=Nunito:400,300' rel='stylesheet' type='text/css'>
+		<link href="css/styles.css" rel="stylesheet">
+		<link href="css/responsive.css" rel="stylesheet">
+    <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+      <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+      <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+    <![endif]-->
+  </head>
+  <body>
+
 		<nav class="navbar navbar-fixed-top" id="topnav">
 			<div class="container">
 				<div class="row" id="navlogo">
@@ -29,7 +52,7 @@
 								<li><a href="predio.html">El Predio</a><img src="img/activemenu.png" class="activearrow"/></li>
 								<li><a href="https://www.facebook.com/sonando.conelgol/photos_stream" target="_blank">Fotos</a><img src="img/activemenu.png" class="activearrow"/></li>
 								<li><a href="notas.html">Notas</a><img src="img/activemenu.png" class="activearrow"/></li>
-								<li class="active"><a href="#">Contacto</a><img src="img/activemenu.png" class="activearrow"/></li>
+								<li class="active"><a href="contacto.html">Contacto</a><img src="img/activemenu.png" class="activearrow"/></li>
 								<li class="dropdown">
 									<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Torneos</a>
 									<ul class="dropdown-menu">
@@ -49,89 +72,20 @@
 			</div>
 		</nav>
 
-		<div class="container" id="contentarea">
-			<div class="row">
-				<div class="col-xs-12 col-sm-12 col-md-4 col-lg-4">
-					<div class="infocontacto">
-						<h3>Atención al Cliente</h3>
-						<h2>0341-3882874</h2>
+		<div class="container fondogris" id="contentarea">
+			<div class="row" style="padding-top: 40px; padding-bottom: 40px;">
+				<div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
+					<div id="comollegarmap">
 						
-						<div class="desdeface">
-							<h4>Desde facebook</h4>
-							<a href="https://www.facebook.com/sonando.conelgol" target="_blank"><img src="img/facebook_logo.png" width="20"/> Libres Mayores</a>
-							<a href="https://www.facebook.com/sonandoinferiores" target="_blank"><img src="img/facebook_logo.png" width="20"/> Inferiores</a>
-							<a href="https://www.facebook.com/sonandoconelgolfemenino" target="_blank"><img src="img/facebook_logo.png" width="20"/> Femenino</a>
-							<a href="https://www.facebook.com/torneoempresas" target="_blank"><img src="img/facebook_logo.png" width="20"/> Empresas</a>
-						</div>
-						
-						<div class="pormail">
-							<h4>Por email</h4>
-							<a href="mailto:info@sonandoconelgol.com.ar" target="_blank">info@sonandoconelgol.com.ar</a>
-							<a href="mailto:tribunal@sonandoconelgol.com.ar" target="_blank">tribunal@sonandoconelgol.com.ar</a>
-							<a href="mailto:inscripcion@sonandoconelgol.com.ar" target="_blank">inscripcion@sonandoconelgol.com.ar</a>
-							<a href="mailto:rrhh@sonandoconelgol.com.ar" target="_blank">rrhh@sonandoconelgol.com.ar</a>
-						</div>
-						
-						<div class="portel">
-							<span></span>
-							<p>Francisco Pochettino: 0341-153882888</p>
-							<p>Pablo Benetti: 0341-153882887</p>
-							<p>Santiago Biazzi 0341-155032605</p>
-						</div>
-					
 					</div>
 				</div>
-				<div class="col-xs-12 col-sm-12 col-md-4 col-lg-4">
-					<div class="formcontacto">
-						<form class="form-horizontal">
-							<div class="form-group">
-								<label for="nombre" class="col-sm-3 control-label">Nombre:</label>
-								<div class="col-sm-9">
-									<input type="text" class="form-control" name="nombre">
-								</div>
-							</div>
-							<div class="form-group">
-								<label for="email" class="col-sm-3 control-label">E-Mail:</label>
-								<div class="col-sm-9">
-									<input type="text" class="form-control" name="email">
-								</div>
-							</div>
-							<div class="form-group">
-								<label for="telefono" class="col-sm-3 control-label">Teléfono:</label>
-								<div class="col-sm-9">
-									<input type="text" class="form-control" name="telefono">
-								</div>
-							</div>
-							<div class="form-group">
-								<label for="asunto" class="col-sm-3 control-label">Asunto:</label>
-								<div class="col-sm-9">
-									<select name="asunto" class="form-control">
-										<option value="inscripcion@sonandoconelgol.com.ar">Inscripción</option>
-										<option value="rrhh@sonandoconelgol.com.ar">RRHH</option>
-										<option value="nulo" selected="selected">Elegir asunto</option>
-										<option value="tribunal@sonandoconelgol.com.ar">Tribunal de disciplina</option>
-										<option value="info@sonandoconelgol.com.ar">Horarios</option>
-									</select>
-								</div>
-							</div>
-							<div class="form-group">
-								<label for="mensaje" class="col-sm-3 control-label">Mensaje:</label>
-								<div class="col-sm-9">
-									<textarea class="form-control" rows="3"></textarea>
-								</div>
-							</div>
-							<div class="form-group">
-								<div class="col-sm-12">
-									<button type="submit" class="btn btn-default pull-right">Enviar</button>
-								</div>
-							</div>
-						</form>
+				<div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
+					<div class="comollegarinfo">
+						<img src="img/llegar1.png" class="img-responsive"/>
+						<a href="http://www.rosario.gov.ar/infomapa" target="_blank"><img src="img/llegar2.png" class="img-responsive"/></a>
+						<a href="contacto.html"><img src="img/llegar3.png" class="img-responsive"/></a>
 					</div>
 				</div>
-				<div class="col-xs-12 col-sm-12 col-md-4 col-lg-4">
-					<a href="<?php echo base_url(); ?>como_llegar"><img src="img/comollegar3.png" class="img-responsive"/></a>
-				</div>
-				<div class="col-xs-12"><br/></div>
 			</div>
 		</div>
 		
@@ -153,8 +107,27 @@
 		</nav>
 
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
+		<script src="https://maps.googleapis.com/maps/api/js?v=3.exp&signed_in=false"></script>
     <script src="js/bootstrap.min.js"></script>
 		<script src="js/jquery.cycle2.min.js"></script>
 		<script src="js/scripts.js"></script>
+		<script type="text/javascript">
+			function initialize() {
+				var myLatlng = new google.maps.LatLng(-32.911243, -60.739163);
+				var mapOptions = {
+					zoom: 15,
+					center: myLatlng
+				}
+				var map = new google.maps.Map(document.getElementById('comollegarmap'), mapOptions);
+
+				var marker = new google.maps.Marker({
+						position: myLatlng,
+						map: map,
+						title: 'Soñando con el Gol'
+				});
+			}
+
+			google.maps.event.addDomListener(window, 'load', initialize);
+		</script>
   </body>
 </html>

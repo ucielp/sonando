@@ -26,7 +26,7 @@
 								<li><a href="predio.html">El Predio</a><img src="img/activemenu.png" class="activearrow"/></li>
 								<li><a href="https://www.facebook.com/sonando.conelgol/photos_stream" target="_blank">Fotos</a><img src="img/activemenu.png" class="activearrow"/></li>
 								<li><a href="notas.html">Notas</a><img src="img/activemenu.png" class="activearrow"/></li>
-								<li><a href="contacto.html">Contacto</a><img src="img/activemenu.png" class="activearrow"/></li>
+								<li><a href="<?php echo base_url(); ?>nosotros">Contacto</a><img src="img/activemenu.png" class="activearrow"/></li>
 								<li class="dropdown">
 									<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Torneos</a>
 									<ul class="dropdown-menu">
