@@ -129,7 +129,7 @@
 					</div>
 				</div>
 				<div class="col-xs-12 col-sm-12 col-md-4 col-lg-4">
-					<a href="<?php echo base_url(); ?>como_llegar"><img src="img/comollegar3.png" class="img-responsive"/></a>
+					<a href="<?php echo base_url(); ?>comollegar"><img src="img/comollegar3.png" class="img-responsive"/></a>
 				</div>
 				<div class="col-xs-12"><br/></div>
 			</div>
