@@ -26,11 +26,11 @@
 								<li><a href="<?php echo base_url(); ?>predio">El Predio</a><img src="img/activemenu.png" class="activearrow"/></li>
 								<li><a href="https://www.facebook.com/sonando.conelgol/photos_stream" target="_blank">Fotos</a><img src="img/activemenu.png" class="activearrow"/></li>
 								<li><a href="<?php echo base_url(); ?>notas">Notas</a><img src="img/activemenu.png" class="activearrow"/></li>
-								<li><a href="<?php echo base_url(); ?>nosotros">Contacto</a><img src="img/activemenu.png" class="activearrow"/></li>
+								<li><a href="<?php echo base_url(); ?>contacto">Contacto</a><img src="img/activemenu.png" class="activearrow"/></li>
 								<li class="dropdown">
 									<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Torneos</a>
 									<ul class="dropdown-menu">
-										<li><a href="libres.html">Mayores</a></li>
+										<li><a href="<?php echo base_url(); ?>libres">Mayores</a></li>
 										<li><a href="https://www.facebook.com/sonandoinferiores" target="_blank">Inferiores</a></li>
 										<li><a href="https://www.facebook.com/sonandoconelgolfemenino" target="_blank">Femenino</a></li>
 										<li><a href="https://www.facebook.com/torneoempresas" target="_blank">Empresas</a></li>
@@ -40,7 +40,7 @@
 						</div>
 					</div>
 					<div class="col-xs-12 col-sm-12 col-md-2 col-lg-2 hidden-xs">
-						<div class="pull-right consonline"><a href="contacto.html"><img src="img/arrow_right.png"/> Consultas Online</a></div>
+						<div class="pull-right consonline"><a href="<?php echo base_url(); ?>contacto"><img src="img/arrow_right.png"/> Consultas Online</a></div>
 					</div>
 				</div>
 			</div>
@@ -52,10 +52,10 @@
 					<div class="bannerfblike"><iframe src="http://www.facebook.com/plugins/like.php?href=https%3A%2F%2Fwww.facebook.com%2Fsonando.conelgol&amp;layout=button_count&amp;action=like&amp;show_faces=false&amp;share=false&amp;height=21" scrolling="no" frameborder="0" style="border:none; width:125px; height:25px"></iframe></div>
 						<div id="mainbanner">
 							<div class="bannerphoto cycle-slideshow" data-cycle-fx="scrollHorz" data-cycle-timeout="3000" data-cycle-pause-on-hover="true" data-cycle-speed="200">
-								<img src="img/libres1off.png" onclick="window.location.href='libres.html'" class="img-responsive"/>
-								<img src="img/libres2off.png" onclick="window.location.href='libres.html'" class="img-responsive"/>
-								<img src="img/libres3off.png" onclick="window.location.href='copaargentina.html'" class="img-responsive"/>
-								<img src="img/libres4off.png" onclick="window.location.href='laseleccion.html'" class="img-responsive"/>
+								<img src="img/libres1off.png" onclick="window.location.href='<?php echo base_url(); ?>libres'" class="img-responsive"/>
+								<img src="img/libres2off.png" onclick="window.location.href='<?php echo base_url(); ?>libres'" class="img-responsive"/>
+								<img src="img/libres3off.png" onclick="window.location.href='<?php echo base_url(); ?>copaargentina'" class="img-responsive"/>
+								<img src="img/libres4off.png" onclick="window.location.href='<?php echo base_url(); ?>laseleccion'" class="img-responsive"/>
 								<div class="cycle-pager"></div>
 							</div>
 						</div>
@@ -77,15 +77,15 @@
 							<a href="#" data-toggle="modal" data-target="#modal-video"><img src="img/secc3.png" class="img-responsive"/></a>
 						</div>
 						<div class="col-xs-6 boxseccion">
-							<a href="laseleccion.html"><img src="img/secc4off.png" class="img-responsive"/></a>
+							<a href="<?php echo base_url(); ?>laseleccion"><img src="img/secc4off.png" class="img-responsive"/></a>
 						</div>
 					</div>
 					<div class="row">
 						<div class="col-xs-6 boxseccion">
-							<a href="copaargentina.html"><img src="img/secc5off.png" class="img-responsive"/></a>
+							<a href="<?php echo base_url(); ?>copaargentina"><img src="img/secc5off.png" class="img-responsive"/></a>
 						</div>
 						<div class="col-xs-6 boxseccion">
-							<a href="unionyvalores.html"><img src="img/secc6off.png" class="img-responsive"/></a>
+							<a href="<?php echo base_url(); ?>unionyvalores"><img src="img/secc6off.png" class="img-responsive"/></a>
 						</div>
 					</div>
 					<div class="row">
@@ -106,7 +106,7 @@
 						</div>
 					</div>
 					<div class="comollegar">
-						<a href="comollegar.html"><img src="img/comollegar.png" class="img-responsive"/></a>
+						<a href="<?php echo base_url(); ?>comollegar"><img src="img/comollegar.png" class="img-responsive"/></a>
 					</div>
 				</div>
 			</div>
