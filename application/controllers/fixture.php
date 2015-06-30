@@ -71,7 +71,7 @@ class Fixture extends CI_Controller {
 		$data['title'] = "So&ntilde;ando con el Gol";
 		$data['message'] = (validation_errors()) ? validation_errors() : $this->session->flashdata('message');
 		
-		$data['main_content'] = 'home/fixture/show_fixture_view';
+		$data['main_content'] = 'home/vistas/fixture';
 		$this->load->view('home/temp/template', $data);
 	}
 
