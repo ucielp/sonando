@@ -44,15 +44,15 @@ $active_record = TRUE;
 $db['default']['hostname'] = 'localhost';
 
 #para la version web
-$db['default']['username'] = 'jforte_sonando';
-$db['default']['database'] = 'jforte_sonando_db';
-$db['default']['password'] = 'ucieluciel';
+#$db['default']['username'] = 'jforte_sonando';
+#$db['default']['database'] = 'jforte_sonando_db';
+#$db['default']['password'] = 'ucieluciel';
 
 # para la version local
 
-# $db['default']['username'] = 'sonando_user';
-# $db['default']['database'] = 'sonando_db';
-# $db['default']['password'] = 'sonando_password';
+$db['default']['username'] = 'sonando_user';
+$db['default']['database'] = 'sonando_db';
+$db['default']['password'] = 'sonando_password';
 
 $db['default']['dbdriver'] = 'mysql';
 $db['default']['dbprefix'] = '';
