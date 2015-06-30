@@ -23,7 +23,7 @@
 					<div class="col-xs-12 col-sm-12 col-md-8 col-lg-8">
 						<div id="mainmenu" class="collapse navbar-collapse">
 							<ul class="nav navbar-nav">
-								<li><a href="predio.html">El Predio</a><img src="img/activemenu.png" class="activearrow"/></li>
+								<li><a href="<?php echo base_url(); ?>predio">El Predio</a><img src="img/activemenu.png" class="activearrow"/></li>
 								<li><a href="https://www.facebook.com/sonando.conelgol/photos_stream" target="_blank">Fotos</a><img src="img/activemenu.png" class="activearrow"/></li>
 								<li><a href="notas.html">Notas</a><img src="img/activemenu.png" class="activearrow"/></li>
 								<li><a href="<?php echo base_url(); ?>nosotros">Contacto</a><img src="img/activemenu.png" class="activearrow"/></li>
