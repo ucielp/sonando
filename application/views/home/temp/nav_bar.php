@@ -9,7 +9,7 @@
 				<button role="button">OK</button>
 			</div>
 			<div class="col-xs-12 col-sm-12 col-md-4 col-lg-4">
-				<div class="pull-right xsnopull"><a target="_blank" href="http://www.joseforte.com"><img src="img/developedby.jpg"/></a></div>
+				<div class="pull-right xsnopull"><a target="_blank" href="http://www.joseforte.com"><img src="<?php echo base_url(); ?>img/developedby.jpg"/></a></div>
 			</div>
 		</div>
 	</div>
