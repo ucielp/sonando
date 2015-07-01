@@ -114,8 +114,13 @@
 		<script src="js/scripts.js"></script>
 		<script>
 			$(document).ready(function(){
-				if ( $(window).width() > 767 ) {
-					$('#modal-video').modal('show');
+				if (/(^|;)\s*visited=/.test(document.cookie)) {
+					//do nothing because i was here before
+				} else { // first time here
+					if ($(window).width() > 767) {
+						document.cookie = "visited=true; max-age=" + 60 * 60 * 24 * 10; // 60 seconds to a minute, 60 minutes to an hour, 24 hours to a day, and 10 days.
+						$('#modal-video').modal('show');
+					}
 				}
 			});
 		</script>
