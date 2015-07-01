@@ -587,6 +587,18 @@ class Admin_model_new extends CI_Model{
 		return $query->result();
 	}
 	
+	function get_reglamentos_by_group(){
+		$this->db->from('reglamento');
+		$this->db->order_by('group');
+		$query = $this->db->get();
+        if ($query->num_rows() > 0){
+            foreach($query->result_array() as $row){
+				$grupo[$row['group']][$row['id']] = $row;
+			}
+			return $grupo;		
+        }
+	}
+	
 	function get_team_category($team_id)
 	{
 		$this->db->select('name_event');	
