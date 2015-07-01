@@ -72,6 +72,13 @@
 			
 			<div class="row">
 				<div class="col-xs-12" id="publibar">
+					<!--<?php foreach ($marcas as $marca): ?>
+						<div class="publibox">
+							<a target="_blank" href="<?php echo $marca->link;?>">
+								<img width="67" alt="<?php echo $marca->nombre;?>" src="<?php echo base_url(); ?>images/home/banner/<?php echo $marca->image_url;?>" class="img-responsive"/>
+							</a>
+						</div>
+					<?php endforeach;?> -->
 					<div class="publibox"><a href="#"><img src="img/publi1off.jpg" class="img-responsive"/></a></div>
 					<div class="publibox"><a href="#"><img src="img/publi2off.jpg" class="img-responsive"/></a></div>
 					<div class="publibox"><a href="#"><img src="img/publi3off.jpg" class="img-responsive"/></a></div>
