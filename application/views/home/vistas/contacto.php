@@ -39,41 +39,37 @@
 				</div>
 				<div class="col-xs-12 col-sm-12 col-md-4 col-lg-4">
 					<div class="formcontacto">
-						<form class="form-horizontal">
+					<div class="validacion_error"><?php echo $message;?></div>
+						<form class="form-horizontal" method="post" action="<?php echo site_url('contacto');?>">
 							<div class="form-group">
 								<label for="nombre" class="col-sm-3 control-label">Nombre:</label>
 								<div class="col-sm-9">
-									<input type="text" class="form-control" name="nombre">
+									<input value="" class="form-control validate[required,custom[onlyLetter],length[0,100]] text-input" type="text" id="lastname" name="lastname"  />
 								</div>
 							</div>
 							<div class="form-group">
 								<label for="email" class="col-sm-3 control-label">E-Mail:</label>
 								<div class="col-sm-9">
-									<input type="text" class="form-control" name="email">
+									<input value=""  class="form-control validate[required,custom[email]] text-input" type="text" name="email" id="email"  />
 								</div>
 							</div>
 							<div class="form-group">
 								<label for="telefono" class="col-sm-3 control-label">Teléfono:</label>
 								<div class="col-sm-9">
-									<input type="text" class="form-control" name="telefono">
+									<input value=""  class="form-control validate[required,custom[onlyLetter],length[0,100]] text-input" type="text" id="tel" name="tel"  />
 								</div>
 							</div>
 							<div class="form-group">
 								<label for="asunto" class="col-sm-3 control-label">Asunto:</label>
 								<div class="col-sm-9">
-									<select name="asunto" class="form-control">
-										<option value="inscripcion@sonandoconelgol.com.ar">Inscripción</option>
-										<option value="rrhh@sonandoconelgol.com.ar">RRHH</option>
-										<option value="nulo" selected="selected">Elegir asunto</option>
-										<option value="tribunal@sonandoconelgol.com.ar">Tribunal de disciplina</option>
-										<option value="info@sonandoconelgol.com.ar">Horarios</option>
-									</select>
+									<?php
+										echo form_dropdown('asunto', $asuntos, 'nulo', 'class="form-control"');?>
 								</div>
 							</div>
 							<div class="form-group">
 								<label for="mensaje" class="col-sm-3 control-label">Mensaje:</label>
 								<div class="col-sm-9">
-									<textarea class="form-control" rows="3"></textarea>
+									<textarea value="Ingresa tu comentario..." class="form-control validate[required,length[6,300]] text-input" name="comments" id="comments" /> </textarea>
 								</div>
 							</div>
 							<div class="form-group">

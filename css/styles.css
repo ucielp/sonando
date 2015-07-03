@@ -1184,3 +1184,6 @@ background: #e4dfdf;
   color: #1b1b1b;
   margin: 10px 0px;
 }
+.validacion_error p{
+	color: #309411;
+}
