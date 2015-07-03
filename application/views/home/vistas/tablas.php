@@ -27,15 +27,7 @@
 								<span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
 							</button>
 							<div class="bgmenulibres hidden-xs"></div>
-							<div id="libresmenu" class="collapse navbar-collapse">
-								<ul class="nav navbar-nav menulibres">
-									<li><a href="equipos.html">Equipos</a><div class="activemarker"></div><img src="img/activemenu2.png" class="activearrow"/></li>
-									<li><a href="fixture.html">Fixture</a><div class="activemarker"></div><img src="img/activemenu2.png" class="activearrow"/></li>
-									<li class="active"><a href="tablas.html">Tablas</a><div class="activemarker"></div><img src="img/activemenu2.png" class="activearrow"/></li>
-									<li><a href="inscripcion.html">Inscripci&oacute;n</a><div class="activemarker"></div><img src="img/activemenu2.png" class="activearrow"/></li>
-									<li><a href="reglamento.html">Reglamento</a><div class="activemarker"></div><img src="img/activemenu2.png" class="activearrow"/></li>
-								</ul>
-							</div>
+							<?php $this->view('home/temp/libres_menu');?>
 						</div>
 					</div>
 				</div>
