@@ -138,5 +138,16 @@
     <script src="js/bootstrap.min.js"></script>
 		<script src="js/jquery.cycle2.min.js"></script>
 		<script src="js/scripts.js"></script>
+	<script type="text/javascript">
+		$('#leftmenu a.hoja').bind( "click", function(e) {
+			e.preventDefault();
+			$(".tablastorneo").html('<h1 class="ajax-loader"><img src="<?php echo base_url(); ?>images/ajax-loader.gif" /></h1>');
+			var href = $(this).attr("href");
+			$(".tablastorneo").load(href);
+			$("body, html").animate({ 
+					scrollTop: $( ".tablastorneo" ).offset().top - 115 
+			}, 600);
+		});
+	</script>
   </body>
 </html>

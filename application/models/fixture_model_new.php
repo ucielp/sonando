@@ -269,7 +269,7 @@ class Fixture_model_new extends CI_Model{
 				}
 			}else{ // hoja
 				$html .= 
-					'<a class="list-group-item" href="">' .
+					'<a class="hoja list-group-item" href="' . base_url() . $url_link . $id . '">' .
 					$tree[$id]['name'] . '</a>';
 			}
 		}			

@@ -24,7 +24,7 @@ class Tablas extends CI_Controller {
         $this->data['posiciones'] = $this->admin_model_new->get_positions($event_id); //genero la tabla de posiciones
 
 
-   		$url_link = 'posiciones/show/';
+   		$url_link = 'tablas/show/';
         $this->data['categoryTree'] = $this->fixture_model_new->parse_category_tree($url_link); # Category Tree
 			
 		$this->data['main_content'] = 'home/vistas/tablas';
@@ -43,7 +43,7 @@ class Tablas extends CI_Controller {
 
 
    		$url_link = 'posiciones/show/';
-        $this->data['categoryTree'] = $this->fixture_model_new->parse_tree($url_link); # Category Tree
+        $this->data['categoryTree'] = $this->fixture_model_new->parse_category_tree($url_link); # Category Tree
 
 		$this->load->view('home/posiciones/table_wrapper_view', $this->data);
 		
