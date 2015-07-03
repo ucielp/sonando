@@ -217,6 +217,74 @@ class Fixture_model_new extends CI_Model{
 		return $tree;
 	}
 	
+	function get_full_category_tree() {
+		$this->db->select('id, parent_id, name_category, tipo');	
+		$this->db->from('category');
+		$this->db->where('show','1');
+		$query = $this->db->get();
+		foreach ($query->result() as $row){
+			$pid  = $row->parent_id;
+			$id   = $row->id;
+			$name = $row->name_category;
+			$tipo = $row->tipo;
+
+			$tree[$id]["tipo"] = $tipo;
+			
+			// Create or add child information to the parent node
+			if (isset($tree[$pid]))
+				// a node for the parent exists
+				// add another child id to this parent
+				$tree[$pid]["children"][] = $id;
+			else
+				// create the first child to this parent
+				$tree[$pid] = array("children"=>array($id));
+
+			// Create or add name information for current node
+			if (isset($tree[$id])) {
+				// a node for the id exists:
+				// set the name of current node
+				$tree[$id]["name"] = $name;
+				$tree[$id]["id"] = $id;
+				$tree[$id]["pid"] = $pid;
+				$tree[$id]["tipo"] = $tipo;
+			} else {
+				// create the current node and give it a name
+				$tree[$id] = array( "name" => $name, "id" => $id, "pid" => $pid, "tipo" => $tipo );				
+			}
+		}
+		return $tree;
+	}
+	
+	function convert_to_html($tree, $id, $html, $url_link){
+		if(isset($tree[$id]['name'])){
+			if($tree[$id]['tipo'] == "nodo"){
+				if($tree[$id]['pid'] == 0){
+					$html .= 
+						'<a href="#' . $tree[$id]['id'] . '" class="list-group-item list-group-parent collapsed" data-toggle="collapse" data-parent="#' . $tree[$id]['id'] . '">' .
+						$tree[$id]['name'] . '</a>';
+				}else{
+					$html .= 
+						'<a href="#' . $tree[$id]['id'] . '" class="list-group-item list-group-parent subparent" data-toggle="collapse" data-parent="#' . $tree[$id]['id'] . '">' .
+						$tree[$id]['name'] . '</a>';
+				}
+			}else{ // hoja
+				$html .= 
+					'<a class="list-group-item" href="">' .
+					$tree[$id]['name'] . '</a>';
+			}
+		}			
+		if(isset($tree[$id]['children'])){
+			$arChildren = &$tree[$id]['children'];
+			$len = count($arChildren);
+			if ($id != 0) $html .= '<div class="collapse" id="' . $tree[$id]['id'] . '">'; // not for the first one
+			for ($i=0; $i<$len; $i++) {
+				$html .= $this->fixture_model_new->convert_to_html($tree, $arChildren[$i], "", $url_link);
+			}
+			if ($id != 0) $html .= '</div>'.PHP_EOL;
+		}
+		return $html;
+	}
+	
 	function convert_to_ul($tree, $id, $html,$url_link){
 			
 	  if (isset($tree[$id]['name'])){
@@ -254,6 +322,13 @@ class Fixture_model_new extends CI_Model{
 	
 	    $tree = $this->fixture_model_new->get_category_tree();
 		$too  = $this->fixture_model_new->convert_to_ul($tree, 0, "",$url_link);
+		
+		return $too;
+	}
+	
+	function parse_category_tree ($url_link) {
+	    $tree = $this->fixture_model_new->get_full_category_tree();
+		$too  = $this->fixture_model_new->convert_to_html($tree, 0, "",$url_link);
 		
 		return $too;
 	}

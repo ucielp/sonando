@@ -25,7 +25,7 @@ class Tablas extends CI_Controller {
 
 
    		$url_link = 'posiciones/show/';
-        $this->data['categoryTree'] = $this->fixture_model_new->parse_tree($url_link); # Category Tree
+        $this->data['categoryTree'] = $this->fixture_model_new->parse_category_tree($url_link); # Category Tree
 			
 		$this->data['main_content'] = 'home/vistas/tablas';
 		$this->load->view('home/temp/template', $this->data);
