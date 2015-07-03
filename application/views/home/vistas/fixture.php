@@ -46,32 +46,7 @@
 					<div class="row">
 						<div id="leftmenu">
 							<div class="list-group" id="desplegable">
-								<a href="#torneo1" class="list-group-item list-group-parent" data-toggle="collapse" data-parent="#torneo1">TORNEO SÁBADO</a>
-								<div class="collapse in" id="torneo1">
-									<a href="#torneo1a" class="list-group-item list-group-parent subparent" data-toggle="collapse" data-parent="#torneo1a">Copa de Campeones</a>
-									<div class="collapse in" id="torneo1a">
-										<a href="#torneo1aa" class="list-group-item list-group-parent subsubparent" data-toggle="collapse" data-parent="#torneo1aa">Grupos</a>
-										<div class="collapse in" id="torneo1aa">
-											<a href="" class="list-group-item">1</a>
-											<a href="" class="list-group-item active">2</a>
-											<a href="" class="list-group-item">3</a>
-											<a href="" class="list-group-item">4</a>
-										</div>
-									</div>
-								</div>
-								<a href="#torneo2" class="list-group-item list-group-parent collapsed" data-toggle="collapse" data-parent="#torneo2">TORNEO DOMINGO</a>
-								<div class="collapse" id="torneo2">
-									<a href="" class="list-group-item">De la A</a>
-									<a href="" class="list-group-item">De la B</a>
-									<a href="" class="list-group-item">De la C</a>
-									<a href="" class="list-group-item">De la D</a>
-									<a href="" class="list-group-item">De la E</a>
-									<a href="" class="list-group-item">De la F</a>
-									<a href="" class="list-group-item">De la G</a>
-									<a href="" class="list-group-item">De la H</a>
-									<a href="" class="list-group-item">De la I</a>
-								</div>
-								<a href="#torneo3" class="list-group-item list-group-parent collapsed" data-toggle="collapse" data-parent="#torneo3">COPA ARGENTINA</a>
+								<?php echo $categoryTree ?>
 							</div>
 							<div class="boxsanciones">
 								<a href="https://docs.google.com/spreadsheet/ccc?key=0AuIBKvFOyc--dEpBZm80aXVfeTl3WFdKaTd2bHgyamc&usp=sharing#gid=0" target="_blank">Sanciones <img src="img/amaroja.png"/></a>
