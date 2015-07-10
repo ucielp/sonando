@@ -672,6 +672,11 @@ h1, h2, h3, h4, h5 {
 	padding-left: 35px;
 }
 
+#leftmenu a.list-group-item.list-group-parent.subsubsubparent {
+	background: #1E1E1E;
+	padding-left: 45px;
+}
+
 #leftmenu a.list-group-item.list-group-parent.collapsed {
 	margin-bottom: 10px;
 }
@@ -687,7 +692,7 @@ h1, h2, h3, h4, h5 {
 	background: #e4dfdf;
   padding: 10px 5px 10px 25px;
   margin-top: 40px;
-  text-transform: uppercase;
+  text-transform: uppercase;	
   width: 140px;
 }
 
