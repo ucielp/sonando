@@ -26,12 +26,46 @@
 				</div>
 				<div class="col-xs-12 col-sm-12 col-md-6 col-lg-6 genericpagecol">
 					<h2>Titulo ejemplo</h2>
-					<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam luctus in erat ac cursus. Morbi rutrum nec enim id euismod. Duis vestibulum neque non sollicitudin lobortis. Etiam sed metus at felis auctor ornare ut venenatis nunc. Vestibulum in est tristique, ullamcorper augue in, consequat odio. Duis nulla ipsum, sollicitudin et velit vitae, vulputate eleifend augue. Nulla finibus dolor ac ante viverra ultricies sit amet accumsan est. Etiam et nisi pharetra, blandit augue ut, aliquet ex. Donec malesuada tellus nulla, eu elementum dolor feugiat id. Sed vestibulum neque in quam aliquet rutrum. Etiam metus eros, por</p>
-					<p>Duis quis elit et sapien bibendum semper. Fusce quis tincidunt lorem. Donec bibendum mauris id dolor dignissim, varius finibus metus semper. Vestibulum consequat tristique nulla, eu condimentum ligula hendrerit a. Pellentesque eget mauris sit amet tellus viverra imperdiet. Vivamus eu elementum eros. Sed tellus nisi, viverra eget placerat sit amet, scelerisque quis nulla. Aenean nisl lacus, sollicitudin sit amet ultrices ut, rhoncus ornare tortor. In metus urna, sagittis in dapibus quis, dictum quis ante. Pellentesque quis metus metus. Praesent pellentesque pharetra magna vel luctus. Mauris at ante augue. Ut euismod quam ut accu</p>
+					<p>Soñando con el gol comenzó a realizar torneos de fútbol en el mes de Noviembre del año 2007 y 
+
+						en los sucesivos años hubo un progreso paulatino de Equipos, que posibilitaron un torneo cada vez 
+
+						más competitivo pero teniendo todos ellos, como principal valor la cooperación, la ayuda mutua y 
+
+						el respecto por el prójimo.  El requisito principal para participar en la Liga, más allá del juego, pasa 
+
+						por que se pregonen los valores de buena Fe, solidaridad,  compañerismo, que es la base para un 
+
+						trabajo de un conjunto exitoso. La cohesión entre los integrantes ayuda a que se exploten las 
+
+						capacidades individuales, obteniendo como resultado que la acción del grupo sea mejor
+
+						Un equipo  puede consagrarse campeón, pero si sus miembros no comparten valores, normas de 
+
+						conducta e iguales metas, el campeonato queda vacío y sin sentido alguno. En soñando con el gol 
+
+						los verdaderos campeones son aquellos elencos que cumplen con las siguientes pautas: ser 
+
+						respetuoso con el prójimo y tener una buena convivencia con la mayor cantidad de compañeros 
+
+						posibles, para saber cuáles son sus necesidades y los valores que pueden aportar al resto del 
+
+						equipo.
+					</p>
 				</div>
 				<div class="col-xs-12 col-sm-12 col-md-6 col-lg-6 genericpagecol">
-					<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam luctus in erat ac cursus. Morbi rutrum nec enim id euismod. Duis vestibulum neque non sollicitudin lobortis. Etiam sed metus at felis auctor ornare ut venenatis nunc. Vestibulum in est tristique, ullamcorper augue in, consequat odio. Duis nulla ipsum, sollicitudin et velit vitae, vulputate eleifend augue. Nulla finibus dolor ac ante viverra ultricies sit amet accumsan est. Etiam et nisi pharetra, blandit augue ut, aliquet ex. Donec malesuada tellus nulla, eu elementum dolor feugiat id. Sed vestibulum neque in quam aliquet rutrum. Etiam metus eros, por</p>
-					<p>Duis quis elit et sapien bibendum semper. Fusce quis tincidunt lorem. Donec bibendum mauris id dolor dignissim, varius finibus metus semper. Vestibulum consequat tristique nulla, eu condimentum ligula hendrerit a. Pellentesque eget mauris sit amet tellus viverra imperdiet. Vivamus eu elementum eros. Sed tellus nisi, viverra eget placerat sit amet, scelerisque quis nulla. Aenean nisl lacus, sollicitudin sit amet ultrices ut, rhoncus ornare tortor. In metus urna, sagittis in dapibus quis, dictum quis ante. Pellentesque quis metus metus. Praesent pellentesque pharetra magna vel luctus. Mauris at ante augue. Ut euismod quam ut accu</p>
+					<p>La mejor jugada dentro de un plantel  es la aportada por el compañerismo, donde un grupo de 
+
+						personas que aprenden a tratarse con un respeto mutuo y con una visión constructiva tiene 
+
+						muchas más posibilidades de alcanzar más de lo que se proponen, que aquellos donde la unión es 
+
+						forzada y tiende en definitiva al individualismo.  Para poder y gozar del torneo, todos aquellos 
+
+						jugadores que quieran inscribirse, tienen que surgirle con espontaneidad la palabra solidaridad y 
+
+						de esa forma serán recibidos con los brazos abiertos por Soñando con el Gol
+					</p>
 				</div>
 				<div class="col-xs-12">
 					<br/>
