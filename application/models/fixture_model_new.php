@@ -255,7 +255,7 @@ class Fixture_model_new extends CI_Model{
 		return $tree;
 	}
 	
-	function convert_to_html($tree, $id, $html, $url_link, $j){
+	function convert_to_html($tree, $id, $html, $url_link, $level){
 		if(isset($tree[$id]['name'])){
 			if($tree[$id]['tipo'] == "nodo"){
 				if($tree[$id]['pid'] == 0){
@@ -263,20 +263,23 @@ class Fixture_model_new extends CI_Model{
 						'<a href="#' . $tree[$id]['id'] . '" class="list-group-item list-group-parent collapsed" data-toggle="collapse" data-parent="#' . $tree[$id]['id'] . '">' .
 						$tree[$id]['name'] . '</a>';
 				}else{
-					if ($j==2){ //level 2
+					if ($level==2){ //level 2
 						$html .= 
 						'<a href="#' . $tree[$id]['id'] . '" class="list-group-item list-group-parent subparent" data-toggle="collapse" data-parent="#' . $tree[$id]['id'] . '">' .
 						$tree[$id]['name'] . '</a>';
-					}else if ($j==3){ //level 3
+					}else if ($level==3){ //level 3
 						$html .= 
 						'<a href="#' . $tree[$id]['id'] . '" class="list-group-item list-group-parent subsubparent" data-toggle="collapse" data-parent="#' . $tree[$id]['id'] . '">' .
 						$tree[$id]['name'] . '</a>';
-					}else if ($j==4){ //for now we don't have this level but could be in the future
+					}else if ($level==4){ //for now we don't have this level but could be in the future
 						$html .= 
 						'<a href="#' . $tree[$id]['id'] . '" class="list-group-item list-group-parent subsubsubparent" data-toggle="collapse" data-parent="#' . $tree[$id]['id'] . '">' .
 						$tree[$id]['name'] . '</a>';
-					}
-					
+					}else if ($level==5){ //for now we don't have this level but could be in the future. If we have more than 5 levels we should add it here
+						$html .= 
+						'<a href="#' . $tree[$id]['id'] . '" class="list-group-item list-group-parent subsubsubsubparent" data-toggle="collapse" data-parent="#' . $tree[$id]['id'] . '">' .
+						$tree[$id]['name'] . '</a>';
+					}					
 				}
 			}else{ // hoja
 				$html .= 
@@ -285,12 +288,12 @@ class Fixture_model_new extends CI_Model{
 			}
 		}			
 		if(isset($tree[$id]['children'])){
-			$j= $j + 1;
+			$level= $level + 1;
 			$arChildren = &$tree[$id]['children'];
 			$len = count($arChildren);
 			if ($id != 0) $html .= '<div class="collapse" id="' . $tree[$id]['id'] . '">'; // not for the first one
 			for ($i=0; $i<$len; $i++) {
-				$html .= $this->fixture_model_new->convert_to_html($tree, $arChildren[$i], "", $url_link, $j);
+				$html .= $this->fixture_model_new->convert_to_html($tree, $arChildren[$i], "", $url_link, $level);
 			}
 			if ($id != 0) $html .= '</div>'.PHP_EOL;
 		}
@@ -339,9 +342,9 @@ class Fixture_model_new extends CI_Model{
 	}
 	
 	function parse_category_tree ($url_link) {
-		$j = 0; // to remember the level
+		$level = 0; // to remember the level
 	    $tree = $this->fixture_model_new->get_full_category_tree();
-		$too  = $this->fixture_model_new->convert_to_html($tree, 0, "",$url_link, $j);
+		$too  = $this->fixture_model_new->convert_to_html($tree, 0, "",$url_link, $level);
 		
 		return $too;
 	}
