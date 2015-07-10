@@ -68,7 +68,7 @@
         </table>  
                 
 
-        <p><a href="<?php echo site_url('inscripcion/preinscribir');?>">Volver</a></p>
+        <p><a href="<?php echo site_url('libres/preinscribir');?>">Volver</a></p>
 
 	</div>
     

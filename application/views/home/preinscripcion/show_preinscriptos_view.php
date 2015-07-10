@@ -41,7 +41,7 @@
                                 </td>
 
                                 <td><?php #le paso un 0 para saber q soy delegado
-                                 echo (anchor("inscripcion/delete_player_temp/".$user['id'], 'Eliminar'));?></td>
+                                 echo (anchor("libres/delete_player_temp/".$user['id'], 'Eliminar'));?></td>
 
                         <?php endforeach;
                  }#termino el if
@@ -53,7 +53,7 @@
                         </tr>
                 </table>  
                          
-                 <p><a href="<?php echo site_url('inscripcion/preinscribir');?>">Volver</a></p>
+                 <p><a href="<?php echo site_url('libres/preinscribir');?>">Volver</a></p>
             </div>
 
 	</div> <!-- END CONTAINER-->

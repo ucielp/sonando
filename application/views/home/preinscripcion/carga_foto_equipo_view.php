@@ -10,7 +10,7 @@
             <h1 id="tituloPrincipalCargar" class="indented">Cargá la foto de tu equipo</h1><br />
         </div>
         <?php 	$attributes = array('id' => 'formID_upload_equipo');
-				echo form_open_multipart('inscripcion/do_upload_foto_equipo', $attributes);
+				echo form_open_multipart('libres/do_upload_foto_equipo', $attributes);
 				
 		?>
          <?php
@@ -90,7 +90,7 @@
             <input type="submit" value="Subir" class="submit" />    
         </form>
 		<?php endforeach;?>
-	    <p><a href="<?php echo site_url('inscripcion/preinscribir');?>">Volver</a></p>
+	    <p><a href="<?php echo site_url('libres/preinscribir');?>">Volver</a></p>
 
   	</div>
 

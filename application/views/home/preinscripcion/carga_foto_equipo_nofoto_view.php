@@ -6,7 +6,7 @@
                 <h1>Se han actualizado los datos de la Historia y de la camiseta.</h1>
         
                 <h3><?php echo $message['error']  ;?></h3>
-                        <p><a href="<?php echo site_url('inscripcion/upload_foto_equipo');?>">Volver</a></p>
+                        <p><a href="<?php echo site_url('libres/upload_foto_equipo');?>">Volver</a></p>
             </div>        
 
 		</div> <!-- END CONTAINER-->

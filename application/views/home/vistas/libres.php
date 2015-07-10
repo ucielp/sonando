@@ -46,8 +46,13 @@
 				<div class="col-xs-12 col-sm-12 col-md-4 col-lg-4">
 					<div class="boxusuarioycont">
 						<img src="img/usuarioycontra.png"/>
-						<input type="text" name="" placeholder="Escribe tu usuario"/><br/>
-						<input type="text" name="" placeholder="Escribe tu contraseña"/><button role="button">Enviar</button>
+						<?php $attributes = array('id' => 'formID_home'); ?>
+						<?php echo form_open("libres", $attributes);?>
+						<?php echo form_input($email);?>
+						<?php echo form_input($password);?>
+						<!--<a href="<?php echo site_url('auth/forgot_password'); ?>"><u>Forgot Password</u></a>-->
+						<?php $submit_home_data = array('name' => 'submit', 'id' => 'submit', 'class' => 'submit', 'value' => 'Ingresar'); ?>
+						<?php echo form_submit($submit_home_data);?>
 					</div>
 					<img src="img/fbpageheader.png" class="img-responsive"/>
 					<div class="fb-page" data-href="https://www.facebook.com/sonando.conelgol" data-small-header="false" data-adapt-container-width="true" data-hide-cover="false" data-show-facepile="true" data-show-posts="false"><div class="fb-xfbml-parse-ignore"><blockquote cite="https://www.facebook.com/sonando.conelgol"><a href="https://www.facebook.com/sonando.conelgol">Soñando Con El Gol</a></blockquote></div></div>

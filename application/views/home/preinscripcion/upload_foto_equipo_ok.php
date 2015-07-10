@@ -9,7 +9,7 @@
                 <div id="upload_photo_success">
                     <img src="<?php echo base_url(); ?>uploads/<?php echo $url_img; ?>" />
                 </div>
-                <p><a href="<?php echo site_url('inscripcion/preinscribir');?>">Volver</a></p>
+                <p><a href="<?php echo site_url('libres/preinscribir');?>">Volver</a></p>
             </div>        
 
 		</div> <!-- END CONTAINER-->

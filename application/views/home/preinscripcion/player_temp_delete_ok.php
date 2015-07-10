@@ -8,7 +8,7 @@
             <p><a href="<?php 
             
             
-             echo site_url('inscripcion/jugadores_preinscriptos');
+             echo site_url('libres/jugadores_preinscriptos');
             
             ?>"><u>Volver</u></a></p>
 	</div>

@@ -9,14 +9,14 @@
         <div id="menu_preinscripcion">
             <p>
 				<?php if ($jugador_ingresado  > 0){?>
-                <a href="<?php echo site_url('inscripcion/asignar_responsables'); ?>">Asignar responsables</a>
+                <a href="<?php echo site_url('libres/asignar_responsables'); ?>">Asignar responsables</a>
 				<?php } ?>
-                <a href="<?php echo site_url('inscripcion/jugadores_preinscriptos'); ?>">Jugadores preinscriptos</a>
-                <a href="<?php echo site_url('inscripcion/jugadores_habilitados'); ?>">Jugadores inscriptos</a>
-                <a href="<?php echo site_url('inscripcion/upload_foto_equipo'); ?>">Info del equipo</a>
+                <a href="<?php echo site_url('libres/jugadores_preinscriptos'); ?>">Jugadores preinscriptos</a>
+                <a href="<?php echo site_url('libres/jugadores_habilitados'); ?>">Jugadores inscriptos</a>
+                <a href="<?php echo site_url('libres/upload_foto_equipo'); ?>">Info del equipo</a>
             </p>
     
-        <?php echo form_open_multipart("inscripcion/preinscribir");?>
+        <?php echo form_open_multipart("libres/preinscribir");?>
           <h1>Por favor, ingrese los datos de los jugadores a continuación<br /></h1>
           
           <p>Nombre<br />
@@ -57,7 +57,7 @@
             
           <p><?php echo form_submit('submit', 'Ingresar jugador');?></p>
 	
-          <p><a href="<?php echo site_url('inscripcion/logout');?>">Cerrar Sesión</a></p>
+          <p><a href="<?php echo site_url('libres/logout');?>">Cerrar Sesión</a></p>
     
         <?php echo form_close();?>
     

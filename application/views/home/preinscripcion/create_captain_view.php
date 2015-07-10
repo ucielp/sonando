@@ -6,7 +6,7 @@
     <div class="preinscripcion_contenedor">
    		<div id="infoMessage"><?php echo $message;?></div>
 	
-		<?php echo form_open("inscripcion/cargar_responsable");?>
+		<?php echo form_open("libres/cargar_responsable");?>
 
           <p>Capitán:
           <?php echo form_dropdown('capitan', $jugadores);?>
@@ -25,7 +25,7 @@
           
           <p><?php echo form_submit('submit', 'Cargar responsable');?>
     
-         <p><a href="<?php echo site_url('inscripcion/preinscribir');?>">Volver</a></p>
+         <p><a href="<?php echo site_url('libres/preinscribir');?>">Volver</a></p>
         <?php echo form_close();?>
 	</div>
 
