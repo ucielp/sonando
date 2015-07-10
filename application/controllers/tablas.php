@@ -22,7 +22,8 @@ class Tablas extends CI_Controller {
 
 		$this->data['event_name'] = $this->fixture_model_new->get_category_and_subcategory($event_id); //para imprimir el nombre por pantalla
         $this->data['posiciones'] = $this->admin_model_new->get_positions($event_id); //genero la tabla de posiciones
-
+		$this->data['goleadores'] = $this->admin_model_new->get_goleadores_new($event_id);
+		$this->data['event_id'] = $event_id;
 
    		$url_link = 'tablas/show/';
         $this->data['categoryTree'] = $this->fixture_model_new->parse_category_tree($url_link); # Category Tree
@@ -40,7 +41,8 @@ class Tablas extends CI_Controller {
 
 		$this->data['event_name'] = $this->fixture_model_new->get_category_and_subcategory($event_id); //para imprimir el nombre por pantalla
         $this->data['posiciones'] = $this->admin_model_new->get_positions($event_id); //genero la tabla de posiciones
-
+		$this->data['goleadores'] = $this->admin_model_new->get_goleadores_new($event_id);
+		$this->data['event_id'] = $event_id;
 
    		$url_link = 'posiciones/show/';
         $this->data['categoryTree'] = $this->fixture_model_new->parse_category_tree($url_link); # Category Tree
