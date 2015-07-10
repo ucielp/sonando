@@ -73,22 +73,14 @@
 			<div class="row">
 				<div class="col-xs-12" id="publibar">
 					<!--<?php foreach ($marcas as $marca): ?>
-						<div class="publibox">
-							<a target="_blank" href="<?php echo $marca->link;?>">
-								<img width="67" alt="<?php echo $marca->nombre;?>" src="<?php echo base_url(); ?>images/home/banner/<?php echo $marca->image_url;?>" class="img-responsive"/>
+							<a class="publibox <?php echo $marca->nombre;?>" target="_blank" href="<?php echo $marca->link;?>">
 							</a>
-						</div>
-					<?php endforeach;?> -->
-					<div class="publibox"><a href="#"><img src="img/publi1off.jpg" class="img-responsive"/></a></div>
-					<div class="publibox"><a href="#"><img src="img/publi2off.jpg" class="img-responsive"/></a></div>
-					<div class="publibox"><a href="#"><img src="img/publi3off.jpg" class="img-responsive"/></a></div>
-					<div class="publibox"><a href="#"><img src="img/publi4off.jpg" class="img-responsive"/></a></div>
-					<div class="publibox"><a href="#"><img src="img/publi5off.jpg" class="img-responsive"/></a></div>
-					<div class="publibox"><a href="#"><img src="img/publi1off.jpg" class="img-responsive"/></a></div>
-					<div class="publibox"><a href="#"><img src="img/publi2off.jpg" class="img-responsive"/></a></div>
-					<div class="publibox"><a href="#"><img src="img/publi3off.jpg" class="img-responsive"/></a></div>
-					<div class="publibox"><a href="#"><img src="img/publi4off.jpg" class="img-responsive"/></a></div>
-					<div class="publibox"><a href="#"><img src="img/publi5off.jpg" class="img-responsive"/></a></div>
+					<?php endforeach;?> El problema de hacerlo dinamico va a ser los css que estan estaticos para el hover e imagen byn-->
+					<a class="publibox abs" target="_blank" href="mailto:absports@sinectis.com"></a>
+					<a class="publibox litoral" target="_blank" href="http://www.aguasellitoral.com.ar"></a>
+					<a class="publibox diviani" target="_blank" href="https://www.facebook.com/DivianiGnc"></a>
+					<a class="publibox espana" target="_blank" href="https://www.facebook.com/EspDeportes"></a>
+					<a class="publibox textil" target="_blank" href="https://es-la.facebook.com/people/Textil-Gasoleros/100009127831574"></a>
 				</div>
 			</div>
 		</div>

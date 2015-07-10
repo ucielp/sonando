@@ -343,7 +343,62 @@ h1, h2, h3, h4, h5 {
 
 .publibox {
 	float: left;
-	padding: 20px 1px;
+	margin: 0 10px;
+}
+
+.publibox.abs{
+	width: 190px;
+	height: 80px;
+	display: block;
+	background:transparent url('../img/1-abs.png') center top no-repeat;
+}
+
+.publibox.abs:hover{
+	background-image: url('../img/1-abs_on.png');
+}
+
+.publibox.litoral{
+	width: 190px;
+	height: 80px;
+	display: block;
+	background:transparent url('../img/2-litoral.png') center top no-repeat;
+}
+
+.publibox.litoral:hover{
+	background-image: url('../img/2-litoral_on.png');
+}
+
+.publibox.diviani{
+	width: 190px;
+	height: 80px;
+	display: block;
+	background:transparent url('../img/3-diviani.png') center top no-repeat;
+}
+
+.publibox.diviani:hover{
+	background-image: url('../img/3-diviani_on.png');
+}
+
+.publibox.espana{
+	width: 190px;
+	height: 80px;
+	display: block;
+	background:transparent url('../img/4-espana.png') center top no-repeat;
+}
+
+.publibox.espana:hover{
+	background-image: url('../img/4-espana_on.png');
+}
+
+.publibox.textil{
+	width: 190px;
+	height: 80px;
+	display: block;
+	background:transparent url('../img/5-textil.png') center top no-repeat;
+}
+
+.publibox.textil:hover{
+	background-image: url('../img/5-textil_on.png');
 }
 
 #conttext {
