@@ -52,7 +52,7 @@
 							<a href="https://www.facebook.com/torneoempresas" target="_blank"><div class="secbutton">EMPRESAS</div></a>
 						</div>
 						<div class="col-xs-6 boxsecbutton">
-							<a href="#"><div class="secbutton">+30</div></a>
+							<a href="<?php echo base_url(); ?>contacto"><div class="secbutton">+30</div></a>
 						</div>
 					</div>
 				</div>
