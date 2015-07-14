@@ -78,8 +78,6 @@
 							<tr>
 								<th class="t">Jugador</th>
 								<th class="o">Goles</th>
-								<th class="o">Amarillas</th>
-								<th class="o">Rojas</th>
 							</tr>
 						 </thead>
 						<tbody>
@@ -89,8 +87,6 @@
 							<tr class="<?php echo "" . ( ($i & 1) ? 'odd' : 'even' );?>">
 								<td class="t"><span class="change_may_min"><?php echo $players_info['name'] . " " .  $players_info['last_name']; ?></span></td>
 								<td class="o"><?php echo $players_info['goal']; ?></td>
-								<td class="o" style="background:yellow;color:black"><?php echo $players_info['yellow']; ?></td>
-								<td class="o" style="background:red;color:white"><?php echo $players_info['red']; ?></td>
 						   </tr>
 						   <?php $i++; endforeach; }?>
 
