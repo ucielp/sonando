@@ -1247,3 +1247,105 @@ background: #e4dfdf;
 .validacion_error p{
 	color: #309411;
 }
+
+/* INFO EQUIPO */
+
+a.listaequipos {
+	color: #2f2f2f;
+	font-size: 15px;
+	text-decoration: none;
+}
+
+a.listaequipos:hover{
+	color: #4e4e4e;
+	text-decoration: none;
+}
+
+.nombreequipo2 {
+	font-size: 20px;
+  color: #2f2f2f;
+  margin: 10px 30px;
+  text-transform: uppercase;
+  text-align: center;
+}
+
+.camisetas {
+	margin-top: 165px;
+	display: inline-block;
+}
+
+.historiaequipo {
+	margin: 30px 0;
+	padding: 0 40px;
+}
+
+.historiaequipo h2 {
+	font-size: 20px;
+  color: #2f2f2f;
+  margin: 10px 30px;
+  text-transform: uppercase;
+}
+
+.historiaequipo p {
+	font-size: 15px;
+  color: #2f2f2f;
+  margin: 10px 0px;
+}
+
+/* CAMISETAS */
+.shirt_equipo{
+	float:left;
+	width:80px;
+	height:80px;
+	background-image:url('../images/equipos/shirt.png');
+	background-repeat:no-repeat
+}
+.no_shirt_equipo{
+	float:left;
+	width:80px;
+	height:80px;
+	background-image:url('../images/equipos/no-shirt.png');
+	background-repeat:no-repeat
+}
+.titular .shirt_left{
+	float:left;
+	width:42px;
+	height:80px;
+	background-image:url('../images/equipos/shirt-left.png');
+	background-repeat:no-repeat
+}
+.titular .shirt_middle{
+	float:left;
+	width:13px;
+	height:80px;
+	background-image:url('../images/equipos/shirt-middle.png');
+	background-repeat:no-repeat
+}
+.titular .shirt_right{
+	float:left;
+	width:27px;
+	height:80px;
+	background-image:url('../images/equipos/shirt-right.png');
+	background-repeat:no-repeat	
+}		
+.suplente .shirt_left{
+	float:left;
+	width:42px;
+	height:80px;
+	background-image:url('../images/equipos/shirt-left.png');
+	background-repeat:no-repeat
+}
+.suplente .shirt_middle{
+	float:left;
+	width:13px;
+	height:80px;
+	background-image:url('../images/equipos/shirt-middle.png');
+	background-repeat:no-repeat
+}
+.suplente .shirt_right{
+	float:left;
+	width:26px;
+	height:80px;
+	background-image:url('../images/equipos/shirt-right.png');
+	background-repeat:no-repeat	
+}
