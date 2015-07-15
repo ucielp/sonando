@@ -1349,3 +1349,124 @@ a.listaequipos:hover{
 	background-image:url('../images/equipos/shirt-right.png');
 	background-repeat:no-repeat	
 }
+
+
+/* FORM  JUGADORES */
+.formlogin {
+	margin-top: 30px;
+}
+
+h2.nombreequipo {
+	font-size: 20px;
+  color: #2f2f2f;
+  margin: 10px 30px;
+  text-transform: uppercase;
+  text-align: left;
+}
+
+.formlogin h4 {
+	font-size: 17px;
+  color: #2f2f2f;
+  margin: 10px 0px;
+  text-transform: none;
+  text-align: left;
+}
+
+a.cerrarSesion {
+	color: #2f2f2f;
+	font-size: 12px;
+	text-decoration: none;
+}
+
+a.cerrarSesion  span{
+	font-size: 16px;
+}
+
+a.cerrarSesion:hover{
+	color: #4e4e4e;
+	text-decoration: none;
+}
+
+.inscripcionmenu {
+	margin: 5px 0 10px 10px;
+}
+
+.inscripcionmenu.nav-pills>li {
+	margin-right: 10px;
+}
+
+.inscripcionmenu.nav-pills>li>a {
+	color: #1f1f1f;
+	font-size: 14px;
+	text-transform: uppercase;
+  background-color: #d8d6d6;
+	padding: 5px 8px;
+  border-radius: 0;
+}
+
+.inscripcionmenu.nav-pills>li.active>a, .inscripcionmenu.nav-pills>li>a:focus, .inscripcionmenu.nav-pills>li>a:hover {
+  color: #fff;
+  background-color: #389c18;
+}
+
+#camisetas{
+	position:relative;
+	width:800px;
+	display:inline-block;
+}
+#colores_a_ingresar{
+	position:relative;
+	width:400px;
+	float:left;
+}
+#colores_ingresados{
+	position:relative;
+	width:400px;
+	float:left;
+	display:inline-block;
+}
+#colores_titulares{
+	position:relative;
+	width:100px;
+	display:inline-block;
+}
+#colores_alternativas{
+	position:relative;
+	width:100px;
+	display:inline-block;
+}
+.shirt-left{
+	width:33px;
+	height:50px;
+	background-image:url('../images/preinscripcion/shirt-left.png');
+	background-repeat:no-repeat;
+	float:left;
+	margin-right:0px
+}
+.shirt-right{
+	position:relative;
+	width:18px;
+	height:50px;
+	background-image:url('../images/preinscripcion/shirt-right.png');
+	background-repeat:no-repeat;
+	float:left;
+	margin-right:20px
+}
+.shirt{
+	position:relative;
+	width:50px;
+	height:50px;
+	background-image:url('../images/preinscripcion/shirt.png');
+	background-repeat:no-repeat;
+	float:left;
+	margin-right:20px
+}
+.no-shirt{
+	position:relative;
+	width:50px;
+	height:50px;
+	background-image:url('../images/preinscripcion/no-shirt.png');
+	background-repeat:no-repeat;
+	float:left;
+	margin-right:20px
+}

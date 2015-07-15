@@ -420,6 +420,7 @@ class Libres extends CI_Controller {
                'delegado_id' => $delegado,
                'sub_delegado_id' => $sub_delegado
             );
+		var_dump($responsables_ids);
 			
 		$user_logged = $this->ion_auth->get_user();
 		$team_id = $user_logged->team_id;
