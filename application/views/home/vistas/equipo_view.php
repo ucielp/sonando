@@ -11,8 +11,8 @@
 					<div class="row">
 						<div id="libresbanner">
 							<img class="bannerphoto" src="<?php echo base_url(); ?>img/intlibres2.jpg"/>
-							<h2><a href="libres.html">TORNEOS LIBRES</a></h2>
-							<h3><a href="libres.html">MAYORES</a></h3>
+							<h2><a href="<?php echo base_url(); ?>libres">TORNEOS LIBRES</a></h2>
+							<h3><a href="<?php echo base_url(); ?>libres">MAYORES</a></h3>
 							<button id="libresmenutoggle" type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#libresmenu" aria-expanded="false">
 								<span class="sr-only">Toggle navigation</span>
 								<span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
