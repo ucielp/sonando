@@ -34,7 +34,8 @@
 			</div>
 			
 			<div class="row">
-				<div class="col-xs-6 col-sm-6 col-md-3 col-lg-3">
+				
+					<div class="col-xs-6 col-sm-6 col-md-3 col-lg-3" style="display: none;">
 					<div class="equipos">
 					<table class="tablascg">
 						<thead>
@@ -43,165 +44,52 @@
 							</tr>
 						</thead>
 						<tbody>
+					
+				
+	<?php 
+	# Defino la cantidad de divs en este caso son 4
+	$cant_por_fila = round(count($equipos_activos)/4);
+	$k=0;
+	?>
+		<?php foreach ($equipos_activos as $equipo): 
+			if(!fmod($k,$cant_por_fila)){?>
+				</tbody>
+					</table>
+					</div>
+				</div>
+		<div class="col-xs-6 col-sm-6 col-md-3 col-lg-3">
+					<div class="equipos">
+					<table class="tablascg">
+						<thead>
 							<tr>
-								<td>Ferrugem A.C.</td>
+								<th>Equipo</th>
 							</tr>
-							<tr class="alt">
-								<td>Sacachispa</td>
+						</thead>
+						<tbody>
+
+			<?php } ?>
+	
+
+						<?php $i = 0; ?>
+							<tr class="<?php echo "" . ( ($i & 1) ? 'alt' : '' );?>">
+								<td class="t"><a href="<?php echo base_url();?>equipos/equipo/<?php echo  $equipo->id;?>"><?php echo $equipo->e_name; ?></a></td>
 							</tr>
-							<tr>
-								<td>Ficatucho</td>
-							</tr>
-							<tr class="alt">
-								<td>Ferrugem A.C.</td>
-							</tr>
-							<tr>
-								<td>Carlos</td>
-							</tr>
-							<tr class="alt">
-								<td>Ferrugem A.C.</td>
-							</tr>
+	               
+						<?php  $i++; $k++; endforeach; ?>
 						</tbody>
 					</table>
 					</div>
 				</div>
-				<div class="col-xs-6 col-sm-6 col-md-3 col-lg-3">
-					<div class="equipos">
-					<table class="tablascg">
-						<thead>
-							<tr>
-								<th>Equipo</th>
-							</tr>
-						</thead>
-						<tbody>
-							<tr>
-								<td>Ferrugem A.C.</td>
-							</tr>
-							<tr class="alt">
-								<td>Sacachispa</td>
-							</tr>
-							<tr>
-								<td>Ficatucho</td>
-							</tr>
-							<tr class="alt">
-								<td>Ferrugem A.C.</td>
-							</tr>
-							<tr>
-								<td>Carlos</td>
-							</tr>
-							<tr class="alt">
-								<td>Ferrugem A.C.</td>
-							</tr>
-						</tbody>
-					</table>
-					</div>
-				</div>
-				<div class="col-xs-6 col-sm-6 col-md-3 col-lg-3">
-					<div class="equipos">
-					<table class="tablascg">
-						<thead>
-							<tr>
-								<th>Equipo</th>
-							</tr>
-						</thead>
-						<tbody>
-							<tr>
-								<td>Ferrugem A.C.</td>
-							</tr>
-							<tr class="alt">
-								<td>Sacachispa</td>
-							</tr>
-							<tr>
-								<td>Ficatucho</td>
-							</tr>
-							<tr class="alt">
-								<td>Ferrugem A.C.</td>
-							</tr>
-							<tr>
-								<td>Carlos</td>
-							</tr>
-							<tr class="alt">
-								<td>Ferrugem A.C.</td>
-							</tr>
-						</tbody>
-					</table>
-					</div>
-				</div>
-				<div class="col-xs-6 col-sm-6 col-md-3 col-lg-3">
-					<div class="equipos">
-					<table class="tablascg">
-						<thead>
-							<tr>
-								<th>Equipo</th>
-							</tr>
-						</thead>
-						<tbody>
-							<tr>
-								<td>Ferrugem A.C.</td>
-							</tr>
-							<tr class="alt">
-								<td>Sacachispa</td>
-							</tr>
-							<tr>
-								<td>Ficatucho</td>
-							</tr>
-							<tr class="alt">
-								<td>Ferrugem A.C.</td>
-							</tr>
-							<tr>
-								<td>Carlos</td>
-							</tr>
-							<tr class="alt">
-								<td>Ferrugem A.C.</td>
-							</tr>
-						</tbody>
-					</table>
-					</div>
+
 				</div>
 			</div>
 		</div>
+		
+		
 		
 		<?php $this->view('home/temp/nav_bar');?>
 		
-		<div class="modal fade" id="modal-goleadores">
-			<div class="modal-dialog modal-md">
-				<div class="modal-content">
-					<div class="modal-header">
-						<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-						<h4 class="modal-title">GOLEADORES<span>COPA ARGENTINA, DE LA C</span></h4>
-					</div>
-					<div class="modal-body">
-						<table class="tablascg">
-							<thead>
-								<tr>
-									<th>Jugador</th><th>Equipo</th><th>Goles</th>
-								</tr>
-							</thead>
-							<tbody>
-								<tr>
-									<td>Carlos Andrade</td><td>Ferrugem A.C.</td><td><strong>22</strong></td>
-								</tr>
-								<tr class="alt">
-									<td>Pepe Biondi</td><td>Sacachispa</td><td><strong>22</strong></td>
-								</tr>
-								<tr>
-									<td>German Rolon</td><td>Ficatucho</td><td><strong>22</strong></td>
-								</tr>
-								<tr class="alt">
-									<td>Carlos</td><td>Ferrugem A.C.</td><td><strong>22</strong></td>
-								</tr>
-								<tr>
-									<td>Carlos</td><td>Ferrugem A.C.</td><td><strong>22</strong></td>
-								</tr>
-								<tr class="alt">
-									<td>Carlos</td><td>Ferrugem A.C.</td><td><strong>22</strong></td>
-								</tr>
-							</tbody>
-						</table>
-					</div>
-				</div>
-			</div>
-		</div>
+		
 
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
     <script src="js/bootstrap.min.js"></script>

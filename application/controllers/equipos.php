@@ -21,9 +21,6 @@ class Equipos extends CI_Controller {
 		
 		$this->data['equipos_activos'] = $this->admin_model_new->get_all_teams_jugando_algo();
 		
-		//~ foreach ($categories as $category):
-			//~ $this->data['equipos'][$category->id] = $this->equipos_model->get_all_teams($category->id);
-		//~ endforeach;
 		$this->data['main_content'] = 'home/vistas/equipos';
 		$this->load->view('home/temp/template', $this->data);
 	}

@@ -12,58 +12,8 @@ class Fixture extends CI_Controller {
 
 	}
 	
-    # TODO arreglar este HACK que puse el event_id por defecto
-	function index($event_id=26,$fecha=NULL)
+	function index()
 	{
-			
-		//Declaramos offset y limit para la paginación
-		$limit = 1;
-		#$offset = 1;
-		//~ ESTO TENGO QUE VER BIEN COMO LO HAGO,QUIZAS DEBERIA SACARLO
-		$fase = 1;
-		
-		if ($fecha){
-			$current_fecha = $fecha;
-		}	
-		else{
-			$current_fecha = $this->fixture_model->get_actual($fase);
-		}
-		
-		//By default show a main category in order to fill the table content
-	
-		if (!$event_id){
-			$event_id = $default_category;
-		}
-		
-		
-		//~ Aca me podria fijar dependiendo del torneo que se juega la cantidad de fechas
-		$total_rows = $this->fixture_model->get_nros_fecha($fase) + 1;
-		
-		$data['fecha_nro'] = $current_fecha;
-		$this->load->library('pagination_torneo');
-		
-		$config = array(
-				'base_url'		=> base_url().'fixture/show/' . $event_id ,
-				'total_rows'	=> $total_rows,
-				'per_page'		=> $limit,
-				'cur_page'		=> $current_fecha,
-				'uri_segment'  => '2',
-				'full_tag_open'	=> '<div id="paginacion">',
-				'full_tag_close' => '</div><div class="clear"></div>',
-				'first_link'	=>	FALSE,
-				'last_link'		=>	FALSE,
-				'use_page_numbers' => FALSE,
-				'cur_tag_open'	=>	'<strong>',
-				'cur_tag_close'	=>	'</strong>'
-			);
-			
-		$this->pagination_torneo->initialize($config);
-			
-
-		$fecha = $current_fecha;
-		
-		$data['fixture'] = $this->fixture_model_new->get_partidos($event_id,$fecha);
-		$data['event_name'] = $this->fixture_model_new->get_category_and_subcategory($event_id); //para imprimir el nombre por pantalla
 
 		$url_link = 'fixture/show/';
 		$data['categoryTree'] = $this->fixture_model_new->parse_category_tree($url_link); # Category Tree
@@ -75,65 +25,40 @@ class Fixture extends CI_Controller {
 		$this->load->view('home/temp/template', $data);
 	}
 
-	function show ($event_id=26,$fecha=NULL)
-{
-		
-	//Declaramos offset y limit para la paginación
-	$limit = 1;
-	#$offset = 1;
-	//~ ESTO TENGO QUE VER BIEN COMO LO HAGO,QUIZAS DEBERIA SACARLO
-	$fase = 1;
+	function show($event_id,$fecha=NULL)
+	{
 	
+	# Tomo las fechas por evento
+	$fechas_por_evento = $this->fixture_model_new->get_fechas_por_evento($event_id);
+	
+	$count_fechas = count($fechas_por_evento);
+
+	# Toma la fecha actual para mostrar
 	if ($fecha){
 		$current_fecha = $fecha;
 	}	
 	else{
-		$current_fecha = $this->fixture_model->get_actual($fase);
+		$current_fecha = $this->fixture_model_new->get_fecha_defecto($event_id);
 	}
 	
-	//By default show a main category in order to fill the table content
- 	
-	if (!$event_id){
-		$event_id = $default_category;
-	}
+	$data['current_fecha'] = $current_fecha;
 	
+	foreach($fechas_por_evento as $fecha):
+		$fecha = $fecha->nro_fecha_id;
+		$data['fixtures'][$fecha] =  $this->fixture_model_new->get_partidos($event_id,$fecha);
+	endforeach;
 	
-	//~ Aca me podria fijar dependiendo del torneo que se juega la cantidad de fechas
-	$total_rows = $this->fixture_model->get_nros_fecha($fase) + 1;
-	
-	$data['fecha_nro'] = $current_fecha;
-	$this->load->library('pagination_torneo');
-	
-	$config = array(
-			'base_url'		=> base_url().'fixture/show/' . $event_id ,
-			'total_rows'	=> $total_rows,
-			'per_page'		=> $limit,
-			'cur_page'		=> $current_fecha,
-			'uri_segment'  => '2',
-			'full_tag_open'	=> '<div id="paginacion">',
-			'full_tag_close' => '</div><div class="clear"></div>',
-			'first_link'	=>	FALSE,
-			'last_link'		=>	FALSE,
-			'use_page_numbers' => FALSE,
-			'cur_tag_open'	=>	'<strong>',
-			'cur_tag_close'	=>	'</strong>'
-		);
-		
-	$this->pagination_torneo->initialize($config);
-		
-	$fecha = $current_fecha;
-	
-	$data['fixture'] = $this->fixture_model_new->get_partidos($event_id,$fecha);
-	$data['event_name'] = $this->fixture_model_new->get_category_and_subcategory($event_id); //para imprimir el nombre por pantalla
 
+	
+	$data['fixture_actual'] = $this->fixture_model_new->get_partidos($event_id,$current_fecha);
+	$data['event_name'] = $this->fixture_model_new->get_category_and_subcategory($event_id); //para imprimir el nombre por pantalla
+	$data['event_id'] = $event_id;
 	$url_link = 'fixture/show/';
 	
 	$data['title'] = "So&ntilde;ando con el Gol";
 	$data['message'] = (validation_errors()) ? validation_errors() : $this->session->flashdata('message');
 	
 	$this->load->view('home/fixture/table_wrapper_view', $data);
-}
- 	
 	
-	
+	}
 }

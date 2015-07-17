@@ -36,42 +36,21 @@ class Fixture_model_new extends CI_Model{
 			return 0;
 	}
 	function get_partidos($event_id,$fecha){
-		if ($fecha == 0){		
-			$this->db->select('p.id as p_id,e1.name as name_equipo1,e1.id as id_equipo1,e2.name as name_equipo2,e2.id as id_equipo2,nro_fecha,date,time,court,team1_res,team2_res,team1_pen,team2_pen,cargado');
-			$this->db->from('partidos p');
-			$this->db->join('equipos e1','e1.id = p.team1_id');
-			$this->db->join('equipos e2','e2.id = p.team2_id');
-			#$this->db->join('fechas f','f.id = p.nro_fecha_id');
-			#lo hago con nro de fecha y no con el id
-			$this->db->join('fechas f','f.nro_fecha = p.nro_fecha_id');
-			$this->db->where('tournament_id',$event_id);
-			$this->db->where('actual','1');
-			//~ $this->db->where('fase',$fase);
-			$query = $this->db->get();
-			$partidos = $query->result();
-            #echo $this->db->last_query() . "<br>";
-			return $partidos;
-		}
-		#la anterior
-		else {
-			$this->db->select('p.id as p_id,e1.name as name_equipo1,e1.id as id_equipo1,e2.name as name_equipo2,e2.id as id_equipo2,nro_fecha,date,time,court,team1_res,team2_res,team1_pen,team2_pen,cargado');
-			$this->db->from('partidos p');
-			$this->db->join('equipos e1','e1.id = p.team1_id');
-			$this->db->join('equipos e2','e2.id = p.team2_id');
-			#$this->db->join('fechas f','f.id = p.nro_fecha_id');
-			#lo hago con nro de fecha y no con el id
-			$this->db->join('fechas f','f.nro_fecha = p.nro_fecha_id');
-			$this->db->where('tournament_id',$event_id);
-			$this->db->where('nro_fecha',$fecha);
-			//~ $this->db->where('fase',$fa	se);
-			$query = $this->db->get();
-			$partidos = $query->result();
-			#echo $this->db->last_query() . "<br>";
-		  
-			return $partidos;
-		}	
+		
+		$this->db->select('p.id as p_id,e1.name as name_equipo1,e1.id as id_equipo1,e2.name as name_equipo2,e2.id as id_equipo2,nro_fecha,date,time,court,team1_res,team2_res,team1_pen,team2_pen,cargado');
+		$this->db->from('partidos p');
+		$this->db->join('equipos e1','e1.id = p.team1_id');
+		$this->db->join('equipos e2','e2.id = p.team2_id');
+		$this->db->join('fechas f','f.nro_fecha = p.nro_fecha_id');
+		$this->db->where('tournament_id',$event_id);
+		$this->db->where('nro_fecha',$fecha);
+		$query = $this->db->get();
+		$partidos = $query->result();
+		//~ echo $this->db->last_query() . "<br>";
+	  
+		return $partidos;
+
 	}
-	
 	
 	function get_partidos_elim($tournament_id){
 		$this->db->select('p.id as p_id,e1.name as name_equipo1,e1.id as id_equipo1,e2.name as name_equipo2,e2.id as id_equipo2,date,time,court,team1_res,team2_res,team1_pen,team2_pen,cargado');
@@ -105,11 +84,11 @@ class Fixture_model_new extends CI_Model{
 		$query = $this->db->get('fechas');
 
 		if ($query->num_rows() > 0)
-			{
-			   $row = $query->row(); 
-			   return   $row->nro_fecha;
-			   
-			  }
+		{
+		   $row = $query->row(); 
+		   return   $row->nro_fecha;
+		   
+		  }
 	}		
 			
 		function get_nro_grupo($tournament,$type,$category){
@@ -365,6 +344,38 @@ class Fixture_model_new extends CI_Model{
 		}
         #echo $this->db->last_query() . "<br>";
 		return $string;
+	}
+	
+	function get_fechas_por_evento($event_id){
+		$this->db->distinct();
+		$this->db->select('nro_fecha_id');
+		$this->db->from('partidos');
+		$this->db->where('tournament_id',$event_id);
+		$query = $this->db->get();
+		$fechas = $query->result();
+		//~ echo $this->db->last_query() . "<br>";
+
+		return $fechas;
+	}
+	
+	function get_fecha_defecto($event_id){
+		$this->db->select('nro_fecha_id');
+		$this->db->from('partidos');
+		$this->db->where('tournament_id',$event_id);
+		$this->db->where('cargado',0);
+		$this->db->group_by('nro_fecha_id');
+		
+		$this->db->order_by('count(cargado) ASC,nro_fecha_id ASC');
+		$this->db->limit(1);
+
+		$query = $this->db->get();
+		//~ echo $this->db->last_query() . "<br>";
+
+		if ($query->num_rows() > 0)
+		{
+			$row = $query->row(); 
+			return $row->nro_fecha_id;		   
+		}
 	}
 }
 		
