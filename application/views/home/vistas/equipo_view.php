@@ -124,22 +124,7 @@
 			</div>
 		</div>
 		
-		<nav class="navbar">
-			<div class="container">
-				<div class="row" id="botnav">
-					<div class="col-xs-12 col-sm-12 col-md-3 col-lg-3">
-						<h3>Recibir NEWSLETTER de SCG</h3>
-					</div>
-					<div class="col-xs-12 col-sm-12 col-md-5 col-lg-5">
-						<input type="text" name="newsletteremail" placeholder="Escribe tu email..."/>
-						<button role="button">OK</button>
-					</div>
-					<div class="col-xs-12 col-sm-12 col-md-4 col-lg-4">
-						<div class="pull-right xsnopull"><a href="#"><img src="img/developedby.jpg"/></a></div>
-					</div>
-				</div>
-			</div>
-		</nav>
+				<?php $this->view('home/temp/nav_bar');?>
 
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
     <script src="js/bootstrap.min.js"></script>
