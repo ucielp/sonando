@@ -8,3 +8,10 @@ UPDATE `sonando_db`.`reglamento` SET `group` = '2' WHERE `reglamento`.`id` = 1; 
 
 --Category 'Por la C' modified as 'nodo'
 UPDATE `sonando_db`.`category` SET `tipo` = 'nodo' WHERE `category`.`id` = 40;
+
+--Agrego newsletter
+CREATE TABLE IF NOT EXISTS `newsletter` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `email` varchar(50) NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
