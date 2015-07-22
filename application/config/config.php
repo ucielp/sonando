@@ -1,4 +1,4 @@
-<?php  if ( ! defined('BASEPATH')) exit('No direct script access allowed');
+<?php if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 
 /*
 |--------------------------------------------------------------------------
@@ -15,7 +15,7 @@
 |
 */
 #para la version web
-#$config['base_url']	= "http://sonandoconelgol.com.ar";
+#$config['base_url']	= "http://www.sonandoconelgol.com.ar";
 $config['base_url']	= "http://localhost/sonando";
 
 /*
@@ -358,7 +358,5 @@ $config['rewrite_short_tags'] = FALSE;
 |
 */
 $config['proxy_ips'] = '';
-
-
 /* End of file config.php */
 /* Location: ./application/config/config.php */

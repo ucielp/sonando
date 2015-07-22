@@ -1,5 +1,5 @@
 $(function() {
-	// Only for views with catMenu
+	// Only for views with catMenu	
 	$('.catmenu').parent().css('marginBottom','80px');	
 	// Let's find all categories with subcategories
 	$('.catmenu ul').find('li:has(ul)')
@@ -20,8 +20,8 @@ $(function() {
 		return false;
 	});	
 	// Start with the first element expanded
-	$('.catmenu ul').closest('li').first().addClass('expanded');
-	$('.catmenu ul').closest('li').first().children('ul').show();
+	//~ $('.catmenu ul').closest('li').first().addClass('expanded');
+	//~ $('.catmenu ul').closest('li').first().children('ul').show();
 	// IE7/8 trick for last-child style
 	$('.catmenu ul li:last-child').css('borderBottom','0')
 });

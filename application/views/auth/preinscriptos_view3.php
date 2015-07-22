@@ -22,6 +22,7 @@
                     <th>Foto</th>                    
                     <th>Electro</th>
                     <th>Certificado</th>
+                    <th>Deslinde</th>
 					<th>Edit</th>
 					<th>Eliminar</th>
                     <th>Inscribir</th>
@@ -96,6 +97,28 @@
 						?> <td>  <?php echo form_checkbox($certificado2);?><?php echo form_checkbox($certificado);?>  </td>
 						
 	
+						<?php 
+						$deslinde_name = 'deslinde[' . $user['id']. ']';
+						if ($user['deslinde'] == 1){
+							$checked = TRUE;
+							}
+						else
+						{
+							$checked = FALSE;
+						}
+						$deslinde = array(
+							'name'  => $deslinde_name,
+							'value' => '1',
+							'checked'     =>  $checked,
+						); 	
+						$deslinde2 = array(
+							'name'  => $deslinde_name,
+							'value' => '0',
+							'checked'     =>  $checked,
+							'type'     =>  'hidden',
+
+						); 	
+						?> <td>  <?php echo form_checkbox($deslinde2);?><?php echo form_checkbox($deslinde);?>  </td>
 								 
 					    <td><?php echo (anchor("auth/edit_player/".$user['id'], 'Edit'));?></td>
 							<td><?php 

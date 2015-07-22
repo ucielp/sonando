@@ -20,21 +20,41 @@ class Admin_model_new extends CI_Model{
 	}
 		
 	#me devuelve las categorias para poner en un comboBox
-	function get_categories_combo_box(){
-		$this->db->select('id, name_category');	
+	# Este metodo arriba se colgaba porque hace muchas consultas
+	//~ function get_categories_combo_box(){
+		//~ $this->db->select('id, name_category');	
+		//~ $this->db->from('category');
+		//~ $this->db->order_by('parent_id asc');
+		//~ $query = $this->db->get();
+		//~ if ($query->num_rows() > 0)
+		//~ {			
+			//~ foreach($query->result_array() as $row){
+				//~ $name_category_completo = $this->fixture_model_new->get_category_and_subcategory($row['id']);
+				//~ $combo[$row['id']]=$name_category_completo;	
+			//~ }
+			//~ return $combo;
+		//~ }
+			//~ return 0;
+	//~ }
+	
+	function get_table_categories(){
+		$this->db->select('id, name_category,parent_id');	
 		$this->db->from('category');
 		$this->db->order_by('parent_id asc');
 		$query = $this->db->get();
 		if ($query->num_rows() > 0)
-		{			
+		{	
+			$this->load->library('table');
+			$this->table->set_heading('ID', 'Category', 'ID Padre');
 			foreach($query->result_array() as $row){
-				$combo[$row['id']]=$row['name_category'];	
+				
+			$this->table->add_row($row['id'], $row['name_category'] , $row['parent_id']);
+
 			}
-			return $combo;
+			return $this->table->generate();
 		}
 			return 0;
 	}
-	
 
 	
 	function get_events_combo_box(){
@@ -84,10 +104,11 @@ class Admin_model_new extends CI_Model{
 			return 0;
 	}
 	
-	function create_category($name_category,$parent_id,$show){
+	function create_category($name_category,$parent_id,$show,$tipo){
 		$this->db->set('name_category', $name_category);
 		$this->db->set('parent_id', $parent_id);
 		$this->db->set('show', $show);
+		$this->db->set('tipo', $tipo);
 
 		$this->db->insert('category');
 		return $this->db->insert_id();
@@ -167,19 +188,6 @@ class Admin_model_new extends CI_Model{
 		return $warning;
 	}
 	
-	###ESTO LO USO PARA CAMBIAR LAS CATEGORIAS DE LOS EQUIPOS
-	#me devuelve las categorias para poner en un comboBox
-	function get_events_ninguno(){
-		$this->db->select('id, name_event as name, category_id');	
-		$this->db->from('events');
-		$query = $this->db->get();
-		foreach($query->result_array() as $row){
-			$combo[$row['id']]=$row['name'];	
-			}
-		$combo[0] = 'Ninguna';
-		return $combo;
-	}
-	
 	function get_orden_ninguno(){
 		$combo[0] = '1';
 		$combo[1] = '2';
@@ -206,20 +214,42 @@ class Admin_model_new extends CI_Model{
 		return $combo;
 	}
 	
-	function get_all_teams_nocategory(){
+	function get_all_teams(){
 		
-		$query = $this->db->query('SELECT e.id as e_id,e.name as e_name, t.id as t_id,eq.password as psswd, e.orden as orden FROM equipos e 
-		JOIN events t ON t.id = e.category_id
+		$query = $this->db->query('
+		SELECT e.id as e_id,e.name as e_name, eq.password as psswd, eq.user as user, e.activo
+		FROM equipos e 
 		JOIN equipos_users eq ON eq.team_id = e.id
-		UNION 
-		SELECT eq.id as e_id,eq.name as e_name, 0,eqp.password as psswd,0 as t_id FROM equipos eq 
-        JOIN equipos_users eqp ON eqp.team_id = eq.id
-        WHERE eq.category_id = 0 
-		ORDER BY t_id ASC, e_name ASC');	
+		ORDER BY e_name ASC');	
 		//~ echo $this->db->last_query() . "<br>";
 
 		return $query->result();
     }
+    
+    function get_all_teams_activos(){
+		
+		$this->db->select('name as e_name, id as e_id');	
+		$this->db->from('equipos');
+		$this->db->where('activo', '1');
+		$this->db->order_by('e_name','ASC');
+		
+		$query = $this->db->get();
+		
+		return $query->result();
+    }
+        
+   function get_all_teams_jugando_algo(){
+		
+	 
+		
+		$query = $this->db->query('SELECT name as e_name, id
+					FROM equipos WHERE id IN (select team_id from category_display) ORDER BY name');	
+				
+		return $query->result();
+    }
+    
+       
+        
     
 	function torneo_generado($event_id)
 	{
@@ -232,13 +262,62 @@ class Admin_model_new extends CI_Model{
 		}
 	}
 	
-	function generate_fase($event_id,$ida_vuelta){
-		$equipos = $this->admin_model_new->get_teams($event_id);
+	function insert_equipo_torneo($ids_en_array, $show, $category_id){
+		$i = 1;
+		foreach ($ids_en_array as $id){
+			if ($show[$i]){
+				$this->db->set('team_id', $ids_en_array[$i]);
+				$this->db->set('category_id', $category_id);
+				$this->db->insert('category_display');
+				$this->db->insert_id();
+			}
+			$i++;
+		}
+		
+	}
+	
+	function delete_equipo_from_category_display($category_id,$team_id)
+	{
+		$this->db->where('category_id', $category_id);
+		$this->db->where('team_id', $team_id);
+		$this->db->delete('category_display'); 
+	}
+	
+	function update_equipos_from_category_display($category_id, $new_post, $new_post_id){
+		$i = 0;
+		foreach ($new_post_id as $a){
+			$ids[$i] = $a;
+			$i++;
+		}
+		
+		$i = 0;
+		foreach ($new_post as $post){
+			$data = array(
+				'orden' => $post,
+           	);
+			$this->db->where('category_id', $category_id);
+			$this->db->where('team_id', 	$ids[$i]);
+			$this->db->update('category_display', $data);
+			$this->db->insert_id();
+			$i++;
+		}
+	}
+	
+	function generate_tournament($tournament_id,$tipo_torneo){
+		
+        if ($tipo_torneo == 'ida'){
+            $ida_vuelta = 0;
+        }
+        else{
+            $ida_vuelta = 1;
+        }
+        
+        $equipos = $this->admin_model_new->get_teams($tournament_id);
 		$i = 0;
 		
 		foreach ($equipos as $row)
 		{
-		   $equipos_id[$i] = $row['id'];	
+		   $equipos_id[$i] = $row['team_id'];	
 		   $i++;
 		}
 		#GENERO EL EQUIPO FANTASMA CON ID = 0
@@ -246,34 +325,37 @@ class Admin_model_new extends CI_Model{
 			$equipos_id[$i] = 0;
 		}
 		
-		$this->admin_model_new->show_fixtures($equipos_id,$event_id,$ida_vuelta);
+		$this->admin_model_new->show_fixtures($equipos_id,$tournament_id,$ida_vuelta);
 		
 		$cant = sizeof($equipos);
-		#esto es para fases
+		#de ahora en mas siempre dejo fase 1 y veo si lo puedo eliminar
 		$fase = 1;
 		
 		$this->admin_model_new->generate_fechas($cant,$fase,$ida_vuelta);
 		
 		#seteo en 1 el campo generado de tipo_torneo
-		$this->admin_model_new->se_genero_eltorneo($event_id);
+		$this->admin_model_new->se_genero_eltorneo($tournament_id);
 	}
 	
 	
-	#la uso en generate_fase
-	function get_teams($event_id){
-        $this->db->select('id,name');
-        $this->db->from('equipos');
-        $this->db->where('category_id',$event_id);
+	#la uso en generate_tournament
+	function get_teams($tournament_id){
+        $this->db->select('team_id');
+        $this->db->from('category_display');
+        $this->db->where('category_id',$tournament_id);
 		$this->db->order_by('orden','ASC');
-		$this->db->order_by('name','ASC');
+		$this->db->order_by('id','ASC');
 
         $query = $this->db->get();
+        
+        # echo $this->db->last_query() . "<br>";
+
         $res = $query->result_array();
         return $res;
     }
 	
-	#la uso en generate_fase
-    function show_fixtures($team_ids,$event_id,$ida_vuelta)
+	#la uso en generate_tournament
+    function show_fixtures($team_ids,$tournament_id,$ida_vuelta)
     {
 	   $teams = sizeof($team_ids);
 	      
@@ -300,8 +382,8 @@ class Admin_model_new extends CI_Model{
 				if ($match == 0) {
 					$away = $teams - 1;
 				}
-				$rounds[$round][$match] = $this->admin_model->team_name($home + 1, $team_ids) 
-					. " vs " .  $this->admin_model->team_name($away + 1, $team_ids);
+				$rounds[$round][$match] = $this->admin_model_new->team_name($home + 1, $team_ids) 
+					. " vs " .  $this->admin_model_new->team_name($away + 1, $team_ids);
 			}
    		}
 	   
@@ -326,7 +408,7 @@ class Admin_model_new extends CI_Model{
 		// to home on odd rounds.
 		for ($round = 0; $round < sizeof($rounds); $round++) {
 			if ($round % 2 == 1) {
-				$rounds[$round][0] = $this->admin_model->flip($rounds[$round][0]);
+				$rounds[$round][0] = $this->admin_model_new->flip($rounds[$round][0]);
 			}
 		}
 		for ($i = 0; $i < sizeof($rounds); $i++) {
@@ -334,12 +416,12 @@ class Admin_model_new extends CI_Model{
 			foreach ($rounds[$i] as $r){
 				list($team1_id, $team2_id) = explode('vs', $r);
 				
-				$this->db->set('tournament_id', $event_id);
+				$this->db->set('tournament_id', $tournament_id);
 				$this->db->set('team1_id', $team1_id);
 				$this->db->set('team2_id', $team2_id);
 				$this->db->set('nro_fecha_id', $i+1);
 				$this->db->insert('partidos');
-				
+				# echo $this->db->last_query() . "<br>";
 	 			$res = $this->db->insert_id();
 			}
     	}
@@ -351,9 +433,9 @@ class Admin_model_new extends CI_Model{
 			for ($i = sizeof($rounds) - 1; $i >= 0; $i--) {
 				$round_counter += 1;
 				foreach ($rounds[$i] as $r) {
-					$r_flip = $this->admin_model->flip($r);
+					$r_flip = $this->admin_model_new->flip($r);
 					list($team1_id, $team2_id) = explode('vs', $r_flip);
-					$this->db->set('tournament_id', $event_id);
+					$this->db->set('tournament_id', $tournament_id);
 					$this->db->set('team1_id', $team1_id);
 					$this->db->set('team2_id', $team2_id);
 					$this->db->set('nro_fecha_id', $i+1+$k);
@@ -368,7 +450,7 @@ class Admin_model_new extends CI_Model{
 			}
   	  }
 	
-	#la uso en generate_fase
+	#la uso en generate_tournament
 	function generate_fechas($cant,$fase,$ida_vuelta){
 		$cant = $cant - 1;
 		if ($ida_vuelta){
@@ -392,13 +474,30 @@ class Admin_model_new extends CI_Model{
 			}
 		}
 	}
+    
+    #la uso en show_fixtures
+	function flip($match) {
+   	 	$components = explode(' vs ', $match);
+   	 	return $components[1] . " vs " . $components[0];
+	}
 	
-	function se_genero_eltorneo($event_id){
+	#la uso en show_fixtures
+	function team_name($num, $names) {
+			$i = $num - 1;
+		if (sizeof($names) > $i && strlen(trim($names[$i])) > 0) {
+			return trim($names[$i]);
+		} else {
+			return $num;
+		}
+	}
+	
+	function se_genero_eltorneo($tournament_id){
 			$data = array(
+            # TODO esto tiene que estar en 1
 				'generado' => '1',
            	);
-			$this->db->where('id', $event_id);
-			$this->db->update('events', $data);
+			$this->db->where('id', $tournament_id);
+			$this->db->update('category', $data);
 			$id_test = $this->db->insert_id();
 	} 
 	
@@ -414,21 +513,22 @@ class Admin_model_new extends CI_Model{
 		}
 	}
 	
-	function generate_table_positions($event_id,$fase){
-		$teams = $this->admin_model_new->get_teams($event_id);
+	function generate_table_positions($tournament_id){
+        
+		$teams = $this->admin_model_new->get_teams($tournament_id);
 		foreach ($teams as $team){
-			$this->db->set('team_id', $team['id']);
-			$this->db->set('fase', $fase);
+			$this->db->set('team_id', $team['team_id']);
+            $this->db->set('category_id', $tournament_id);
 			$this->db->insert('posiciones');
 			}
 			return $teams;
 	}
+    
 	function get_fechas(){
 		
 		$this->db->select('id');
 		$this->db->from('fechas');
 		$this->db->where("actual", "1");
-		$this->db->where("fase", "2");
 
 		$query = $this->db->get();
 		
@@ -484,6 +584,18 @@ class Admin_model_new extends CI_Model{
 		return $query->result();
 	}
 	
+	function get_reglamentos_by_group(){
+		$this->db->from('reglamento');
+		$this->db->order_by('group');
+		$query = $this->db->get();
+        if ($query->num_rows() > 0){
+            foreach($query->result_array() as $row){
+				$grupo[$row['group']][$row['id']] = $row;
+			}
+			return $grupo;		
+        }
+	}
+	
 	function get_team_category($team_id)
 	{
 		$this->db->select('name_event');	
@@ -504,10 +616,10 @@ class Admin_model_new extends CI_Model{
 	function get_partidos_por_fecha()
 	{
 		
-		$this->db->select('eq1.name equipo1,eq2.name equipo2,e.name_event,p.time as horario,p.court as cancha');	
+		$this->db->select('eq1.name equipo1,eq2.name equipo2,c.id as id_category,p.time as horario,p.court as cancha');	
 		$this->db->from('partidos p');
 		$this->db->join('fechas f','f.id = p.nro_fecha_id');
-		$this->db->join('events e','e.id = p.tournament_id');
+		$this->db->join('category c','c.id = p.tournament_id');
 		$this->db->join('equipos eq1','eq1.id = p.team1_id');
 		$this->db->join('equipos eq2','eq2.id = p.team2_id');
 		$this->db->where('f.actual', 1);
@@ -520,5 +632,719 @@ class Admin_model_new extends CI_Model{
 		}
 	}
 	
-}
+	function get_tipo_torneos()
+	{
+
+		$query = $this->db->query("SHOW COLUMNS FROM category LIKE 'tipo'");	
+
+		foreach ($query->result() as $row){
+			$enums = $row->Type;
+			$regex = "/'(.*?)'/";
+			preg_match_all( $regex , $enums, $enum_array );
+			$enum_fields = $enum_array[1];
+		}
 		
+		foreach($enum_fields as $enum_data){
+			$combo[$enum_data]=$enum_data;	
+		}
+		return $combo;
+	}
+	
+	function get_category_tree() {
+	
+		$this->db->select('id, parent_id,name_category,tipo');	
+		$this->db->from('category');
+		$query = $this->db->get();
+		  
+
+		foreach ($query->result() as $row)
+		{
+			$pid  = $row->parent_id;
+			$id   = $row->id;
+			$name = $row->name_category;
+			$tipo = $row->tipo;
+
+			$tree[$id]["tipo"] = $tipo;
+
+			
+			// Create or add child information to the parent node
+			if (isset($tree[$pid]))
+				// a node for the parent exists
+				// add another child id to this parent
+				$tree[$pid]["children"][] = $id;
+			else
+				// create the first child to this parent
+				$tree[$pid] = array("children"=>array($id));
+
+			// Create or add name information for current node
+			if (isset($tree[$id]))
+				// a node for the id exists:
+				// set the name of current node
+				$tree[$id]["name"] = $name;
+			else
+				// create the current node and give it a name
+				$tree[$id] = array( "name"=>$name );
+				
+		}
+		return $tree;
+	}
+	
+	function convert_to_ul($tree, $id, $html,$url_link){
+			
+	  if (isset($tree[$id]['name'])){
+	  //~ if (isset($tree[$id]['name']) & ($tree[$id]['tipo'] == 'ida' )){
+			if($tree[$id]['tipo'] == "nodo"){
+				$html .= 
+					'<li>' .
+						'<span class="nav-click"></span>' . $tree[$id]['name'] ;
+			}
+			else{
+				$html .= 
+					'<li>' .
+						'<span class="nav-click"></span>' .
+						'<a href="' . base_url() . $url_link . $id . '">' . $tree[$id]['name'] . '</a>';
+			}
+	   }			
+
+	  if (isset($tree[$id]['children']))
+	  {
+		$arChildren = &$tree[$id]['children'];
+		$len = count($arChildren);
+		$html .= '<ul>';
+		for ($i=0; $i<$len; $i++) {
+			$html .= $this->admin_model_new->convert_to_ul($tree, $arChildren[$i], "",$url_link);
+		}
+		$html .= '</ul>'.PHP_EOL;
+	  }
+
+	  $html .= '</li>'.PHP_EOL;
+	  return $html;
+	}
+	
+	function parse_tree ($url_link) {
+	    $tree = $this->admin_model_new->get_category_tree();
+		$too  = $this->admin_model_new->convert_to_ul($tree, 0, "",$url_link);
+		
+		return $too;
+	}
+	
+	
+	function get_data_category_by_id($id){
+		$this->db->select('name_category,show,tipo,generado');	
+		$this->db->from('category');
+		$this->db->where('id', $id);
+		$query = $this->db->get();
+
+		foreach ($query->result() as $row){
+			return $row;
+		}
+	}
+	
+	function get_all_teams_from_category_display_by_categoryid($category_id){
+        $this->db->select('team_id,e.name as nombre_equipo,cd.orden as el_orden');
+        $this->db->from('category_display cd');
+		$this->db->join('equipos e','e.id=cd.team_id');
+        $this->db->where('cd.category_id',$category_id);
+		$this->db->order_by('cd.orden','ASC');
+		$this->db->order_by('name','ASC');
+
+        $query = $this->db->get();
+        $res = $query->result();
+        
+        if ($query->num_rows() > 0)
+		{
+		  return $res;
+		}
+		else{
+			return 0;
+		}
+    }
+    
+    ### Funciones para swap
+    
+    function get_all_teams_from_category_display_by_categoryid_combobox($category_id){
+        $this->db->select('team_id,e.name as nombre_equipo');
+        $this->db->from('category_display cd');
+		$this->db->join('equipos e','e.id=cd.team_id');
+        $this->db->where('cd.category_id',$category_id);
+		$this->db->order_by('cd.orden','ASC');
+		$this->db->order_by('name','ASC');
+
+        $query = $this->db->get();
+        if ($query->num_rows() > 0)
+		{
+            foreach($query->result_array() as $row){
+				$combo[$row['team_id']]=$row['nombre_equipo'];	
+			}
+            $combo[0] = 'Elegir equipo para que salga';
+			return $combo;		
+        }
+		else{
+			return 0;
+        }
+    }
+    
+    
+    function get_all_teams_not_this_category($category_id){
+
+        $query = $this->db->query('SELECT name as e_name, id as e_id FROM equipos 
+        WHERE activo = 1
+        AND ID NOT IN (SELECT team_id FROM category_display WHERE category_id = '. $category_id . ')');	
+
+        return $query->result();
+    }
+
+     function get_all_teams_not_this_category_combo($category_id){
+
+		$query = $this->db->query('SELECT name as nombre_equipo, id as team_id FROM equipos 
+		WHERE activo = 1
+		AND ID NOT IN (SELECT team_id FROM category_display WHERE category_id = '. $category_id . ')');	
+
+        
+        if ($query->num_rows() > 0)
+		{
+            foreach($query->result_array() as $row){
+				$combo[$row['team_id']]=$row['nombre_equipo'];	
+			}
+            $combo[0] = 'Elegir equipo para que entre';
+			return $combo;		
+        }
+		else{
+			return 0;
+        }
+    }
+    
+    function swap_teams($tournament_id,$team_in,$team_out){
+        
+        //~ echo "$tournament_id,$team_in,$team_out";
+		
+		
+		###partidos 
+		$data = array(
+				'team1_id' =>  $team_in,
+           	);
+		$this->db->where('team1_id', $team_out);
+        $this->db->where('tournament_id', $tournament_id);
+		$this->db->update('partidos', $data);
+		$this->db->insert_id();	
+				
+		$data = array(
+				'team2_id' =>  $team_in,
+           	);
+		$this->db->where('team2_id', $team_out);
+        $this->db->where('tournament_id', $tournament_id);
+		$this->db->update('partidos', $data);
+		$this->db->insert_id();			
+
+
+		# category_display
+		$data = array(
+				'team_id' =>  $team_in,
+           	);
+		$this->db->where('team_id', $team_out);
+        $this->db->where('category_id', $tournament_id);
+		$this->db->update('category_display', $data);
+		$this->db->insert_id();
+		
+		# posiciones 
+		$data = array(
+				'team_id' =>  $team_in,
+           	);
+		$this->db->where('team_id', $team_out);
+        $this->db->where('category_id', $tournament_id);
+		$this->db->update('posiciones', $data);
+		$this->db->insert_id();	
+		
+	}
+    
+    ################# end of swap
+    
+    function get_partidos($tournament_id,$actual_fecha_id){
+		$this->db->select('p.id as p_id,e1.name as name_equipo1,e2.name as name_equipo2,nro_fecha,date,time,court,team1_res,team2_res,team1_pen,team2_pen,cargado');
+		$this->db->from('partidos p');
+		$this->db->join('equipos e1','e1.id = p.team1_id');
+		$this->db->join('equipos e2','e2.id = p.team2_id');
+		$this->db->join('fechas f','f.nro_fecha= p.nro_fecha_id');
+		$this->db->where('tournament_id',$tournament_id);
+		$this->db->where('f.id',$actual_fecha_id);
+		$query = $this->db->get();
+		//~ echo $this->db->last_query() . "<br>";
+		$partidos = $query->result();
+		return $partidos;
+	}
+	
+    function set_horarios($partidos_id,$dias,$horarios,$canchas)
+		{
+	 	$i = 1; 
+		foreach ($partidos_id as $partido)
+		{
+		
+			#esto actualiza los horarios de partidos
+			$data = array(
+				'date' => $dias[$i],
+				'time' => $horarios[$i],
+				'court' => $canchas[$i],
+           	);
+         	$this->db->where('id', $partido);
+			$this->db->update('partidos', $data);
+			$this->db->insert_id();
+			
+			$i++;
+    	}  
+	}
+	
+    function set_results($partidos_id,$result1,$result2,$penal1,$penal2,$cargados,$perdidos){
+
+		$i = 1;
+		foreach ($partidos_id as $partido)
+		{		
+				#esto actualiza los partidos que no fueron seteados
+				if (!$cargados[$i]){
+					if ($perdidos[$i]){
+						#Perdieron los dos equipos se le pone 0 a 0 pero no se suman los puntos
+						$data = array(
+							'team1_res' => '0',
+							'team2_res' => '0',
+							'cargado' => '1',
+						);
+						$this->db->where('id', $partido);
+						$this->db->update('partidos', $data);
+						$this->db->insert_id();
+					}
+				else {
+					if ($penal1[$i]){
+						$p1 = $penal1[$i];
+					}
+					else{
+						$p1 = 'NULL';
+					}
+					
+					if ($penal2[$i]){
+						$p2 = $penal2[$i];
+					}
+					else{
+						$p2 = 'NULL';
+					}		
+							
+					$data = array(
+							'team1_res' => $result1[$i],
+							'team2_res' => $result2[$i],
+							'team1_pen' => $p1,
+							'team2_pen' => $p2,
+							'cargado' => '1',
+						);
+						$this->db->where('id', $partido);
+						$this->db->update('partidos', $data);
+						$this->db->insert_id();
+						# echo $this->db->last_query() . "<br>";
+
+				}
+			}
+			else{
+				#echo "esos partidos fueron seteados anteriormente: " . $partido . "<br>";
+			}	
+			$i++;
+    	}  
+	}
+    
+    function update_positions($partidos,$cargado,$actual_perdido,$actual_tournament_id){
+		if (!$cargado){
+			if  ($actual_perdido){
+				$this->ambos_perdieron($partidos->team1_id,$partidos->team2_id,$actual_tournament_id);
+			}
+			else {
+				if ($partidos->team1_res == $partidos->team2_res){
+					$this->empate($partidos->team1_id,$partidos->team2_id,$partidos->team1_res,$partidos->team2_res,$actual_tournament_id);
+				}
+				else if ($partidos->team1_res > $partidos->team2_res){
+					$this->ganador($partidos->team1_id,$partidos->team2_id,$partidos->team1_res,$partidos->team2_res,$actual_tournament_id);
+				}
+				else {
+					$this->ganador($partidos->team2_id,$partidos->team1_id,$partidos->team2_res,$partidos->team1_res,$actual_tournament_id);
+				}
+			}
+		}
+		else{
+				#equipo ya cargado
+			}
+	}
+	
+    
+    	function empate($team1_id,$team2_id, $team1_res, $team2_res,$actual_tournament_id){
+			$this->db->set('pj', 'pj + 1', FALSE);
+			$this->db->set('pe', 'pe + 1', FALSE);
+			$gf = 'gf+'. $team1_res;
+			$gc = 'gc-'. $team2_res;
+			$dg = 'dg+' . $team1_res . "-" . $team2_res;
+			$this->db->set('gf', $gf, FALSE);
+			$this->db->set('gc', $gc, FALSE);
+			$this->db->set('dg', $dg, FALSE);
+			$this->db->set('ptos', 'ptos + 1', FALSE);
+			$this->db->where('team_id', $team1_id);
+            $this->db->where('category_id', $actual_tournament_id);            
+			$this->db->update('posiciones');
+			$this->db->insert_id();
+	
+			$this->db->set('pj', 'pj + 1', FALSE);
+			$this->db->set('pe', 'pe + 1', FALSE);
+			$gf = 'gf+'. $team2_res;
+			$gc = 'gc-'. $team1_res;
+			$dg = 'dg+' . $team2_res . "-" . $team1_res;
+			$this->db->set('gf', $gf, FALSE);
+			$this->db->set('gc', $gc, FALSE);
+			$this->db->set('dg', $dg, FALSE);
+			$this->db->set('ptos', 'ptos + 1', FALSE);
+			$this->db->where('team_id', $team2_id);
+            $this->db->where('category_id', $actual_tournament_id);            
+			$this->db->update('posiciones');
+			$res = $this->db->insert_id();
+
+	}
+
+	function ganador($team1_id,$team2_id, $team1_res, $team2_res,$actual_tournament_id){
+			$this->db->set('pj', 'pj + 1', FALSE);
+			$this->db->set('pg', 'pg + 1', FALSE);
+			$gf = 'gf+'. $team1_res;
+			$gc = 'gc-'. $team2_res;
+			$dg = 'dg+' . $team1_res . "-" . $team2_res;
+			$this->db->set('gf', $gf, FALSE);
+			$this->db->set('gc', $gc, FALSE);
+			$this->db->set('dg', $dg, FALSE);
+			$this->db->set('ptos', 'ptos + 3', FALSE);
+			$this->db->where('team_id', $team1_id);
+            $this->db->where('category_id', $actual_tournament_id);            
+			$this->db->update('posiciones');
+			$this->db->insert_id();
+	
+			$this->db->set('pj', 'pj + 1', FALSE);
+			$this->db->set('pp', 'pp + 1', FALSE);
+			$gf = 'gf+'. $team2_res;
+			$gc = 'gc-'. $team1_res;
+			$dg = 'dg+' . $team2_res . "-" . $team1_res;
+			$this->db->set('gf', $gf, FALSE);
+			$this->db->set('gc', $gc, FALSE);
+			$this->db->set('dg', $dg, FALSE);
+			$this->db->where('team_id', $team2_id);
+            $this->db->where('category_id', $actual_tournament_id);            
+			$this->db->update('posiciones');
+			$res = $this->db->insert_id();
+	}
+	
+	function ambos_perdieron($team1_id,$team2_id,$actual_tournament_id){
+			$this->db->set('pj', 'pj + 1', FALSE);
+			$this->db->set('pp', 'pp + 1', FALSE);
+			$this->db->where('team_id', $team1_id);
+            $this->db->where('category_id', $actual_tournament_id);
+			$this->db->update('posiciones');
+			$this->db->insert_id();
+			
+			$this->db->set('pj', 'pj + 1', FALSE);
+			$this->db->set('pp', 'pp + 1', FALSE);
+			$this->db->where('team_id', $team2_id);
+            $this->db->where('category_id', $actual_tournament_id);            
+			$this->db->update('posiciones');
+			$this->db->insert_id();
+	}
+    
+    function get_team_by_match($partido_id)
+	{
+		$this->db->select('team1_id, team2_id,team1_res,team2_res, e1.name as equipo1_name, e2.name as equipo2_name');
+		$this->db->from('partidos p');
+		$this->db->join('equipos e1','e1.id = p.team1_id');
+		$this->db->join('equipos e2','e2.id = p.team2_id');
+		$this->db->where('p.id',$partido_id);
+		$query = $this->db->get();
+		foreach ($query->result() as $row){
+			return $row;
+		}
+	}
+    
+    function get_all_players_combo($team_id)
+	{
+		$this->db->from('jugadores');
+		$this->db->where('team_id',$team_id);
+		$this->db->order_by('last_name','asc');		
+		$query = $this->db->get();	
+		if ($query->num_rows() > 0 ) {
+			foreach($query->result_array() as $row){
+				$full_name = $row['name'] . " " . $row['last_name'];
+				$combo[$row['id']] = $full_name;	
+				}
+					
+		}
+		$combo[0] = 'Otro';
+		return $combo;	
+	}
+    
+    function set_goleadores($goleadores_id){
+		foreach ($goleadores_id as $goleador_id){
+			$this->db->set('goal', 'goal + 1', FALSE);
+			$this->db->where('id', $goleador_id);
+			$this->db->update('jugadores');
+			$res = $this->db->insert_id();
+			}
+	}
+	
+
+    function get_goleadores_new($category_id){
+        $query = $this->db->query('SELECT j.name as name_jugador, j.last_name, j.goal,e.name as name_equipo
+        
+                FROM  jugadores j
+                JOIN equipos e ON e.id  = j.team_id
+                WHERE team_id IN (SELECT team_id FROM category_display WHERE category_id = '. $category_id . 
+                        ' AND goal != 0 )
+               
+                ORDER by goal desc,e.name asc
+                LIMIT 20
+                '
+        );	
+		return $query->result();
+
+    }
+
+
+
+    function get_equipos_from_category_display($tournament_id){
+        
+        $query = $this->db->query('SELECT name, id FROM equipos 
+		WHERE activo = 1
+		AND ID IN (SELECT team_id FROM category_display WHERE category_id = '. $tournament_id . ')');	
+        
+		foreach($query->result_array() as $row){
+			$combo[$row['id']]=$row['name'];	
+			}
+		$combo[0] = 'Elegir equipo';
+
+		return $combo;
+	}
+    
+     function generate_match($team1_id,$team2_id,$tournament_id,$fecha_id){
+		  
+		 		$this->db->set('tournament_id', $tournament_id);
+				$this->db->set('team1_id', $team1_id);
+				$this->db->set('team2_id', $team2_id);
+				$this->db->set('nro_fecha_id', $fecha_id);
+				$this->db->insert('partidos');
+	 			$res = $this->db->insert_id();
+		}  
+    
+    function get_positions($tournament_id){
+		$this->db->select('p.id as position_id,e.name as name_equipo,e.id as id_equipo,pj,pg,pe,pp,gf,gc,dg,ptos');
+		$this->db->from('posiciones p');
+		$this->db->join('equipos e','e.id = p.team_id');
+		$this->db->where('p.category_id', $tournament_id);
+		$this->db->order_by('ptos','DESC');
+		$this->db->order_by('dg','DESC');
+		$this->db->order_by('gf','DESC');
+		$this->db->order_by('name_equipo','ASC');
+		$query = $this->db->get();
+		$posiciones = $query->result();
+		# echo $this->db->last_query() . "<br>";
+		return $posiciones;
+	}
+	
+	function delete_team_totalmente($team_id){
+		$this->db->delete('equipos', array('id' => $team_id));
+		$this->db->delete('equipos_info', array('team_id' => $team_id));
+		$this->db->delete('equipos_users', array('team_id' => $team_id));
+		$this->db->delete('jugadores', array('team_id' => $team_id));
+		$this->db->delete('partidos', array('team1_id' => $team_id));
+		$this->db->delete('partidos', array('team2_id' => $team_id));
+		$this->db->delete('posiciones', array('team_id' => $team_id));
+	}
+	
+	function update_equipos_activado($activados){
+
+		$in = array();
+
+		foreach( $activados as $s => $opts )
+			{
+				foreach( $opts as $id )
+				{
+					array_push($in,$id);
+
+				}
+			}
+		
+		//~ # Seteo todos como no activos 
+		$data = array(
+			'activo' => 0,
+		);
+		$this->db->update('equipos', $data);
+		$id_test = $this->db->insert_id();
+		
+		# Seteo ahora solo los activos
+		$data = array(
+			'activo' => 1,
+		);
+		
+		$this->db->where_in('id', $in);
+		$this->db->update('equipos', $data);
+		$id_test = $this->db->insert_id();
+		
+
+
+	}
+	
+	### Crear equipos nuevos
+    function create_team($team_name,$category_id){
+        
+        $this->db->select('id');	
+		$this->db->from('equipos');
+		$this->db->where('name', $team_name);
+		        
+        $query = $this->db->get();
+		if($query->num_rows() > 0)
+		{
+            return 0;
+        }
+        else{
+            $this->db->set('name', $team_name);
+            $this->db->set('category_id', $category_id);
+            //~ $this->db->set('actual_fase1_id', $category_id);
+            $this->db->insert('equipos');
+            return $this->db->insert_id();
+        }
+	}
+	function create_team_info($team_id){
+		$this->db->set('team_id', $team_id);
+		$this->db->insert('equipos_info');
+		return $this->db->insert_id();
+	}
+    
+    function create_equipos_users($team_id,$username, $password){
+		$this->db->set('team_id', $team_id);
+		$this->db->set('user', $username);
+		$this->db->set('password', $password);
+		$this->db->insert('equipos_users');
+		return $this->db->insert_id();
+	}
+    ### Fin de crear equipos
+    
+	function update_jugadores($ids_elec,$ids_cert,$ids_deslinde,$ids_inscriptos){
+		if ($ids_elec){
+			foreach( $ids_elec as $id => $val)
+			{
+			$data = array(
+				'electro' => $val,
+           	);
+			
+			$this->db->where('id', $id);
+			$this->db->update('jugadores', $data);
+			$id_test = $this->db->insert_id();
+			} 	
+		}
+		if ($ids_cert){
+			foreach( $ids_cert as $id => $val)
+			{
+			$data = array(
+				'certificado' => $val,
+           	);
+			
+			$this->db->where('id', $id);
+			$this->db->update('jugadores', $data);
+			$id_test = $this->db->insert_id();
+			} 	
+		}
+		
+		if ($ids_deslinde){
+			foreach( $ids_deslinde as $id => $val)
+			{
+			$data = array(
+				'deslinde' => $val,
+           	);
+			
+			$this->db->where('id', $id);
+			$this->db->update('jugadores', $data);
+			$id_test = $this->db->insert_id();
+			} 	
+		}
+		if ($ids_inscriptos){
+			foreach( $ids_inscriptos as $id => $val)
+			{
+			$data = array(
+				'inscripto' => $val,
+           	);
+			
+			$this->db->where('id', $id);
+			$this->db->update('jugadores', $data);
+			$id_test = $this->db->insert_id();
+			} 	
+		}
+	}
+	
+	function show_players_ficha($equipo_id){
+
+		$this->db->select('name as nombre,last_name as apellido, dni, birth,certificado,electro,inscripto,deslinde');
+		$this->db->from('jugadores');
+		$this->db->where('team_id',$equipo_id);
+
+		#$this->db->where('inscripto','1');
+
+		$certificado = 'No';
+		$electro = 'No';
+		$inscripto = 'No';
+		$query = $this->db->get();
+		#echo $this->db->last_query() . "<br>";
+
+		return $query->result();
+	}
+	
+	function clean_db($clausura){
+			
+			$this->db->truncate('partidos_elimin');
+			$this->db->truncate('partidos'); 
+ 			$this->db->truncate('posiciones'); 
+			$this->db->truncate('postfase_temp'); 
+			$this->db->truncate('fechas'); 
+			$this->db->truncate('notas'); 
+			$this->db->truncate('sanciones');
+			$this->db->truncate('category_display');
+			
+			
+			$data = array(
+				'generado' => '0',
+           	);
+           	
+			$this->db->update('category', $data);
+			
+			$data = array(
+				'actual_fase2_id' => '0',
+				'orden' => '0',
+				
+           	);
+			$this->db->update('equipos', $data);
+			
+			$data = array(
+				'goal' => '0',
+				'red' => '0',
+				'yellow' => '0',
+				'goal' => '0',
+				
+           	);
+			$this->db->update('jugadores', $data);
+			
+			$data = array(
+				'generado' => '0',
+				
+           	);
+			$this->db->update('tipo_torneo', $data);
+			
+			#si ademas es clausura hay que borrar los certificados, electros y deslinde
+			if ($clausura){
+				$data = array(
+					'certificado' => '0',
+					'electro' => '0',
+					'deslinde' => '0',
+					'inscripto' => '0',
+           		);
+				$this->db->update('jugadores', $data);
+			}
+		}
+		
+	function delete_match($match_id)
+	{
+		$this->db->delete('partidos', array('id' => $match_id));
+	}
+		
+}

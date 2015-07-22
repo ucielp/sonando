@@ -15,7 +15,7 @@
 
 
                </tr>
-                <?php $i = 0; 
+                <?php
 				if ($teams){
 					foreach ($teams as $team):?>
 						<tr> 

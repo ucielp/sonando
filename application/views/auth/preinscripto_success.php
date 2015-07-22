@@ -9,7 +9,7 @@
     <?php echo form_open("auth/inscribir");?>
       <h1>Jugadores modificados</h1>
 
-           <p><a href="<?php echo site_url('auth/mostrar_categorias');?>"><u>Go Back</u></a></p>
+           <p><a href="<?php echo site_url('auth/activar_equipos');?>"><u>Go Back</u></a></p>
 
     <?php echo form_close();?>
 </div>

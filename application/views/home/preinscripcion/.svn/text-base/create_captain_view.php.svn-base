@@ -6,7 +6,7 @@
     <div class="preinscripcion_contenedor">
    		<div id="infoMessage"><?php echo $message;?></div>
 	
-		<?php echo form_open("inscripcion/cargar_responsable");?>
+		<?php echo form_open("libres/cargar_responsable");?>
 
           <p>Capitán:
           <?php echo form_dropdown('capitan', $jugadores);?>

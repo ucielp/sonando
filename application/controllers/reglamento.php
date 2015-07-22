@@ -13,11 +13,11 @@ class Reglamento extends CI_Controller {
 	
 	public function index()
 	{
-		$this->data['title'] = "Soñando con el Gol - Nosotros";
+		$this->data['title'] = "Soñando con el Gol - Relamento";
 		
-		$this->data['items_reglamento'] = $this->admin_model_new->get_reglamento();
+		$this->data['group_reglamento'] = $this->admin_model_new->get_reglamentos_by_group();
 				
-		$this->data['main_content'] = 'home/vistas/reglamento_view';
+		$this->data['main_content'] = 'home/vistas/reglamento';
 		$this->load->view('home/temp/template', $this->data);
 		
 		

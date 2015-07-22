@@ -8,7 +8,7 @@
 	
     <?php echo form_open("auth/set_horarios_last");?>     
      <div class="header_page">
-				<h1>Partidos del torneo <span style="text-transform:uppercase;"><?php echo $category_name;?></span></h1>
+				<h1> <?php echo $category_name;?></h1>
 			</div>
             <center>
 			<table class="horarios_admin">
@@ -22,6 +22,8 @@
                         <th class="t">Equipo2</th>
 						
 						<th class="t">Planilla</th>
+						<th align="right" width = "200">Eliminar partido</th>
+
                     </tr>
                  </thead>
              	<tbody>
@@ -48,6 +50,8 @@
 
                         <td class="t"><a href=""><?php echo $partido->name_equipo2;?></a></td>
 						<td class="t"><a href="<?php echo site_url('auth/print_form/' . $partido->p_id )?>"<u>Imprimir planilla</u></a></td>
+						<td class="t" align="right"><a href="<?php echo site_url('auth/delete_match_pre/' . $partido->p_id )?>"<u>Eliminar</u></a></td>
+
 	               </tr>
                    <?php $i++; endforeach;?>
 				</tbody>

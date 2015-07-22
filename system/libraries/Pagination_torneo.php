@@ -45,7 +45,7 @@ class CI_Pagination_torneo {
 	var $first_tag_close	= '&nbsp;';
 	var $last_tag_open		= '&nbsp;';
 	var $last_tag_close		= '';
-	var $first_url			= '1'; // Le pongo 1 para que vaya a al 1er fecha Alternative URL for the First Page.
+	var $first_url			= ''; // Alternative URL for the First Page.
 	var $cur_tag_open		= '&nbsp;<strong>';
 	var $cur_tag_close		= '</strong>';
 	var $next_tag_open		= '<div class="fecha_posterior">';

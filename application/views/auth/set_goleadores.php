@@ -5,7 +5,7 @@
 	<h1>Cargar Goleadores</h1>
 	
 	<div id="infoMessage"><?php echo $message;?></div>   
-        <?php echo form_open("auth/set_goleadores_go");?>
+        <?php echo form_open("auth/set_goleadores_new_go");?>
 
     <table class="goleadores_admin" align="center">
     <thead>

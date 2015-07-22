@@ -73,13 +73,16 @@
 			</ul>  <!-- END AnythingSlider #1 -->
             
             <div class="titular_nosotros">
-            	<h1>Ubicación</h1>
+            	<h1>Ubicación y contactos</h1>
                 
 			</div>
             <div id="ubicacion">
             	<div id="datos_contacto_mapa">
+                    <p>Las líneas 110 115 y 146 te dejan a unas cuadras del predio. </p>
+					<p>Más información en <a href="http://infomapa.rosario.gov.ar/emapa/mapa.htm" target="_blank">infomapa Rosario</a></p>
+					<HR align= LEFT WIDTH=80%>
                     <p>Podés contactarte con nosotros</p>
-                    <p>Francisco Pochetino: 0341-153882888</p>
+                    <p>Francisco Pochettino: 0341-153882888</p>
                     <p>Pablo Benetti: 0341-153882887</p>
                     <p>Santiago Biazzi 0341-155032605</p>
                     <p>Atencion al ciente: 0341-3882874</p>

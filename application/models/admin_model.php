@@ -11,63 +11,6 @@ class Admin_model extends CI_Model{
 	}
 	
 	
-	function update_jugadores($ids_elec,$ids_cert,$ids_inscriptos){
-		if ($ids_elec){
-			foreach( $ids_elec as $id => $val)
-			{
-			$data = array(
-				'electro' => $val,
-           	);
-			
-			$this->db->where('id', $id);
-			$this->db->update('jugadores', $data);
-			$id_test = $this->db->insert_id();
-			} 	
-		}
-		if ($ids_cert){
-			foreach( $ids_cert as $id => $val)
-			{
-			$data = array(
-				'certificado' => $val,
-           	);
-			
-			$this->db->where('id', $id);
-			$this->db->update('jugadores', $data);
-			$id_test = $this->db->insert_id();
-			} 	
-		}
-		if ($ids_inscriptos){
-			foreach( $ids_inscriptos as $id => $val)
-			{
-			$data = array(
-				'inscripto' => $val,
-           	);
-			
-			$this->db->where('id', $id);
-			$this->db->update('jugadores', $data);
-			$id_test = $this->db->insert_id();
-			} 	
-		}
-	}
-		
-	function get_goleadores($category_id){
-	   $this->db->select('j.name as name_jugador, j.last_name, j.goal,e.name as name_equipo');
-	   $this->db->from('jugadores j');
-	   $this->db->join('equipos e','e.id = j.team_id');
-	   $this->db->join('tipo_torneo c','c.id = e.actual_fase1_id');
-	   #$this->db->join('tipo_torneo c','c.id = e.category_id');
-	   
-	   $this->db->where('c.id',$category_id);
-	   $this->db->where('j.goal > ','0');
-
-	   $this->db->limit(20);
-	   $this->db->order_by('j.goal desc, e.name asc'); 
-	   $query = $this->db->get();
-	   $goleadores = $query->result();
-	   return $goleadores;
-	}
-
-	
 	function set_results($partidos_id,$result1,$result2,$cargados,$perdidos){
 		$i = 1;
 		foreach ($partidos_id as $partido)
@@ -220,7 +163,7 @@ class Admin_model extends CI_Model{
     
 	### Estas dos son las nuevas funciones para sacar los datos para armar la planilla
     function get_equipos_partidos($id_partido){
-		$this->db->select('tournament_id,team1_id,team2_id,e1.name as equipo1_name, e2.name as equipo2_name,court,time,nro_fecha');
+		$this->db->select('tournament_id,team1_id,team2_id,e1.name as equipo1_name, e2.name as equipo2_name,court,time,nro_fecha,date');
 		$this->db->from('partidos p');
 		$this->db->join('equipos e1','e1.id = p.team1_id');
 		$this->db->join('equipos e2','e2.id = p.team2_id');
@@ -265,23 +208,7 @@ class Admin_model extends CI_Model{
 		return $torneo;
     }
     
-	function show_players_ficha($equipo_id){
-			
 	
-		$this->db->select('name as nombre,last_name as apellido, dni, birth,certificado,electro,inscripto');
-		$this->db->from('jugadores');
-		$this->db->where('team_id',$equipo_id);
-
-		#$this->db->where('inscripto','1');
-
-		$certificado = 'No';
-		$electro = 'No';
-		$inscripto = 'No';
-		$query = $this->db->get();
-		#echo $this->db->last_query() . "<br>";
-
-		return $query->result();
-	}
 	
 	function to_excel_model_elim($id_partido){
 		
@@ -519,18 +446,6 @@ class Admin_model extends CI_Model{
 		}
 	}
 	
-	function create_team($team_name,$category_id){
-		$this->db->set('name', $team_name);
-		$this->db->set('category_id', $category_id);
-		$this->db->set('actual_fase1_id', $category_id);
-		$this->db->insert('equipos');
-		return $this->db->insert_id();
-	}
-	function create_team_info($team_id){
-		$this->db->set('team_id', $team_id);
-		$this->db->insert('equipos_info');
-		return $this->db->insert_id();
-	}
 	
 	function set_sancion($id_jugador,$sancion,$observacion,$tournament_id,$nro_fecha){
 		$this->db->set('player_id', $id_jugador);
@@ -544,42 +459,36 @@ class Admin_model extends CI_Model{
 		return $this->db->insert_id();
 	}
 	
-	function get_tournament_by_player_id($player_id){
-		$this->db->select('t.id,actual_fase2_id');
-		$this->db->from('tipo_torneo t');
-		$this->db->join('equipos e','e.actual_fase1_id = t.id');
-		$this->db->join('jugadores j','j.team_id = e.id');
-		$this->db->where('j.id',$player_id);
-		$query = $this->db->get();
-		
-		if ($query->num_rows() > 0)
-		{
-		   $row = $query->row(); 
-		   if ($row->actual_fase2_id == 0){
-			   
-			    $this->db->select('t.id,actual_fase1_id');
-				$this->db->from('tipo_torneo t');
-				$this->db->join('equipos e','e.actual_fase1_id = t.id');
-				$this->db->join('jugadores j','j.team_id = e.id');
-				$this->db->where('j.id',$player_id);
-				$query = $this->db->get();
-				if ($query->num_rows() > 0)
-				{
-					$row = $query->row(); 
-					return $row->actual_fase1_id;
-				}
-		   	}	
-		    else return $row->actual_fase2_id ;
-			}	
-		
-		}
-	function create_equipos_users($team_id,$username, $password){
-		$this->db->set('team_id', $team_id);
-		$this->db->set('user', $username);
-		$this->db->set('password', $password);
-		$this->db->insert('equipos_users');
-		return $this->db->insert_id();
-	}
+	//~ function get_tournament_by_player_id($player_id){
+		//~ $this->db->select('t.id,actual_fase2_id');
+		//~ $this->db->from('tipo_torneo t');
+		//~ $this->db->join('equipos e','e.actual_fase1_id = t.id');
+		//~ $this->db->join('jugadores j','j.team_id = e.id');
+		//~ $this->db->where('j.id',$player_id);
+		//~ $query = $this->db->get();
+		//~ 
+		//~ if ($query->num_rows() > 0)
+		//~ {
+		   //~ $row = $query->row(); 
+		   //~ if ($row->actual_fase2_id == 0){
+			   //~ 
+			    //~ $this->db->select('t.id,actual_fase1_id');
+				//~ $this->db->from('tipo_torneo t');
+				//~ $this->db->join('equipos e','e.actual_fase1_id = t.id');
+				//~ $this->db->join('jugadores j','j.team_id = e.id');
+				//~ $this->db->where('j.id',$player_id);
+				//~ $query = $this->db->get();
+				//~ if ($query->num_rows() > 0)
+				//~ {
+					//~ $row = $query->row(); 
+					//~ return $row->actual_fase1_id;
+				//~ }
+		   	//~ }	
+		    //~ else return $row->actual_fase2_id ;
+			//~ }	
+		//~ 
+		//~ }
+
 	
 	function get_equipo_info($team_id){
 		$this->db->from('equipos_info');
@@ -651,11 +560,10 @@ el permiso especial de los organizadores del torneo. Hay tiempo hasta el Sábado
 		foreach($query->result_array() as $row){
 			$combo[$row['id']]=$row['name'];	
 			}
-		
 		$combo[0] = 'Elegir equipo';
-
 		return $combo;
-	}	
+	}
+    
 	function change_team_name($team_id,$new_name) {
 		$datos1 = array(
 				'name' => $new_name,
@@ -681,138 +589,140 @@ el permiso especial de los organizadores del torneo. Hay tiempo hasta el Sábado
 		$this->db->insert_id();
 		
 	}	
-	function swap_teams($team1_id,$team2_id){
-		
-		#saco la categoria del 1ero
-		$this->db->select('actual_fase1_id');	
-		$this->db->from('equipos');
-		$this->db->where('id',$team1_id);
-		$query = $this->db->get();
+	//~ function swap_teams($team1_id,$team2_id){
+		//~ 
+		//~ #saco la categoria del 1ero
+		//~ $this->db->select('actual_fase1_id');	
+		//~ $this->db->from('equipos');
+		//~ $this->db->where('id',$team1_id);
+		//~ $query = $this->db->get();
+//~ 
+		//~ if ($query->num_rows() > 0)
+		//~ {
+		   //~ $row = $query->row(); 
+		   //~ $cat_team1 =  $row->actual_fase1_id;  
+		//~ }	
+		//~ 
+		//~ #saco la categoria del 2do
+		//~ $this->db->select('actual_fase1_id');	
+		//~ $this->db->from('equipos');
+		//~ $this->db->where('id',$team2_id);
+		//~ $query = $this->db->get();
+//~ 
+		//~ if ($query->num_rows() > 0)
+		//~ {
+		   //~ $row = $query->row(); 
+		   //~ $cat_team2 =  $row->actual_fase1_id;  
+		//~ }
+		//~ 
+		//~ ###partidos TENGO QUE HACERLO TEMPORAL	
+		//~ $temp_nro = '99999';
+		//~ $data = array(
+				//~ 'team1_id' =>  $temp_nro,
+           	//~ );
+		//~ $this->db->where('team1_id', $team2_id);
+		//~ $this->db->update('partidos', $data);
+		//~ $this->db->insert_id();	
+				//~ 
+		//~ $data = array(
+				//~ 'team2_id' =>  $temp_nro,
+           	//~ );
+		//~ $this->db->where('team2_id', $team2_id);
+		//~ $this->db->update('partidos', $data);
+		//~ $this->db->insert_id();			
+//~ 
+		//~ $data = array(
+				//~ 'team1_id' =>  $team2_id,
+           	//~ );
+		//~ $this->db->where('team1_id', $team1_id);
+		//~ $this->db->update('partidos', $data);
+		//~ $this->db->insert_id();	
+				//~ 
+		//~ $data = array(
+				//~ 'team2_id' =>  $team2_id,
+           	//~ );
+		//~ $this->db->where('team2_id', $team1_id);
+		//~ $this->db->update('partidos', $data);
+		//~ $this->db->insert_id();		
+		//~ 
+		//~ #cambio el temporal
+		//~ $data = array(
+				//~ 'team1_id' =>  $team1_id,
+           	//~ );
+		//~ $this->db->where('team1_id', $temp_nro);
+		//~ $this->db->update('partidos', $data);
+		//~ $this->db->insert_id();	
+				//~ 
+		//~ $data = array(
+				//~ 'team2_id' =>  $team1_id,
+           	//~ );
+		//~ $this->db->where('team2_id', $temp_nro);
+		//~ $this->db->update('partidos', $data);
+		//~ $this->db->insert_id();	
+//~ 
+		//~ #equipos TENGO QUE HACERLO TEMPORAL
+		//~ 
+		//~ $data = array(
+				//~ 'category_id' =>  $cat_team2,
+				//~ 'actual_fase1_id' =>  $cat_team2,
+           	//~ );
+		//~ $this->db->where('id', $team1_id);
+		//~ $this->db->update('equipos', $data);
+		//~ $this->db->insert_id();
+		//~ 
+		//~ $data = array(
+				//~ 'category_id' =>  $cat_team1,
+				//~ 'actual_fase1_id' =>  $cat_team1,
+           	//~ );
+		//~ $this->db->where('id', $team2_id);
+		//~ $this->db->update('equipos', $data);
+		//~ $this->db->insert_id();
+		//~ 
+		//~ ####posiciones 
+		//~ $temp_nro = '99999';
+		//~ $data = array(
+				//~ 'team_id' =>  $temp_nro,
+           	//~ );
+		//~ $this->db->where('team_id', $team2_id);
+		//~ $this->db->where('fase', '1');
+		//~ $this->db->update('posiciones', $data);
+		//~ $this->db->insert_id();	
+		//~ 
+			//~ $data = array(
+				//~ 'team_id' =>  $team2_id,
+           	//~ );
+		//~ $this->db->where('team_id', $team1_id);
+		//~ $this->db->where('fase', '1');
+		//~ $this->db->update('posiciones', $data);
+		//~ $this->db->insert_id();
+	//~ 
+		//~ $data = array(
+				//~ 'team_id' =>  $team1_id,
+           	//~ );
+		//~ $this->db->where('team_id', $temp_nro);
+		//~ $this->db->where('fase', '1');
+		//~ $this->db->update('posiciones', $data);
+		//~ $this->db->insert_id();			
+		//~ 
+		//~ #Update posiciones SET team_id = $team1_id where team_id = $team2_id and fase = 1;
+		//~ #Update posiciones SET team_id = $team2_id where team_id = $team1_id and fase = 1;
+//~ 
+		//~ ################
+		//~ #UPDATE partidos SET `team1_id` = $team1_id where `team1_id` = $team2_id;
+		//~ #UPDATE partidos SET `team2_id` = $team1_id where `team2_id` = $team2_id;
+		//~ 
+		//~ #UPDATE partidos SET `team1_id` = $team2_id where `team1_id` = $team1_id;
+		//~ #UPDATE partidos SET `team2_id` = $team2_id where `team2_id` = $team1_id;
+		//~ 
+		//~ #Update equipos SET category_id = $cat_team2 where id = $team1_id;
+		//~ #Update equipos SET actual_fase_1 = $cat_team2 where id = $team1_id;
+//~ 
+		//~ #Update equipos SET category_id = $cat_team1 where id = $team2_id;
+		//~ #Update equipos SET actual_fase_1 = $cat_team1 where id = $team2_id;
+		//~ 
+	//~ }
+    
 
-		if ($query->num_rows() > 0)
-		{
-		   $row = $query->row(); 
-		   $cat_team1 =  $row->actual_fase1_id;  
-		}	
-		
-		#saco la categoria del 2do
-		$this->db->select('actual_fase1_id');	
-		$this->db->from('equipos');
-		$this->db->where('id',$team2_id);
-		$query = $this->db->get();
-
-		if ($query->num_rows() > 0)
-		{
-		   $row = $query->row(); 
-		   $cat_team2 =  $row->actual_fase1_id;  
-		}
-		
-		###partidos TENGO QUE HACERLO TEMPORAL	
-		$temp_nro = '99999';
-		$data = array(
-				'team1_id' =>  $temp_nro,
-           	);
-		$this->db->where('team1_id', $team2_id);
-		$this->db->update('partidos', $data);
-		$this->db->insert_id();	
-				
-		$data = array(
-				'team2_id' =>  $temp_nro,
-           	);
-		$this->db->where('team2_id', $team2_id);
-		$this->db->update('partidos', $data);
-		$this->db->insert_id();			
-
-		$data = array(
-				'team1_id' =>  $team2_id,
-           	);
-		$this->db->where('team1_id', $team1_id);
-		$this->db->update('partidos', $data);
-		$this->db->insert_id();	
-				
-		$data = array(
-				'team2_id' =>  $team2_id,
-           	);
-		$this->db->where('team2_id', $team1_id);
-		$this->db->update('partidos', $data);
-		$this->db->insert_id();		
-		
-		#cambio el temporal
-		$data = array(
-				'team1_id' =>  $team1_id,
-           	);
-		$this->db->where('team1_id', $temp_nro);
-		$this->db->update('partidos', $data);
-		$this->db->insert_id();	
-				
-		$data = array(
-				'team2_id' =>  $team1_id,
-           	);
-		$this->db->where('team2_id', $temp_nro);
-		$this->db->update('partidos', $data);
-		$this->db->insert_id();	
-
-		#equipos TENGO QUE HACERLO TEMPORAL
-		
-		$data = array(
-				'category_id' =>  $cat_team2,
-				'actual_fase1_id' =>  $cat_team2,
-           	);
-		$this->db->where('id', $team1_id);
-		$this->db->update('equipos', $data);
-		$this->db->insert_id();
-		
-		$data = array(
-				'category_id' =>  $cat_team1,
-				'actual_fase1_id' =>  $cat_team1,
-           	);
-		$this->db->where('id', $team2_id);
-		$this->db->update('equipos', $data);
-		$this->db->insert_id();
-		
-		####posiciones 
-		$temp_nro = '99999';
-		$data = array(
-				'team_id' =>  $temp_nro,
-           	);
-		$this->db->where('team_id', $team2_id);
-		$this->db->where('fase', '1');
-		$this->db->update('posiciones', $data);
-		$this->db->insert_id();	
-		
-			$data = array(
-				'team_id' =>  $team2_id,
-           	);
-		$this->db->where('team_id', $team1_id);
-		$this->db->where('fase', '1');
-		$this->db->update('posiciones', $data);
-		$this->db->insert_id();
-	
-		$data = array(
-				'team_id' =>  $team1_id,
-           	);
-		$this->db->where('team_id', $temp_nro);
-		$this->db->where('fase', '1');
-		$this->db->update('posiciones', $data);
-		$this->db->insert_id();			
-		
-		#Update posiciones SET team_id = $team1_id where team_id = $team2_id and fase = 1;
-		#Update posiciones SET team_id = $team2_id where team_id = $team1_id and fase = 1;
-
-		################
-		#UPDATE partidos SET `team1_id` = $team1_id where `team1_id` = $team2_id;
-		#UPDATE partidos SET `team2_id` = $team1_id where `team2_id` = $team2_id;
-		
-		#UPDATE partidos SET `team1_id` = $team2_id where `team1_id` = $team1_id;
-		#UPDATE partidos SET `team2_id` = $team2_id where `team2_id` = $team1_id;
-		
-		#Update equipos SET category_id = $cat_team2 where id = $team1_id;
-		#Update equipos SET actual_fase_1 = $cat_team2 where id = $team1_id;
-
-		#Update equipos SET category_id = $cat_team1 where id = $team2_id;
-		#Update equipos SET actual_fase_1 = $cat_team1 where id = $team2_id;
-		
-	}	
 	#me devuelve las categorias para poner en un comboBox
 	function get_categories(){
 		$this->db->select('id, category as name');	
@@ -1065,7 +975,7 @@ el permiso especial de los organizadores del torneo. Hay tiempo hasta el Sábado
 		$this->db->where('f.id',$actual_fecha_id);
 		$this->db->where('f.fase',$fase);
 		$query = $this->db->get();
-		#echo $this->db->last_query() . "<br>";
+		echo $this->db->last_query() . "<br>";
 		$partidos = $query->result();
 		return $partidos;
 	}
@@ -1360,77 +1270,77 @@ el permiso especial de los organizadores del torneo. Hay tiempo hasta el Sábado
 		}
 	}
 		
-	function get_teams_using_desarrollo($tournament_id){
-		$this->db->select('position,from_id');
-		$this->db->from('desarrollo');
-		$this->db->where('to_id', $tournament_id);
-		$query = $this->db->get();
-		$posiciones = $query->result();
-		$i=0;
-		foreach ($query->result() as $row){
-			$teams_id[$i] = $this->admin_model->get_positions_fase1($row->from_id,$row->position);
-			$i++;
-			}
-			return $teams_id;
-		}	
+	//~ function get_teams_using_desarrollo($tournament_id){
+		//~ $this->db->select('position,from_id');
+		//~ $this->db->from('desarrollo');
+		//~ $this->db->where('to_id', $tournament_id);
+		//~ $query = $this->db->get();
+		//~ $posiciones = $query->result();
+		//~ $i=0;
+		//~ foreach ($query->result() as $row){
+			//~ $teams_id[$i] = $this->admin_model->get_positions_fase1($row->from_id,$row->position);
+			//~ $i++;
+			//~ }
+			//~ return $teams_id;
+		//~ }	
 	
 	####esta la uso para modificar la tabla de posicioens manualmente
-	function get_positions_modify_fase1($actual_fase1_id){
-		$this->db->select('p.id as position_id, e.name as name_equipo,e.id as id_equipo,pj,pg,pe,pp,gf,gc,dg,ptos');
-		$this->db->from('posiciones p');
-		$this->db->join('equipos e','e.id = p.team_id');
-		$this->db->join('tipo_torneo t','t.id = e.actual_fase1_id');
-		$this->db->where('e.actual_fase1_id', $actual_fase1_id);
-		$this->db->where('p.fase', '1');
-		$this->db->order_by('ptos','DESC');
-		$this->db->order_by('dg','DESC');
-		$this->db->order_by('gf','DESC');
-		$this->db->order_by('name_equipo','ASC');
-		$query = $this->db->get();
-		$posiciones = $query->result();
-		#echo $this->db->last_query() . "<br>";
-		return $posiciones;
-	}
-	function get_positions_modify_fase2($actual_fase2_id){
-		$this->db->select('p.id as position_id, e.name as name_equipo,e.id as id_equipo,pj,pg,pe,pp,gf,gc,dg,ptos');
-		$this->db->from('posiciones p');
-		$this->db->join('equipos e','e.id = p.team_id');
-		$this->db->join('tipo_torneo t','t.id = e.actual_fase2_id');
-		$this->db->where('e.actual_fase2_id', $actual_fase2_id);
-		$this->db->where('p.fase', '2');
-		$this->db->order_by('ptos','DESC');
-		$this->db->order_by('dg','DESC');
-		$this->db->order_by('gf','DESC');
-		$this->db->order_by('name_equipo','ASC');
-		$query = $this->db->get();
-		$posiciones = $query->result();
-		#echo $this->db->last_query() . "<br>";
-		return $posiciones;
-	}
+	//~ function get_positions_modify_fase1($actual_fase1_id){
+		//~ $this->db->select('p.id as position_id, e.name as name_equipo,e.id as id_equipo,pj,pg,pe,pp,gf,gc,dg,ptos');
+		//~ $this->db->from('posiciones p');
+		//~ $this->db->join('equipos e','e.id = p.team_id');
+		//~ $this->db->join('tipo_torneo t','t.id = e.actual_fase1_id');
+		//~ $this->db->where('e.actual_fase1_id', $actual_fase1_id);
+		//~ $this->db->where('p.fase', '1');
+		//~ $this->db->order_by('ptos','DESC');
+		//~ $this->db->order_by('dg','DESC');
+		//~ $this->db->order_by('gf','DESC');
+		//~ $this->db->order_by('name_equipo','ASC');
+		//~ $query = $this->db->get();
+		//~ $posiciones = $query->result();
+		//~ #echo $this->db->last_query() . "<br>";
+		//~ return $posiciones;
+	//~ }
+	//~ function get_positions_modify_fase2($actual_fase2_id){
+		//~ $this->db->select('p.id as position_id, e.name as name_equipo,e.id as id_equipo,pj,pg,pe,pp,gf,gc,dg,ptos');
+		//~ $this->db->from('posiciones p');
+		//~ $this->db->join('equipos e','e.id = p.team_id');
+		//~ $this->db->join('tipo_torneo t','t.id = e.actual_fase2_id');
+		//~ $this->db->where('e.actual_fase2_id', $actual_fase2_id);
+		//~ $this->db->where('p.fase', '2');
+		//~ $this->db->order_by('ptos','DESC');
+		//~ $this->db->order_by('dg','DESC');
+		//~ $this->db->order_by('gf','DESC');
+		//~ $this->db->order_by('name_equipo','ASC');
+		//~ $query = $this->db->get();
+		//~ $posiciones = $query->result();
+		//~ #echo $this->db->last_query() . "<br>";
+		//~ return $posiciones;
+	//~ }
 	
 	#ESTA LA USO PARA generate_campeones_grupo
-	function get_positions_fase1($actual_fase1_id, $position){
-		$this->db->select('team_id,ptos,dg,gf,e.name as name_equipo');
-		$this->db->from('posiciones p');
-		$this->db->join('equipos e','e.id = p.team_id');
-		$this->db->join('tipo_torneo t','t.id = e.actual_fase1_id');
-		$this->db->where('e.actual_fase1_id', $actual_fase1_id);
-		$this->db->where('fase', '1');
-		$this->db->limit(1,$position-1);
-		$this->db->order_by('ptos','DESC');
-		$this->db->order_by('dg','DESC');
-		$this->db->order_by('gf','DESC');
-		$this->db->order_by('name_equipo','ASC');
-		$query = $this->db->get();
-		$posiciones = $query->result();
-		#echo $this->db->last_query() . "<br>";
-		if ($query->num_rows() > 0)
-		{
-		   $row = $query->row(); 
-		   return $row->team_id;
-		  
-		}	
-	}
+	//~ function get_positions_fase1($actual_fase1_id, $position){
+		//~ $this->db->select('team_id,ptos,dg,gf,e.name as name_equipo');
+		//~ $this->db->from('posiciones p');
+		//~ $this->db->join('equipos e','e.id = p.team_id');
+		//~ $this->db->join('tipo_torneo t','t.id = e.actual_fase1_id');
+		//~ $this->db->where('e.actual_fase1_id', $actual_fase1_id);
+		//~ $this->db->where('fase', '1');
+		//~ $this->db->limit(1,$position-1);
+		//~ $this->db->order_by('ptos','DESC');
+		//~ $this->db->order_by('dg','DESC');
+		//~ $this->db->order_by('gf','DESC');
+		//~ $this->db->order_by('name_equipo','ASC');
+		//~ $query = $this->db->get();
+		//~ $posiciones = $query->result();
+		//~ #echo $this->db->last_query() . "<br>";
+		//~ if ($query->num_rows() > 0)
+		//~ {
+		   //~ $row = $query->row(); 
+		   //~ return $row->team_id;
+		  //~ 
+		//~ }	
+	//~ }
 	
 	function update_equipos_actual_fase2_id($team_id,$tournament_id){
 			$data = array(
@@ -1748,31 +1658,32 @@ el permiso especial de los organizadores del torneo. Hay tiempo hasta el Sábado
         JOIN equipos_users eqp ON eqp.team_id = eq.id
         WHERE eq.category_id = 0 
 		ORDER BY t_id ASC, e_name ASC');	
-		//~ echo $this->db->last_query() . "<br>";
+		//~ # echo $this->db->last_query() . "<br>";
 
 		return $query->result();
     }
 	
-	function update_categorias($new_post, $new_post_id){
-		$i = 0;
-		foreach ($new_post_id as $a){
-			$ids[$i] = $a;
-			$i++;
-		}
-		
-		$i = 0;
-		foreach ($new_post as $post){
-			$data = array(
-				'category_id' => $post,
-				'actual_fase1_id' => $post,
-           	);
-			$this->db->where('id', 	$ids[$i]);
-			$this->db->update('equipos', $data);
-			$id_test = $this->db->insert_id();
-			#echo $this->db->last_query() . "<br>";
-			$i++;
-		}
-	}
+	//~ function update_categorias($new_post, $new_post_id){
+		//~ $i = 0;
+		//~ foreach ($new_post_id as $a){
+			//~ $ids[$i] = $a;
+			//~ $i++;
+		//~ }
+		//~ 
+		//~ $i = 0;
+		//~ foreach ($new_post as $post){
+			//~ $data = array(
+				//~ 'category_id' => $post,
+				//~ 'actual_fase1_id' => $post,
+           	//~ );
+			//~ $this->db->where('id', 	$ids[$i]);
+			//~ $this->db->update('equipos', $data);
+			//~ $id_test = $this->db->insert_id();
+			//~ #echo $this->db->last_query() . "<br>";
+			//~ $i++;
+		//~ }
+	//~ }
+    
 	function update_equipos($new_post, $new_post_id){
 		$i = 0;
 		foreach ($new_post_id as $a){
@@ -1992,49 +1903,7 @@ el permiso especial de los organizadores del torneo. Hay tiempo hasta el Sábado
 	
 		}  
 		
-		function clean_db($clausura){
-			
-			$this->db->truncate('partidos_elimin');
-			$this->db->truncate('partidos'); 
- 			$this->db->truncate('posiciones'); 
-			$this->db->truncate('postfase_temp'); 
-			$this->db->truncate('fechas'); 
-			$this->db->truncate('notas'); 
-			$this->db->truncate('sanciones'); 
-			
-			$data = array(
-				'actual_fase2_id' => '0',
-				'orden' => '0',
-				
-           	);
-			$this->db->update('equipos', $data);
-			
-			$data = array(
-				'goal' => '0',
-				'red' => '0',
-				'yellow' => '0',
-				'goal' => '0',
-				
-           	);
-			$this->db->update('jugadores', $data);
-			
-			$data = array(
-				'generado' => '0',
-				
-           	);
-			$this->db->update('tipo_torneo', $data);
-			
-			#si ademas es clausura hay que borrar los certificados y electros
-			if ($clausura){
-				$data = array(
-					'certificado' => '0',
-					'electro' => '0',
-					'inscripto' => '0',
-           		);
-				$this->db->update('jugadores', $data);
-			}
-		}	
-		
+
 	##########	
 	function get_partidos_por_horario($actual_fecha_id){
 		
