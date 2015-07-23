@@ -47,7 +47,7 @@
 					<div class="boxusuarioycont">
 						<img src="img/usuarioycontra.png"/>
 						<?php $attributes = array('id' => 'formID_home'); ?>
-						<?php echo form_open("libres", $attributes);?>
+						<?php echo form_open("newsletter", $attributes);?>
 						<?php echo form_input($email);?>
 						<?php echo form_input($password);?>
 						<!--<a href="<?php echo site_url('auth/forgot_password'); ?>"><u>Forgot Password</u></a>-->
@@ -60,16 +60,19 @@
 				<div class="col-xs-12 col-sm-12 col-md-4 col-lg-4">
 					<div class="boxnewsletter">
 						<h2>Recibir Newsletter</h2>
-						<input type="text" name="" placeholder="Escribe tu email"/><br/>
+						<input type="email" name="newsletteremail" placeholder="Escribe tu email..."/>
 						<button role="button">OK</button>
 					</div>
+					<input name="redirect" type="hidden" value="<?= $this->uri->uri_string() ?>" />
+
 					<div class="boxcopaamerica">
 						<a href="<?php echo base_url(); ?>copaargentina"><img src="img/torneocopaargentina.jpg" class="img-responsive"/></a>
 					</div>
 				</div>
 			</div>
 		</div>
-		
+			<?php echo form_close();?>
+
 		<?php $this->view('home/temp/nav_bar');?>
 
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
