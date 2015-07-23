@@ -2,23 +2,22 @@
 
 <div class='mainInfo'>
 
-	<h1>Intercambiar equipos en la etapa de fase</h1>
+	<h1>Entra un equipo por otro: <?php echo $category_name?></h1>
 	   
-	<div id="infoMessage"><?php echo $message;?></div>
     
-	<?php echo form_open("auth/swap_teams_go");?>
+	<?php echo form_open("auth/swap_teams_new_go/$tournament_id");?>
     
-     <p>Equipo1 a intercambiar<br />     
+     <p> 
      <?php $categories[0] = 'Ninguno'; 
-	 echo form_dropdown('dropdown_team1', $equipos, '0');?>
+	 echo form_dropdown('team_out', $teams_from_tournament, '0');?>
      </p>
       
-       <p>Equipo2 a intercambiar<br />     
+       <p>
      <?php $categories[0] = 'Ninguno'; 
-	 echo form_dropdown('dropdown_team2', $equipos, '0');?>
+	 echo form_dropdown('team_in', $teams_actives, '0');?>
      </p>
      
-     <p><?php echo form_submit('submit', 'Intercambiar equipos');?></p>
+     <p><?php echo form_submit('submit', 'Entra un equipo por otro');?></p>
 
 	 <p><a href="<?php echo site_url('auth');?>"><u>Go Back</u></a></p>
 

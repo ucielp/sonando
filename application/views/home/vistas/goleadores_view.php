@@ -1,33 +1,20 @@
-        <div class="header_page">
-            <h1>Goleadores</h1>
-            <h2>&nbsp;</h2>
-        </div>
-        
-        <?php echo form_open("goleadores/ver_goleadores");?>
-    
-    
-						  
-        <div class="preinscripcion_contenedor">
-        	<div id="infoMessage"><?php echo $message;?></div>
-            <div class="tabla_goleadores">
-				         
-             <?php if ( $events){
-                 echo form_dropdown('dropdown_category', $events);
-                 } 
-             ?>
-             
-             	   <?php $data_submit = array(
-								  'name'        => 'submit',
-								  'class'          => 'submit_goleadores',
-								  'value'       => 'Ver Goleadores',
-								);
-                      echo form_submit($data_submit);?><p>
+    	<div class="container-fixture">
+            <div class="catmenu"><?php echo $categoryTree ?></div>
+            <div class="table-wrapper">
+				<div class="table-header">
+					<h1><?php echo $event_name;?></h1>
+						<h2></h2>
+				</div>
+                		
+                      
+            <table class="fixture">
+
             <table class="goleadores">
                     <thead>
                         <tr>
                             <th class="t">Jugador</th>
                             <th class="t">Equipo</th>
-                            <th class="o">Total</th>
+                            <th class="o">Goles</th>
                         </tr>
                      </thead>
                     <tbody>
@@ -40,11 +27,6 @@
 						<?php $i++; endforeach;?>
                     </tbody>
 				</table>
-        </div>
-		
-	
-             
-             <?php echo form_close();?>
-             
-       </div> <!-- END CONTAINER-->
-	</div> <!-- END WRAPPER -->
+            </div> <!-- END table-wrapper -->
+			</div> <!-- END CONTAINER-->
+            </div> <!-- END WRAPPER-->

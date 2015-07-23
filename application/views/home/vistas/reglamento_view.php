@@ -10,7 +10,9 @@
 	<?php foreach ($items_reglamento as $item): ?>
 		<div class="link_pdf">  
 		 <h2><?php echo $item->titulo ?></h2>
-			<a href="<?php echo base_url(); ?>images/nosotros/<?php echo $item->link . '"'; ?> target="_blank"><img src="<?php echo base_url(); ?>images/nosotros/pdf_icon.png" width="52" height="52" /></a>
+				<a href="<?php echo $item->link . '"';?> target="_blank">
+				<img src="<?php echo base_url(); ?>images/nosotros/pdf_icon.png" width="52" height="52" />
+			</a>
 		</div>	
 	<?php endforeach;?>
 

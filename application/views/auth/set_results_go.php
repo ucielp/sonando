@@ -6,16 +6,16 @@
 	
 	<div id="infoMessage"><?php echo $message;?></div>   
 	
-    <?php echo form_open("auth/set_goleadores/$actual_tournament_id");?>     
+    <?php echo form_open("auth/set_goleadores_new/$tournament_id");?>     
      <div class="header_page">
-				<h1>Partidos del torneo <span style="text-transform:uppercase;"><?php echo $category_name;?></span></h1>
+				<h1> <?php echo $category_name;?></h1>
 			</div>
             <center>
 			<table class="resultados_admin">
                 <thead>
                     <tr>
                         <th class="e1">Equipo1</th>
-                        <th class="r">Resultado</th>
+                        <th class="r">Resultado (penales)</th>
                         <th class="e2">Equipo2</th>
                         <th class="i">Ya ingresado (tildar para ignorar partido)</th>
                          <th class="i">Dar perdido a ambos equipos</th>
@@ -30,21 +30,30 @@
                         	<input type="hidden" name="<?php echo $name0;?>" value="<?php echo $partido->p_id?>">
 							<?php 
 								$name1  = 'res1[' . $i . ']';
+								$name1_penales  = 'pen1[' . $i . ']';
+
 								if ($partido->cargado){
+									echo " (" . form_input($name1_penales,$partido->team1_pen) . ") ";
 									echo form_input($name1,$partido->team1_res);
 								}
 								else{
+									echo " (" . form_input($name1_penales,'') . ") ";
 									echo form_input($name1,'');
 									}	
 								?>
                         	:
 							<?php 
 								$name2  = 'res2[' . $i . ']';
+								$name2_penales  = 'pen2[' . $i . ']';
+
 								if ($partido->cargado){
 									echo form_input($name2,$partido->team2_res);
+									echo " (" . form_input($name2_penales,$partido->team2_pen) . ")";
 								}
 								else{
 									echo form_input($name2,'');
+									echo " (" . form_input($name2_penales,'') . ")";
+
 									}	
 							?></td>
                         <td class="e2"><?php echo $partido->name_equipo2;?></td>

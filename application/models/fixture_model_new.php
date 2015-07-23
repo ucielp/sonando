@@ -36,41 +36,21 @@ class Fixture_model_new extends CI_Model{
 			return 0;
 	}
 	function get_partidos($event_id,$fecha){
-		if ($fecha == 0){		
-			$this->db->select('p.id as p_id,e1.name as name_equipo1,e1.id as id_equipo1,e2.name as name_equipo2,e2.id as id_equipo2,nro_fecha,date,time,court,team1_res,team2_res, cargado');
-			$this->db->from('partidos p');
-			$this->db->join('equipos e1','e1.id = p.team1_id');
-			$this->db->join('equipos e2','e2.id = p.team2_id');
-			#$this->db->join('fechas f','f.id = p.nro_fecha_id');
-			#lo hago con nro de fecha y no con el id
-			$this->db->join('fechas f','f.nro_fecha = p.nro_fecha_id');
-			$this->db->where('tournament_id',$event_id);
-			$this->db->where('actual','1');
-			//~ $this->db->where('fase',$fase);
-			$query = $this->db->get();
-			$partidos = $query->result();
-			return $partidos;
-		}
-		#la anterior
-		else {
-			$this->db->select('p.id as p_id,e1.name as name_equipo1,e1.id as id_equipo1,e2.name as name_equipo2,e2.id as id_equipo2,nro_fecha,date,time,court,team1_res,team2_res, cargado');
-			$this->db->from('partidos p');
-			$this->db->join('equipos e1','e1.id = p.team1_id');
-			$this->db->join('equipos e2','e2.id = p.team2_id');
-			#$this->db->join('fechas f','f.id = p.nro_fecha_id');
-			#lo hago con nro de fecha y no con el id
-			$this->db->join('fechas f','f.nro_fecha = p.nro_fecha_id');
-			$this->db->where('tournament_id',$event_id);
-			$this->db->where('nro_fecha',$fecha);
-			//~ $this->db->where('fase',$fa	se);
-			$query = $this->db->get();
-			$partidos = $query->result();
-			#echo $this->db->last_query() . "<br>";
-		  
-			return $partidos;
-		}	
+		
+		$this->db->select('p.id as p_id,e1.name as name_equipo1,e1.id as id_equipo1,e2.name as name_equipo2,e2.id as id_equipo2,nro_fecha,date,time,court,team1_res,team2_res,team1_pen,team2_pen,cargado');
+		$this->db->from('partidos p');
+		$this->db->join('equipos e1','e1.id = p.team1_id');
+		$this->db->join('equipos e2','e2.id = p.team2_id');
+		$this->db->join('fechas f','f.nro_fecha = p.nro_fecha_id');
+		$this->db->where('tournament_id',$event_id);
+		$this->db->where('nro_fecha',$fecha);
+		$query = $this->db->get();
+		$partidos = $query->result();
+		//~ echo $this->db->last_query() . "<br>";
+	  
+		return $partidos;
+
 	}
-	
 	
 	function get_partidos_elim($tournament_id){
 		$this->db->select('p.id as p_id,e1.name as name_equipo1,e1.id as id_equipo1,e2.name as name_equipo2,e2.id as id_equipo2,date,time,court,team1_res,team2_res,team1_pen,team2_pen,cargado');
@@ -104,11 +84,11 @@ class Fixture_model_new extends CI_Model{
 		$query = $this->db->get('fechas');
 
 		if ($query->num_rows() > 0)
-			{
-			   $row = $query->row(); 
-			   return   $row->nro_fecha;
-			   
-			  }
+		{
+		   $row = $query->row(); 
+		   return   $row->nro_fecha;
+		   
+		  }
 	}		
 			
 		function get_nro_grupo($tournament,$type,$category){
@@ -178,11 +158,10 @@ class Fixture_model_new extends CI_Model{
 		
 		function get_category_tree() {
 	
-		$this->db->select('id, parent_id,name_category');	
+		$this->db->select('id, parent_id,name_category,tipo');	
 		$this->db->from('category');
 		$this->db->where('show','1');
 		$query = $this->db->get();
-		//~ echo $this->db->last_query() . "<br>";
 		  
 
 		foreach ($query->result() as $row)
@@ -190,7 +169,11 @@ class Fixture_model_new extends CI_Model{
 			$pid  = $row->parent_id;
 			$id   = $row->id;
 			$name = $row->name_category;
+			$tipo = $row->tipo;
 
+			$tree[$id]["tipo"] = $tipo;
+
+			
 			// Create or add child information to the parent node
 			if (isset($tree[$pid]))
 				// a node for the parent exists
@@ -208,17 +191,111 @@ class Fixture_model_new extends CI_Model{
 			else
 				// create the current node and give it a name
 				$tree[$id] = array( "name"=>$name );
+				
 		}
 		return $tree;
 	}
 	
-	function convert_to_ul($tree, $id, $html){
+	function get_full_category_tree() {
+		$this->db->select('id, parent_id, name_category, tipo');	
+		$this->db->from('category');
+		$this->db->where('show','1');
+		$query = $this->db->get();
+		foreach ($query->result() as $row){
+			$pid  = $row->parent_id;
+			$id   = $row->id;
+			$name = $row->name_category;
+			$tipo = $row->tipo;
 
-	  if (isset($tree[$id]['name']))
-		$html .= 
-			'<li>' .
-				'<span class="nav-click"></span>' .
-				'<a href="' . base_url() . 'fixture/show_fixture/' . $id . '">' . $tree[$id]['name'] . '</a>';
+			$tree[$id]["tipo"] = $tipo;
+			
+			// Create or add child information to the parent node
+			if (isset($tree[$pid]))
+				// a node for the parent exists
+				// add another child id to this parent
+				$tree[$pid]["children"][] = $id;
+			else
+				// create the first child to this parent
+				$tree[$pid] = array("children"=>array($id));
+
+			// Create or add name information for current node
+			if (isset($tree[$id])) {
+				// a node for the id exists:
+				// set the name of current node
+				$tree[$id]["name"] = $name;
+				$tree[$id]["id"] = $id;
+				$tree[$id]["pid"] = $pid;
+				$tree[$id]["tipo"] = $tipo;
+			} else {
+				// create the current node and give it a name
+				$tree[$id] = array( "name" => $name, "id" => $id, "pid" => $pid, "tipo" => $tipo );				
+			}
+		}
+		return $tree;
+	}
+	
+	function convert_to_html($tree, $id, $html, $url_link, $level){
+		if(isset($tree[$id]['name'])){
+			if($tree[$id]['tipo'] == "nodo"){
+				if($tree[$id]['pid'] == 0){
+					$html .= 
+						'<a href="#' . $tree[$id]['id'] . '" class="list-group-item list-group-parent collapsed" data-toggle="collapse" data-parent="#' . $tree[$id]['id'] . '">' .
+						$tree[$id]['name'] . '</a>';
+				}else{
+					if ($level==2){ //level 2
+						$html .= 
+						'<a href="#' . $tree[$id]['id'] . '" class="list-group-item list-group-parent subparent" data-toggle="collapse" data-parent="#' . $tree[$id]['id'] . '">' .
+						$tree[$id]['name'] . '</a>';
+					}else if ($level==3){ //level 3
+						$html .= 
+						'<a href="#' . $tree[$id]['id'] . '" class="list-group-item list-group-parent subsubparent" data-toggle="collapse" data-parent="#' . $tree[$id]['id'] . '">' .
+						$tree[$id]['name'] . '</a>';
+					}else if ($level==4){ //for now we don't have this level but could be in the future
+						$html .= 
+						'<a href="#' . $tree[$id]['id'] . '" class="list-group-item list-group-parent subsubsubparent" data-toggle="collapse" data-parent="#' . $tree[$id]['id'] . '">' .
+						$tree[$id]['name'] . '</a>';
+					}else if ($level==5){ //for now we don't have this level but could be in the future. If we have more than 5 levels we should add it here
+						$html .= 
+						'<a href="#' . $tree[$id]['id'] . '" class="list-group-item list-group-parent subsubsubsubparent" data-toggle="collapse" data-parent="#' . $tree[$id]['id'] . '">' .
+						$tree[$id]['name'] . '</a>';
+					}					
+				}
+			}else{ // hoja
+				$html .= 
+					'<a class="hoja list-group-item" href="' . base_url() . $url_link . $id . '">' .
+					$tree[$id]['name'] . '</a>';
+			}
+		}			
+		if(isset($tree[$id]['children'])){
+			$level= $level + 1;
+			$arChildren = &$tree[$id]['children'];
+			$len = count($arChildren);
+			if ($id != 0) $html .= '<div class="collapse" id="' . $tree[$id]['id'] . '">'; // not for the first one
+			for ($i=0; $i<$len; $i++) {
+				$html .= $this->fixture_model_new->convert_to_html($tree, $arChildren[$i], "", $url_link, $level);
+			}
+			if ($id != 0) $html .= '</div>'.PHP_EOL;
+		}
+		return $html;
+	}
+	
+	function convert_to_ul($tree, $id, $html,$url_link){
+			
+	  if (isset($tree[$id]['name'])){
+	  //~ if (isset($tree[$id]['name']) & ($tree[$id]['tipo'] == 'ida' )){
+			if($tree[$id]['tipo'] == "nodo"){
+				$html .= 
+					'<li>' .
+						'<span class="nav-click"></span>' .
+						 $tree[$id]['name'] ;
+			}
+			else{
+				$html .= 
+					'<li>' .
+						'<span class="nav-click"></span>' .
+						'<a href="' . base_url() . $url_link . $id . '">' . $tree[$id]['name'] . '</a>';
+			}
+	   }			
 
 	  if (isset($tree[$id]['children']))
 	  {
@@ -226,7 +303,7 @@ class Fixture_model_new extends CI_Model{
 		$len = count($arChildren);
 		$html .= '<ul>';
 		for ($i=0; $i<$len; $i++) {
-			$html .= $this->fixture_model_new->convert_to_ul($tree, $arChildren[$i], "");
+			$html .= $this->fixture_model_new->convert_to_ul($tree, $arChildren[$i], "",$url_link);
 		}
 		$html .= '</ul>'.PHP_EOL;
 	  }
@@ -235,13 +312,75 @@ class Fixture_model_new extends CI_Model{
 	  return $html;
 	}
 	
-	function parse_tree () {
+	function parse_tree ($url_link) {
 	
 	    $tree = $this->fixture_model_new->get_category_tree();
-		$too = $this->fixture_model_new->convert_to_ul($tree, 0, "");
+		$too  = $this->fixture_model_new->convert_to_ul($tree, 0, "",$url_link);
 		
 		return $too;
 	}
+	
+	function parse_category_tree ($url_link) {
+		$level = 0; // to remember the level
+	    $tree = $this->fixture_model_new->get_full_category_tree();
+		$too  = $this->fixture_model_new->convert_to_html($tree, 0, "",$url_link, $level);
 		
+		return $too;
+	}
+	
+	function get_category_and_subcategory($id_category){
+		$string = '';
+		while($id_category != 0){
+			$this->db->select('name_category,parent_id');	
+			$this->db->from('category');
+			$this->db->where('id', $id_category);
+			$query = $this->db->get();
+			//~ $string = '';
+			foreach ($query->result() as $row){	
+				$parent_id = $row->parent_id;
+				$string = $row->name_category . " / " . $string;
+			}
+			$id_category = $parent_id;
+		}
+        #echo $this->db->last_query() . "<br>";
+		return $string;
+	}
+	
+	function get_fechas_por_evento($event_id){
+		$this->db->distinct();
+		$this->db->select('nro_fecha_id');
+		$this->db->from('partidos');
+		$this->db->where('tournament_id',$event_id);
+		$query = $this->db->get();
+		if ($query->num_rows() > 0)
+		{
+			$fechas = $query->result();
+			return $fechas;
+
+		}
+		else{
+			return;
+		}	
+	}
+	
+	function get_fecha_defecto($event_id){
+		$this->db->select('nro_fecha_id');
+		$this->db->from('partidos');
+		$this->db->where('tournament_id',$event_id);
+		$this->db->where('cargado',0);
+		$this->db->group_by('nro_fecha_id');
+		
+		$this->db->order_by('count(cargado) ASC,nro_fecha_id ASC');
+		$this->db->limit(1);
+
+		$query = $this->db->get();
+
+		if ($query->num_rows() > 0)
+		{
+			$row = $query->row(); 
+			return $row->nro_fecha_id;		   
+		}
+		
+	}
 }
 		

@@ -1,4 +1,4 @@
-﻿<?php defined('BASEPATH') OR exit('No direct script access allowed');
+<?php defined('BASEPATH') OR exit('No direct script access allowed');
 
 class Inscripcion extends CI_Controller {
 
@@ -13,6 +13,14 @@ class Inscripcion extends CI_Controller {
 	}
 	
 	function index()
+	{
+		$this->data['title'] = "So&ntilde;ando con el gol - Inscripcion";
+		$this->data['message'] = (validation_errors()) ? validation_errors() : $this->session->flashdata('message');
+		$this->data['main_content'] = 'home/vistas/inscripcion';
+		$this->load->view('home/temp/template', $this->data);
+	}
+	
+	function index_old()
 	{
 		$this->data['title'] = "So&ntilde;ando con el gol - Inscripcion";
 		$this->data['message'] = (validation_errors()) ? validation_errors() : $this->session->flashdata('message');
