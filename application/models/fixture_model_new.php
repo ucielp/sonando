@@ -352,10 +352,15 @@ class Fixture_model_new extends CI_Model{
 		$this->db->from('partidos');
 		$this->db->where('tournament_id',$event_id);
 		$query = $this->db->get();
-		$fechas = $query->result();
-		//~ echo $this->db->last_query() . "<br>";
+		if ($query->num_rows() > 0)
+		{
+			$fechas = $query->result();
+			return $fechas;
 
-		return $fechas;
+		}
+		else{
+			return;
+		}	
 	}
 	
 	function get_fecha_defecto($event_id){
@@ -369,13 +374,13 @@ class Fixture_model_new extends CI_Model{
 		$this->db->limit(1);
 
 		$query = $this->db->get();
-		//~ echo $this->db->last_query() . "<br>";
 
 		if ($query->num_rows() > 0)
 		{
 			$row = $query->row(); 
 			return $row->nro_fecha_id;		   
 		}
+		
 	}
 }
 		
