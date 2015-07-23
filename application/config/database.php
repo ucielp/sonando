@@ -50,9 +50,9 @@ $db['default']['password'] = 'ucieluciel';
 
 # para la version local
 
-# $db['default']['username'] = 'sonando_user';
-# $db['default']['database'] = 'sonando_db';
-# $db['default']['password'] = 'sonando_password';
+#$db['default']['username'] = 'sonando_user';
+#$db['default']['database'] = 'sonando_db';
+#$db['default']['password'] = 'sonando_password';
 
 $db['default']['dbdriver'] = 'mysql';
 $db['default']['dbprefix'] = '';

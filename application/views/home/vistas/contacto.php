@@ -1,43 +1,97 @@
-		<div class="header_page">
-            <h1>Contacto</h1>
-            <h2>&nbsp;</h2>
-        </div>
-        <div class="contacto_contenedor">
-        <div id="validacion_error"><?php echo $message;?></div>
-			<div id="contacto">
-                <div id="contacto-labels">
-                    <p>Nombre:<br /><br /></p>
-                    <p>e-mail:<br /><br /></p>
-                    <p>Teléfono:<br /><br /></p>
-                    <p>Asunto:<br /><br /></p>
-                    <p>Mensaje:</p>
-                </div>
-                    <form id="formID" class="formular" method="post" action="<?php echo site_url('contacto');?>">
-                        <fieldset>
-                            <label>
-                                <input value=""  class="validate[required,custom[onlyLetter],length[0,100]] text-input" type="text" id="lastname" name="lastname"  />
-                            </label>
-                            <label>
-                                <input value=""  class="validate[required,custom[email]] text-input" type="text" name="email" id="email"  />
-                            </label>
-                            <label>
-                                <input value=""  class="validate[required,custom[onlyLetter],length[0,100]] text-input" type="text" id="tel" name="tel"  />
-                            </label>
-                            <label>
-                                <?php 
-								echo form_dropdown('asunto', $asuntos, 'nulo');?><br /><br />
-                            </label>
-                            <label>
-                                <textarea value="Ingresa tu comentario..." class="validate[required,length[6,300]] text-input" name="comments" id="comments" /> </textarea>
-                            </label>
-                            
-                            <input class="submit" type="submit" value="Enviar!"/>
-                        </fieldset>
-                    </form>
-			</div><!-- END contacto-->
-        </div>
-        
-        </div> <!-- END CONTAINER-->
-	</div> <!-- END WRAPPER -->
-        
-        
+		<nav class="navbar navbar-fixed-top" id="topnav">
+			<div class="container">
+				<?php $this->view('home/temp/nav_logo');?>
+				<?php $this->view('home/temp/nav_menu');?>
+			</div>
+		</nav>
+
+		<div class="container" id="contentarea">
+			<div class="row">
+				<div class="col-xs-12 col-sm-12 col-md-4 col-lg-4">
+					<div class="infocontacto">
+						<h3>Atención al Cliente</h3>
+						<h2>0341-3882874</h2>
+						
+						<div class="desdeface">
+							<h4>Desde facebook</h4>
+							<a href="https://www.facebook.com/sonando.conelgol" target="_blank"><img src="img/facebook_logo.png" width="20"/> Libres Mayores</a>
+							<a href="https://www.facebook.com/sonandoinferiores" target="_blank"><img src="img/facebook_logo.png" width="20"/> Inferiores</a>
+							<a href="https://www.facebook.com/sonandoconelgolfemenino" target="_blank"><img src="img/facebook_logo.png" width="20"/> Femenino</a>
+							<a href="https://www.facebook.com/torneoempresas" target="_blank"><img src="img/facebook_logo.png" width="20"/> Empresas</a>
+						</div>
+						
+						<div class="pormail">
+							<h4>Por email</h4>
+							<a href="mailto:info@sonandoconelgol.com.ar" target="_blank">info@sonandoconelgol.com.ar</a>
+							<a href="mailto:tribunal@sonandoconelgol.com.ar" target="_blank">tribunal@sonandoconelgol.com.ar</a>
+							<a href="mailto:inscripcion@sonandoconelgol.com.ar" target="_blank">inscripcion@sonandoconelgol.com.ar</a>
+							<a href="mailto:rrhh@sonandoconelgol.com.ar" target="_blank">rrhh@sonandoconelgol.com.ar</a>
+						</div>
+						
+						<div class="portel">
+							<span></span>
+							<p>Francisco Pochettino: 0341-153882888</p>
+							<p>Pablo Benetti: 0341-153882887</p>
+							<p>Santiago Biazzi 0341-155032605</p>
+						</div>
+					
+					</div>
+				</div>
+				<div class="col-xs-12 col-sm-12 col-md-4 col-lg-4">
+					<div class="formcontacto">
+					<div class="validacion_error"><?php echo $message;?></div>
+						<form class="form-horizontal" method="post" action="<?php echo site_url('contacto');?>">
+							<div class="form-group">
+								<label for="nombre" class="col-sm-3 control-label">Nombre:</label>
+								<div class="col-sm-9">
+									<input value="" class="form-control validate[required,custom[onlyLetter],length[0,100]] text-input" type="text" id="lastname" name="lastname"  />
+								</div>
+							</div>
+							<div class="form-group">
+								<label for="email" class="col-sm-3 control-label">E-Mail:</label>
+								<div class="col-sm-9">
+									<input value=""  class="form-control validate[required,custom[email]] text-input" type="text" name="email" id="email"  />
+								</div>
+							</div>
+							<div class="form-group">
+								<label for="telefono" class="col-sm-3 control-label">Teléfono:</label>
+								<div class="col-sm-9">
+									<input value=""  class="form-control validate[required,custom[onlyLetter],length[0,100]] text-input" type="text" id="tel" name="tel"  />
+								</div>
+							</div>
+							<div class="form-group">
+								<label for="asunto" class="col-sm-3 control-label">Asunto:</label>
+								<div class="col-sm-9">
+									<?php
+										echo form_dropdown('asunto', $asuntos, 'nulo', 'class="form-control"');?>
+								</div>
+							</div>
+							<div class="form-group">
+								<label for="mensaje" class="col-sm-3 control-label">Mensaje:</label>
+								<div class="col-sm-9">
+									<textarea value="Ingresa tu comentario..." class="form-control validate[required,length[6,300]] text-input" name="comments" id="comments" /> </textarea>
+								</div>
+							</div>
+							<div class="form-group">
+								<div class="col-sm-12">
+									<button type="submit" class="btn btn-default pull-right">Enviar</button>
+								</div>
+							</div>
+						</form>
+					</div>
+				</div>
+				<div class="col-xs-12 col-sm-12 col-md-4 col-lg-4">
+					<a href="<?php echo base_url(); ?>comollegar"><img src="img/comollegar3.png" class="img-responsive"/></a>
+				</div>
+				<div class="col-xs-12"><br/></div>
+			</div>
+		</div>
+		
+		<?php $this->view('home/temp/nav_bar');?>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
+    <script src="js/bootstrap.min.js"></script>
+		<script src="js/jquery.cycle2.min.js"></script>
+		<script src="js/scripts.js"></script>
+  </body>
+</html>

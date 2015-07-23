@@ -16,6 +16,14 @@ class Inscripcion extends CI_Controller {
 	{
 		$this->data['title'] = "So&ntilde;ando con el gol - Inscripcion";
 		$this->data['message'] = (validation_errors()) ? validation_errors() : $this->session->flashdata('message');
+		$this->data['main_content'] = 'home/vistas/inscripcion';
+		$this->load->view('home/temp/template', $this->data);
+	}
+	
+	function index_old()
+	{
+		$this->data['title'] = "So&ntilde;ando con el gol - Inscripcion";
+		$this->data['message'] = (validation_errors()) ? validation_errors() : $this->session->flashdata('message');
 		//validate form input
 		#$this->form_validation->set_rules('email', 'Usuario', 'required|valid_email');
 		$this->form_validation->set_rules('password', 'Contraseña', 'required');

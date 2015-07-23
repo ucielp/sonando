@@ -240,13 +240,10 @@ class Admin_model_new extends CI_Model{
         
    function get_all_teams_jugando_algo(){
 		
-	    //~ $query = $this->db->query('SELECT name as e_name, id as e_id FROM equipos 
-        //~ WHERE activo = 1
-        //~ AND ID NOT IN (SELECT team_id FROM category_display WHERE category_id = '. $category_id . ')');	
-        
+	 
 		
 		$query = $this->db->query('SELECT name as e_name, id
-					FROM equipos WHERE id IN (select team_id from category_display)');	
+					FROM equipos WHERE id IN (select team_id from category_display) ORDER BY name');	
 				
 		return $query->result();
     }
@@ -585,6 +582,18 @@ class Admin_model_new extends CI_Model{
 		$this->db->order_by('titulo');
 		$query = $this->db->get();
 		return $query->result();
+	}
+	
+	function get_reglamentos_by_group(){
+		$this->db->from('reglamento');
+		$this->db->order_by('group');
+		$query = $this->db->get();
+        if ($query->num_rows() > 0){
+            foreach($query->result_array() as $row){
+				$grupo[$row['group']][$row['id']] = $row;
+			}
+			return $grupo;		
+        }
 	}
 	
 	function get_team_category($team_id)
