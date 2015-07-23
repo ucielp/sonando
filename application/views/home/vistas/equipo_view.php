@@ -50,7 +50,7 @@
 								?>
 								<?php
 										if (!$equipo_info->titular_color1 & !$equipo_info->titular_color2){
-											echo $first . "no_shirt_equipo" . $second . "grey" .  $third;
+											//~ echo $first . "no_shirt_equipo" . $second . "grey" .  $third;
 										}
 										else if ($equipo_info->titular_color1 & $equipo_info->titular_color2){
 											echo $first . "shirt_left" . $second . $equipo_info->titular_color1 . $third;
@@ -59,9 +59,13 @@
 										}							
 										else{
 											if ($equipo_info->titular_color1)
-											{echo $first . "shirt_equipo" . $second . $equipo_info->titular_color1 . $third;}
+											{
+												echo $first . "shirt_equipo" . $second . $equipo_info->titular_color1 . $third;
+											}
 											else 
-											{echo $first . "shirt_equipo" . $second . $equipo_info->titular_color2 . $third;}
+											{
+												echo $first . "shirt_equipo" . $second . $equipo_info->titular_color2 . $third;
+											}
 										}
 									?>
 							</div>
@@ -73,18 +77,22 @@
 								?>
 								<?php
 										if (!$equipo_info->alternativa_color1 & !$equipo_info->alternativa_color2){
-											echo $first . "no_shirt_equipo" . $second . "grey" .  $third;
+											//~ echo $first . "no_shirt_equipo" . $second . "grey" .  $third;
 										}
-										else if ($equipo_info->alternativa_color2 & $equipo_info->alternativa_color2){
+										else if ($equipo_info->alternativa_color1 & $equipo_info->alternativa_color2){
 											echo $first . "shirt_left" . $second . $equipo_info->alternativa_color1 . $third;
 											echo $first . "shirt_middle" . $second . $equipo_info->alternativa_color2 . $third;
 											echo $first . "shirt_right" . $second . $equipo_info->alternativa_color1 . $third;
 										}							
 										else{
 											if ($equipo_info->alternativa_color1)
-											{echo $first . "shirt_equipo" . $second . $equipo_info->alternativa_color1 . $third;}
+											{
+												echo $first . "shirt_equipo" . $second . $equipo_info->alternativa_color1 . $third;
+											}
 											else 
-											{echo $first . "shirt_equipo" . $second . $equipo_info->alternativa_color2 . $third;}
+											{
+												echo $first . "shirt_equipo" . $second . $equipo_info->alternativa_color2 . $third;
+											}
 										}
 									?>
 							</div>
@@ -93,8 +101,12 @@
 			</div>
 			<div class="row">
 				<div class="historiaequipo col-xs-12 col-sm-12 col-md-12 col-lg-12">
-					<h2>Historia del Equipo</h2>
-					<?php echo $equipo_info->historia; ?>
+					<?php if($equipo_info->historia) {?>
+
+						<h2>Historia del Equipo</h2>
+						<?php echo $equipo_info->historia; ?>
+					<?php }?>
+
 				</div>
 			</div>
 			<?php endforeach; } ?>

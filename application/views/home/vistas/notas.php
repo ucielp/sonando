@@ -12,7 +12,7 @@
 					<?php foreach($notas as $nota): ?>
 							<div class="notacont">
 								<h2><?php echo $nota->fecha; ?></h2>
-								<h3><a href="nota1.html"><?php echo $nota->titulo; ?></a></h3>
+								<h3><?php echo $nota->titulo; ?></h3>
 								<p><?php echo $nota->texto;?></p>
 								<?php if($nota->audio != '') { ?>
 									<div class="conaudio"><a href="<?php echo base_url(); ?>uploads/notas/<?php echo $nota->audio; ?>" target="_blank"><img src="<?php echo base_url(); ?>img/audioicon.png" class="img-responsive"/></a></div>

@@ -25,7 +25,7 @@
 					<br/>
 				</div>
 				<div class="col-xs-12 col-sm-12 col-md-6 col-lg-6 genericpagecol">
-					<h2>Titulo ejemplo</h2>
+					<h2></h2>
 					<p>Soñando con el gol comenzó a realizar torneos de fútbol en el mes de Noviembre del año 2007 y 
 
 						en los sucesivos años hubo un progreso paulatino de Equipos, que posibilitaron un torneo cada vez 
