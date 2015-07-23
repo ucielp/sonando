@@ -15,8 +15,8 @@
 |
 */
 #para la version web
-#$config['base_url']	= "http://www.sonandoconelgol.com.ar";
-$config['base_url']	= "http://localhost/sonando";
+$config['base_url']	= "http://www.sonandoconelgol.com.ar";
+#$config['base_url']	= "http://localhost/sonando";
 
 /*
 |--------------------------------------------------------------------------
