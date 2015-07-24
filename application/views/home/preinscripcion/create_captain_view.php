@@ -56,15 +56,15 @@
 
 					<?php echo form_open("libres/cargar_responsable");?>
 					  <p>Capitán:
-					  <?php echo form_dropdown('capitan', $jugadores, '420');?>
+					  <?php echo form_dropdown('capitan', $jugadores, $capitan);?>
 					  </p>
 					  
 					  <p>Delegado:
-					  <?php echo form_dropdown('delegado', $jugadores);?>
+					  <?php echo form_dropdown('delegado', $jugadores,$delegado);?>
 					  </p>
 					  
 					  <p>Sub Delegado:
-					  <?php echo form_dropdown('sub_delegado', $jugadores);?>
+					  <?php echo form_dropdown('sub_delegado', $jugadores, $sub_delegado);?>
 					  </p>
  
 					  <p><?php echo form_submit('submit', 'Cargar responsable');?>

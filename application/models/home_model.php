@@ -18,7 +18,8 @@ class Home_model extends CI_Model{
 	
 	function insert_newsletter($email){
 		$ql = $this->db->select('id')->from('newsletter')->where('email',$email)->get();
-		if( $ql->num_rows() > 0 ) {print "ya existe";} else {
+		if( $ql->num_rows() > 0 ) {
+		} else {
 			$a = array('email' => $email);
 			$this->db->insert('newsletter', $a);
 		}

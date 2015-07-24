@@ -1346,5 +1346,16 @@ class Admin_model_new extends CI_Model{
 	{
 		$this->db->delete('partidos', array('id' => $match_id));
 	}
+	
+	function get_representante($team_id,$tipo_representante){
+		$this->db->select($tipo_representante);	
+		$this->db->from('equipos');
+		$this->db->where('id', $team_id);
+				
+		$query = $this->db->get();
 		
+		foreach ($query->result() as $row){
+			return $row->$tipo_representante;
+		}
+	}
 }
