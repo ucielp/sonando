@@ -110,7 +110,8 @@
 					//do nothing because i was here before
 				} else { // first time here
 					if ($(window).width() > 767) {
-						document.cookie = "visited=true; max-age=" + 60 * 60 * 24 * 10; // 60 seconds to a minute, 60 minutes to an hour, 24 hours to a day, and 10 days.
+						//~ document.cookie = "visited=true; max-age=" + 60 * 60 * 24 * 10; // 60 seconds to a minute, 60 minutes to an hour, 24 hours to a day, and 10 days.
+						document.cookie = "visited=true; max-age=" + 60 * 60 * 16; // 60 seconds to a minute, 60 minutes to an hour, 16 hours.
 						$('#modal-video').modal('show');
 					}
 				}

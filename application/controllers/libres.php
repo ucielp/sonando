@@ -52,11 +52,13 @@ class Libres extends CI_Controller {
 			$this->data['email'] = array('name' => 'email',
 				'id' => 'email',
 				'type' => 'text',
+				'placeholder' => 'Escribe tu usuario',
 				'value' => $this->form_validation->set_value('email'),
 			);
 			$this->data['password'] = array('name' => 'password',
 				'id' => 'password',
 				'type' => 'password',
+				'placeholder' => 'Escribe tu contraseña',
 			);
 		}	
 
