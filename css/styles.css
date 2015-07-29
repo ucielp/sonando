@@ -800,6 +800,11 @@ h1, h2, h3, h4, h5 {
 	width: 90%;
   margin-top: 60px;
 }
+.tablastorneo hr.hr_fixture{
+	color: #389C18 !important;
+	background: #389C18 none repeat scroll 0% 0% !important;
+	height: 3px;
+}
 
 .tablastorneo h2 {
 	font-size: 17px;
