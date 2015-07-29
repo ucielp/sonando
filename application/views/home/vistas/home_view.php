@@ -12,7 +12,7 @@
 						<div id="mainbanner">
 							<div class="bannerphoto cycle-slideshow" data-cycle-fx="scrollHorz" data-cycle-timeout="3000" data-cycle-pause-on-hover="true" data-cycle-speed="200">
 								<img src="img/libres1off.png" onclick="window.location.href='<?php echo base_url(); ?>libres'" class="img-responsive"/>
-								<img src="img/libres2off.png" onclick="window.location.href='<?php echo base_url(); ?>libres'" class="img-responsive"/>
+								<img src="img/libres2off.png" onclick="window.location.href='<?php echo base_url(); ?>torneodomingos'" class="img-responsive"/>
 								<img src="img/libres3off.png" onclick="window.location.href='<?php echo base_url(); ?>copaargentina'" class="img-responsive"/>
 								<img src="img/libres4off.png" onclick="window.location.href='<?php echo base_url(); ?>laseleccion'" class="img-responsive"/>
 								<div class="cycle-pager"></div>
