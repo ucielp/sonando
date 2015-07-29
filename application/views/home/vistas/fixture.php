@@ -70,6 +70,8 @@
 	<script type="text/javascript">
 		$('#leftmenu a.hoja').bind( "click", function(e) {
 			e.preventDefault();
+			$('#leftmenu a.hoja').removeClass('active');
+			$( this ).addClass('active');
 			$(".tablastorneo").html('<h1 class="ajax-loader"><img src="<?php echo base_url(); ?>images/ajax-loader.gif" /></h1>');
 			var href = $(this).attr("href");
 			$(".tablastorneo").load(href);
