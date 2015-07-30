@@ -33,10 +33,18 @@
 				<?php } ?>
 				<div class="col-xs-12 col-sm-12 col-md-4 col-lg-4">
 					<div id="notassidebar">
-						<a href="<?php echo base_url(); ?>unionyvalores"><img src="<?php echo base_url(); ?>img/sidebarizq1off.png" class="img-responsive"/></a>
-						<a href="<?php echo base_url(); ?>laseleccion"><img src="<?php echo base_url(); ?>img/sidebarizq2off.png" class="img-responsive"/></a>
+						<a href="<?php echo base_url(); ?>unionyvalores"><img src="img/sidebarizq1off.png" class="img-responsive"/></a>
+						<a href="<?php echo base_url(); ?>laseleccion"><img src="img/sidebarizq2off.png" class="img-responsive"/></a>
 					</div>
 				</div>
+<!--
+				<div class="col-xs-12 col-sm-12 col-md-4 col-lg-4">
+					<div id="notassidebar">
+						<a href="unionyvalores.html"><img src="img/sidebarizq1off.png" class="img-responsive"/></a>
+						<a href="laseleccion.html"><img src="img/sidebarizq2off.png" class="img-responsive"/></a>
+					</div>
+				</div>
+-->
 			</div>
 			<?php echo $this->pagination->create_links(); ?></div>	
 		</div>
