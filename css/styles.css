@@ -372,11 +372,11 @@ h1, h2, h3, h4, h5 {
 	width: 190px;
 	height: 80px;
 	display: block;
-	background:transparent url('../img/3-diviani.png') center top no-repeat;
+	background:transparent url('../img/3-Diviani.png') center top no-repeat;
 }
 
 .publibox.diviani:hover{
-	background-image: url('../img/3-diviani_on.png');
+	background-image: url('../img/3-Diviani_on.png');
 }
 
 .publibox.espana{
@@ -697,6 +697,7 @@ h1, h2, h3, h4, h5 {
 	-webkit-border-radius: 0;
 	border-radius: 0;
 	text-align: center;
+	outline:none;
 }
 
 #leftmenu a.list-group-item.active {
@@ -793,9 +794,16 @@ h1, h2, h3, h4, h5 {
 }
 
 .tablastorneo {
+/*
 	overflow: hidden; 
+*/
 	width: 90%;
   margin-top: 60px;
+}
+.tablastorneo hr.hr_fixture{
+	color: #389C18 !important;
+	background: #389C18 none repeat scroll 0% 0% !important;
+	height: 3px;
 }
 
 .tablastorneo h2 {

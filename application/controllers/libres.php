@@ -52,11 +52,13 @@ class Libres extends CI_Controller {
 			$this->data['email'] = array('name' => 'email',
 				'id' => 'email',
 				'type' => 'text',
+				'placeholder' => 'Escribe tu usuario',
 				'value' => $this->form_validation->set_value('email'),
 			);
 			$this->data['password'] = array('name' => 'password',
 				'id' => 'password',
 				'type' => 'password',
+				'placeholder' => 'Escribe tu contraseña',
 			);
 		}	
 
@@ -243,6 +245,10 @@ class Libres extends CI_Controller {
 	
 		$this->data['team_name'] = $this->admin_model->get_team_name($team_id);
 
+		$this->data['capitan'] = $this->admin_model_new->get_representante($team_id,'capitan_id');
+		$this->data['delegado'] = $this->admin_model_new->get_representante($team_id,'delegado_id');
+		$this->data['sub_delegado'] = $this->admin_model_new->get_representante($team_id,'sub_delegado_id');
+		
 		$this->data['title'] = 'Asignar responsables';
 		$this->data['message'] = (validation_errors()) ? validation_errors() : $this->session->flashdata('message');
 		$this->data['jugadores'] = $this->admin_model->get_players_combo($team_id,'0'); //para el combo box

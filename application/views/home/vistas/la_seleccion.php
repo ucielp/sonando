@@ -33,10 +33,14 @@
 						<h3><a href="https://www.facebook.com/sonandoinferiores">FACEBOOK SCG INFERIORES</a></h3>
 						<br/>
 						<br/>
-						<h3><span class="glyphicon glyphicon-arrow-right" aria-hidden="true"></span> <a href="#">VER  VIDEOS SELECCIóN SUB 15</a></h3>
-						<h3><span class="glyphicon glyphicon-arrow-right" aria-hidden="true"></span> <a href="#">VER  VIDEOS SELECCIóN SUB 17</a></h3>
-						<h3><span class="glyphicon glyphicon-arrow-right" aria-hidden="true"></span> <a href="#">VER  VIDEOS SELECCIóN SUB 21</a></h3>
-						<h3><span class="glyphicon glyphicon-arrow-right" aria-hidden="true"></span> <a href="#">VER VIDEOS SELECCIÓN mayores</a></h3>
+<!--
+						<h3><span class="glyphicon glyphicon-arrow-right" aria-hidden="true"></span> <a target="_blank" href="#">VER  VIDEOS SELECCIóN SUB 15</a></h3>
+-->
+						<h3><span class="glyphicon glyphicon-arrow-right" aria-hidden="true"></span> <a target="_blank" href="https://www.youtube.com/watch?v=5J27evHAR_U ">VER  VIDEOS SELECCIóN SUB 17</a></h3>
+						<h3><span class="glyphicon glyphicon-arrow-right" aria-hidden="true"></span> <a target="_blank"href="https://www.youtube.com/watch?v=G3Htctx1gY8">VER  VIDEOS SELECCIóN SUB 21</a></h3>
+<!--
+						<h3><span class="glyphicon glyphicon-arrow-right" aria-hidden="true"></span> <a target="_blank" href="#">VER VIDEOS SELECCIÓN mayores</a></h3>
+-->
 					</div>
 				</div>
 				<div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">

@@ -12,7 +12,7 @@
 						<div id="mainbanner">
 							<div class="bannerphoto cycle-slideshow" data-cycle-fx="scrollHorz" data-cycle-timeout="3000" data-cycle-pause-on-hover="true" data-cycle-speed="200">
 								<img src="img/libres1off.png" onclick="window.location.href='<?php echo base_url(); ?>libres'" class="img-responsive"/>
-								<img src="img/libres2off.png" onclick="window.location.href='<?php echo base_url(); ?>libres'" class="img-responsive"/>
+								<img src="img/libres2off.png" onclick="window.location.href='<?php echo base_url(); ?>torneodomingos'" class="img-responsive"/>
 								<img src="img/libres3off.png" onclick="window.location.href='<?php echo base_url(); ?>copaargentina'" class="img-responsive"/>
 								<img src="img/libres4off.png" onclick="window.location.href='<?php echo base_url(); ?>laseleccion'" class="img-responsive"/>
 								<div class="cycle-pager"></div>
@@ -110,7 +110,8 @@
 					//do nothing because i was here before
 				} else { // first time here
 					if ($(window).width() > 767) {
-						document.cookie = "visited=true; max-age=" + 60 * 60 * 24 * 10; // 60 seconds to a minute, 60 minutes to an hour, 24 hours to a day, and 10 days.
+						//~ document.cookie = "visited=true; max-age=" + 60 * 60 * 24 * 10; // 60 seconds to a minute, 60 minutes to an hour, 24 hours to a day, and 10 days.
+						document.cookie = "visited=true; max-age=" + 60 * 60 * 16; // 60 seconds to a minute, 60 minutes to an hour, 16 hours.
 						$('#modal-video').modal('show');
 					}
 				}

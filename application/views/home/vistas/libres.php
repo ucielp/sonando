@@ -47,31 +47,21 @@
 					<div class="boxusuarioycont">
 						<img src="img/usuarioycontra.png"/>
 						<?php $attributes = array('id' => 'formID_home'); ?>
-						<?php echo form_open("newsletter", $attributes);?>
+						<?php echo form_open("libres", $attributes);?>
 						<?php echo form_input($email);?>
 						<?php echo form_input($password);?>
 						<!--<a href="<?php echo site_url('auth/forgot_password'); ?>"><u>Forgot Password</u></a>-->
 						<?php $submit_home_data = array('name' => 'submit', 'id' => 'submit', 'class' => 'submit', 'value' => 'Ingresar'); ?>
 						<?php echo form_submit($submit_home_data);?>
+						<?php echo form_close();?>
+
 					</div>
 					<img src="img/fbpageheader.png" class="img-responsive"/>
 					<div class="fb-page" data-href="https://www.facebook.com/sonando.conelgol" data-small-header="false" data-adapt-container-width="true" data-hide-cover="false" data-show-facepile="true" data-show-posts="false"><div class="fb-xfbml-parse-ignore"><blockquote cite="https://www.facebook.com/sonando.conelgol"><a href="https://www.facebook.com/sonando.conelgol">Soñando Con El Gol</a></blockquote></div></div>
 				</div>
-				<div class="col-xs-12 col-sm-12 col-md-4 col-lg-4">
-					<div class="boxnewsletter">
-						<h2>Recibir Newsletter</h2>
-						<input type="email" name="newsletteremail" placeholder="Escribe tu email..."/>
-						<button role="button">OK</button>
-					</div>
-					<input name="redirect" type="hidden" value="<?= $this->uri->uri_string() ?>" />
+					<?php $this->view('home/temp/nav_newsletter');?>
 
-					<div class="boxcopaamerica">
-						<a href="<?php echo base_url(); ?>copaargentina"><img src="img/torneocopaargentina.jpg" class="img-responsive"/></a>
-					</div>
-				</div>
-			</div>
 		</div>
-			<?php echo form_close();?>
 
 		<?php $this->view('home/temp/nav_bar');?>
 

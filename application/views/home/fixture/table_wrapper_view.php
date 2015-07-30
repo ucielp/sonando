@@ -11,7 +11,6 @@
 # Me fijo si hay alguna fecha que no está cargada
 if($fixture_actual){
 ?>
-
 	<h3>Próxima fecha</h3>
 	<h3><?php echo 'Fecha ' . $current_fecha;?></h3>
 	<table class="tablascg">
@@ -46,9 +45,11 @@ if($fixture_actual){
 		?>
 		</tbody>
 	</table>
+	<hr class="hr_fixture">
 <?php 
 }
 ?>
+
 <h2>Fixture completo</h2>
 
 		<?php
