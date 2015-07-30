@@ -1297,7 +1297,6 @@ class Admin_model_new extends CI_Model{
  			$this->db->truncate('posiciones'); 
 			$this->db->truncate('postfase_temp'); 
 			$this->db->truncate('fechas'); 
-			$this->db->truncate('notas'); 
 			$this->db->truncate('sanciones');
 			$this->db->truncate('category_display');
 			
