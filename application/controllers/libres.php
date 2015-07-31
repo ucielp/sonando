@@ -185,47 +185,64 @@ class Libres extends CI_Controller {
 				'id' => 'name',
 				'type' => 'text',
 				'value' => $this->form_validation->set_value('name'),
+				'class' => 'form-control'
+
 			);
 			$this->data['last_name'] = array('name' => 'last_name',
 				'id' => 'last_name',
 				'type' => 'text',
 				'value' => $this->form_validation->set_value('last_name'),
+				'class' => 'form-control'
+
 			);
 			
 			$this->data['dni'] = array('name' => 'dni',
 				'id' => 'dni',
 				'type' => 'text',
 				'value' => $this->form_validation->set_value('dni'),
+				'class' => 'form-control'
+
 			);
 			
 			$this->data['birth'] = array('name' => 'birth',
 				'id' => 'birth',
 				'type' => 'text',
 				'value' => $this->form_validation->set_value('birth'),
+				'class' => 'form-control'
+
 			);
 			
 			$this->data['phone'] = array('name' => 'phone',
 				'id' => 'phone',
 				'type' => 'text',
 				'value' => $this->form_validation->set_value('phone'),
+				'class' => 'form-control'
+
 			);
 			
 			$this->data['email'] = array('name' => 'email',
 				'id' => 'email',
 				'type' => 'text',
 				'value' => $this->form_validation->set_value('email'),
+				'class' => 'form-control',
+				'type' => "email" ,
+
 			);
 			
 			$this->data['address'] = array('name' => 'address',
 				'id' => 'address',
 				'type' => 'text',
 				'value' => $this->form_validation->set_value('address'),
+				'class' => 'form-control'
+
 			);
 			
 			$this->data['obra_social'] = array('name' => 'obra_social',
 				'id' => 'obra_social',
 				'type' => 'text',
 				'value' => $this->form_validation->set_value('obra_social'),
+				'class' => 'form-control'
+
 			);
 
 			$this->data['main_content'] = 'home/preinscripcion/preinscripcion';
