@@ -61,50 +61,66 @@
 							<div class="form-group">
 								<label for="name" class="col-sm-4 control-label">Nombre</label>
 								<div class="col-sm-8">
-									<input type="text" class="form-control" name="name" id="name">
+								<?php 
+									echo form_input($name);
+								?>
+
 								</div>
 							</div>
 							<div class="form-group">
-								<label for="lastname" class="col-sm-4 control-label">Apellido</label>
+								<label for="last_name" class="col-sm-4 control-label">Apellido</label>
 								<div class="col-sm-8">
-									<input type="text" class="form-control" name="lastname" id="lastname">
+									<?php 
+										echo form_input($last_name);
+									?>								
 								</div>
 							</div>
 							<div class="form-group">
 								<label for="dni" class="col-sm-4 control-label">Documento</label>
 								<div class="col-sm-8">
-									<input type="text" class="form-control" name="dni" id="dni">
-								</div>
+									<?php 
+										echo form_input($dni);
+									?>								
 							</div>
 							<div class="form-group">
-								<label for="birth" class="col-sm-4 control-label">Fecha de Nacimiento</label>
+								<label for="birth" class="col-sm-4 control-label">Nacimiento </label>
 								<div class="col-sm-8">
-									<input type="text" class="form-control" name="birth" id="birth"> (dd/mm/aa)
+								<?php 
+									echo form_input($birth);
+								?>								
 								</div>
 							</div>
 							<div class="form-group">
 								<label for="phone" class="col-sm-4 control-label">Teléfono</label>
 								<div class="col-sm-8">
-									<input type="text" class="form-control" name="phone" id="phone">
+
+									<?php 
+										echo form_input($phone);
+									?>								
 								</div>
 							</div>
 							<div class="form-group">
 								<label for="email" class="col-sm-4 control-label">Email</label>
 								<div class="col-sm-8">
-									<input type="email" class="form-control" name="email" id="email">
+								<?php 
+									echo form_input($email);
+								?>							
 								</div>
 							</div>
 							<div class="form-group">
 								<label for="address" class="col-sm-4 control-label">Domicilio</label>
 								<div class="col-sm-8">
-									<input type="text" class="form-control" name="address" id="address">
+								<?php 
+									echo form_input($address);
+								?>	
 								</div>
 							</div>
 							<div class="form-group">
 								<label for="obra_social" class="col-sm-4 control-label">Obra Social</label>
 								<div class="col-sm-8">
-									<input type="text" class="form-control" name="obra_social" id="obra_social">
-								</div>
+								<?php 
+									echo form_input($obra_social);
+								?>								</div>
 							</div>
 							<div class="form-group">
 								<label for="userfile" class="col-sm-4 control-label">Foto Carnet: (opcional)</label>
