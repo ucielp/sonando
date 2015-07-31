@@ -16,7 +16,7 @@
           <?php echo form_input($name);?>
           </p>
           
-          <p>Apellido<br />
+          <p>Apellidssso<br />
           <?php echo form_input($last_name);?>
           </p>
           
