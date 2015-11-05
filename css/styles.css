@@ -37,7 +37,7 @@ h1, h2, h3, h4, h5 {
 	padding-bottom: 0px;
 }
 
-#modal-video .modal-body, #modal-sub21 .modal-body, #modal-sub17 .modal-body {
+#modal-video .modal-body, #modal-sub21 .modal-body, #modal-sub17 .modal-body, #modal-sub22 .modal-body, #modal-sub16 .modal-body {
   background-color: #111;
 }
 
@@ -1107,7 +1107,13 @@ background: #e4dfdf;
 }
 
 .seleccionder h3 {
-	color: #305915;
+color: #305915;
+}
+
+.seleccionder h3 p{
+color: #305915;
+text-transform: none;
+
 }
 
 .seleccionder h3 span {
@@ -1117,11 +1123,26 @@ background: #e4dfdf;
 .seleccionder h3 a {
 	font-size: 19px;
   color: #305915;
+  margin: 0px;
+  padding: 0px;
+  text-transform: uppercase;
+  text-align: left;
+    font-weight: 600;
+}   
+
+
+.seleccionder h4 span {
+	vertical-align: middle;
+}
+
+.seleccionder h4 a {
+	font-size: 19px;
+  color: #707070;
   margin: 15px 0px;
   text-transform: uppercase;
   text-align: left;
 	font-weight: 600;
-}
+}  
 
 .seleccionder p {
 	font-size: 17px;
