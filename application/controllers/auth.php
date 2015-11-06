@@ -818,11 +818,16 @@ class Auth extends Controller {
         $partidos = $this->admin_model_new->get_partidos_por_fecha(); 
 		$this->data['partidos'] = $partidos;
         
-        #get_category_and_subcategory
-        
         foreach($partidos as $partido){
-            $cat_and_subcategory[$partido->id_category] = $this->fixture_model_new->get_category_and_subcategory($partido->id_category);
+            if (isset($cat_and_subcategory[$partido->id_category])){
+            }
+            else{
+                $cat_and_subcategory[$partido->id_category] = $this->fixture_model_new->get_category_and_subcategory($partido->id_category);
+
+            }
         }
+        //~ $this->output->enable_profiler(TRUE);
+
         $this->data['cat_and_subcategory'] = $cat_and_subcategory;
     
 		$this->load->view('auth/horario_fecha_view', $this->data);
