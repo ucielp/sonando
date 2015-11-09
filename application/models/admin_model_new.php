@@ -623,8 +623,12 @@ class Admin_model_new extends CI_Model{
 		$this->db->join('equipos eq1','eq1.id = p.team1_id');
 		$this->db->join('equipos eq2','eq2.id = p.team2_id');
 		$this->db->where('f.actual', 1);
+        
+        # Esto lo hago para que no me muestre los que ya se jugaron
+        $this->db->where('cargado', 0);
+
+
 		$query = $this->db->get();
-		//~ echo $this->db->last_query() . "<br>";
 
         if ($query->num_rows() > 0)
 		{
