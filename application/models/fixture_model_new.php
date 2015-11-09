@@ -376,7 +376,7 @@ class Fixture_model_new extends CI_Model{
                 }
                 else{
                     $id_category = 0;
-                    $string = "OJO NO TIENE PADRE" . " / " . $string;
+                    $string = "???" . " / " . $string;
                 }
             }
 		}
