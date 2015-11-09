@@ -816,6 +816,7 @@ class Auth extends Controller {
 		$this->data['message'] = (validation_errors()) ? validation_errors() : $this->session->flashdata('message');
 
         $partidos = $this->admin_model_new->get_partidos_por_fecha(); 
+
 		$this->data['partidos'] = $partidos;
         
         $all_parents_of = array();
@@ -835,11 +836,12 @@ class Auth extends Controller {
 
             }
         }
-        $this->output->enable_profiler(TRUE);
+
+        //~ $this->output->enable_profiler(TRUE);
 
         $this->data['cat_and_subcategory'] = $cat_and_subcategory;
     
-		//~ $this->load->view('auth/horario_fecha_view', $this->data);
+		$this->load->view('auth/horario_fecha_view', $this->data);
 
     }
 	   
