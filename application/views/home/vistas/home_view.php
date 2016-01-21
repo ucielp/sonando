@@ -93,7 +93,9 @@
 					<div class="modal-body">
 						<div class="custommodalclose" data-dismiss="modal" aria-label="Close"><span class="glyphicon glyphicon-remove-circle" aria-hidden="true"></span></div>
 						<div class="embed-responsive embed-responsive-16by9">
+<!--
 							<iframe class="embed-responsive-item" src="https://www.youtube.com/embed/b9d1lFgaRq0" frameborder="0" allowfullscreen></iframe>
+-->
 						</div>
 					</div>
 				</div>
