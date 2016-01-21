@@ -328,6 +328,7 @@ class Fixture_model_new extends CI_Model{
 		return $too;
 	}
 	
+    # Esta funcion no esta del todo bien, tengo que agregar query->num_rows > 0
 	function get_category_and_subcategory($id_category){
 		$string = '';
 		while($id_category != 0){
@@ -344,6 +345,46 @@ class Fixture_model_new extends CI_Model{
 		}
         #echo $this->db->last_query() . "<br>";
 		return $string;
+	}
+    
+    function get_category_and_subcategory_optimized($id_category,$all_parents_of,$all_parents_name){
+        $parent_of;
+        $parent_name;
+        $el_padre_de;
+		$string = '';
+        $count = 0;
+		while($id_category != 0){
+            $count ++;
+            if (isset($all_parents_of[$id_category])){
+                $string = $all_parents_name[$id_category]. " / " . $string;
+                $id_category = $all_parents_of[$id_category];
+            }
+            else{
+                $this->db->select('name_category,parent_id');	
+                $this->db->from('category');
+                $this->db->where('id', $id_category);
+                $query = $this->db->get();
+            
+                if ($query->num_rows() > 0){
+                    foreach ($query->result() as $row){	
+                        $parent_id = $row->parent_id;
+                        $string = $row->name_category . " / " . $string;
+                        $parent_of[$id_category] = $row->parent_id;
+                        $parent_name [$id_category] = $row->name_category;
+                        $id_category = $parent_id;
+                    }
+                }
+                else{
+                    $id_category = 0;
+                    $string = "???" . " / " . $string;
+                }
+            }
+		}
+        return array(
+            'string' => $string,
+            'parents_of' => $parent_of,
+            'parents_name' => $parent_name,
+        );
 	}
 	
 	function get_fechas_por_evento($event_id){

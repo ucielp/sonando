@@ -816,16 +816,27 @@ class Auth extends Controller {
 		$this->data['message'] = (validation_errors()) ? validation_errors() : $this->session->flashdata('message');
 
         $partidos = $this->admin_model_new->get_partidos_por_fecha(); 
+
 		$this->data['partidos'] = $partidos;
         
+        $all_parents_of = array();
+        $all_parents_name = array();
         foreach($partidos as $partido){
+
             if (isset($cat_and_subcategory[$partido->id_category])){
+
             }
             else{
-                $cat_and_subcategory[$partido->id_category] = $this->fixture_model_new->get_category_and_subcategory($partido->id_category);
+                $query = $this->fixture_model_new->get_category_and_subcategory_optimized($partido->id_category,$all_parents_of,$all_parents_name);
+                $cat_and_subcategory[$partido->id_category] = $query['string'];
+                $parents_of = $query['parents_of'];
+                $parents_name = $query['parents_name'];
+                $all_parents_of = $all_parents_of + $parents_of;
+                $all_parents_name = $all_parents_name + $parents_name;
 
             }
         }
+
         //~ $this->output->enable_profiler(TRUE);
 
         $this->data['cat_and_subcategory'] = $cat_and_subcategory;
