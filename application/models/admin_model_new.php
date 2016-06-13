@@ -1283,7 +1283,7 @@ class Admin_model_new extends CI_Model{
 		$this->db->from('jugadores');
 		$this->db->where('team_id',$equipo_id);
 
-		#$this->db->where('inscripto','1');
+		$this->db->where('inscripto','1');
 
 		$certificado = 'No';
 		$electro = 'No';
